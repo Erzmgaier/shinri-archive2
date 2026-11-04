@@ -67,6 +67,7 @@
   .copy-btn { display: block; width: fit-content; margin: 0 auto 20px auto; padding: 8px 16px; background: rgba(179, 58, 58, 0.1); color: var(--accent); border: 1px solid var(--accent); border-radius: 4px; font-family: inherit; font-size: 0.8rem; cursor: pointer; transition: all 0.2s; text-transform: uppercase; letter-spacing: 1px; }
   .copy-btn:hover { background: var(--accent); color: #fff; }
   .copy-btn.copied { background: #5ca85c; border-color: #5ca85c; color: #fff; }
+  .copy-btn.hidden-btn { display: none; }
 
   .tabs { display: flex; justify-content: center; border-bottom: 1px solid var(--border); margin-bottom: 35px; gap: 20px; }
   .tab-btn { background: transparent; border: none; color: var(--dim); font-family: inherit; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; padding: 12px 20px; cursor: pointer; border-bottom: 3px solid transparent; transition: all 0.2s; font-weight: 500; }
@@ -259,17 +260,32 @@
     const activeDossier = document.getElementById(id);
     activeDossier.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
     activeDossier.querySelector('.tab-content[id$="-off"]').classList.add('active');
+    
     activeDossier.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
     activeDossier.querySelector('.tab-btn').classList.add('active');
+
+    const copyBtn = activeDossier.querySelector('.copy-btn');
+    if (copyBtn) copyBtn.classList.remove('hidden-btn');
   }
 
   function openTab(dossierId, tabType, btn) {
     const dossier = document.getElementById(dossierId);
     dossier.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
     document.getElementById(dossierId + '-' + tabType).classList.add('active');
+    
     dossier.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
+    
     document.getElementById('main-content').scrollTop = 0;
+
+    const copyBtn = dossier.querySelector('.copy-btn');
+    if (copyBtn) {
+      if (tabType === 'hist') {
+        copyBtn.classList.add('hidden-btn');
+      } else {
+        copyBtn.classList.remove('hidden-btn');
+      }
+    }
   }
 
   function copyDossier(id, btn) {
