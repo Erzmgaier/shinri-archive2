@@ -19,7 +19,6 @@
     background-image: radial-gradient(circle at 50% 0%, #11161c 0%, var(--bg) 70%);
   }
 
-  /* Шапка */
   header {
     padding: 20px 30px; border-bottom: 1px solid var(--border);
     background: rgba(8, 10, 12, 0.9); flex-shrink: 0;
@@ -47,7 +46,6 @@
   
   .layout { display: flex; flex: 1; overflow: hidden; z-index: 5; }
   
-  /* Меню */
   aside { 
     width: 320px; background: #0a0c10; border-right: 1px solid var(--border); 
     display: flex; flex-direction: column; flex-shrink: 0; position: relative; 
@@ -111,85 +109,126 @@
   .lore-text p { margin: 0 0 20px; text-indent: 25px; }
   .lore-text p:last-child { margin-bottom: 0; }
 
-  /* ====== СЕКРЕТКА С МОНОКУМОЙ (УЛУЧШЕННАЯ) ====== */
+  /* ====== СЕКРЕТКА ====== */
   .monokuma-overlay {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: #000; /* Полностью черный фон */
+    background: rgba(0, 0, 0, 0.95);
     display: flex; align-items: center; justify-content: center;
-    z-index: 9999;
-    opacity: 0; pointer-events: none;
-    transition: opacity 0.3s ease;
-    overflow: hidden;
+    z-index: 9999; opacity: 0; pointer-events: none;
+    transition: opacity 0.3s ease; overflow: hidden;
   }
   .monokuma-overlay.active { opacity: 1; pointer-events: auto; }
   
-  /* Эффект красной сирены на фоне */
   .monokuma-overlay::before {
     content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background: radial-gradient(circle, rgba(255,0,0,0.3) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(255,0,0,0.2) 0%, transparent 60%);
     z-index: 1;
   }
-  .monokuma-overlay.active::before {
-    animation: sirenPulse 1s infinite alternate;
-  }
-  @keyframes sirenPulse {
-    0% { opacity: 0.3; transform: scale(1); }
-    100% { opacity: 0.8; transform: scale(1.5); }
-  }
+  .monokuma-overlay.active::before { animation: sirenPulse 1s infinite alternate; }
+  @keyframes sirenPulse { 0% { opacity: 0.3; transform: scale(1); } 100% { opacity: 0.8; transform: scale(1.5); } }
 
   .monokuma-content {
-    position: relative; z-index: 2;
-    display: flex; flex-direction: column; align-items: center;
-    transform: scale(0.8) translateY(50px);
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center;
+    transform: scale(0.8) translateY(50px); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
   .monokuma-overlay.active .monokuma-content { transform: scale(1) translateY(0); }
   
-  /* Картинка с покачиванием */
   .monokuma-img {
-    width: 300px; height: auto;
-    filter: drop-shadow(0 0 30px rgba(255, 0, 0, 0.8));
-    animation: monokumaIdle 3s infinite ease-in-out;
+    width: 250px; height: auto; filter: drop-shadow(0 0 20px rgba(255, 0, 0, 0.6));
+    animation: monokumaIdle 3s infinite ease-in-out; cursor: pointer; transition: opacity 0.2s ease, transform 0.2s ease;
   }
-  @keyframes monokumaIdle {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-10px) rotate(2deg); }
-  }
+  @keyframes monokumaIdle { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-8px) rotate(2deg); } }
   
-  /* Стильное окно диалога */
   .monokuma-dialog {
-    background: #000; color: #fff;
-    padding: 25px 35px; border-radius: 0px;
-    font-family: "Merriweather", serif; font-weight: bold;
-    font-size: 1.15rem; text-align: center;
-    margin-top: -20px; position: relative; z-index: 3;
-    box-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
-    border: 2px solid #fff; max-width: 550px;
-    letter-spacing: 0.5px; line-height: 1.5;
-    cursor: pointer; transition: background 0.2s, transform 0.1s;
+    background: #000; color: #fff; padding: 20px 30px; border-radius: 0px;
+    font-family: "Merriweather", serif; font-weight: bold; font-size: 1.1rem; text-align: center;
+    margin-top: -15px; position: relative; z-index: 3; box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
+    border: 2px solid #fff; max-width: 550px; letter-spacing: 0.5px; line-height: 1.5; transition: background 0.2s, transform 0.1s;
   }
-  .monokuma-dialog:hover { background: #111; }
   .monokuma-dialog::before {
-    content: ""; position: absolute; top: -14px; left: 50%;
-    transform: translateX(-50%);
-    border-left: 14px solid transparent; border-right: 14px solid transparent; border-bottom: 14px solid #fff;
+    content: ""; position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+    border-left: 12px solid transparent; border-right: 12px solid transparent; border-bottom: 12px solid #fff;
   }
-  
+
+  .nagito-container {
+    position: absolute; bottom: -20px; right: 5%; z-index: 4; cursor: pointer;
+    transition: transform 0.3s ease, filter 0.3s; filter: drop-shadow(0px 0px 15px rgba(255,255,255,0.1)); user-select: none;
+  }
+  .nagito-container:hover { transform: scale(1.05) translateY(-10px); filter: drop-shadow(0px 0px 20px rgba(255,255,255,0.4)); }
+  .nagito-img { width: 280px; height: auto; transform: scaleX(-1); transition: opacity 0.3s ease; }
+
   .close-monokuma {
-    margin-top: 25px; background: transparent; border: none;
-    color: #555; font-family: inherit; font-size: 0.85rem;
-    cursor: pointer; text-transform: uppercase; letter-spacing: 2px; transition: color 0.2s;
+    margin-top: 20px; background: transparent; border: none; color: #555;
+    font-family: inherit; font-size: 0.8rem; cursor: pointer; text-transform: uppercase;
+    letter-spacing: 2px; transition: color 0.2s; position: relative; z-index: 5;
   }
   .close-monokuma:hover { color: #fff; }
 
+  /* ====== МОБИЛЬНАЯ ВЕРСИЯ (АДАПТИВНОСТЬ) ====== */
   @media (max-width: 900px) {
-    .layout { flex-direction: column; }
-    aside { width: 100%; height: auto; max-height: 250px; border-right: none; border-bottom: 1px solid var(--border); border-radius: 0; margin-top: 0; border-top: none;}
-    main { padding: 20px; } .dossier-wrapper { padding: 25px; } header { padding: 15px; gap: 15px; } 
+    /* Шапка */
+    header { 
+      padding: 15px; gap: 15px; 
+      flex-direction: row; /* Оставляем в ряд, но уменьшаем */
+    }
     .header-logo-container { width: 50px; height: 50px; }
-    .header-text h1 { font-size: 1.2rem; letter-spacing: 3px; }
-    .monokuma-img { width: 220px; }
-    .monokuma-dialog { font-size: 0.95rem; padding: 15px 20px; max-width: 320px;}
+    .header-text h1 { font-size: 1.1rem; letter-spacing: 3px; }
+    .header-text p { font-size: 0.6rem; letter-spacing: 1px; }
+
+    /* Меню */
+    .layout { flex-direction: column; }
+    aside { 
+      width: 100%; height: auto; max-height: 180px; /* Ограничиваем высоту меню */
+      border-right: none; border-bottom: 1px solid var(--border); 
+      border-radius: 0; margin-top: 0; border-top: none;
+    }
+    .aside-header { padding: 15px 20px 10px; }
+    aside h2 { font-size: 0.65rem; }
+    .aside-list { 
+      display: flex; /* Делаем меню горизонтальным */
+      flex-direction: row; 
+      overflow-x: auto; /* Скролл вбок */
+      padding: 10px 15px; 
+      gap: 10px;
+      white-space: nowrap;
+    }
+    .aside-list li { margin-bottom: 0; padding: 0; flex-shrink: 0; }
+    .nav-btn { 
+      padding: 8px 12px; 
+      flex-direction: row; /* Иконка и текст в ряд */
+      gap: 8px;
+      width: auto;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+    }
+    .nav-btn.active { background: rgba(179, 58, 58, 0.15); border-color: var(--accent); border-left-width: 1px; }
+    .nav-icon { width: 24px; height: 24px; font-size: 0.8rem; border: none; background: transparent; }
+    .nav-info { flex-direction: column; text-align: left; }
+    .nav-btn .num { font-size: 0.55rem; }
+    .nav-btn .name { font-size: 0.75rem; }
+    .aside-footer { display: none; } /* Скрываем подвал меню на телефоне */
+
+    /* Основной контент */
+    main { padding: 15px; }
+    .dossier-wrapper { padding: 20px 15px; border-radius: 8px; }
+    .dossier-title { font-size: 1.1rem; letter-spacing: 2px; }
+    .dossier-meta { font-size: 0.75rem; margin-bottom: 20px; }
+    
+    /* Вкладки */
+    .tabs { gap: 10px; }
+    .tab-btn { font-size: 0.75rem; padding: 10px 12px; letter-spacing: 1px; }
+
+    /* Текст */
+    .block-title { font-size: 0.75rem; margin: 25px 0 10px; }
+    .block-text { font-size: 0.85rem; line-height: 1.6; }
+    .lore-text { font-size: 0.85rem; line-height: 1.7; }
+    .lore-text p { text-indent: 15px; }
+
+    /* Секретка */
+    .monokuma-img { width: 180px; }
+    .monokuma-dialog { font-size: 0.85rem; padding: 15px 20px; max-width: 90%; }
+    .nagito-container { bottom: 0; right: 0; }
+    .nagito-img { width: 140px; }
   }
 </style>
 </head>
@@ -263,7 +302,7 @@
       </div>
       <div class="tab-content active" id="d04-off">
         <div class="block-title">Особые приметы</div>
-        <p class="block-text">Левая рука полностью изуродована (последствия нападения хищника), скрыта под толстым слоем грязных бинтов. Маску на лице не носит, одежда и рукава выглядят потрёпанными. Проявляет признаки острой социофобии: при контакте с другими учениками ведет себя пугливо, избегает зрительного контакта. Наблюдается тремор рук при громких звуках или резких движениях. В стрессовых ситуациях склонен забиваться в углы и искать укрытия.</p>
+        <p class="block-text">Левая рука полностью изуродована (последствия нападения хищника), скрыта под толстым слоем грязных бинтов. Маску на лице не носит, одежда и рукава выглядят потрёпанными. Проявляет признаки острой социофобии: при контакте с другими учениками ведет себя пугливо, избегает зрительного контакта. Наблюдается тремор рук при громких звуках или резких движениях. В стрессовых ситуациях склонен забиваться в углы искать укрытия.</p>
         <div class="block-title">Краткая сводка</div>
         <p class="block-text">Первые годы жизни провел запертым в сыром подвале родного дома. В возрасте 9 лет совершил побег в тайгу, где попал в медвежий капкан и подвергся нападению волчьей стаи. Был спасен некой <span class="secret">[ИНФОРМАЦИЯ ЗАСЕКРЕЧЕНА]</span>, под чьим негласным надзором скрывался в глухом лесу. Спустя год его родное поселение вместе с родителями было уничтожено бандой мародеров <span class="secret">[ДАННЫЕ УДАЛЕНЫ]</span>. О произошедшем узнал от наставницы, окончательно разорвав связи с прошлым. На данный момент не поддерживает контакт с внешним миром.</p>
         <div class="block-title">Причина присвоения таланта</div>
@@ -353,19 +392,23 @@
   </main>
 </div>
 
-<!-- ====== ОКНО СЕКРЕТКИ (МОНОКУМА) ====== -->
+<!-- ====== ОКНО СЕКРЕТКИ ====== -->
 <div class="monokuma-overlay" id="monokumaOverlay" onclick="hideMonokuma(event)">
   <div class="monokuma-content">
-    <img src="monokuma.png" alt="Монокума" class="monokuma-img" onclick="changePhrase(event)">
+    <img src="monokuma.png" id="monokumaImg" alt="Монокума" class="monokuma-img" onclick="changePhrase(event)">
     <div class="monokuma-dialog" id="monokumaText" onclick="changePhrase(event)">
       Пип-пип! Нашёл секрет? Только никому не говори, иначе я тебя накажу! ПУХ-ХА-ХА!
     </div>
+    
+    <div class="nagito-container" ondblclick="startDebate(event)" title="Дважды кликни по мне!">
+      <img src="nagito.png" id="nagitoImg" alt="Нагито" class="nagito-img">
+    </div>
+
     <button class="close-monokuma" onclick="hideMonokuma(event)">[ Закрыть ]</button>
   </div>
 </div>
 
 <script>
-  // Логика переключения меню
   function openDossier(id, btn) {
     document.querySelectorAll('.dossier-wrapper').forEach(d => d.classList.add('hidden'));
     document.getElementById(id).classList.remove('hidden');
@@ -384,7 +427,6 @@
     if (copyBtn) copyBtn.classList.remove('hidden-btn');
   }
 
-  // Логика переключения вкладок (Дело / История)
   function openTab(dossierId, tabType, btn) {
     const dossier = document.getElementById(dossierId);
     dossier.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
@@ -405,7 +447,6 @@
     }
   }
 
-  // Логика копирования дела
   function copyDossier(id, btn) {
     const dossier = document.getElementById(id);
     let text = "———————————————————————\n";
@@ -439,45 +480,88 @@
     }).catch(err => alert("Ошибка при копировании"));
   }
 
-  // ====== ЛОГИКА СЕКРЕТКИ С МОНОКУМОЙ ======
-  const monokumaPhrases = [
-    "Пип-пип! Решил заглянуть в закрытый архив? Любопытство — первая ступенька к отчаянию! ПУХ-ХА-ХА!",
-    "Итак, начнем Убийственную Игру?! Правила просты: убей кого-нибудь и не попадись!",
-    "Эй, не смей трогать мой архив! Там записаны все ваши грязные секретики!",
-    "Таланты, таланты, таланты... Они такие хрупкие, когда дело доходит до отчаяния!",
-    "Ну что, кто из них сломается первым? Убийца или жертва?",
-    "Ах, я так люблю запах отчаяния по утрам! Он бодрит лучше кофе!",
-    "Ты ведь не думаешь, что это просто игра, правда? Это... УБИЙСТВЕННАЯ ИГРА!",
-    "Смотри в оба! Ведь убийца может быть прямо за твоей спиной... Или это ты?",
-    "Надежда — это иллюзия! Сдавайтесь и примите отчаяние!",
-    "Если ты нарушишь правила Академии... я лично вырву твое сердце! Хи-хи-хи!",
-    "Все эти личные дела... Интересно, кто из них первым решится на убийство?",
-    "Не заставляй меня нажимать на кнопку! Ты же знаешь, что будет потом!"
-  ];
+  // ====== ЛОГИКА СЕКРЕТКИ ======
+  let isDebating = false;
+  let debateTimeouts = [];
 
   function showMonokuma() {
     document.getElementById('monokumaOverlay').classList.add('active');
-    changePhrase(); // Сразу меняем фразу при открытии
+    isDebating = false;
+    document.getElementById('monokumaImg').src = 'monokuma.png';
+    document.getElementById('nagitoImg').src = 'nagito.png';
+    document.getElementById('monokumaText').innerText = "Пип-пип! Нашёл секрет? Только никому не говори, иначе я тебя накажу! ПУХ-ХА-ХА!";
   }
 
   function hideMonokuma(event) {
-    // Закрываем только если кликнули по фону или кнопке
     if (event.target.classList.contains('monokuma-overlay') || event.target.classList.contains('close-monokuma')) {
       document.getElementById('monokumaOverlay').classList.remove('active');
+      debateTimeouts.forEach(clearTimeout);
+      debateTimeouts = [];
+      isDebating = false;
     }
   }
 
   function changePhrase(event) {
-    if(event) event.stopPropagation(); // Чтобы клик по картинке не закрывал окно
+    if (isDebating) return; 
+    if(event) event.stopPropagation(); 
+    
+    const img = document.getElementById('monokumaImg');
     const textElement = document.getElementById('monokumaText');
+    img.src = 'monokuma1.png';
+
+    const monokumaPhrases = [
+      "Пип-пип! Решил заглянуть в закрытый архив? Любопытство — первая ступенька к отчаянию! ПУХ-ХА-ХА!",
+      "Итак, начнем Убийственную Игру?! Правила просты: убей кого-нибудь и не попадись!",
+      "Эй, не смей трогать мой архив! Там записаны все ваши грязные секретики!",
+      "Таланты, таланты, таланты... Они такие хрупкие, когда дело доходит до отчаяния!",
+      "Ну что, кто из них сломается первым? Убийца или жертва?",
+      "Ах, я так люблю запах отчаяния по утрам! Он бодрит лучше кофе!",
+      "Ты ведь не думаешь, что это просто игра, правда? Это... УБИЙСТВЕННАЯ ИГРА!",
+      "Смотри в оба! Ведь убийца может быть прямо за твоей спиной... Или это ты?",
+      "Надежда — это иллюзия! Сдавайтесь и примите отчаяние!",
+      "Если ты нарушишь правила Академии... я лично вырву твое сердце! Хи-хи-хи!",
+      "Все эти личные дела... Интересно, кто из них первым решится на убийство?",
+      "Не заставляй меня нажимать на кнопку! Ты же знаешь, что будет потом!"
+    ];
+    
     const randomIndex = Math.floor(Math.random() * monokumaPhrases.length);
     textElement.innerText = monokumaPhrases[randomIndex];
     
-    // Небольшой эффект увеличения при смене фразы
     textElement.style.transform = "scale(1.05)";
-    setTimeout(() => {
-      textElement.style.transform = "scale(1)";
-    }, 150);
+    setTimeout(() => { textElement.style.transform = "scale(1)"; }, 150);
+  }
+
+  function startDebate(event) {
+    event.stopPropagation();
+    if (isDebating) return; 
+    
+    isDebating = true;
+    const imgNagito = document.getElementById('nagitoImg');
+    const imgMonokuma = document.getElementById('monokumaImg');
+    const textElement = document.getElementById('monokumaText');
+
+    imgNagito.src = 'nagito1.png';
+    imgMonokuma.src = 'monokuma1.png'; 
+
+    const debateScript = [
+      { text: "О, Монокума! Твоё отчаяние такое... прекрасное! Оно обязательно породит ещё большую надежду!", delay: 0 },
+      { text: "Заткнись, псих! Ваша надежда — это просто топливо для моего отчаяния! ПУХ-ХА-ХА!", delay: 3500 },
+      { text: "Ты не прав! Надежда — это свет, который ведёт нас сквозь тьму. Даже в этой Академии!", delay: 7000 },
+      { text: "Свет? В моей Академии? Единственный свет здесь — это блеск ножа перед убийством!", delay: 10500 },
+      { text: "Но разве убийство ради надежды не является высшим проявлением любви к человечеству?!", delay: 14000 },
+      { text: "Ты безумен, и мне это нравится! Но всё же... Я заставлю вас убивать друг друга!", delay: 17500 },
+      { text: "Я верю в них! Они преодолеют любое отчаяние! Ведь они — Абсолютные!", delay: 21000 },
+      { text: "Хватит болтать! Начинайте уже свою Убийственную Игру! ПУХ-ХА-ХА!", delay: 24500 }
+    ];
+
+    debateScript.forEach(part => {
+      const timeoutId = setTimeout(() => {
+        textElement.innerText = part.text;
+        textElement.style.transform = "scale(1.05)";
+        setTimeout(() => { textElement.style.transform = "scale(1)"; }, 150);
+      }, part.delay);
+      debateTimeouts.push(timeoutId);
+    });
   }
 </script>
 
