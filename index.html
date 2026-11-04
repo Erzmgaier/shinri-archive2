@@ -114,79 +114,75 @@
   /* ====== СЕКРЕТКА С МОНОКУМОЙ ====== */
   .monokuma-overlay {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(10, 0, 0, 0.9); /* Темно-красный фон */
-    backdrop-filter: blur(8px);
+    background: rgba(0, 0, 0, 0.95); /* Глубокий черный фон */
+    backdrop-filter: blur(5px);
     display: flex; align-items: center; justify-content: center;
     z-index: 9999;
     opacity: 0; pointer-events: none;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.2s ease;
   }
   .monokuma-overlay.active { opacity: 1; pointer-events: auto; }
   
-  /* Красная пульсация фона */
+  /* Эффект кровавой вспышки при появлении */
   .monokuma-overlay::before {
     content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background: radial-gradient(circle, rgba(255,0,0,0.2) 0%, transparent 70%);
-    animation: alarmPulse 1s infinite alternate;
-    z-index: 1;
+    background: radial-gradient(circle, rgba(200,0,0,0.4) 0%, transparent 60%);
+    opacity: 0; z-index: 1;
   }
-  @keyframes alarmPulse {
-    0% { opacity: 0.5; }
-    100% { opacity: 1; }
+  .monokuma-overlay.active::before {
+    animation: flashRed 0.4s ease-out forwards;
+  }
+  @keyframes flashRed {
+    0% { opacity: 1; transform: scale(1.5); }
+    100% { opacity: 0.3; transform: scale(1); }
   }
 
   .monokuma-content {
     position: relative; z-index: 2;
     display: flex; flex-direction: column; align-items: center;
-    transform: scale(0.5) translateY(50px);
-    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform: scale(1.2) translateY(-20px);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
   .monokuma-overlay.active .monokuma-content { transform: scale(1) translateY(0); }
   
-  /* Глитч-эффект для картинки */
+  /* Картинка без глитча, только легкое покачивание */
   .monokuma-img {
-    width: 280px; height: auto;
-    filter: drop-shadow(0 0 20px rgba(255, 0, 0, 0.8));
-    animation: glitch 0.2s infinite, monokumaBounce 2s infinite ease-in-out;
+    width: 300px; height: auto;
+    filter: drop-shadow(0 0 25px rgba(200, 0, 0, 0.6));
+    animation: monokumaIdle 3s infinite ease-in-out;
+  }
+  @keyframes monokumaIdle {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-8px) rotate(2deg); }
   }
   
-  @keyframes glitch {
-    0% { transform: translate(0); }
-    20% { transform: translate(-3px, 2px); }
-    40% { transform: translate(-3px, -2px); }
-    60% { transform: translate(3px, 2px); }
-    80% { transform: translate(3px, -2px); }
-    100% { transform: translate(0); }
-  }
-  @keyframes monokumaBounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-  }
-  
-  /* Диалоговое окно */
+  /* Диалоговое окно как в Danganronpa */
   .monokuma-dialog {
     background: #000; color: #fff;
-    padding: 25px 35px; border-radius: 5px;
+    padding: 25px 35px; border-radius: 0px; /* Резкие углы для стиля */
     font-family: "Merriweather", serif; font-weight: bold;
-    font-size: 1.2rem; text-align: center;
-    margin-top: -30px; position: relative; z-index: 3;
-    box-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
-    border: 2px solid #ff0000; max-width: 450px;
-    text-transform: uppercase;
+    font-size: 1.15rem; text-align: center;
+    margin-top: -20px; position: relative; z-index: 3;
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
+    border: 2px solid #fff; max-width: 500px;
+    letter-spacing: 0.5px; line-height: 1.5;
+    cursor: pointer; /* Чтобы было понятно, что можно кликнуть и сменить фразу */
+    transition: background 0.2s;
   }
+  .monokuma-dialog:hover { background: #111; }
+  
   .monokuma-dialog::before {
-    content: ""; position: absolute; top: -12px; left: 50%;
+    content: ""; position: absolute; top: -14px; left: 50%;
     transform: translateX(-50%);
-    border-left: 12px solid transparent; border-right: 12px solid transparent; border-bottom: 12px solid #ff0000;
+    border-left: 14px solid transparent; border-right: 14px solid transparent; border-bottom: 14px solid #fff;
   }
   
   .close-monokuma {
-    margin-top: 25px; background: rgba(255,0,0,0.1); border: 1px solid #ff0000;
-    color: #ff0000; font-family: inherit; font-size: 0.9rem; padding: 10px 20px;
-    cursor: pointer; text-transform: uppercase; letter-spacing: 2px; transition: all 0.2s;
-    border-radius: 4px; font-weight: bold;
+    margin-top: 25px; background: transparent; border: none;
+    color: #555; font-family: inherit; font-size: 0.85rem;
+    cursor: pointer; text-transform: uppercase; letter-spacing: 2px; transition: color 0.2s;
   }
-  .close-monokuma:hover { background: #ff0000; color: #000; }
+  .close-monokuma:hover { color: #fff; }
 
   @media (max-width: 900px) {
     .layout { flex-direction: column; }
@@ -194,8 +190,8 @@
     main { padding: 20px; } .dossier-wrapper { padding: 25px; } header { padding: 15px; gap: 15px; } 
     .header-logo-container { width: 50px; height: 50px; }
     .header-text h1 { font-size: 1.2rem; letter-spacing: 3px; }
-    .monokuma-img { width: 200px; }
-    .monokuma-dialog { font-size: 1rem; padding: 15px 20px; max-width: 300px;}
+    .monokuma-img { width: 220px; }
+    .monokuma-dialog { font-size: 0.95rem; padding: 15px 20px; max-width: 320px;}
   }
 </style>
 </head>
@@ -290,7 +286,8 @@
         </div>
       </div>
     </article>
-        <!-- ДЕЛО 3: Рантаро -->
+
+    <!-- ДЕЛО 3: Рантаро -->
     <article class="dossier-wrapper hidden" id="d07">
       <div class="dossier-title">ЛИЧНОЕ ДЕЛО №07-А</div>
       <div class="dossier-meta"><div><span class="label">Имя:</span> Рантаро Амами</div><div><span class="label">Возраст:</span> 20 лет | <span class="label">Статус:</span> Жив</div><div><span class="label">Талант:</span> Абсолютный Авантюрист</div></div>
@@ -362,7 +359,7 @@
 <div class="monokuma-overlay" id="monokumaOverlay" onclick="hideMonokuma(event)">
   <div class="monokuma-content">
     <img src="monokuma.png" alt="Монокума" class="monokuma-img" onclick="changePhrase(event)">
-    <div class="monokuma-dialog" id="monokumaText">
+    <div class="monokuma-dialog" id="monokumaText" onclick="changePhrase(event)">
       Пип-пип! Нашёл секрет? Только никому не говори, иначе я тебя накажу! ПУХ-ХА-ХА!
     </div>
     <button class="close-monokuma" onclick="hideMonokuma(event)">[ Закрыть ]</button>
@@ -447,12 +444,14 @@
   // ====== ЛОГИКА СЕКРЕТКИ С МОНОКУМОЙ ======
   const monokumaPhrases = [
     "Пип-пип! Нашёл секрет? Только никому не говори, иначе я тебя накажу! ПУХ-ХА-ХА!",
-    "Ах, ученики Пика Надежды... Такие талантливые, и такие легко убиваемые!",
-    "Ты правда думаешь, что это просто архив? Как наивно!",
-    "Кто-то здесь совершит убийство... И это будешь не я!",
-    "Хочешь узнать, что скрывается в [ДАННЫЕ УДАЛЕНЫ]? А это секрет!",
-    "Не заставляй меня использовать наказание! Оно тебе не понравится...",
-    "Убийство — это не просто преступление, это образ жизни! Хи-хи!"
+    "Итак, начнем Убийственную Игру?!",
+    "Эй, не смей трогать мой архив! Или ты хочешь, чтобы я нажал на кнопку?",
+    "В этом архиве есть кое-что интересное... например, твоя будущая причина смерти! Хи-хи!",
+    "Таланты, таланты, таланты... Они такие хрупкие, когда дело доходит до отчаяния!",
+    "Ну что, кто из них сломается первым? Убийца или жертва?",
+    "Ах, я так люблю запах отчаяния по утрам!",
+    "Ты ведь не думаешь, что это просто игра, правда? Это... УБИЙСТВЕННАЯ ИГРА!",
+    "Смотри в оба! Ведь убийца может быть прямо за твоей спиной!"
   ];
 
   function showMonokuma() {
