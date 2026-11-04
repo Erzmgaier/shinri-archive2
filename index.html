@@ -6,53 +6,51 @@
 <title>Архив личных дел — Пик Надежды</title>
 <style>
   :root {
-    --bg: #080a0c; 
-    --panel: rgba(18, 21, 26, 0.85);
-    --border: #2c333d;
-    --text: #d1d5db;
-    --dim: #8b949e;
-    --accent: #b33a3a;
+    --bg: #050608; /* Более глубокий темный фон */
+    --panel: #0d1015;
+    --border: #1f252e;
+    --text: #c9d1d9;
+    --dim: #6e7681;
+    --accent: #b33a3a; /* Кроваво-красный */
     --secret: #d4a017;
-    --hover: rgba(28, 34, 43, 0.9);
+    --hover: #151a21;
   }
   * { box-sizing: border-box; }
   body {
     margin: 0; background: var(--bg); color: var(--text);
     font-family: "Courier New", Consolas, monospace; line-height: 1.6;
     height: 100vh; display: flex; flex-direction: column; overflow: hidden;
-    position: relative;
+    /* Легкий градиент на фоне для объема */
+    background-image: radial-gradient(circle at 50% 0%, #11161c 0%, var(--bg) 70%);
   }
 
-  /* ФОН С ЛОГОТИПОМ */
-  body::before {
-    content: "";
-    position: fixed;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    width: 80vh; height: 80vh;
-    background-image: url('logo.png'); /* ТУТ ПОДКЛЮЧАЕТСЯ ТВОЯ КАРТИНКА */
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    opacity: 0.04; /* Прозрачность (сделай 0.08, если хочешь ярче) */
-    z-index: -1;
-    pointer-events: none;
-  }
-
+  /* Шапка с логотипом */
   header {
-    padding: 15px 20px; border-bottom: 2px solid var(--border);
-    background: rgba(13, 15, 18, 0.95); text-align: center; flex-shrink: 0;
-    z-index: 10;
+    padding: 15px 30px; border-bottom: 2px solid var(--border);
+    background: rgba(10, 12, 16, 0.95); flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center; gap: 25px;
+    z-index: 10; box-shadow: 0 4px 20px rgba(0,0,0,0.6);
   }
-  header h1 { margin: 0 0 4px; font-size: 1.2rem; letter-spacing: 3px; text-transform: uppercase; color: #e6edf3; }
-  header p { margin: 0; color: var(--accent); font-size: 0.75rem; letter-spacing: 2px; }
   
+  .header-logo {
+    width: 60px; height: 60px;
+    object-fit: contain;
+    filter: invert(1) grayscale(1) brightness(1.5); /* Делает черный логотип белым */
+    opacity: 0.8;
+    transition: opacity 0.3s;
+  }
+  .header-logo:hover { opacity: 1; }
+
+  .header-text { text-align: left; }
+  .header-text h1 { margin: 0 0 4px; font-size: 1.4rem; letter-spacing: 4px; text-transform: uppercase; color: #e6edf3; }
+  .header-text p { margin: 0; color: var(--accent); font-size: 0.75rem; letter-spacing: 2px; }
+
   .layout { display: flex; flex: 1; overflow: hidden; z-index: 5; }
   
+  /* Боковое меню */
   aside {
     width: 280px; background: var(--panel); border-right: 1px solid var(--border);
     overflow-y: auto; flex-shrink: 0; padding: 20px 0;
-    backdrop-filter: blur(5px);
   }
   aside h2 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: var(--dim); margin: 0 20px 15px; padding-bottom: 10px; border-bottom: 1px dashed var(--border); }
   aside ul { list-style: none; padding: 0; margin: 0; }
@@ -68,54 +66,63 @@
   .nav-btn .num { color: var(--dim); font-size: 0.75rem; margin-bottom: 2px; }
   .nav-btn .name { font-weight: bold; }
 
-  main { flex: 1; overflow-y: auto; padding: 30px; position: relative; }
+  /* Контент */
+  main { flex: 1; overflow-y: auto; padding: 40px; position: relative; }
   
   .dossier-wrapper {
-    max-width: 900px; margin: 0 auto; background: var(--panel);
-    border: 1px solid var(--border); border-top: 4px solid var(--accent);
-    padding: 30px 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    animation: fadeIn 0.3s ease;
-    backdrop-filter: blur(8px);
+    max-width: 850px; margin: 0 auto; background: var(--panel);
+    border: 1px solid var(--border); border-top: 3px solid var(--accent);
+    padding: 40px 50px; box-shadow: 0 15px 40px rgba(0,0,0,0.7);
+    animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
   .dossier-wrapper.hidden { display: none; }
-  .dossier-title { text-align: center; font-size: 1.4rem; letter-spacing: 2px; color: #fff; margin: 0 0 10px; font-weight: bold; }
-  .dossier-meta { text-align: center; font-size: 0.95rem; margin-bottom: 20px; }
+  
+  .dossier-title { text-align: center; font-size: 1.5rem; letter-spacing: 3px; color: #fff; margin: 0 0 15px; font-weight: bold; }
+  .dossier-meta { text-align: center; font-size: 0.95rem; margin-bottom: 30px; }
   .dossier-meta div { margin: 5px 0; }
   .dossier-meta .label { color: var(--dim); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;}
 
-  .tabs { display: flex; justify-content: center; border-bottom: 1px solid var(--border); margin-bottom: 25px; gap: 10px; }
+  /* Вкладки */
+  .tabs { display: flex; justify-content: center; border-bottom: 1px solid var(--border); margin-bottom: 30px; gap: 15px; }
   .tab-btn {
     background: transparent; border: none; color: var(--dim); font-family: inherit;
-    font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; padding: 10px 15px;
+    font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; padding: 12px 20px;
     cursor: pointer; border-bottom: 3px solid transparent; transition: all 0.2s;
   }
   .tab-btn:hover { color: #fff; }
   .tab-btn.active { color: #fff; border-bottom-color: var(--accent); }
-  .tab-content { display: none; animation: fadeIn 0.3s ease; }
+  .tab-content { display: none; animation: fadeIn 0.4s ease; }
   .tab-content.active { display: block; }
 
-  .block-title { font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin: 25px 0 12px; display: flex; align-items: center; }
-  .block-title::after { content: ""; flex: 1; height: 1px; background: var(--border); margin-left: 15px; }
-  .block-text { margin: 0 0 15px; text-align: justify; font-size: 1rem; }
-  .secret { color: var(--secret); background: rgba(212, 160, 23, 0.1); border: 1px dashed var(--secret); padding: 0 4px; font-size: 0.9em; cursor: help; }
-  .lore-text { font-size: 0.95rem; color: #b1b8c0; text-align: justify; line-height: 1.7; }
-  .lore-text p { margin: 0 0 15px; }
+  /* Текст */
+  .block-title { font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin: 30px 0 15px; display: flex; align-items: center; }
+  .block-title::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, var(--border) 0%, transparent 100%); margin-left: 20px; }
+  .block-text { margin: 0 0 15px; text-align: justify; font-size: 1rem; color: #b1b8c0; }
+  .secret { color: var(--secret); background: rgba(212, 160, 23, 0.08); border: 1px dashed rgba(212, 160, 23, 0.5); padding: 2px 6px; font-size: 0.85em; cursor: help; }
+  
+  .lore-text { font-size: 1rem; color: #b1b8c0; text-align: justify; line-height: 1.8; }
+  .lore-text p { margin: 0 0 20px; text-indent: 20px; } /* Красная строка для красоты */
   .lore-text p:last-child { margin-bottom: 0; }
 
-  @media (max-width: 800px) {
+  @media (max-width: 900px) {
     .layout { flex-direction: column; }
-    aside { width: 100%; height: 200px; border-right: none; border-bottom: 1px solid var(--border); }
-    main { padding: 15px; }
-    .dossier-wrapper { padding: 20px; }
+    aside { width: 100%; height: auto; max-height: 250px; border-right: none; border-bottom: 1px solid var(--border); }
+    main { padding: 20px; }
+    .dossier-wrapper { padding: 25px; }
+    header { padding: 15px; gap: 15px; }
+    .header-logo { width: 45px; height: 45px; }
   }
 </style>
 </head>
 <body>
 
 <header>
-  <h1>Архив личных дел</h1>
-  <p>АКАДЕМИЯ «ПИК НАДЕЖДЫ» · СЛУЖБА БЕЗОПАСНОСТИ</p>
+  <img src="logo.png" alt="Герб Академии" class="header-logo">
+  <div class="header-text">
+    <h1>Архив личных дел</h1>
+    <p>АКАДЕМИЯ «ПИК НАДЕЖДЫ» · СЛУЖБА БЕЗОПАСНОСТИ</p>
+  </div>
 </header>
 
 <div class="layout">
@@ -200,8 +207,7 @@
         </div>
       </div>
     </article>
-
-    <!-- ДЕЛО 3: Рантаро -->
+        <!-- ДЕЛО 3: Рантаро -->
     <article class="dossier-wrapper hidden" id="d07">
       <div class="dossier-title">ЛИЧНОЕ ДЕЛО №07-А</div>
       <div class="dossier-meta">
