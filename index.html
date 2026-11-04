@@ -7,14 +7,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #050608; 
-    --panel: #0d1015;
-    --border: #1f252e;
-    --text: #c9d1d9;
-    --dim: #6e7681;
-    --accent: #b33a3a;
-    --secret: #d4a017;
-    --hover: #151a21;
+    --bg: #050608; --panel: #0d1015; --border: #1f252e; --text: #c9d1d9;
+    --dim: #6e7681; --accent: #b33a3a; --secret: #d4a017; --hover: #151a21;
   }
   * { box-sizing: border-box; }
   body {
@@ -24,59 +18,31 @@
     background-image: radial-gradient(circle at 50% 0%, #11161c 0%, var(--bg) 70%);
   }
 
-  /* Шапка */
   header {
-    padding: 20px 30px; 
-    border-bottom: 1px solid var(--border);
-    background: rgba(8, 10, 12, 0.9); 
-    flex-shrink: 0;
+    padding: 20px 30px; border-bottom: 1px solid var(--border);
+    background: rgba(8, 10, 12, 0.9); flex-shrink: 0;
     display: flex; align-items: center; justify-content: center; gap: 25px;
-    z-index: 10; 
-    box-shadow: 0 4px 20px rgba(0,0,0,0.8);
-    position: relative;
+    z-index: 10; box-shadow: 0 4px 20px rgba(0,0,0,0.8); position: relative;
   }
   
-  /* Исправленный логотип */
   .header-logo {
-    width: 65px; height: 65px;
-    object-fit: contain;
-    /* Превращаем черный фон в прозрачный, а сам герб делаем белым */
-    mix-blend-mode: screen; 
-    filter: invert(1) grayscale(1) brightness(1.2);
-    opacity: 0.85;
-    transition: opacity 0.3s, transform 0.3s;
-    filter: drop-shadow(0 0 8px rgba(255,255,255,0.1)); /* Легкое свечение */
+    width: 65px; height: 65px; object-fit: contain;
+    mix-blend-mode: screen; filter: invert(1) grayscale(1) brightness(1.2);
+    opacity: 0.85; transition: opacity 0.3s, transform 0.3s;
+    filter: drop-shadow(0 0 8px rgba(255,255,255,0.1));
   }
-  .header-logo:hover { 
-    opacity: 1; 
-    transform: scale(1.05);
-  }
+  .header-logo:hover { opacity: 1; transform: scale(1.05); }
 
   .header-text { text-align: left; }
-  
-  /* Строгий шрифт с засечками для заголовка */
   .header-text h1 { 
-    font-family: "Merriweather", serif;
-    margin: 0 0 6px; 
-    font-size: 1.5rem; 
-    letter-spacing: 6px; 
-    text-transform: uppercase; 
-    color: #dce3eb; 
+    font-family: "Merriweather", serif; margin: 0 0 6px; font-size: 1.5rem; 
+    letter-spacing: 6px; text-transform: uppercase; color: #dce3eb; 
     text-shadow: 0 2px 4px rgba(0,0,0,0.5);
   }
-  
-  .header-text p { 
-    margin: 0; 
-    color: var(--accent); 
-    font-size: 0.75rem; 
-    letter-spacing: 3px; 
-    text-transform: uppercase;
-    opacity: 0.8;
-  }
+  .header-text p { margin: 0; color: var(--accent); font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; opacity: 0.8; }
 
   .layout { display: flex; flex: 1; overflow: hidden; z-index: 5; }
   
-  /* Боковое меню */
   aside {
     width: 300px; background: var(--panel); border-right: 1px solid var(--border);
     overflow-y: auto; flex-shrink: 0; padding: 25px 0;
@@ -96,7 +62,6 @@
   .nav-btn .num { color: var(--accent); font-size: 0.75rem; margin-bottom: 4px; letter-spacing: 1px;}
   .nav-btn .name { font-weight: 500; letter-spacing: 1px;}
 
-  /* Контент */
   main { flex: 1; overflow-y: auto; padding: 40px; position: relative; }
   
   .dossier-wrapper {
@@ -113,7 +78,6 @@
   .dossier-meta div { margin: 6px 0; }
   .dossier-meta .label { color: var(--dim); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 2px;}
 
-  /* Вкладки */
   .tabs { display: flex; justify-content: center; border-bottom: 1px solid var(--border); margin-bottom: 35px; gap: 20px; }
   .tab-btn {
     background: transparent; border: none; color: var(--dim); font-family: inherit;
@@ -125,7 +89,6 @@
   .tab-content { display: none; animation: fadeIn 0.4s ease; }
   .tab-content.active { display: block; }
 
-  /* Текст */
   .block-title { font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin: 35px 0 15px; display: flex; align-items: center; font-weight: 500; }
   .block-title::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, var(--border) 0%, transparent 100%); margin-left: 20px; }
   .block-text { margin: 0 0 20px; text-align: justify; font-size: 0.95rem; color: #a9b2bc; line-height: 1.7; }
@@ -239,7 +202,8 @@
         </div>
       </div>
     </article>
-        <!-- ДЕЛО 3: Рантаро -->
+
+    <!-- ДЕЛО 3: Рантаро -->
     <article class="dossier-wrapper hidden" id="d07">
       <div class="dossier-title">ЛИЧНОЕ ДЕЛО №07-А</div>
       <div class="dossier-meta">
