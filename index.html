@@ -117,25 +117,20 @@
     box-shadow: 0 0 30px rgba(179, 58, 58, 0.15), 0 15px 40px rgba(0,0,0,0.7);
   }
 
-  /* КРУГЛЫЙ ШТАМП (через внутренний div) */
+  /* ПРОСТОЙ И РАБОЧИЙ ШТАМП */
   .stamp-bg {
     position: absolute;
     top: 15px; right: 15px;
-    width: 160px; height: 160px;
+    width: 140px; height: 140px;
     background-image: url('stamp.png');
-    background-size: contain;
-    background-repeat: no-repeat;
+    background-size: cover;
     background-position: center;
-    border-radius: 50%;
-    overflow: hidden;
-    
-    opacity: 0.08; 
+    background-repeat: no-repeat;
+    border-radius: 50%; /* Закругляем */
+    opacity: 0.15; /* Полупрозрачный */
     transform: rotate(15deg); 
     pointer-events: none; 
     z-index: 0; 
-    
-    mix-blend-mode: screen;
-    filter: invert(1) grayscale(1);
   }
 
   @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
@@ -266,7 +261,7 @@
     main { padding: 15px; }
     .dossier-wrapper { padding: 20px 15px; }
     
-    .stamp-bg { width: 100px; height: 100px; opacity: 0.06; }
+    .stamp-bg { width: 100px; height: 100px; opacity: 0.1; }
     
     .vn-monokuma { height: 220px; left: -20px; bottom: 180px; }
     .vn-nagito { height: 240px; right: -20px; bottom: 160px; }
