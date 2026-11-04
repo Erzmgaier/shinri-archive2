@@ -77,7 +77,6 @@
 
   main { flex: 1; overflow-y: auto; padding: 40px; position: relative; }
   
-  /* Карточка личного дела (со штампом) */
   .dossier-wrapper { 
     position: relative; 
     overflow: hidden; 
@@ -87,25 +86,25 @@
     animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1); border-radius: 12px;
   }
   
-  /* Стили для штампа */
+  /* ИСПРАВЛЕННЫЙ ШТАМП */
   .dossier-wrapper::after {
     content: "";
     position: absolute;
     top: 20px; right: 20px;
-    width: 150px; height: 150px;
+    width: 180px; height: 180px;
     background-image: url('stamp.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    opacity: 0.05; 
+    opacity: 0.03; 
     transform: rotate(15deg); 
     pointer-events: none; 
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition: opacity 0.3s ease;
     z-index: 0; 
+    mix-blend-mode: screen; 
   }
   .dossier-wrapper:hover::after {
-    opacity: 0.15; 
-    transform: rotate(10deg) scale(1.1);
+    opacity: 0.08; 
   }
 
   @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
@@ -236,7 +235,7 @@
     main { padding: 15px; }
     .dossier-wrapper { padding: 20px 15px; }
     
-    .dossier-wrapper::after { width: 100px; height: 100px; opacity: 0.08; }
+    .dossier-wrapper::after { width: 100px; height: 100px; opacity: 0.05; }
     
     .vn-monokuma { height: 220px; left: -20px; bottom: 180px; }
     .vn-nagito { height: 240px; right: -20px; bottom: 160px; }
@@ -276,7 +275,7 @@
   </aside>
 
   <main id="main-content">
-    <!-- ДЕЛО 1: Кокичи -->
+        <!-- ДЕЛО 1: Кокичи -->
     <article class="dossier-wrapper" id="d03">
       <div class="dossier-title">ЛИЧНОЕ ДЕЛО №03-К</div>
       <div class="dossier-meta"><div><span class="label">Имя:</span> Кокичи Ома</div><div><span class="label">Возраст:</span> 20 лет | <span class="label">Статус:</span> Жив</div><div><span class="label">Талант:</span> Абсолютный Шут Хаоса</div></div>
@@ -435,6 +434,7 @@
     </div>
   </div>
 </div>
+
 <script>
   // Логика переключения меню
   function openDossier(id, btn) {
