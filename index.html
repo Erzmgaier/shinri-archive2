@@ -86,23 +86,27 @@
     animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1); border-radius: 12px;
   }
   
-  /* ИСПРАВЛЕННЫЙ ШТАМП */
+  /* ЗАКРУГЛЕННЫЙ ШТАМП */
   .dossier-wrapper::after {
     content: "";
     position: absolute;
-    top: 20px; right: 20px;
-    width: 180px; height: 180px;
+    top: 15px; right: 15px;
+    width: 160px; height: 160px;
     background-image: url('stamp.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    opacity: 0.03; 
+    opacity: 0.04; 
     transform: rotate(15deg); 
     pointer-events: none; 
-    transition: opacity 0.3s ease;
     z-index: 0; 
     mix-blend-mode: screen; 
+    
+    /* Вот эти две строчки делают его круглым */
+    border-radius: 50%; 
+    overflow: hidden; 
   }
+  
   .dossier-wrapper:hover::after {
     opacity: 0.08; 
   }
