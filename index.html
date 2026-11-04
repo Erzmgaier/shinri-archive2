@@ -109,126 +109,133 @@
   .lore-text p { margin: 0 0 20px; text-indent: 25px; }
   .lore-text p:last-child { margin-bottom: 0; }
 
-  /* ====== СЕКРЕТКА ====== */
-  .monokuma-overlay {
+  /* ====== НОВАЯ СЕКРЕТКА (ВИЗУАЛЬНАЯ НОВЕЛЛА) ====== */
+  .vn-overlay {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background: rgba(0, 0, 0, 0.95);
     display: flex; align-items: center; justify-content: center;
-    z-index: 9999; opacity: 0; pointer-events: none;
-    transition: opacity 0.3s ease; overflow: hidden;
+    z-index: 9999;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.3s ease;
+    overflow: hidden;
   }
-  .monokuma-overlay.active { opacity: 1; pointer-events: auto; }
+  .vn-overlay.active { opacity: 1; pointer-events: auto; }
   
-  .monokuma-overlay::before {
+  /* Красный фон-сирена */
+  .vn-overlay::before {
     content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
     background: radial-gradient(circle, rgba(255,0,0,0.2) 0%, transparent 60%);
     z-index: 1;
   }
-  .monokuma-overlay.active::before { animation: sirenPulse 1s infinite alternate; }
+  .vn-overlay.active::before { animation: sirenPulse 1s infinite alternate; }
   @keyframes sirenPulse { 0% { opacity: 0.3; transform: scale(1); } 100% { opacity: 0.8; transform: scale(1.5); } }
 
-  .monokuma-content {
-    position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center;
-    transform: scale(0.8) translateY(50px); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  }
-  .monokuma-overlay.active .monokuma-content { transform: scale(1) translateY(0); }
-  
-  .monokuma-img {
-    width: 250px; height: auto; filter: drop-shadow(0 0 20px rgba(255, 0, 0, 0.6));
-    animation: monokumaIdle 3s infinite ease-in-out; cursor: pointer; transition: opacity 0.2s ease, transform 0.2s ease;
-  }
-  @keyframes monokumaIdle { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-8px) rotate(2deg); } }
-  
-  .monokuma-dialog {
-    background: #000; color: #fff; padding: 20px 30px; border-radius: 0px;
-    font-family: "Merriweather", serif; font-weight: bold; font-size: 1.1rem; text-align: center;
-    margin-top: -15px; position: relative; z-index: 3; box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
-    border: 2px solid #fff; max-width: 550px; letter-spacing: 0.5px; line-height: 1.5; transition: background 0.2s, transform 0.1s;
-  }
-  .monokuma-dialog::before {
-    content: ""; position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
-    border-left: 12px solid transparent; border-right: 12px solid transparent; border-bottom: 12px solid #fff;
+  .vn-container {
+    position: relative; width: 100%; height: 100%; max-width: 1200px;
+    z-index: 2; display: flex; align-items: flex-end; justify-content: center;
+    padding-bottom: 40px;
   }
 
-  .nagito-container {
-    position: absolute; bottom: -20px; right: 5%; z-index: 4; cursor: pointer;
-    transition: transform 0.3s ease, filter 0.3s; filter: drop-shadow(0px 0px 15px rgba(255,255,255,0.1)); user-select: none;
+  /* Монокума */
+  .vn-monokuma {
+    position: absolute;
+    bottom: 150px; left: 10%;
+    height: 350px; width: auto;
+    z-index: 3;
+    filter: drop-shadow(0 0 20px rgba(255, 0, 0, 0.5));
+    transition: transform 0.2s, opacity 0.2s;
   }
-  .nagito-container:hover { transform: scale(1.05) translateY(-10px); filter: drop-shadow(0px 0px 20px rgba(255,255,255,0.4)); }
-  .nagito-img { width: 280px; height: auto; transform: scaleX(-1); transition: opacity 0.3s ease; }
+  .vn-monokuma.talking { transform: translateY(-10px) scale(1.05); }
+  .vn-monokuma.hidden { opacity: 0; transform: translateY(20px); }
 
-  .close-monokuma {
-    margin-top: 20px; background: transparent; border: none; color: #555;
-    font-family: inherit; font-size: 0.8rem; cursor: pointer; text-transform: uppercase;
-    letter-spacing: 2px; transition: color 0.2s; position: relative; z-index: 5;
+  /* Нагито */
+  .vn-nagito {
+    position: absolute;
+    bottom: 130px; right: 5%;
+    height: 380px; width: auto;
+    z-index: 3;
+    transition: transform 0.2s, opacity 0.2s;
+    cursor: pointer;
   }
-  .close-monokuma:hover { color: #fff; }
+  .vn-nagito.talking { transform: translateY(-10px) scale(1.05); filter: drop-shadow(0 0 20px rgba(255,255,255,0.4)); }
+  .vn-nagito.hidden { opacity: 0; transform: translateY(20px); }
+  .vn-nagito:hover { filter: drop-shadow(0 0 25px rgba(255,255,255,0.6)); }
 
-  /* ====== МОБИЛЬНАЯ ВЕРСИЯ (АДАПТИВНОСТЬ) ====== */
-  @media (max-width: 900px) {
-    /* Шапка */
-    header { 
-      padding: 15px; gap: 15px; 
-      flex-direction: row; /* Оставляем в ряд, но уменьшаем */
-    }
-    .header-logo-container { width: 50px; height: 50px; }
-    .header-text h1 { font-size: 1.1rem; letter-spacing: 3px; }
-    .header-text p { font-size: 0.6rem; letter-spacing: 1px; }
+  /* Диалоговое окно */
+  .vn-dialog-box {
+    position: relative; z-index: 4;
+    width: 90%; max-width: 900px;
+    background: #000; border: 2px solid #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 30px rgba(255, 0, 0, 0.3);
+    padding: 0;
+    display: flex; flex-direction: column;
+    overflow: hidden;
+  }
 
-    /* Меню */
+  /* Имя говорящего */
+  .vn-name-tag {
+    position: absolute; top: -35px; left: 20px;
+    background: #fff; color: #000;
+    font-family: "Merriweather", serif; font-weight: bold;
+    font-size: 1.1rem; padding: 5px 20px;
+    border-radius: 5px 5px 0 0;
+    border: 2px solid #fff; border-bottom: none;
+    text-transform: uppercase; letter-spacing: 2px;
+    box-shadow: 0 -5px 15px rgba(0,0,0,0.5);
+  }
+
+  /* Текст диалога */
+  .vn-text-content {
+    padding: 30px 40px;
+    font-family: "Merriweather", serif;
+    font-size: 1.15rem; color: #fff;
+    line-height: 1.6;
+    min-height: 120px;
+    display: flex; align-items: center;
+  }
+
+  /* Индикатор "Клик" */
+  .vn-click-indicator {
+    position: absolute; bottom: 10px; right: 20px;
+    color: var(--accent); font-size: 1.5rem;
+    animation: bounceArrow 1s infinite;
+  }
+  @keyframes bounceArrow {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+  }
+
+  /* Кнопки управления */
+  .vn-controls {
+    position: absolute; top: 20px; right: 20px; z-index: 10;
+    display: flex; gap: 10px;
+  }
+  .vn-btn {
+    background: rgba(0,0,0,0.6); border: 1px solid var(--border); color: var(--dim);
+    padding: 8px 15px; border-radius: 5px; font-family: inherit; font-size: 0.8rem;
+    cursor: pointer; transition: all 0.2s; text-transform: uppercase;
+  }
+  .vn-btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+  @media (max-width: 800px) {
     .layout { flex-direction: column; }
-    aside { 
-      width: 100%; height: auto; max-height: 180px; /* Ограничиваем высоту меню */
-      border-right: none; border-bottom: 1px solid var(--border); 
-      border-radius: 0; margin-top: 0; border-top: none;
-    }
-    .aside-header { padding: 15px 20px 10px; }
-    aside h2 { font-size: 0.65rem; }
-    .aside-list { 
-      display: flex; /* Делаем меню горизонтальным */
-      flex-direction: row; 
-      overflow-x: auto; /* Скролл вбок */
-      padding: 10px 15px; 
-      gap: 10px;
-      white-space: nowrap;
-    }
+    aside { width: 100%; height: auto; max-height: 180px; border-right: none; border-bottom: 1px solid var(--border); border-radius: 0; margin-top: 0; border-top: none;}
+    .aside-list { display: flex; flex-direction: row; overflow-x: auto; padding: 10px 15px; gap: 10px; white-space: nowrap; }
     .aside-list li { margin-bottom: 0; padding: 0; flex-shrink: 0; }
-    .nav-btn { 
-      padding: 8px 12px; 
-      flex-direction: row; /* Иконка и текст в ряд */
-      gap: 8px;
-      width: auto;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid var(--border);
-    }
+    .nav-btn { padding: 8px 12px; flex-direction: row; gap: 8px; width: auto; background: rgba(255,255,255,0.03); border: 1px solid var(--border); }
     .nav-btn.active { background: rgba(179, 58, 58, 0.15); border-color: var(--accent); border-left-width: 1px; }
     .nav-icon { width: 24px; height: 24px; font-size: 0.8rem; border: none; background: transparent; }
-    .nav-info { flex-direction: column; text-align: left; }
-    .nav-btn .num { font-size: 0.55rem; }
-    .nav-btn .name { font-size: 0.75rem; }
-    .aside-footer { display: none; } /* Скрываем подвал меню на телефоне */
-
-    /* Основной контент */
+    .aside-footer { display: none; }
     main { padding: 15px; }
-    .dossier-wrapper { padding: 20px 15px; border-radius: 8px; }
-    .dossier-title { font-size: 1.1rem; letter-spacing: 2px; }
-    .dossier-meta { font-size: 0.75rem; margin-bottom: 20px; }
+    .dossier-wrapper { padding: 20px 15px; }
     
-    /* Вкладки */
-    .tabs { gap: 10px; }
-    .tab-btn { font-size: 0.75rem; padding: 10px 12px; letter-spacing: 1px; }
-
-    /* Текст */
-    .block-title { font-size: 0.75rem; margin: 25px 0 10px; }
-    .block-text { font-size: 0.85rem; line-height: 1.6; }
-    .lore-text { font-size: 0.85rem; line-height: 1.7; }
-    .lore-text p { text-indent: 15px; }
-
-    /* Секретка */
-    .monokuma-img { width: 180px; }
-    .monokuma-dialog { font-size: 0.85rem; padding: 15px 20px; max-width: 90%; }
-    .nagito-container { bottom: 0; right: 0; }
-    .nagito-img { width: 140px; }
+    /* Секретка на телефоне */
+    .vn-monokuma { height: 220px; left: -20px; bottom: 180px; }
+    .vn-nagito { height: 240px; right: -20px; bottom: 160px; }
+    .vn-dialog-box { width: 95%; margin-bottom: 20px; }
+    .vn-text-content { font-size: 0.95rem; padding: 20px; min-height: 100px; }
+    .vn-name-tag { font-size: 0.9rem; padding: 4px 15px; top: -30px; left: 10px;}
   }
 </style>
 </head>
@@ -392,23 +399,30 @@
   </main>
 </div>
 
-<!-- ====== ОКНО СЕКРЕТКИ ====== -->
-<div class="monokuma-overlay" id="monokumaOverlay" onclick="hideMonokuma(event)">
-  <div class="monokuma-content">
-    <img src="monokuma.png" id="monokumaImg" alt="Монокума" class="monokuma-img" onclick="changePhrase(event)">
-    <div class="monokuma-dialog" id="monokumaText" onclick="changePhrase(event)">
-      Пип-пип! Нашёл секрет? Только никому не говори, иначе я тебя накажу! ПУХ-ХА-ХА!
-    </div>
+<!-- ====== НОВАЯ СЕКРЕТКА (ВИЗУАЛЬНАЯ НОВЕЛЛА) ====== -->
+<div class="vn-overlay" id="vnOverlay">
+  <div class="vn-controls">
+    <button class="vn-btn" onclick="closeVN()">Закрыть [X]</button>
+  </div>
+  
+  <div class="vn-container" onclick="advanceDialogue(event)">
+    <!-- Спрайты -->
+    <img src="monokuma.png" id="vnMonokuma" class="vn-monokuma" alt="Монокума">
+    <img src="nagito.png" id="vnNagito" class="vn-nagito hidden" alt="Нагито" ondblclick="startDebate(event)">
     
-    <div class="nagito-container" ondblclick="startDebate(event)" title="Дважды кликни по мне!">
-      <img src="nagito.png" id="nagitoImg" alt="Нагито" class="nagito-img">
+    <!-- Диалоговое окно -->
+    <div class="vn-dialog-box">
+      <div class="vn-name-tag" id="vnName">Монокума</div>
+      <div class="vn-text-content" id="vnText">
+        Пип-пип! Нашёл секрет? Только никому не говори, иначе я тебя накажу! ПУХ-ХА-ХА!
+      </div>
+      <div class="vn-click-indicator">▼</div>
     </div>
-
-    <button class="close-monokuma" onclick="hideMonokuma(event)">[ Закрыть ]</button>
   </div>
 </div>
 
 <script>
+  // Логика переключения меню
   function openDossier(id, btn) {
     document.querySelectorAll('.dossier-wrapper').forEach(d => d.classList.add('hidden'));
     document.getElementById(id).classList.remove('hidden');
@@ -427,6 +441,7 @@
     if (copyBtn) copyBtn.classList.remove('hidden-btn');
   }
 
+  // Логика переключения вкладок (Дело / История)
   function openTab(dossierId, tabType, btn) {
     const dossier = document.getElementById(dossierId);
     dossier.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
@@ -447,6 +462,7 @@
     }
   }
 
+  // Логика копирования дела
   function copyDossier(id, btn) {
     const dossier = document.getElementById(id);
     let text = "———————————————————————\n";
@@ -480,37 +496,62 @@
     }).catch(err => alert("Ошибка при копировании"));
   }
 
-  // ====== ЛОГИКА СЕКРЕТКИ ======
+  // ====== ЛОГИКА СЕКРЕТКИ (ВИЗУАЛЬНАЯ НОВЕЛЛА) ======
+  let currentLine = 0;
   let isDebating = false;
-  let debateTimeouts = [];
+  let debateTimeout = null;
+
+  const openingScript = [
+    { name: "Монокума", text: "Пип-пип! Нашёл секрет? Только никому не говори, иначе я тебя накажу! ПУХ-ХА-ХА!", sprite: "monokuma.png", speaker: "monokuma" }
+  ];
 
   function showMonokuma() {
-    document.getElementById('monokumaOverlay').classList.add('active');
+    document.getElementById('vnOverlay').classList.add('active');
+    // Сброс
+    currentLine = 0;
     isDebating = false;
-    document.getElementById('monokumaImg').src = 'monokuma.png';
-    document.getElementById('nagitoImg').src = 'nagito.png';
-    document.getElementById('monokumaText').innerText = "Пип-пип! Нашёл секрет? Только никому не говори, иначе я тебя накажу! ПУХ-ХА-ХА!";
-  }
-
-  function hideMonokuma(event) {
-    if (event.target.classList.contains('monokuma-overlay') || event.target.classList.contains('close-monokuma')) {
-      document.getElementById('monokumaOverlay').classList.remove('active');
-      debateTimeouts.forEach(clearTimeout);
-      debateTimeouts = [];
-      isDebating = false;
-    }
-  }
-
-  function changePhrase(event) {
-    if (isDebating) return; 
-    if(event) event.stopPropagation(); 
+    if(debateTimeout) clearTimeout(debateTimeout);
     
-    const img = document.getElementById('monokumaImg');
-    const textElement = document.getElementById('monokumaText');
-    img.src = 'monokuma1.png';
+    document.getElementById('vnNagito').classList.add('hidden');
+    document.getElementById('vnNagito').src = 'nagito.png';
+    document.getElementById('vnMonokuma').src = 'monokuma.png';
+    document.getElementById('vnMonokuma').classList.remove('hidden');
+    document.getElementById('vnName').innerText = openingScript[0].name;
+    document.getElementById('vnName').style.color = "#000";
+    document.getElementById('vnText').innerText = openingScript[0].text;
+  }
 
+  function closeVN() {
+    document.getElementById('vnOverlay').classList.remove('active');
+    if(debateTimeout) clearTimeout(debateTimeout);
+    isDebating = false;
+  }
+
+  // Клик по экрану (если не спорим) - просто меняет фразы Монокумы
+  function advanceDialogue(event) {
+    if (isDebating) return;
+    // Проверяем, что кликнули не по кнопке закрытия
+    if (event.target.classList.contains('vn-btn')) return;
+
+    // Если Нагито скрыт, показываем его после первого клика
+    const nagito = document.getElementById('vnNagito');
+    if (nagito.classList.contains('hidden')) {
+      nagito.classList.remove('hidden');
+      nagito.classList.add('talking');
+      document.getElementById('vnName').innerText = "Нагито Комаэда";
+      document.getElementById('vnName').style.color = "#fff";
+      document.getElementById('vnName').style.background = "var(--accent)";
+      document.getElementById('vnText').innerText = "О? Кто это тут у нас... Монокума? Твоё отчаяние такое... прекрасное!";
+      document.getElementById('vnMonokuma').classList.remove('talking');
+      return;
+    }
+
+    // Иначе просто меняем фразы Монокумы
+    document.getElementById('vnName').innerText = "Монокума";
+    document.getElementById('vnName').style.color = "#000";
+    document.getElementById('vnName').style.background = "#fff";
+    
     const monokumaPhrases = [
-      "Пип-пип! Решил заглянуть в закрытый архив? Любопытство — первая ступенька к отчаянию! ПУХ-ХА-ХА!",
       "Итак, начнем Убийственную Игру?! Правила просты: убей кого-нибудь и не попадись!",
       "Эй, не смей трогать мой архив! Там записаны все ваши грязные секретики!",
       "Таланты, таланты, таланты... Они такие хрупкие, когда дело доходит до отчаяния!",
@@ -525,43 +566,65 @@
     ];
     
     const randomIndex = Math.floor(Math.random() * monokumaPhrases.length);
-    textElement.innerText = monokumaPhrases[randomIndex];
-    
-    textElement.style.transform = "scale(1.05)";
-    setTimeout(() => { textElement.style.transform = "scale(1)"; }, 150);
+    document.getElementById('vnText').innerText = monokumaPhrases[randomIndex];
+    document.getElementById('vnMonokuma').src = 'monokuma1.png';
   }
 
+  // Двойной клик по Нагито (Начало спора)
   function startDebate(event) {
     event.stopPropagation();
     if (isDebating) return; 
     
     isDebating = true;
-    const imgNagito = document.getElementById('nagitoImg');
-    const imgMonokuma = document.getElementById('monokumaImg');
-    const textElement = document.getElementById('monokumaText');
+    const imgNagito = document.getElementById('vnNagito');
+    const imgMonokuma = document.getElementById('vnMonokuma');
+    const textElement = document.getElementById('vnText');
+    const nameTag = document.getElementById('vnName');
 
     imgNagito.src = 'nagito1.png';
     imgMonokuma.src = 'monokuma1.png'; 
 
     const debateScript = [
-      { text: "О, Монокума! Твоё отчаяние такое... прекрасное! Оно обязательно породит ещё большую надежду!", delay: 0 },
-      { text: "Заткнись, псих! Ваша надежда — это просто топливо для моего отчаяния! ПУХ-ХА-ХА!", delay: 3500 },
-      { text: "Ты не прав! Надежда — это свет, который ведёт нас сквозь тьму. Даже в этой Академии!", delay: 7000 },
-      { text: "Свет? В моей Академии? Единственный свет здесь — это блеск ножа перед убийством!", delay: 10500 },
-      { text: "Но разве убийство ради надежды не является высшим проявлением любви к человечеству?!", delay: 14000 },
-      { text: "Ты безумен, и мне это нравится! Но всё же... Я заставлю вас убивать друг друга!", delay: 17500 },
-      { text: "Я верю в них! Они преодолеют любое отчаяние! Ведь они — Абсолютные!", delay: 21000 },
-      { text: "Хватит болтать! Начинайте уже свою Убийственную Игру! ПУХ-ХА-ХА!", delay: 24500 }
+      { speaker: "Нагито", text: "О, Монокума! Твоё отчаяние такое... прекрасное! Оно обязательно породит ещё большую надежду!", delay: 0 },
+      { speaker: "Монокума", text: "Заткнись, псих! Ваша надежда — это просто топливо для моего отчаяния! ПУХ-ХА-ХА!", delay: 4000 },
+      { speaker: "Нагито", text: "Ты не прав! Надежда — это свет, который ведёт нас сквозь тьму. Даже в этой Академии!", delay: 8000 },
+      { speaker: "Монокума", text: "Свет? В моей Академии? Единственный свет здесь — это блеск ножа перед убийством!", delay: 12000 },
+      { speaker: "Нагито", text: "Но разве убийство ради надежды не является высшим проявлением любви к человечеству?!", delay: 16000 },
+      { speaker: "Монокума", text: "Ты безумен, и мне это нравится! Но всё же... Я заставлю вас убивать друг друга!", delay: 20000 },
+      { speaker: "Нагито", text: "Я верю в них! Они преодолеют любое отчаяние! Ведь они — Абсолютные!", delay: 24000 },
+      { speaker: "Монокума", text: "Хватит болтать! Начинайте уже свою Убийственную Игру! ПУХ-ХА-ХА!", delay: 28000 }
     ];
 
-    debateScript.forEach(part => {
-      const timeoutId = setTimeout(() => {
-        textElement.innerText = part.text;
-        textElement.style.transform = "scale(1.05)";
-        setTimeout(() => { textElement.style.transform = "scale(1)"; }, 150);
-      }, part.delay);
-      debateTimeouts.push(timeoutId);
-    });
+    let currentStep = 0;
+    
+    function playNextLine() {
+      if (currentStep >= debateScript.length) {
+        isDebating = false;
+        return;
+      }
+      
+      const line = debateScript[currentStep];
+      textElement.innerText = line.text;
+      
+      if (line.speaker === "Нагито") {
+        nameTag.innerText = "Нагито Комаэда";
+        nameTag.style.color = "#fff";
+        nameTag.style.background = "var(--accent)";
+        imgNagito.classList.add('talking');
+        imgMonokuma.classList.remove('talking');
+      } else {
+        nameTag.innerText = "Монокума";
+        nameTag.style.color = "#000";
+        nameTag.style.background = "#fff";
+        imgMonokuma.classList.add('talking');
+        imgNagito.classList.remove('talking');
+      }
+
+      currentStep++;
+      debateTimeout = setTimeout(playNextLine, 4000);
+    }
+
+    playNextLine();
   }
 </script>
 
