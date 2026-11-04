@@ -86,7 +86,7 @@
     animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1); border-radius: 12px;
   }
   
-  /* ЗАКРУГЛЕННЫЙ ШТАМП */
+  /* КРУГЛЫЙ ШТАМП */
   .dossier-wrapper::after {
     content: "";
     position: absolute;
@@ -102,9 +102,9 @@
     z-index: 0; 
     mix-blend-mode: screen; 
     
-    /* Вот эти две строчки делают его круглым */
-    border-radius: 50%; 
-    overflow: hidden; 
+    /* МАСКА: Вырезает ровный круг */
+    -webkit-mask-image: radial-gradient(circle, black 50%, transparent 52%);
+    mask-image: radial-gradient(circle, black 50%, transparent 52%);
   }
   
   .dossier-wrapper:hover::after {
