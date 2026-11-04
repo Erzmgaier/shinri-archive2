@@ -6,26 +6,53 @@
 <title>Архив личных дел — Пик Надежды</title>
 <style>
   :root {
-    --bg: #0a0b0e; --panel: #12151a; --border: #232831; --text: #c9d1d9;
-    --dim: #8b949e; --accent: #b33a3a; --secret: #d4a017; --hover: #1c222b;
+    --bg: #080a0c; 
+    --panel: rgba(18, 21, 26, 0.85);
+    --border: #2c333d;
+    --text: #d1d5db;
+    --dim: #8b949e;
+    --accent: #b33a3a;
+    --secret: #d4a017;
+    --hover: rgba(28, 34, 43, 0.9);
   }
   * { box-sizing: border-box; }
   body {
     margin: 0; background: var(--bg); color: var(--text);
     font-family: "Courier New", Consolas, monospace; line-height: 1.6;
     height: 100vh; display: flex; flex-direction: column; overflow: hidden;
+    position: relative;
   }
+
+  /* ФОН С ЛОГОТИПОМ */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80vh; height: 80vh;
+    background-image: url('logo.png'); /* ТУТ ПОДКЛЮЧАЕТСЯ ТВОЯ КАРТИНКА */
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.04; /* Прозрачность (сделай 0.08, если хочешь ярче) */
+    z-index: -1;
+    pointer-events: none;
+  }
+
   header {
     padding: 15px 20px; border-bottom: 2px solid var(--border);
-    background: #0d0f12; text-align: center; flex-shrink: 0;
+    background: rgba(13, 15, 18, 0.95); text-align: center; flex-shrink: 0;
+    z-index: 10;
   }
   header h1 { margin: 0 0 4px; font-size: 1.2rem; letter-spacing: 3px; text-transform: uppercase; color: #e6edf3; }
   header p { margin: 0; color: var(--accent); font-size: 0.75rem; letter-spacing: 2px; }
-  .layout { display: flex; flex: 1; overflow: hidden; }
+  
+  .layout { display: flex; flex: 1; overflow: hidden; z-index: 5; }
   
   aside {
     width: 280px; background: var(--panel); border-right: 1px solid var(--border);
     overflow-y: auto; flex-shrink: 0; padding: 20px 0;
+    backdrop-filter: blur(5px);
   }
   aside h2 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: var(--dim); margin: 0 20px 15px; padding-bottom: 10px; border-bottom: 1px dashed var(--border); }
   aside ul { list-style: none; padding: 0; margin: 0; }
@@ -42,11 +69,13 @@
   .nav-btn .name { font-weight: bold; }
 
   main { flex: 1; overflow-y: auto; padding: 30px; position: relative; }
+  
   .dossier-wrapper {
     max-width: 900px; margin: 0 auto; background: var(--panel);
     border: 1px solid var(--border); border-top: 4px solid var(--accent);
     padding: 30px 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     animation: fadeIn 0.3s ease;
+    backdrop-filter: blur(8px);
   }
   @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
   .dossier-wrapper.hidden { display: none; }
@@ -86,7 +115,7 @@
 
 <header>
   <h1>Архив личных дел</h1>
-  <p>АКАДЕМИЯ «ПИК НАДЕЖДЫ» · СЛУЖБА БЕЗОПАСНОСТИ · КОНФИДЕНЦИАЛЬНО</p>
+  <p>АКАДЕМИЯ «ПИК НАДЕЖДЫ» · СЛУЖБА БЕЗОПАСНОСТИ</p>
 </header>
 
 <div class="layout">
@@ -171,7 +200,8 @@
         </div>
       </div>
     </article>
-        <!-- ДЕЛО 3: Рантаро -->
+
+    <!-- ДЕЛО 3: Рантаро -->
     <article class="dossier-wrapper hidden" id="d07">
       <div class="dossier-title">ЛИЧНОЕ ДЕЛО №07-А</div>
       <div class="dossier-meta">
