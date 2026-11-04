@@ -220,3 +220,53 @@
         <p class="block-text">До 7 лет росла в изолированной лесной деревне в семье промысловика. В ходе разбойного нападения мародёров деревня была полностью уничтожена, а родители субъекта погибли. Харукава сумела скрыться в юго-западных лесах, где в одиночку заняла медвежью пещеру и провела более десяти лет в полной изоляции, ведя жесткую борьбу за выживание.</p>
         <div class="block-title">Причина присвоения таланта</div>
         <p class="block-text">Продемонстрировала феноменальные навыки выживания в дикой природе, хладнокровие и абсолют
+            </main>
+</div>
+
+<script>
+  // Логика переключения между персонажами
+  function openDossier(id, btn) {
+    const dossiers = document.querySelectorAll('.dossier-wrapper');
+    dossiers.forEach(d => d.classList.add('hidden'));
+    document.getElementById(id).classList.remove('hidden');
+
+    const buttons = document.querySelectorAll('.nav-btn');
+    buttons.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    document.getElementById('main-content').scrollTop = 0;
+    
+    // Сбрасываем вкладки у нового персонажа на "Официальное дело"
+    const activeDossier = document.getElementById(id);
+    const tabs = activeDossier.querySelectorAll('.tab-content');
+    tabs.forEach(t => t.classList.remove('active'));
+    activeDossier.querySelector('.tab-content[id$="-off"]').classList.add('active');
+
+    const tabBtns = activeDossier.querySelectorAll('.tab-btn');
+    tabBtns.forEach(b => b.classList.remove('active'));
+    activeDossier.querySelector('.tab-btn').classList.add('active');
+  }
+
+  // Логика переключения между "Делом" и "Историей"
+  function openTab(dossierId, tabType, btn) {
+    const dossier = document.getElementById(dossierId);
+    
+    // Скрываем все вкладки внутри этого дела
+    const contents = dossier.querySelectorAll('.tab-content');
+    contents.forEach(c => c.classList.remove('active'));
+    
+    // Показываем нужную
+    document.getElementById(dossierId + '-' + tabType).classList.add('active');
+
+    // Меняем активную кнопку
+    const btns = dossier.querySelectorAll('.tab-btn');
+    btns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    
+    // Прокручиваем наверх при смене вкладки
+    document.getElementById('main-content').scrollTop = 0;
+  }
+</script>
+
+</body>
+</html>
