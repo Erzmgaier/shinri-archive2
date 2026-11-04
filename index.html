@@ -6,213 +6,75 @@
 <title>Архив личных дел — Пик Надежды</title>
 <style>
   :root {
-    --bg: #0a0b0e;
-    --panel: #12151a;
-    --border: #232831;
-    --text: #c9d1d9;
-    --dim: #8b949e;
-    --accent: #b33a3a;
-    --secret: #d4a017;
-    --hover: #1c222b;
+    --bg: #0a0b0e; --panel: #12151a; --border: #232831; --text: #c9d1d9;
+    --dim: #8b949e; --accent: #b33a3a; --secret: #d4a017; --hover: #1c222b;
   }
   * { box-sizing: border-box; }
   body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--text);
-    font-family: "Courier New", Consolas, monospace;
-    line-height: 1.6;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
+    margin: 0; background: var(--bg); color: var(--text);
+    font-family: "Courier New", Consolas, monospace; line-height: 1.6;
+    height: 100vh; display: flex; flex-direction: column; overflow: hidden;
   }
-  
-  /* Шапка */
   header {
-    padding: 15px 20px;
-    border-bottom: 2px solid var(--border);
-    background: #0d0f12;
-    text-align: center;
-    flex-shrink: 0;
+    padding: 15px 20px; border-bottom: 2px solid var(--border);
+    background: #0d0f12; text-align: center; flex-shrink: 0;
   }
-  header h1 {
-    margin: 0 0 4px;
-    font-size: 1.2rem;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: #e6edf3;
-  }
-  header p {
-    margin: 0;
-    color: var(--accent);
-    font-size: 0.75rem;
-    letter-spacing: 2px;
-  }
-
-  /* Макет */
-  .layout {
-    display: flex;
-    flex: 1;
-    overflow: hidden;
-  }
-
-  /* Боковое меню */
+  header h1 { margin: 0 0 4px; font-size: 1.2rem; letter-spacing: 3px; text-transform: uppercase; color: #e6edf3; }
+  header p { margin: 0; color: var(--accent); font-size: 0.75rem; letter-spacing: 2px; }
+  .layout { display: flex; flex: 1; overflow: hidden; }
+  
+  /* Меню */
   aside {
-    width: 280px;
-    background: var(--panel);
-    border-right: 1px solid var(--border);
-    overflow-y: auto;
-    flex-shrink: 0;
-    padding: 20px 0;
+    width: 280px; background: var(--panel); border-right: 1px solid var(--border);
+    overflow-y: auto; flex-shrink: 0; padding: 20px 0;
   }
-  aside h2 {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: var(--dim);
-    margin: 0 20px 15px;
-    padding-bottom: 10px;
-    border-bottom: 1px dashed var(--border);
-  }
+  aside h2 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: var(--dim); margin: 0 20px 15px; padding-bottom: 10px; border-bottom: 1px dashed var(--border); }
   aside ul { list-style: none; padding: 0; margin: 0; }
   aside li { margin-bottom: 2px; }
-  
-  /* Кнопки меню */
   .nav-btn {
-    width: 100%;
-    text-align: left;
-    background: transparent;
-    border: none;
-    border-left: 3px solid transparent;
-    color: var(--text);
-    padding: 12px 20px;
-    font-family: inherit;
-    font-size: 0.9rem;
-    cursor: pointer;
-    transition: all .2s ease;
-    display: flex;
-    flex-direction: column;
+    width: 100%; text-align: left; background: transparent; border: none;
+    border-left: 3px solid transparent; color: var(--text); padding: 12px 20px;
+    font-family: inherit; font-size: 0.9rem; cursor: pointer; transition: all .2s ease;
+    display: flex; flex-direction: column;
   }
   .nav-btn:hover { background: var(--hover); }
-  .nav-btn.active {
-    background: var(--hover);
-    border-left-color: var(--accent);
-  }
-  .nav-btn .num { 
-    color: var(--dim); 
-    font-size: 0.75rem;
-    margin-bottom: 2px;
-  }
+  .nav-btn.active { background: var(--hover); border-left-color: var(--accent); }
+  .nav-btn .num { color: var(--dim); font-size: 0.75rem; margin-bottom: 2px; }
   .nav-btn .name { font-weight: bold; }
 
-  /* Рабочая область (справа) */
-  main {
-    flex: 1;
-    overflow-y: auto; /* Скролл только для контента */
-    padding: 30px;
-    position: relative;
-  }
-  
+  /* Контент */
+  main { flex: 1; overflow-y: auto; padding: 30px; position: relative; }
   .dossier-wrapper {
-    max-width: 900px;
-    margin: 0 auto;
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-top: 4px solid var(--accent);
-    padding: 30px 40px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    max-width: 900px; margin: 0 auto; background: var(--panel);
+    border: 1px solid var(--border); border-top: 4px solid var(--accent);
+    padding: 30px 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     animation: fadeIn 0.3s ease;
   }
-
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
   .dossier-wrapper.hidden { display: none; }
-
-  .dossier-title {
-    text-align: center;
-    font-size: 1.4rem;
-    letter-spacing: 2px;
-    color: #fff;
-    margin: 0 0 10px;
-    font-weight: bold;
-  }
-  .dossier-meta {
-    text-align: center;
-    font-size: 0.95rem;
-    margin-bottom: 20px;
-  }
+  .dossier-title { text-align: center; font-size: 1.4rem; letter-spacing: 2px; color: #fff; margin: 0 0 10px; font-weight: bold; }
+  .dossier-meta { text-align: center; font-size: 0.95rem; margin-bottom: 20px; }
   .dossier-meta div { margin: 5px 0; }
   .dossier-meta .label { color: var(--dim); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;}
 
-  /* Вкладки внутри дела */
-  .tabs {
-    display: flex;
-    justify-content: center;
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 25px;
-    gap: 10px;
-  }
+  /* Вкладки */
+  .tabs { display: flex; justify-content: center; border-bottom: 1px solid var(--border); margin-bottom: 25px; gap: 10px; }
   .tab-btn {
-    background: transparent;
-    border: none;
-    color: var(--dim);
-    font-family: inherit;
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    padding: 10px 15px;
-    cursor: pointer;
-    border-bottom: 3px solid transparent;
-    transition: all 0.2s;
+    background: transparent; border: none; color: var(--dim); font-family: inherit;
+    font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; padding: 10px 15px;
+    cursor: pointer; border-bottom: 3px solid transparent; transition: all 0.2s;
   }
   .tab-btn:hover { color: #fff; }
-  .tab-btn.active {
-    color: #fff;
-    border-bottom-color: var(--accent);
-  }
-
-  /* Контент вкладок */
+  .tab-btn.active { color: #fff; border-bottom-color: var(--accent); }
   .tab-content { display: none; animation: fadeIn 0.3s ease; }
   .tab-content.active { display: block; }
 
-  /* Оформление блоков в официальном деле */
-  .block-title {
-    font-size: 0.85rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin: 25px 0 12px;
-    display: flex;
-    align-items: center;
-  }
-  .block-title::after {
-    content: "";
-    flex: 1;
-    height: 1px;
-    background: var(--border);
-    margin-left: 15px;
-  }
+  /* Оформление */
+  .block-title { font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin: 25px 0 12px; display: flex; align-items: center; }
+  .block-title::after { content: ""; flex: 1; height: 1px; background: var(--border); margin-left: 15px; }
   .block-text { margin: 0 0 15px; text-align: justify; font-size: 1rem; }
-  .secret {
-    color: var(--secret);
-    background: rgba(212, 160, 23, 0.1);
-    border: 1px dashed var(--secret);
-    padding: 0 4px;
-    font-size: 0.9em;
-    cursor: help;
-  }
-
-  /* Оформление блоков в истории (Досье) */
-  .lore-text {
-    font-size: 0.95rem;
-    color: #b1b8c0;
-    text-align: justify;
-    line-height: 1.7;
-  }
+  .secret { color: var(--secret); background: rgba(212, 160, 23, 0.1); border: 1px dashed var(--secret); padding: 0 4px; font-size: 0.9em; cursor: help; }
+  .lore-text { font-size: 0.95rem; color: #b1b8c0; text-align: justify; line-height: 1.7; }
   .lore-text p { margin: 0 0 15px; }
   .lore-text p:last-child { margin-bottom: 0; }
 
@@ -232,7 +94,6 @@
 </header>
 
 <div class="layout">
-  <!-- Меню -->
   <aside>
     <h2>Оглавление архива</h2>
     <ul>
@@ -243,7 +104,6 @@
     </ul>
   </aside>
 
-  <!-- Контент -->
   <main id="main-content">
 
     <!-- ================= ДЕЛО 1: Кокичи ================= -->
@@ -254,29 +114,20 @@
         <div><span class="label">Возраст:</span> 20 лет | <span class="label">Статус:</span> Жив</div>
         <div><span class="label">Талант:</span> Абсолютный Шут Хаоса</div>
       </div>
-
-      <!-- Кнопки вкладок -->
       <div class="tabs">
         <button class="tab-btn active" onclick="openTab('d03', 'off', this)">Официальное дело</button>
         <button class="tab-btn" onclick="openTab('d03', 'hist', this)">Личная история</button>
       </div>
-
-      <!-- Вкладка: Официальное дело -->
       <div class="tab-content active" id="d03-off">
         <div class="block-title">Особые приметы</div>
         <p class="block-text">Костюм Шута, скрывающий истинное лицо субъекта; вне выступлений Ома держится подчёркнуто открыто, но о своей внешности говорит уклончиво, и причины этого <span class="secret">[ДАННЫЕ ОТ СЛУЖБЫ БЕЗОПАСНОСТИ ЗАСЕКРЕЧЕНЫ]</span>. На поясе — старинный карманный компас на тяжёлой цепочке. Манеры игривые, речь театральная, с внезапными переходами от детской непосредственности к холодному расчёту. При общении с незнакомыми людьми постоянно «прощупывает» их реакциями — проверяет на страх, жадность, тщеславие.</p>
-
         <div class="block-title">Краткая сводка</div>
         <p class="block-text">Вырос в трущобах, с ранних лет выживал на улице вместе с Рантаро Амами (см. дело №07-А), который стал его ближайшим другом и тылом. Из уличной банды создал международную бродячую труппу «D.I.C.E.», чьи перформансы прогремели от криминального клана Кузурю до совета директоров Towa Group и королевского двора Новоселик. Костюм Шута Хаоса создан Цумуги Широганэ по референсам, собранным Амами в Италии и Франции. За кулисами представлений труппа добывает компромат на влиятельных лиц; часть добытых данных передаётся Амами для экспедиций, взамен D.I.C.E. обеспечивает безопасность его сестёр, чьи имена и местонахождение <span class="secret">[ИНФОРМАЦИЯ ЗАСЕКРЕЧЕНА]</span> и изъяты из общего доступа в целях безопасности субъекта.</p>
-
         <div class="block-title">Причина присвоения таланта</div>
         <p class="block-text">Способен превратить любое событие в управляемый спектакль и удерживать внимание аудитории любой статусной принадлежности. Демонстрирует незаурядное мастерство манипуляции: под прикрытием представлений проворачивает кражи, подмены документов и взломы, оставаясь неуличённым. Умеет читать толпу и отдельного человека, подстраивая сценарий под реакции. Отдельно отмечается парадоксальная черта: субъект лжёт почти постоянно, однако в критических ситуациях, связанных с Амами, действует безошибочно и без обмана — комиссия фиксирует это как аномалию.</p>
-
         <div class="block-title">Цель прибытия</div>
         <p class="block-text">Официально зачислен в Академию «Пик Надежды» для освоения программы по профилю таланта и расширения репертуара труппы. Академия и прежде пользовалась известностью в округах, однако именно поступление Омы привлекло к ней дополнительное внимание: число желающих поступить и посетить учреждение заметно выросло, а администрация не скрывает, что намерена использовать имя субъекта в своих интересах. Фактически, по данным скрытого наблюдения, Ома относится к обучению как к очередной сцене и посещает лишь те занятия, где может получить доступ к <span class="secret">[ИНФОРМАЦИЯ ЗАСЕКРЕЧЕНА]</span>. Администрация предупреждает: субъект не боится разоблачения, не реагирует на стандартные угрозы и способен склонить окружающих к нужному ему решению, оставаясь при этом обаятельным. При проведении допросов рекомендуется присутствие второго наблюдателя.</p>
       </div>
-
-      <!-- Вкладка: Личная история -->
       <div class="tab-content" id="d03-hist">
         <div class="lore-text">
           <p>Данные о ранних годах жизни субъекта до формирования труппы «D.I.C.E.» частично изъяты. Известно, что он родился и вырос в трущобах, где с ранних лет был вынужден бороться за выживание. В этот период он познакомился с Рантаро Амами, разделив с ним тяготы уличной жизни и заключив нерушимый союз. Их выживание было построено на взаимовыручке и совместном преодолении опасных ситуаций.</p>
@@ -293,28 +144,20 @@
         <div><span class="label">Возраст:</span> 12 лет | <span class="label">Статус:</span> Жив</div>
         <div><span class="label">Талант:</span> Маленький Абсолютный Изобретатель</div>
       </div>
-
       <div class="tabs">
         <button class="tab-btn active" onclick="openTab('d04', 'off', this)">Официальное дело</button>
         <button class="tab-btn" onclick="openTab('d04', 'hist', this)">Личная история</button>
       </div>
-
-      <!-- Официальное -->
       <div class="tab-content active" id="d04-off">
         <div class="block-title">Особые приметы</div>
         <p class="block-text">Левая рука полностью изуродована, скрыта под толстым слоем грязных бинтов. Маску на лице не носит, одежда и рукава выглядят потрёпанными и грязными. Проявляет признаки сильной социофобии. При контакте с другими учениками ведет себя пугливо и скрытно.</p>
-
         <div class="block-title">Краткая сводка</div>
         <p class="block-text">Первые годы жизни провел взаперти в сыром подвале. В возрасте 9 лет совершил побег в тайгу, где попал в медвежий капкан и подвергся нападению волчьей стаи. Был спасен некой <span class="secret">[ИНФОРМАЦИЯ ЗАСЕКРЕЧЕНА]</span>, под чьим негласным надзором скрывался в глухом лесу. Спустя год после побега Кемури его родное неблагополучное поселение вместе с родителями было полностью уничтожено в результате налёта <span class="secret">[ДАННЫЕ УДАЛЕНЫ]</span>, после чего субъект окончательно разорвал связи с прошлым.</p>
-
         <div class="block-title">Причина присвоения таланта</div>
         <p class="block-text">За время нахождения в изоляции субъект научился из ржавого охотничьего хлама, деталей и лесных трав создавать автономные сигнальные системы, бесшумные растяжки и скрытые капканы, начиненные смертоносным парализующим ядом собственного варева. Продемонстрировал уникальный гениальный сплав механики и полевой химии, способный эффективно блокировать периметр и ликвидировать живые цели.</p>
-
         <div class="block-title">Цель прибытия</div>
         <p class="block-text">Направлен в Академию для освоения передовых технологий и получения фундаментальных знаний. Администрация предупреждает учеников: данный субъект обладает гениальными инженерными навыками в области создания опасных ловушек. Рекомендуется соблюдать повышенную осторожность при совместном обучении.</p>
       </div>
-
-      <!-- История (ПОЛНЫЙ ТЕКСТ) -->
       <div class="tab-content" id="d04-hist">
         <div class="lore-text">
           <p>Ранее Джатаро жил в крайне неблагополучной и абьюзивной семье. Его мать беспробудно пила на пару с отцом, а порой они употребляли и запрещённые вещества. Мальчика постоянно держали запертым в сыром темном подвале словно вещь и лишь изредка выпускали на улицу. В один из январских дней, когда его в очередной раз выпихнули подышать воздухом, Джатаро решился на отчаянный шаг. Под покровом ночи ребёнок сбежал в глухой лес. Ему казалось, что там будет гораздо безопаснее, чем дома, но это стало его роковой ошибкой.</p>
@@ -328,8 +171,7 @@
         </div>
       </div>
     </article>
-
-    <!-- ================= ДЕЛО 3: Рантаро ================= -->
+        <!-- ================= ДЕЛО 3: Рантаро ================= -->
     <article class="dossier-wrapper hidden" id="d07">
       <div class="dossier-title">ЛИЧНОЕ ДЕЛО №07-А</div>
       <div class="dossier-meta">
@@ -337,28 +179,20 @@
         <div><span class="label">Возраст:</span> 20 лет | <span class="label">Статус:</span> Жив</div>
         <div><span class="label">Талант:</span> Абсолютный Авантюрист</div>
       </div>
-
       <div class="tabs">
         <button class="tab-btn active" onclick="openTab('d07', 'off', this)">Официальное дело</button>
         <button class="tab-btn" onclick="openTab('d07', 'hist', this)">Личная история</button>
       </div>
-
-      <!-- Официальное -->
       <div class="tab-content active" id="d07-off">
         <div class="block-title">Особые приметы</div>
         <p class="block-text">Светло-зелёные волосы с выбритыми висками, пирсинг, серебряные кольца. На теле множество шрамов от старых экспедиций, происхождение которых <span class="secret">[ДАННЫЕ ОТ СЛУЖБЫ БЕЗОПАСНОСТИ ЗАСЕКРЕЧЕНЫ]</span> — при упоминании о них субъект заметно меняет тему. Держится расслабленно и дружелюбно, однако взгляд постоянно сканирует окружение, а спит крайне чутко. О прошлом говорит уклончиво, легко переводит разговор.</p>
-
         <div class="block-title">Краткая сводка</div>
         <p class="block-text">Вырос в трущобах старшим сыном в семье с двенадцатью младшими сёстрами, с ранних лет брался за любую опасную работу ради их пропитания. На одной из подработок познакомился с Кокичи Омой (см. дело №03-К) и стал для него надёжным тылом; в ответ труппа «D.I.C.E.» тайно обеспечивает безопасность его сестёр. Совместно с Цумуги Широганэ участвовал в создании образа «Шута Хаоса» — собирал визуальные референсы в карнавальных городах Италии и уличных театрах Франции. В ходе одной из экспедиций субъект провёл <span class="secret">[ИНФОРМАЦИЯ ЗАСЕКРЕЧЕНА]</span> дней в одиночестве без связи и припасов, после чего был найден живым, но с провалом в памяти о произошедшем; детали инцидента не восстановлены до сих пор.</p>
-
         <div class="block-title">Причина присвоения таланта</div>
         <p class="block-text">Совершил множество экспедиций в зоны повышенной опасности — гробницы Египта, храмы инков в джунглях Южной Америки, криминальные кварталы азиатских мегаполисов. Выживал там, где гибли подготовленные группы, сохраняя хладнокровие и трезвый расчёт в ситуациях, провоцирующих панику. Обладает редкой способностью выстраивать доверие с маргинальными элементами, не теряя контроля над ситуацией. Отдельно отмечается, что субъект поддерживает тесную связь с Кокичи Омой и по его просьбе неоднократно выступал посредником и помощником в делах труппы «D.I.C.E.», оставаясь при этом в тени.</p>
-
         <div class="block-title">Цель прибытия</div>
         <p class="block-text">Официально зачислен в Академию «Пик Надежды» для систематизации полевых знаний и освоения передовых методов исследований. Фактически, по данным скрытого наблюдения, субъект воспринимает обучение как удобное прикрытие: занятия посещает выборочно, а основное время уделяет <span class="secret">[ИНФОРМАЦИЯ ЗАСЕКРЕЧЕНА]</span>, что и стало условием его согласия на прибытие. Администрация предупреждает: субъект не склонен к панике, не поддаётся стандартному давлению и обладает связями за пределами Академии. При угрозе другим ученикам ожидается активное вмешательство с непредсказуемыми последствиями.</p>
       </div>
-
-      <!-- История -->
       <div class="tab-content" id="d07-hist">
         <div class="lore-text">
           <p>Родился в трущобах, будучи старшим сыном в многодетной семье (12 младших сестёр). С раннего детства нес на себе колоссальную ответственность, хватаясь за любую опасную работу ради пропитания и безопасности родных. Жизнь на дне закалила его характер, подарив невероятное самообладание. На одной из таких подработок он и познакомился с Кокичи Омой. Их общая борьба за существование сплотила их, а Рантаро не раз выручал друга в переломные моменты, став для него надежным тылом. В знак этой нерушимой связи они обменялись аксессуарами (Кокичи носит компас, а Рантаро — серебряный амулет в виде маски).</p>
@@ -375,12 +209,14 @@
         <div><span class="label">Возраст:</span> 18.5 лет | <span class="label">Статус:</span> Жива</div>
         <div><span class="label">Талант:</span> Абсолютная Охотница</div>
       </div>
-
       <div class="tabs">
         <button class="tab-btn active" onclick="openTab('d11', 'off', this)">Официальное дело</button>
         <button class="tab-btn" onclick="openTab('d11', 'hist', this)">Личная история</button>
       </div>
-
-      <!-- Официальное -->
       <div class="tab-content active" id="d11-off">
-        <div class="block-title">Особые приметы</div
+        <div class="block-title">Особые приметы</div>
+        <p class="block-text">Обладает звериной грацией и высокой скоростью реакции. На теле присутствуют многочисленные шрамы от когтей хищников, на руках — <span class="secret">[ДАННЫЕ ОТ СЛУЖБЫ БЕЗОПАСНОСТИ ЗАСЕКРЕЧЕНЫ]</span>. Одежда выглядит поношенной, со следами грубой ручной штопки и нашитыми пластырями. Почти не знакома с современными технологиями.</p>
+        <div class="block-title">Краткая сводка</div>
+        <p class="block-text">До 7 лет росла в изолированной лесной деревне в семье промысловика. В ходе разбойного нападения мародёров деревня была полностью уничтожена, а родители субъекта погибли. Харукава сумела скрыться в юго-западных лесах, где в одиночку заняла медвежью пещеру и провела более десяти лет в полной изоляции, ведя жесткую борьбу за выживание.</p>
+        <div class="block-title">Причина присвоения таланта</div>
+        <p class="block-text">Продемонстрировала феноменальные навыки выживания в дикой природе, хладнокровие и абсолют
