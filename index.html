@@ -109,7 +109,7 @@
   .lore-text p { margin: 0 0 20px; text-indent: 25px; }
   .lore-text p:last-child { margin-bottom: 0; }
 
-  /* ====== СЕКРЕТКА (ВИЗУАЛЬНАЯ НОВЕЛЛА) ====== */
+  /* ====== СЕКРЕТКА ====== */
   .vn-overlay {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background: rgba(0, 0, 0, 0.95); display: flex; align-items: center; justify-content: center;
@@ -378,6 +378,7 @@
 
   </main>
 </div>
+
 <!-- ====== НОВАЯ СЕКРЕТКА (ВИЗУАЛЬНАЯ НОВЕЛЛА) ====== -->
 <div class="flash-overlay" id="flashOverlay"></div>
 
@@ -405,7 +406,6 @@
     </div>
   </div>
 </div>
-
 <script>
   // Логика переключения меню
   function openDossier(id, btn) {
@@ -590,6 +590,25 @@
     let currentStep = 0;
     
     function playNextLine() {
+      if (currentStep >= debateScript.length) {
+        clearInterval(debateLoop);
+        
+        const overlay = document.getElementById('vnOverlay');
+        overlay.style.transition = "opacity 0.8s ease";
+        overlay.style.opacity = "0";
+        
+        setTimeout(() => {
+          overlay.classList.remove('active');
+          overlay.style.opacity = ""; 
+          overlay.style.transition = ""; 
+          document.getElementById('vnNagito').classList.add('hidden');
+          document.getElementById('vnNagito').classList.remove('appearing');
+          isDebating = false;
+        }, 800);
+        
+        return;
+      }
+      
       const line = debateScript[currentStep];
       
       imgNagito.src = line.spriteN;
@@ -610,7 +629,7 @@
         imgNagito.classList.remove('talking');
       }
 
-      currentStep = (currentStep + 1) % debateScript.length; 
+      currentStep++; 
     }
 
     playNextLine();
