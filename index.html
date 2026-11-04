@@ -86,7 +86,7 @@
     animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1); border-radius: 12px;
   }
   
-  /* КРУГЛЫЙ ШТАМП */
+  /* ИДЕАЛЬНЫЙ ШТАМП (БЕЗ ФОНА, КРУГЛЫЙ) */
   .dossier-wrapper::after {
     content: "";
     position: absolute;
@@ -96,19 +96,22 @@
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    opacity: 0.04; 
+    opacity: 0.06; 
     transform: rotate(15deg); 
     pointer-events: none; 
     z-index: 0; 
-    mix-blend-mode: screen; 
     
-    /* МАСКА: Вырезает ровный круг */
+    /* Убираем черный квадрат и делаем молоток белым */
+    filter: invert(1) grayscale(1) brightness(1.5);
+    mix-blend-mode: screen;
+    
+    /* Оставляем закругление */
     -webkit-mask-image: radial-gradient(circle, black 50%, transparent 52%);
     mask-image: radial-gradient(circle, black 50%, transparent 52%);
   }
   
   .dossier-wrapper:hover::after {
-    opacity: 0.08; 
+    opacity: 0.12; 
   }
 
   @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
@@ -279,7 +282,7 @@
   </aside>
 
   <main id="main-content">
-        <!-- ДЕЛО 1: Кокичи -->
+    <!-- ДЕЛО 1: Кокичи -->
     <article class="dossier-wrapper" id="d03">
       <div class="dossier-title">ЛИЧНОЕ ДЕЛО №03-К</div>
       <div class="dossier-meta"><div><span class="label">Имя:</span> Кокичи Ома</div><div><span class="label">Возраст:</span> 20 лет | <span class="label">Статус:</span> Жив</div><div><span class="label">Талант:</span> Абсолютный Шут Хаоса</div></div>
