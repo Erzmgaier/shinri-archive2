@@ -7,7 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #050608; --panel: #0a0c10; --card-bg: #11151b; --border: #1f252e; 
+    --bg: #050608; --panel: #0a0c10; --border: #1f252e; 
     --text: #c9d1d9; --dim: #6e7681; --accent: #b33a3a; --secret: #d4a017; 
     --hover: #151a21;
   }
@@ -18,14 +18,12 @@
     height: 100vh; display: flex; flex-direction: column; overflow: hidden;
     background-image: radial-gradient(circle at 50% 0%, #11161c 0%, var(--bg) 70%);
   }
-
   header {
     padding: 20px 30px; border-bottom: 1px solid var(--border);
     background: rgba(8, 10, 12, 0.9); flex-shrink: 0;
     display: flex; align-items: center; justify-content: center; gap: 25px;
     z-index: 10; box-shadow: 0 4px 20px rgba(0,0,0,0.8); position: relative;
   }
-  
   .header-logo {
     width: 65px; height: 65px; object-fit: contain;
     mix-blend-mode: screen; filter: invert(1) grayscale(1) brightness(1.2);
@@ -33,108 +31,45 @@
     filter: drop-shadow(0 0 8px rgba(255,255,255,0.1));
   }
   .header-logo:hover { opacity: 1; transform: scale(1.05); }
-
   .header-text { text-align: left; }
-  .header-text h1 { 
-    font-family: "Merriweather", serif; margin: 0 0 6px; font-size: 1.5rem; 
-    letter-spacing: 6px; text-transform: uppercase; color: #dce3eb; 
-    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-  }
+  .header-text h1 { font-family: "Merriweather", serif; margin: 0 0 6px; font-size: 1.5rem; letter-spacing: 6px; text-transform: uppercase; color: #dce3eb; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
   .header-text p { margin: 0; color: var(--accent); font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; opacity: 0.8; }
-
+  
   .layout { display: flex; flex: 1; overflow: hidden; z-index: 5; }
-  
-  /* ================= БОКОВОЕ МЕНЮ ================= */
-  aside {
-    width: 320px; background: #0a0c10;
-    border-right: 1px solid var(--border);
-    display: flex; flex-direction: column;
-    flex-shrink: 0; position: relative;
-    background-image: linear-gradient(180deg, rgba(20,25,30,0.5) 0%, transparent 100%);
-  }
-  
-  .aside-header {
-    padding: 25px 25px 15px;
-    border-bottom: 1px dashed var(--border);
-  }
-  aside h2 { 
-    font-size: 0.7rem; text-transform: uppercase; letter-spacing: 3px; 
-    color: var(--accent); margin: 0; 
-  }
-
-  .aside-list {
-    list-style: none; padding: 15px 0; margin: 0; flex: 1; overflow-y: auto;
-  }
+  aside { width: 320px; background: #0a0c10; border-right: 1px solid var(--border); display: flex; flex-direction: column; flex-shrink: 0; position: relative; background-image: linear-gradient(180deg, rgba(20,25,30,0.5) 0%, transparent 100%); }
+  .aside-header { padding: 25px 25px 15px; border-bottom: 1px dashed var(--border); }
+  aside h2 { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 3px; color: var(--accent); margin: 0; }
+  .aside-list { list-style: none; padding: 15px 0; margin: 0; flex: 1; overflow-y: auto; }
   .aside-list li { margin-bottom: 4px; padding: 0 15px;}
-  
-  .nav-btn {
-    width: 100%; text-align: left; background: transparent; 
-    border: 1px solid transparent; border-left: 3px solid transparent; 
-    color: var(--text); padding: 12px 15px;
-    font-family: inherit; font-size: 0.85rem; cursor: pointer; 
-    transition: all .2s ease; display: flex; align-items: center; gap: 15px;
-    border-radius: 4px;
-  }
-  
+  .nav-btn { width: 100%; text-align: left; background: transparent; border: 1px solid transparent; border-left: 3px solid transparent; color: var(--text); padding: 12px 15px; font-family: inherit; font-size: 0.85rem; cursor: pointer; transition: all .2s ease; display: flex; align-items: center; gap: 15px; border-radius: 4px; }
   .nav-btn:hover { background: rgba(255,255,255,0.03); border-color: var(--border); }
-  .nav-btn.active { 
-    background: rgba(179, 58, 58, 0.1); border-color: var(--accent);
-    border-left-color: var(--accent); 
-  }
-  
-  .nav-icon {
-    width: 32px; height: 32px; background: rgba(255,255,255,0.05);
-    border: 1px solid var(--border); display: flex; align-items: center; justify-content: center;
-    font-size: 1.1rem; color: var(--dim); transition: all 0.2s; border-radius: 4px;
-  }
-  .nav-btn.active .nav-icon {
-    color: var(--accent); border-color: var(--accent); background: rgba(179, 58, 58, 0.1);
-  }
-
+  .nav-btn.active { background: rgba(179, 58, 58, 0.1); border-color: var(--accent); border-left-color: var(--accent); }
+  .nav-icon { width: 32px; height: 32px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; color: var(--dim); transition: all 0.2s; border-radius: 4px; }
+  .nav-btn.active .nav-icon { color: var(--accent); border-color: var(--accent); background: rgba(179, 58, 58, 0.1); }
   .nav-info { display: flex; flex-direction: column; }
   .nav-btn .num { color: var(--dim); font-size: 0.65rem; margin-bottom: 2px; letter-spacing: 1px;}
   .nav-btn .name { font-weight: 500; letter-spacing: 0.5px; font-size: 0.9rem; }
   .nav-btn.active .num, .nav-btn.active .name { color: #fff; }
+  .aside-footer { padding: 20px 25px; border-top: 1px solid var(--border); background: rgba(0,0,0,0.2); font-size: 0.65rem; color: var(--dim); line-height: 1.5; }
+  .aside-footer .status { display: flex; align-items: center; gap: 8px; color: #5ca85c; margin-bottom: 10px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
+  .status-dot { width: 6px; height: 6px; background: #5ca85c; border-radius: 50%; box-shadow: 0 0 6px #5ca85c; animation: pulse 2s infinite; }
+  @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
 
-  .aside-footer {
-    padding: 20px 25px; border-top: 1px solid var(--border);
-    background: rgba(0,0,0,0.2); font-size: 0.65rem; color: var(--dim); line-height: 1.5;
-  }
-  .aside-footer .status {
-    display: flex; align-items: center; gap: 8px; color: #5ca85c; margin-bottom: 10px;
-    font-weight: bold; text-transform: uppercase; letter-spacing: 1px;
-  }
-  .status-dot {
-    width: 6px; height: 6px; background: #5ca85c; border-radius: 50%;
-    box-shadow: 0 0 6px #5ca85c; animation: pulse 2s infinite;
-  }
-  @keyframes pulse {
-    0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; }
-  }
-
-  /* ================= КОНТЕНТ ================= */
   main { flex: 1; overflow-y: auto; padding: 40px; position: relative; }
-  
-  .dossier-wrapper {
-    max-width: 850px; margin: 0 auto; background: var(--panel);
-    border: 1px solid var(--border); border-top: 3px solid var(--accent);
-    padding: 40px 50px; box-shadow: 0 15px 40px rgba(0,0,0,0.7);
-    animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  }
+  .dossier-wrapper { max-width: 850px; margin: 0 auto; background: var(--panel); border: 1px solid var(--border); border-top: 3px solid var(--accent); padding: 40px 50px; box-shadow: 0 15px 40px rgba(0,0,0,0.7); animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
   @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
   .dossier-wrapper.hidden { display: none; }
-  
   .dossier-title { text-align: center; font-family: "Merriweather", serif; font-size: 1.4rem; letter-spacing: 4px; color: #fff; margin: 0 0 20px; font-weight: bold; }
   .dossier-meta { text-align: center; font-size: 0.85rem; margin-bottom: 30px; letter-spacing: 1px;}
   .dossier-meta div { margin: 6px 0; }
   .dossier-meta .label { color: var(--dim); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 2px;}
 
+  .copy-btn { display: block; width: fit-content; margin: 0 auto 20px auto; padding: 8px 16px; background: rgba(179, 58, 58, 0.1); color: var(--accent); border: 1px solid var(--accent); border-radius: 4px; font-family: inherit; font-size: 0.8rem; cursor: pointer; transition: all 0.2s; text-transform: uppercase; letter-spacing: 1px; }
+  .copy-btn:hover { background: var(--accent); color: #fff; }
+  .copy-btn.copied { background: #5ca85c; border-color: #5ca85c; color: #fff; }
+
   .tabs { display: flex; justify-content: center; border-bottom: 1px solid var(--border); margin-bottom: 35px; gap: 20px; }
-  .tab-btn {
-    background: transparent; border: none; color: var(--dim); font-family: inherit;
-    font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; padding: 12px 20px;
-    cursor: pointer; border-bottom: 3px solid transparent; transition: all 0.2s; font-weight: 500;
-  }
+  .tab-btn { background: transparent; border: none; color: var(--dim); font-family: inherit; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; padding: 12px 20px; cursor: pointer; border-bottom: 3px solid transparent; transition: all 0.2s; font-weight: 500; }
   .tab-btn:hover { color: #fff; }
   .tab-btn.active { color: #fff; border-bottom-color: var(--accent); }
   .tab-content { display: none; animation: fadeIn 0.4s ease; }
@@ -143,9 +78,7 @@
   .block-title { font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin: 35px 0 15px; display: flex; align-items: center; font-weight: 500; }
   .block-title::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, var(--border) 0%, transparent 100%); margin-left: 20px; }
   .block-text { margin: 0 0 20px; text-align: justify; font-size: 0.95rem; color: #a9b2bc; line-height: 1.7; }
-  
   .secret { color: var(--secret); background: rgba(212, 160, 23, 0.05); border: 1px dashed rgba(212, 160, 23, 0.4); padding: 2px 6px; font-size: 0.85em; cursor: help; }
-  
   .lore-text { font-size: 0.95rem; color: #a9b2bc; text-align: justify; line-height: 1.8; }
   .lore-text p { margin: 0 0 20px; text-indent: 25px; }
   .lore-text p:last-child { margin-bottom: 0; }
@@ -153,11 +86,7 @@
   @media (max-width: 900px) {
     .layout { flex-direction: column; }
     aside { width: 100%; height: auto; max-height: 250px; border-right: none; border-bottom: 1px solid var(--border); }
-    main { padding: 20px; }
-    .dossier-wrapper { padding: 25px; }
-    header { padding: 15px; gap: 15px; }
-    .header-logo { width: 45px; height: 45px; }
-    .header-text h1 { font-size: 1.2rem; letter-spacing: 3px; }
+    main { padding: 20px; } .dossier-wrapper { padding: 25px; } header { padding: 15px; gap: 15px; } .header-logo { width: 45px; height: 45px; } .header-text h1 { font-size: 1.2rem; letter-spacing: 3px; }
   }
 </style>
 </head>
@@ -173,49 +102,13 @@
 
 <div class="layout">
   <aside>
-    <div class="aside-header">
-      <h2>Оглавление архива</h2>
-    </div>
-    
+    <div class="aside-header"><h2>Оглавление архива</h2></div>
     <ul class="aside-list">
-      <li>
-        <button class="nav-btn active" onclick="openDossier('d03', this)">
-          <div class="nav-icon">🎭</div>
-          <div class="nav-info">
-            <span class="num">№03-К</span>
-            <span class="name">Кокичи Ома</span>
-          </div>
-        </button>
-      </li>
-      <li>
-        <button class="nav-btn" onclick="openDossier('d04', this)">
-          <div class="nav-icon">⚙️</div>
-          <div class="nav-info">
-            <span class="num">№04-К</span>
-            <span class="name">Джатаро Кемури</span>
-          </div>
-        </button>
-      </li>
-      <li>
-        <button class="nav-btn" onclick="openDossier('d07', this)">
-          <div class="nav-icon">🧭</div>
-          <div class="nav-info">
-            <span class="num">№07-А</span>
-            <span class="name">Рантаро Амами</span>
-          </div>
-        </button>
-      </li>
-      <li>
-        <button class="nav-btn" onclick="openDossier('d11', this)">
-          <div class="nav-icon">🏹</div>
-          <div class="nav-info">
-            <span class="num">№11-Х</span>
-            <span class="name">Маки Харукава</span>
-          </div>
-        </button>
-      </li>
+      <li><button class="nav-btn active" onclick="openDossier('d03', this)"><div class="nav-icon">🎭</div><div class="nav-info"><span class="num">№03-К</span><span class="name">Кокичи Ома</span></div></button></li>
+      <li><button class="nav-btn" onclick="openDossier('d04', this)"><div class="nav-icon">⚙️</div><div class="nav-info"><span class="num">№04-К</span><span class="name">Джатаро Кемури</span></div></button></li>
+      <li><button class="nav-btn" onclick="openDossier('d07', this)"><div class="nav-icon">🧭</div><div class="nav-info"><span class="num">№07-А</span><span class="name">Рантаро Амами</span></div></button></li>
+      <li><button class="nav-btn" onclick="openDossier('d11', this)"><div class="nav-icon">🏹</div><div class="nav-info"><span class="num">№11-Х</span><span class="name">Маки Харукава</span></div></button></li>
     </ul>
-
     <div class="aside-footer">
       <div class="status"><div class="status-dot"></div> Система активна</div>
       <div>Уровень доступа: S-2<br>Зашифровано: AES-256</div>
@@ -223,15 +116,11 @@
   </aside>
 
   <main id="main-content">
-
     <!-- ДЕЛО 1: Кокичи -->
     <article class="dossier-wrapper" id="d03">
       <div class="dossier-title">ЛИЧНОЕ ДЕЛО №03-К</div>
-      <div class="dossier-meta">
-        <div><span class="label">Имя:</span> Кокичи Ома</div>
-        <div><span class="label">Возраст:</span> 20 лет | <span class="label">Статус:</span> Жив</div>
-        <div><span class="label">Талант:</span> Абсолютный Шут Хаоса</div>
-      </div>
+      <div class="dossier-meta"><div><span class="label">Имя:</span> Кокичи Ома</div><div><span class="label">Возраст:</span> 20 лет | <span class="label">Статус:</span> Жив</div><div><span class="label">Талант:</span> Абсолютный Шут Хаоса</div></div>
+      <button class="copy-btn" onclick="copyDossier('d03', this)">Скопировать для RP</button>
       <div class="tabs">
         <button class="tab-btn active" onclick="openTab('d03', 'off', this)">Официальное дело</button>
         <button class="tab-btn" onclick="openTab('d03', 'hist', this)">Личная история</button>
@@ -261,11 +150,8 @@
     <!-- ДЕЛО 2: Джатаро -->
     <article class="dossier-wrapper hidden" id="d04">
       <div class="dossier-title">ЛИЧНОЕ ДЕЛО №04-К</div>
-      <div class="dossier-meta">
-        <div><span class="label">Имя:</span> Джатаро Кемури</div>
-        <div><span class="label">Возраст:</span> 12 лет | <span class="label">Статус:</span> Жив</div>
-        <div><span class="label">Талант:</span> Маленький Абсолютный Изобретатель</div>
-      </div>
+      <div class="dossier-meta"><div><span class="label">Имя:</span> Джатаро Кемури</div><div><span class="label">Возраст:</span> 12 лет | <span class="label">Статус:</span> Жив</div><div><span class="label">Талант:</span> Маленький Абсолютный Изобретатель</div></div>
+      <button class="copy-btn" onclick="copyDossier('d04', this)">Скопировать для RP</button>
       <div class="tabs">
         <button class="tab-btn active" onclick="openTab('d04', 'off', this)">Официальное дело</button>
         <button class="tab-btn" onclick="openTab('d04', 'hist', this)">Личная история</button>
@@ -297,11 +183,8 @@
     <!-- ДЕЛО 3: Рантаро -->
     <article class="dossier-wrapper hidden" id="d07">
       <div class="dossier-title">ЛИЧНОЕ ДЕЛО №07-А</div>
-      <div class="dossier-meta">
-        <div><span class="label">Имя:</span> Рантаро Амами</div>
-        <div><span class="label">Возраст:</span> 20 лет | <span class="label">Статус:</span> Жив</div>
-        <div><span class="label">Талант:</span> Абсолютный Авантюрист</div>
-      </div>
+      <div class="dossier-meta"><div><span class="label">Имя:</span> Рантаро Амами</div><div><span class="label">Возраст:</span> 20 лет | <span class="label">Статус:</span> Жив</div><div><span class="label">Талант:</span> Абсолютный Авантюрист</div></div>
+      <button class="copy-btn" onclick="copyDossier('d07', this)">Скопировать для RP</button>
       <div class="tabs">
         <button class="tab-btn active" onclick="openTab('d07', 'off', this)">Официальное дело</button>
         <button class="tab-btn" onclick="openTab('d07', 'hist', this)">Личная история</button>
@@ -330,11 +213,8 @@
     <!-- ДЕЛО 4: Маки -->
     <article class="dossier-wrapper hidden" id="d11">
       <div class="dossier-title">ЛИЧНОЕ ДЕЛО №11-Х</div>
-      <div class="dossier-meta">
-        <div><span class="label">Имя:</span> Маки Харукава</div>
-        <div><span class="label">Возраст:</span> 18.5 лет | <span class="label">Статус:</span> Жива</div>
-        <div><span class="label">Талант:</span> Абсолютная Охотница</div>
-      </div>
+      <div class="dossier-meta"><div><span class="label">Имя:</span> Маки Харукава</div><div><span class="label">Возраст:</span> 18.5 лет | <span class="label">Статус:</span> Жива</div><div><span class="label">Талант:</span> Абсолютная Охотница</div></div>
+      <button class="copy-btn" onclick="copyDossier('d11', this)">Скопировать для RP</button>
       <div class="tabs">
         <button class="tab-btn active" onclick="openTab('d11', 'off', this)">Официальное дело</button>
         <button class="tab-btn" onclick="openTab('d11', 'hist', this)">Личная история</button>
@@ -370,37 +250,59 @@
 
 <script>
   function openDossier(id, btn) {
-    const dossiers = document.querySelectorAll('.dossier-wrapper');
-    dossiers.forEach(d => d.classList.add('hidden'));
+    document.querySelectorAll('.dossier-wrapper').forEach(d => d.classList.add('hidden'));
     document.getElementById(id).classList.remove('hidden');
-
-    const buttons = document.querySelectorAll('.nav-btn');
-    buttons.forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
-
     document.getElementById('main-content').scrollTop = 0;
     
     const activeDossier = document.getElementById(id);
-    const tabs = activeDossier.querySelectorAll('.tab-content');
-    tabs.forEach(t => t.classList.remove('active'));
+    activeDossier.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
     activeDossier.querySelector('.tab-content[id$="-off"]').classList.add('active');
-
-    const tabBtns = activeDossier.querySelectorAll('.tab-btn');
-    tabBtns.forEach(b => b.classList.remove('active'));
+    activeDossier.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
     activeDossier.querySelector('.tab-btn').classList.add('active');
   }
 
   function openTab(dossierId, tabType, btn) {
     const dossier = document.getElementById(dossierId);
-    const contents = dossier.querySelectorAll('.tab-content');
-    contents.forEach(c => c.classList.remove('active'));
+    dossier.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
     document.getElementById(dossierId + '-' + tabType).classList.add('active');
-
-    const btns = dossier.querySelectorAll('.tab-btn');
-    btns.forEach(b => b.classList.remove('active'));
+    dossier.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
-    
     document.getElementById('main-content').scrollTop = 0;
+  }
+
+  function copyDossier(id, btn) {
+    const dossier = document.getElementById(id);
+    let text = "———————————————————————\n";
+    text += dossier.querySelector('.dossier-title').innerText + "\n";
+    
+    dossier.querySelectorAll('.dossier-meta div').forEach(div => {
+      text += div.innerText.replace(" | ", "\n") + "\n";
+    });
+    text += "———————————————————————\n\n";
+
+    const offTab = dossier.querySelector('.tab-content[id$="-off"]');
+    const elements = offTab.children;
+    
+    for (let i = 0; i < elements.length; i++) {
+      if (elements[i].classList.contains('block-title')) {
+        text += elements[i].innerText.toUpperCase() + ":\n";
+      } else if (elements[i].classList.contains('block-text')) {
+        text += elements[i].innerText + "\n";
+        text += "———————————————————————\n";
+      }
+    }
+
+    navigator.clipboard.writeText(text).then(() => {
+      const originalText = btn.innerText;
+      btn.innerText = "Успешно скопировано!";
+      btn.classList.add('copied');
+      setTimeout(() => {
+        btn.innerText = originalText;
+        btn.classList.remove('copied');
+      }, 2000);
+    }).catch(err => alert("Ошибка при копировании"));
   }
 </script>
 
