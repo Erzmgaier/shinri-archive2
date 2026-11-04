@@ -86,28 +86,28 @@
     animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1); border-radius: 12px;
   }
   
-  /* ИДЕАЛЬНЫЙ ШТАМП (БЕЗ ФОНА, КРУГЛЫЙ) */
+  /* ИДЕАЛЬНЫЙ КРУГЛЫЙ ШТАМП */
   .dossier-wrapper::after {
     content: "";
     position: absolute;
     top: 15px; right: 15px;
     width: 160px; height: 160px;
     background-image: url('stamp.png');
-    background-size: contain;
-    background-repeat: no-repeat;
+    background-size: cover; /* Растягиваем картинку на весь блок */
     background-position: center;
+    background-repeat: no-repeat;
+    
+    border-radius: 50%; /* Обрезаем сам блок по кругу */
+    overflow: hidden;
+    
     opacity: 0.06; 
     transform: rotate(15deg); 
     pointer-events: none; 
     z-index: 0; 
     
-    /* Убираем черный квадрат и делаем молоток белым */
-    filter: invert(1) grayscale(1) brightness(1.5);
+    /* Магия логотипа: инверсия и screen */
     mix-blend-mode: screen;
-    
-    /* Оставляем закругление */
-    -webkit-mask-image: radial-gradient(circle, black 50%, transparent 52%);
-    mask-image: radial-gradient(circle, black 50%, transparent 52%);
+    filter: invert(1) grayscale(1);
   }
   
   .dossier-wrapper:hover::after {
@@ -242,7 +242,7 @@
     main { padding: 15px; }
     .dossier-wrapper { padding: 20px 15px; }
     
-    .dossier-wrapper::after { width: 100px; height: 100px; opacity: 0.05; }
+    .dossier-wrapper::after { width: 100px; height: 100px; opacity: 0.08; }
     
     .vn-monokuma { height: 220px; left: -20px; bottom: 180px; }
     .vn-nagito { height: 240px; right: -20px; bottom: 160px; }
@@ -282,7 +282,7 @@
   </aside>
 
   <main id="main-content">
-    <!-- ДЕЛО 1: Кокичи -->
+        <!-- ДЕЛО 1: Кокичи -->
     <article class="dossier-wrapper" id="d03">
       <div class="dossier-title">ЛИЧНОЕ ДЕЛО №03-К</div>
       <div class="dossier-meta"><div><span class="label">Имя:</span> Кокичи Ома</div><div><span class="label">Возраст:</span> 20 лет | <span class="label">Статус:</span> Жив</div><div><span class="label">Талант:</span> Абсолютный Шут Хаоса</div></div>
