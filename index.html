@@ -86,7 +86,7 @@
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
   }
 
-  /* Угловые скобки (декоративные) */
+  /* Угловые скобки */
   .dossier-wrapper::before,
   .dossier-wrapper::after {
     content: "";
@@ -96,44 +96,55 @@
     transition: all 0.3s ease;
     pointer-events: none;
     opacity: 0.5;
+    z-index: 2;
   }
-  
-  /* Верхний левый угол */
   .dossier-wrapper::before {
     top: 10px; left: 10px;
     border-right: none; border-bottom: none;
   }
-  
-  /* Нижний правый угол */
   .dossier-wrapper::after {
     bottom: 10px; right: 10px;
     border-left: none; border-top: none;
   }
-
-  /* При наведении скобки краснеют и раздвигаются */
-  .dossier-wrapper:hover::before,
-  .dossier-wrapper:hover::after {
-    border-color: var(--accent);
-    opacity: 1;
-  }
   .dossier-wrapper:hover::before {
-    top: 5px; left: 5px;
+    top: 5px; left: 5px; border-color: var(--accent); opacity: 1;
   }
   .dossier-wrapper:hover::after {
-    bottom: 5px; right: 5px;
+    bottom: 5px; right: 5px; border-color: var(--accent); opacity: 1;
   }
-  
   .dossier-wrapper:hover {
     border-color: rgba(179, 58, 58, 0.4);
     box-shadow: 0 0 30px rgba(179, 58, 58, 0.15), 0 15px 40px rgba(0,0,0,0.7);
   }
 
+  /* КРУГЛЫЙ ШТАМП (через внутренний div) */
+  .stamp-bg {
+    position: absolute;
+    top: 15px; right: 15px;
+    width: 160px; height: 160px;
+    background-image: url('stamp.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 50%;
+    overflow: hidden;
+    
+    opacity: 0.08; 
+    transform: rotate(15deg); 
+    pointer-events: none; 
+    z-index: 0; 
+    
+    mix-blend-mode: screen;
+    filter: invert(1) grayscale(1);
+  }
+
   @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
   .dossier-wrapper.hidden { display: none; }
-  .dossier-title { text-align: center; font-family: "Merriweather", serif; font-size: 1.4rem; letter-spacing: 4px; color: #fff; margin: 0 0 20px; font-weight: bold; }
-  .dossier-meta { text-align: center; font-size: 0.85rem; margin-bottom: 30px; letter-spacing: 1px;}
+  .dossier-title { position: relative; z-index: 1; text-align: center; font-family: "Merriweather", serif; font-size: 1.4rem; letter-spacing: 4px; color: #fff; margin: 0 0 20px; font-weight: bold; }
+  .dossier-meta { position: relative; z-index: 1; text-align: center; font-size: 0.85rem; margin-bottom: 30px; letter-spacing: 1px;}
   .dossier-meta div { margin: 6px 0; }
   .dossier-meta .label { color: var(--dim); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 2px;}
+  .tabs, .tab-content, .copy-btn { position: relative; z-index: 1; }
 
   .copy-btn { display: block; width: fit-content; margin: 0 auto 20px auto; padding: 8px 16px; background: rgba(179, 58, 58, 0.1); color: var(--accent); border: 1px solid var(--accent); border-radius: 6px; font-family: inherit; font-size: 0.8rem; cursor: pointer; transition: all 0.2s; text-transform: uppercase; letter-spacing: 1px; }
   .copy-btn:hover { background: var(--accent); color: #fff; }
@@ -255,6 +266,8 @@
     main { padding: 15px; }
     .dossier-wrapper { padding: 20px 15px; }
     
+    .stamp-bg { width: 100px; height: 100px; opacity: 0.06; }
+    
     .vn-monokuma { height: 220px; left: -20px; bottom: 180px; }
     .vn-nagito { height: 240px; right: -20px; bottom: 160px; }
     .vn-dialog-box { width: 95%; margin-bottom: 20px; }
@@ -295,6 +308,7 @@
   <main id="main-content">
         <!-- ДЕЛО 1: Кокичи -->
     <article class="dossier-wrapper" id="d03">
+      <div class="stamp-bg"></div>
       <div class="dossier-title">ЛИЧНОЕ ДЕЛО №03-К</div>
       <div class="dossier-meta"><div><span class="label">Имя:</span> Кокичи Ома</div><div><span class="label">Возраст:</span> 20 лет | <span class="label">Статус:</span> Жив</div><div><span class="label">Талант:</span> Абсолютный Шут Хаоса</div></div>
       <button class="copy-btn" onclick="copyDossier('d03', this)">Скопировать для RP</button>
@@ -326,6 +340,7 @@
 
     <!-- ДЕЛО 2: Джатаро -->
     <article class="dossier-wrapper hidden" id="d04">
+      <div class="stamp-bg"></div>
       <div class="dossier-title">ЛИЧНОЕ ДЕЛО №04-К</div>
       <div class="dossier-meta"><div><span class="label">Имя:</span> Джатаро Кемури</div><div><span class="label">Возраст:</span> 12 лет | <span class="label">Статус:</span> Жив</div><div><span class="label">Талант:</span> Маленький Абсолютный Изобретатель</div></div>
       <button class="copy-btn" onclick="copyDossier('d04', this)">Скопировать для RP</button>
@@ -359,6 +374,7 @@
 
     <!-- ДЕЛО 3: Рантаро -->
     <article class="dossier-wrapper hidden" id="d07">
+      <div class="stamp-bg"></div>
       <div class="dossier-title">ЛИЧНОЕ ДЕЛО №07-А</div>
       <div class="dossier-meta"><div><span class="label">Имя:</span> Рантаро Амами</div><div><span class="label">Возраст:</span> 20 лет | <span class="label">Статус:</span> Жив</div><div><span class="label">Талант:</span> Абсолютный Авантюрист</div></div>
       <button class="copy-btn" onclick="copyDossier('d07', this)">Скопировать для RP</button>
@@ -389,6 +405,7 @@
 
     <!-- ДЕЛО 4: Маки -->
     <article class="dossier-wrapper hidden" id="d11">
+      <div class="stamp-bg"></div>
       <div class="dossier-title">ЛИЧНОЕ ДЕЛО №11-Х</div>
       <div class="dossier-meta"><div><span class="label">Имя:</span> Маки Харукава</div><div><span class="label">Возраст:</span> 18.5 лет | <span class="label">Статус:</span> Жива</div><div><span class="label">Талант:</span> Абсолютная Охотница</div></div>
       <button class="copy-btn" onclick="copyDossier('d11', this)">Скопировать для RP</button>
