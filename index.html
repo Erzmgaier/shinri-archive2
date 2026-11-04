@@ -7,8 +7,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #050608; --panel: #0d1015; --border: #1f252e; --text: #c9d1d9;
-    --dim: #6e7681; --accent: #b33a3a; --secret: #d4a017; --hover: #151a21;
+    --bg: #050608; --panel: #0a0c10; --card-bg: #11151b; --border: #1f252e; 
+    --text: #c9d1d9; --dim: #6e7681; --accent: #b33a3a; --secret: #d4a017; 
+    --hover: #151a21;
   }
   * { box-sizing: border-box; }
   body {
@@ -17,12 +18,14 @@
     height: 100vh; display: flex; flex-direction: column; overflow: hidden;
     background-image: radial-gradient(circle at 50% 0%, #11161c 0%, var(--bg) 70%);
   }
+
   header {
     padding: 20px 30px; border-bottom: 1px solid var(--border);
     background: rgba(8, 10, 12, 0.9); flex-shrink: 0;
     display: flex; align-items: center; justify-content: center; gap: 25px;
     z-index: 10; box-shadow: 0 4px 20px rgba(0,0,0,0.8); position: relative;
   }
+  
   .header-logo {
     width: 65px; height: 65px; object-fit: contain;
     mix-blend-mode: screen; filter: invert(1) grayscale(1) brightness(1.2);
@@ -30,6 +33,7 @@
     filter: drop-shadow(0 0 8px rgba(255,255,255,0.1));
   }
   .header-logo:hover { opacity: 1; transform: scale(1.05); }
+
   .header-text { text-align: left; }
   .header-text h1 { 
     font-family: "Merriweather", serif; margin: 0 0 6px; font-size: 1.5rem; 
@@ -40,25 +44,75 @@
 
   .layout { display: flex; flex: 1; overflow: hidden; z-index: 5; }
   
+  /* ================= БОКОВОЕ МЕНЮ ================= */
   aside {
-    width: 300px; background: var(--panel); border-right: 1px solid var(--border);
-    overflow-y: auto; flex-shrink: 0; padding: 25px 0;
+    width: 320px; background: #0a0c10;
+    border-right: 1px solid var(--border);
+    display: flex; flex-direction: column;
+    flex-shrink: 0; position: relative;
+    background-image: linear-gradient(180deg, rgba(20,25,30,0.5) 0%, transparent 100%);
   }
-  aside h2 { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 3px; color: var(--dim); margin: 0 25px 20px; padding-bottom: 15px; border-bottom: 1px dashed var(--border); }
-  aside ul { list-style: none; padding: 0; margin: 0; }
-  aside li { margin-bottom: 2px; }
+  
+  .aside-header {
+    padding: 25px 25px 15px;
+    border-bottom: 1px dashed var(--border);
+  }
+  aside h2 { 
+    font-size: 0.7rem; text-transform: uppercase; letter-spacing: 3px; 
+    color: var(--accent); margin: 0; 
+  }
+
+  .aside-list {
+    list-style: none; padding: 15px 0; margin: 0; flex: 1; overflow-y: auto;
+  }
+  .aside-list li { margin-bottom: 4px; padding: 0 15px;}
   
   .nav-btn {
-    width: 100%; text-align: left; background: transparent; border: none;
-    border-left: 3px solid transparent; color: var(--text); padding: 14px 25px;
-    font-family: inherit; font-size: 0.85rem; cursor: pointer; transition: all .2s ease;
-    display: flex; flex-direction: column;
+    width: 100%; text-align: left; background: transparent; 
+    border: 1px solid transparent; border-left: 3px solid transparent; 
+    color: var(--text); padding: 12px 15px;
+    font-family: inherit; font-size: 0.85rem; cursor: pointer; 
+    transition: all .2s ease; display: flex; align-items: center; gap: 15px;
+    border-radius: 4px;
   }
-  .nav-btn:hover { background: var(--hover); }
-  .nav-btn.active { background: var(--hover); border-left-color: var(--accent); }
-  .nav-btn .num { color: var(--accent); font-size: 0.75rem; margin-bottom: 4px; letter-spacing: 1px;}
-  .nav-btn .name { font-weight: 500; letter-spacing: 1px;}
+  
+  .nav-btn:hover { background: rgba(255,255,255,0.03); border-color: var(--border); }
+  .nav-btn.active { 
+    background: rgba(179, 58, 58, 0.1); border-color: var(--accent);
+    border-left-color: var(--accent); 
+  }
+  
+  .nav-icon {
+    width: 32px; height: 32px; background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border); display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; color: var(--dim); transition: all 0.2s; border-radius: 4px;
+  }
+  .nav-btn.active .nav-icon {
+    color: var(--accent); border-color: var(--accent); background: rgba(179, 58, 58, 0.1);
+  }
 
+  .nav-info { display: flex; flex-direction: column; }
+  .nav-btn .num { color: var(--dim); font-size: 0.65rem; margin-bottom: 2px; letter-spacing: 1px;}
+  .nav-btn .name { font-weight: 500; letter-spacing: 0.5px; font-size: 0.9rem; }
+  .nav-btn.active .num, .nav-btn.active .name { color: #fff; }
+
+  .aside-footer {
+    padding: 20px 25px; border-top: 1px solid var(--border);
+    background: rgba(0,0,0,0.2); font-size: 0.65rem; color: var(--dim); line-height: 1.5;
+  }
+  .aside-footer .status {
+    display: flex; align-items: center; gap: 8px; color: #5ca85c; margin-bottom: 10px;
+    font-weight: bold; text-transform: uppercase; letter-spacing: 1px;
+  }
+  .status-dot {
+    width: 6px; height: 6px; background: #5ca85c; border-radius: 50%;
+    box-shadow: 0 0 6px #5ca85c; animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; }
+  }
+
+  /* ================= КОНТЕНТ ================= */
   main { flex: 1; overflow-y: auto; padding: 40px; position: relative; }
   
   .dossier-wrapper {
@@ -119,13 +173,53 @@
 
 <div class="layout">
   <aside>
-    <h2>Оглавление архива</h2>
-    <ul>
-      <li><button class="nav-btn active" onclick="openDossier('d03', this)"><span class="num">№03-К</span><span class="name">Кокичи Ома</span></button></li>
-      <li><button class="nav-btn" onclick="openDossier('d04', this)"><span class="num">№04-К</span><span class="name">Джатаро Кемури</span></button></li>
-      <li><button class="nav-btn" onclick="openDossier('d07', this)"><span class="num">№07-А</span><span class="name">Рантаро Амами</span></button></li>
-      <li><button class="nav-btn" onclick="openDossier('d11', this)"><span class="num">№11-Х</span><span class="name">Маки Харукава</span></button></li>
+    <div class="aside-header">
+      <h2>Оглавление архива</h2>
+    </div>
+    
+    <ul class="aside-list">
+      <li>
+        <button class="nav-btn active" onclick="openDossier('d03', this)">
+          <div class="nav-icon">🎭</div>
+          <div class="nav-info">
+            <span class="num">№03-К</span>
+            <span class="name">Кокичи Ома</span>
+          </div>
+        </button>
+      </li>
+      <li>
+        <button class="nav-btn" onclick="openDossier('d04', this)">
+          <div class="nav-icon">⚙️</div>
+          <div class="nav-info">
+            <span class="num">№04-К</span>
+            <span class="name">Джатаро Кемури</span>
+          </div>
+        </button>
+      </li>
+      <li>
+        <button class="nav-btn" onclick="openDossier('d07', this)">
+          <div class="nav-icon">🧭</div>
+          <div class="nav-info">
+            <span class="num">№07-А</span>
+            <span class="name">Рантаро Амами</span>
+          </div>
+        </button>
+      </li>
+      <li>
+        <button class="nav-btn" onclick="openDossier('d11', this)">
+          <div class="nav-icon">🏹</div>
+          <div class="nav-info">
+            <span class="num">№11-Х</span>
+            <span class="name">Маки Харукава</span>
+          </div>
+        </button>
+      </li>
     </ul>
+
+    <div class="aside-footer">
+      <div class="status"><div class="status-dot"></div> Система активна</div>
+      <div>Уровень доступа: S-2<br>Зашифровано: AES-256</div>
+    </div>
   </aside>
 
   <main id="main-content">
@@ -144,7 +238,7 @@
       </div>
       <div class="tab-content active" id="d03-off">
         <div class="block-title">Особые приметы</div>
-        <p class="block-text">Костюм Шута, скрывающий истинное лицо субъекта; вне выступлений Ома держится подчёркнуто открыто, но о своей внешности говорит уклончиво, и причины этого <span class="secret">[ДАННЫЕ ОТ СЛУЖБЫ БЕЗОПАСНОСТИ ЗАСЕКРЕЧЕНЫ]</span>. На поясе — старинный карманный компас на тяжёлой цепочке. Манеры игривые, речь театральная, с внезапными переходами от детской непосредственности к холодному расчёту. При общении с незнакомыми людьми постоянно «прощупывает» их реакциями — проверяет на страх, жадность, тщеславие.</p>
+        <p class="block-text">Костюм Шута, скрывающий истинное лицо субъекта; вне выступлений Ома держится подчёркнуто открыто, но о своей внешности говорит уклончиво, и причины этого <span class="secret">[ДАННЫЕ ОТ СЛУЖБЫ БЕЗОПАСНОСТИ ЗАСЕКРЕЧЕНЫ]</span>. На поясе — старинный карманный компас на тяжёлой цепочке, с которым он никогда не расстаётся. Манеры игривые, речь театральная, с внезапными переходами от детской непосредственности к холодному расчёту. При общении с незнакомыми людьми постоянно «прощупывает» их реакциями — проверяет на страх, жадность, тщеславие. Обладает высокой стрессоустойчивостью, в критических ситуациях сохраняет ледяное спокойствие.</p>
         <div class="block-title">Краткая сводка</div>
         <p class="block-text">Вырос в трущобах, с ранних лет выживал на улице вместе с Рантаро Амами (см. дело №07-А), который стал его ближайшим другом и тылом. Из уличной банды создал международную бродячую труппу «D.I.C.E.», чьи перформансы прогремели от криминального клана Кузурю до совета директоров Towa Group и королевского двора Новоселик. Костюм Шута Хаоса создан Цумуги Широганэ по референсам, собранным Амами в Италии и Франции. За кулисами представлений труппа добывает компромат на влиятельных лиц; часть добытых данных передаётся Амами для экспедиций, взамен D.I.C.E. обеспечивает безопасность его сестёр, чьи имена и местонахождение <span class="secret">[ИНФОРМАЦИЯ ЗАСЕКРЕЧЕНА]</span> и изъяты из общего доступа в целях безопасности субъекта.</p>
         <div class="block-title">Причина присвоения таланта</div>
@@ -164,7 +258,7 @@
       </div>
     </article>
 
-       <!-- ДЕЛО 2: Джатаро -->
+    <!-- ДЕЛО 2: Джатаро -->
     <article class="dossier-wrapper hidden" id="d04">
       <div class="dossier-title">ЛИЧНОЕ ДЕЛО №04-К</div>
       <div class="dossier-meta">
@@ -233,7 +327,7 @@
       </div>
     </article>
 
-       <!-- ДЕЛО 4: Маки -->
+    <!-- ДЕЛО 4: Маки -->
     <article class="dossier-wrapper hidden" id="d11">
       <div class="dossier-title">ЛИЧНОЕ ДЕЛО №11-Х</div>
       <div class="dossier-meta">
@@ -270,6 +364,9 @@
         </div>
       </div>
     </article>
+
+  </main>
+</div>
 
 <script>
   function openDossier(id, btn) {
