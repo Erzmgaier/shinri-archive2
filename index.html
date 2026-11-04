@@ -23,7 +23,6 @@
   header p { margin: 0; color: var(--accent); font-size: 0.75rem; letter-spacing: 2px; }
   .layout { display: flex; flex: 1; overflow: hidden; }
   
-  /* Меню */
   aside {
     width: 280px; background: var(--panel); border-right: 1px solid var(--border);
     overflow-y: auto; flex-shrink: 0; padding: 20px 0;
@@ -42,7 +41,6 @@
   .nav-btn .num { color: var(--dim); font-size: 0.75rem; margin-bottom: 2px; }
   .nav-btn .name { font-weight: bold; }
 
-  /* Контент */
   main { flex: 1; overflow-y: auto; padding: 30px; position: relative; }
   .dossier-wrapper {
     max-width: 900px; margin: 0 auto; background: var(--panel);
@@ -57,7 +55,6 @@
   .dossier-meta div { margin: 5px 0; }
   .dossier-meta .label { color: var(--dim); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;}
 
-  /* Вкладки */
   .tabs { display: flex; justify-content: center; border-bottom: 1px solid var(--border); margin-bottom: 25px; gap: 10px; }
   .tab-btn {
     background: transparent; border: none; color: var(--dim); font-family: inherit;
@@ -69,7 +66,6 @@
   .tab-content { display: none; animation: fadeIn 0.3s ease; }
   .tab-content.active { display: block; }
 
-  /* Оформление */
   .block-title { font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin: 25px 0 12px; display: flex; align-items: center; }
   .block-title::after { content: ""; flex: 1; height: 1px; background: var(--border); margin-left: 15px; }
   .block-text { margin: 0 0 15px; text-align: justify; font-size: 1rem; }
@@ -106,7 +102,7 @@
 
   <main id="main-content">
 
-    <!-- ================= ДЕЛО 1: Кокичи ================= -->
+    <!-- ДЕЛО 1: Кокичи -->
     <article class="dossier-wrapper" id="d03">
       <div class="dossier-title">ЛИЧНОЕ ДЕЛО №03-К</div>
       <div class="dossier-meta">
@@ -136,7 +132,7 @@
       </div>
     </article>
 
-    <!-- ================= ДЕЛО 2: Джатаро ================= -->
+    <!-- ДЕЛО 2: Джатаро -->
     <article class="dossier-wrapper hidden" id="d04">
       <div class="dossier-title">ЛИЧНОЕ ДЕЛО №04-К</div>
       <div class="dossier-meta">
@@ -171,7 +167,7 @@
         </div>
       </div>
     </article>
-        <!-- ================= ДЕЛО 3: Рантаро ================= -->
+        <!-- ДЕЛО 3: Рантаро -->
     <article class="dossier-wrapper hidden" id="d07">
       <div class="dossier-title">ЛИЧНОЕ ДЕЛО №07-А</div>
       <div class="dossier-meta">
@@ -201,7 +197,7 @@
       </div>
     </article>
 
-    <!-- ================= ДЕЛО 4: Маки ================= -->
+    <!-- ДЕЛО 4: Маки -->
     <article class="dossier-wrapper hidden" id="d11">
       <div class="dossier-title">ЛИЧНОЕ ДЕЛО №11-Х</div>
       <div class="dossier-meta">
@@ -219,12 +215,22 @@
         <div class="block-title">Краткая сводка</div>
         <p class="block-text">До 7 лет росла в изолированной лесной деревне в семье промысловика. В ходе разбойного нападения мародёров деревня была полностью уничтожена, а родители субъекта погибли. Харукава сумела скрыться в юго-западных лесах, где в одиночку заняла медвежью пещеру и провела более десяти лет в полной изоляции, ведя жесткую борьбу за выживание.</p>
         <div class="block-title">Причина присвоения таланта</div>
-        <p class="block-text">Продемонстрировала феноменальные навыки выживания в дикой природе, хладнокровие и абсолют
-            </main>
+        <p class="block-text">Продемонстрировала феноменальные навыки выживания в дикой природе, хладнокровие и абсолютную точность стрельбы из арбалета. Самостоятельно превратила дикую пещеру в оборудованную базу. В совершенстве владеет навыками свежевания, маскировки, ориентирования и полевой медицины. Навыки ближнего и дальнего боя доведены до автоматизма.</p>
+        <div class="block-title">Цель прибытия</div>
+        <p class="block-text">Официально зачислена после обнаружения пригласительного письма у её лагеря. Однако, по данным скрытого наблюдения, субъект проявляет полное безразличие к учебному процессу. Истинная цель прибытия в Академию — скрытый надзор и защита <span class="secret">[ИНФОРМАЦИЯ ЗАСЕКРЕЧЕНА]</span>. Администрация предупреждает учеников: субъект крайне скрытен, эмоционально холоден и потенциально опасен при попытках сближения.</p>
+      </div>
+      <div class="tab-content" id="d11-hist">
+        <div class="lore-text">
+          <p>До 7 лет Маки жила в глухой лесной деревне. Ее мать была рукодельницей и обучила девочку шитью, а отец промышлял охотой. Однажды, когда отец взял Маки на первую совместную охоту и она впервые поразила цель из арбалета, их деревня подверглась нападению мародеров. Вернувшись, они застали дома в огне. Отец успел вынести раненую мать из пламени, но оба погибли от рук бандитов на глазах у девочки. Перед смертью отец велел ей уезжать и искать свое счастье. Забрав фамильные кулоны, Маки укрылась в юго-западных лесах, где убила медведя и заняла его пещеру, проведя в полной изоляции более 10 лет.</p>
+          <p>Спустя годы она спасла от волков мальчика по имени Джатаро Кемури (см. дело №04-К), выходила его и обучила охотничьим премудростям. Она планировала подарить ему отцовский кулон, приняв его как родного, но отложила этот жест до окончания его обучения. Узнав о гибели родителей Джатаро, Маки помогла ему уничтожить ту самую банду мародеров. Не имея тяги к учебе, она отправилась в Академию «Пик Надежды» исключительно ради того, чтобы приглядывать за своим юным подопечным.</p>
+        </div>
+      </div>
+    </article>
+
+  </main>
 </div>
 
 <script>
-  // Логика переключения между персонажами
   function openDossier(id, btn) {
     const dossiers = document.querySelectorAll('.dossier-wrapper');
     dossiers.forEach(d => d.classList.add('hidden'));
@@ -236,7 +242,6 @@
 
     document.getElementById('main-content').scrollTop = 0;
     
-    // Сбрасываем вкладки у нового персонажа на "Официальное дело"
     const activeDossier = document.getElementById(id);
     const tabs = activeDossier.querySelectorAll('.tab-content');
     tabs.forEach(t => t.classList.remove('active'));
@@ -247,23 +252,16 @@
     activeDossier.querySelector('.tab-btn').classList.add('active');
   }
 
-  // Логика переключения между "Делом" и "Историей"
   function openTab(dossierId, tabType, btn) {
     const dossier = document.getElementById(dossierId);
-    
-    // Скрываем все вкладки внутри этого дела
     const contents = dossier.querySelectorAll('.tab-content');
     contents.forEach(c => c.classList.remove('active'));
-    
-    // Показываем нужную
     document.getElementById(dossierId + '-' + tabType).classList.add('active');
 
-    // Меняем активную кнопку
     const btns = dossier.querySelectorAll('.tab-btn');
     btns.forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     
-    // Прокручиваем наверх при смене вкладки
     document.getElementById('main-content').scrollTop = 0;
   }
 </script>
