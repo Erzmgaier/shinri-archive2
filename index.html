@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Архив личных дел — Пик Надежды</title>
-<!-- ИКОНКА САЙТА -->
-<link rel="icon" type="image/png" href="favicon.png" id="dynamic-favicon">
+<!-- ИКОНКА САЙТА (добавлено ?v=2 для сброса кэша) -->
+<link rel="icon" type="image/png" href="favicon.png?v=2" id="dynamic-favicon">
 <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -20,24 +20,16 @@
     height: 100vh; display: flex; flex-direction: column; overflow: hidden;
     background-image: radial-gradient(circle at 50% 0%, #11161c 0%, var(--bg) 70%);
   }
-
   body::before {
     content: ""; position: fixed; top: 0; left: 0; width: 200%; height: 200%;
-    background-image: 
-      linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-    background-size: 50px 50px;
-    z-index: -1; pointer-events: none;
-    animation: gridMove 20s linear infinite;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 50px 50px; z-index: -1; pointer-events: none; animation: gridMove 20s linear infinite;
   }
   @keyframes gridMove { 0% { transform: translate(0, 0); } 100% { transform: translate(-50px, -50px); } }
-
   header {
-    padding: 20px 30px; border-bottom: 1px solid var(--border);
-    background: rgba(8, 10, 12, 0.9); flex-shrink: 0;
-    display: flex; align-items: center; justify-content: center; gap: 25px;
-    z-index: 10; box-shadow: 0 4px 20px rgba(0,0,0,0.8); position: relative;
-    backdrop-filter: blur(10px);
+    padding: 20px 30px; border-bottom: 1px solid var(--border); background: rgba(8, 10, 12, 0.9);
+    flex-shrink: 0; display: flex; align-items: center; justify-content: center; gap: 25px;
+    z-index: 10; box-shadow: 0 4px 20px rgba(0,0,0,0.8); position: relative; backdrop-filter: blur(10px);
   }
   .header-logo-container {
     width: 70px; height: 70px; display: flex; align-items: center; justify-content: center;
@@ -54,15 +46,12 @@
   .header-text { text-align: left; }
   .header-text h1 { font-family: "Merriweather", serif; margin: 0 0 6px; font-size: 1.5rem; letter-spacing: 6px; text-transform: uppercase; color: #dce3eb; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
   .header-text p { margin: 0; color: var(--accent); font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; opacity: 0.8; }
-  
   .layout { display: flex; flex: 1; overflow: hidden; z-index: 5; }
-  
   aside { 
     width: 320px; background: #0a0c10; border-right: 1px solid var(--border); 
     display: flex; flex-direction: column; flex-shrink: 0; position: relative; 
     background-image: linear-gradient(180deg, rgba(20,25,30,0.5) 0%, transparent 100%);
-    border-top-right-radius: 12px; margin-top: 5px; border-top: 1px solid var(--border);
-    backdrop-filter: blur(10px);
+    border-top-right-radius: 12px; margin-top: 5px; border-top: 1px solid var(--border); backdrop-filter: blur(10px);
   }
   .aside-header { padding: 25px 25px 15px; border-bottom: 1px dashed var(--border); }
   aside h2 { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 3px; color: var(--accent); margin: 0; }
@@ -76,14 +65,11 @@
   }
   .nav-btn:hover { background: rgba(255,255,255,0.03); border-color: var(--border); }
   .nav-btn.active { background: rgba(179, 58, 58, 0.1); border-color: var(--accent); border-left-color: var(--accent); }
-  
   .nav-btn.active::after {
     content: ""; position: absolute; right: 0; top: 20%; height: 60%; width: 4px;
-    background: var(--accent); border-radius: 2px;
-    box-shadow: 0 0 10px var(--accent); animation: pulseLine 1.5s infinite alternate;
+    background: var(--accent); border-radius: 2px; box-shadow: 0 0 10px var(--accent); animation: pulseLine 1.5s infinite alternate;
   }
   @keyframes pulseLine { 0% { opacity: 0.5; transform: scaleY(0.8); } 100% { opacity: 1; transform: scaleY(1); } }
-
   .nav-icon { width: 32px; height: 32px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; color: var(--dim); transition: all 0.2s; border-radius: 50%; }
   .nav-btn.active .nav-icon { color: var(--accent); border-color: var(--accent); background: rgba(179, 58, 58, 0.1); }
   .nav-info { display: flex; flex-direction: column; }
@@ -94,221 +80,84 @@
   .aside-footer .status { display: flex; align-items: center; gap: 8px; color: #5ca85c; margin-bottom: 10px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
   .status-dot { width: 6px; height: 6px; background: #5ca85c; border-radius: 50%; box-shadow: 0 0 6px #5ca85c; animation: pulse 2s infinite; }
   @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
-
   main { flex: 1; overflow-y: auto; padding: 40px; position: relative; }
-  
   .dossier-wrapper { 
-    position: relative; 
-    max-width: 850px; margin: 0 auto; background: var(--panel); 
+    position: relative; max-width: 850px; margin: 0 auto; background: var(--panel); 
     border: 1px solid var(--border); border-top: 3px solid var(--accent); 
     padding: 40px 50px; box-shadow: 0 15px 40px rgba(0,0,0,0.7); 
     animation: slideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1); border-radius: 12px;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
   }
   @keyframes slideIn { from { opacity: 0; transform: translateY(30px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
-
-  .dossier-wrapper::before,
-  .dossier-wrapper::after {
-    content: "";
-    position: absolute;
-    width: 20px; height: 20px;
-    border: 2px solid var(--dim);
-    transition: all 0.3s ease;
-    pointer-events: none;
-    opacity: 0.5;
-    z-index: 2;
+  .dossier-wrapper::before, .dossier-wrapper::after {
+    content: ""; position: absolute; width: 20px; height: 20px; border: 2px solid var(--dim);
+    transition: all 0.3s ease; pointer-events: none; opacity: 0.5; z-index: 2;
   }
   .dossier-wrapper::before { top: 10px; left: 10px; border-right: none; border-bottom: none; }
   .dossier-wrapper::after { bottom: 10px; right: 10px; border-left: none; border-top: none; }
   .dossier-wrapper:hover::before { top: 5px; left: 5px; border-color: var(--accent); opacity: 1; }
   .dossier-wrapper:hover::after { bottom: 5px; right: 5px; border-color: var(--accent); opacity: 1; }
-  .dossier-wrapper:hover {
-    border-color: rgba(179, 58, 58, 0.4);
-    box-shadow: 0 0 30px rgba(179, 58, 58, 0.15), 0 15px 40px rgba(0,0,0,0.7);
-  }
-
-  .stamp-bg {
-    position: absolute;
-    top: 15px; right: 15px;
-    width: 140px; height: 140px;
-    background-image: url('stamp.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    border-radius: 50%;
-    opacity: 0.15; 
-    transform: rotate(15deg); 
-    pointer-events: none; 
-    z-index: 0; 
-  }
-
+  .dossier-wrapper:hover { border-color: rgba(179, 58, 58, 0.4); box-shadow: 0 0 30px rgba(179, 58, 58, 0.15), 0 15px 40px rgba(0,0,0,0.7); }
+  .stamp-bg { position: absolute; top: 15px; right: 15px; width: 140px; height: 140px; background-image: url('stamp.png'); background-size: cover; background-position: center; background-repeat: no-repeat; border-radius: 50%; opacity: 0.15; transform: rotate(15deg); pointer-events: none; z-index: 0; }
   .dossier-wrapper.hidden { display: none; }
-  
-  .dossier-title { 
-    position: relative; z-index: 1; text-align: center; font-family: "Merriweather", serif; 
-    font-size: 1.4rem; letter-spacing: 4px; color: #fff; margin: 0 0 20px; font-weight: bold; 
-    cursor: default;
-  }
+  .dossier-title { position: relative; z-index: 1; text-align: center; font-family: "Merriweather", serif; font-size: 1.4rem; letter-spacing: 4px; color: #fff; margin: 0 0 20px; font-weight: bold; cursor: default; }
   .dossier-title:hover { animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite; }
-  @keyframes glitch {
-    0% { transform: translate(0); text-shadow: 2px 0 red, -2px 0 blue; }
-    20% { transform: translate(-2px, 2px); text-shadow: -2px 0 red, 2px 0 blue; }
-    40% { transform: translate(-2px, -2px); text-shadow: 2px 0 red, -2px 0 blue; }
-    60% { transform: translate(2px, 2px); text-shadow: -2px 0 red, 2px 0 blue; }
-    80% { transform: translate(2px, -2px); text-shadow: 2px 0 red, -2px 0 blue; }
-    100% { transform: translate(0); text-shadow: none; }
-  }
-
+  @keyframes glitch { 0% { transform: translate(0); text-shadow: 2px 0 red, -2px 0 blue; } 20% { transform: translate(-2px, 2px); text-shadow: -2px 0 red, 2px 0 blue; } 40% { transform: translate(-2px, -2px); text-shadow: 2px 0 red, -2px 0 blue; } 60% { transform: translate(2px, 2px); text-shadow: -2px 0 red, 2px 0 blue; } 80% { transform: translate(2px, -2px); text-shadow: -2px 0 red, 2px 0 blue; } 100% { transform: translate(0); text-shadow: none; } }
   .dossier-meta { position: relative; z-index: 1; text-align: center; font-size: 0.85rem; margin-bottom: 30px; letter-spacing: 1px;}
   .dossier-meta div { margin: 6px 0; }
   .dossier-meta .label { color: var(--dim); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 2px;}
   .tabs, .tab-content, .copy-btn { position: relative; z-index: 1; }
-
   .copy-btn { display: block; width: fit-content; margin: 0 auto 20px auto; padding: 8px 16px; background: rgba(179, 58, 58, 0.1); color: var(--accent); border: 1px solid var(--accent); border-radius: 6px; font-family: inherit; font-size: 0.8rem; cursor: pointer; transition: all 0.2s; text-transform: uppercase; letter-spacing: 1px; }
   .copy-btn:hover { background: var(--accent); color: #fff; }
   .copy-btn.copied { background: #5ca85c; border-color: #5ca85c; color: #fff; }
   .copy-btn.hidden-btn { display: none; }
-
   .tabs { display: flex; justify-content: center; border-bottom: 1px solid var(--border); margin-bottom: 35px; gap: 20px; flex-wrap: wrap; }
   .tab-btn { background: transparent; border: none; color: var(--dim); font-family: inherit; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; padding: 12px 20px; cursor: pointer; border-bottom: 3px solid transparent; transition: all 0.2s; font-weight: 500; }
   .tab-btn:hover { color: #fff; }
   .tab-btn.active { color: #fff; border-bottom-color: var(--accent); }
-  
   .tab-content { display: none; }
   .tab-content.active { display: block; }
-
   .block-title { font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin: 35px 0 15px; display: flex; align-items: center; font-weight: 500; }
   .block-title::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, var(--border) 0%, transparent 100%); margin-left: 20px; }
-  
   .block-text { margin: 0 0 20px; text-align: justify; font-size: 0.95rem; color: #a9b2bc; line-height: 1.7; }
   .secret { color: var(--secret); background: rgba(212, 160, 23, 0.05); border: 1px dashed rgba(212, 160, 23, 0.4); padding: 2px 6px; font-size: 0.85em; cursor: help; }
   .lore-text { font-size: 0.95rem; color: #a9b2bc; text-align: justify; line-height: 1.8; }
   .lore-text p { margin: 0 0 20px; text-indent: 25px; }
   .lore-text p:last-child { margin-bottom: 0; }
-
-  /* Стили для вкладки снаряжения */
-  .gear-category {
-    font-size: 0.75rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--dim);
-    margin: 25px 0 10px;
-    border-bottom: 1px dashed var(--border);
-    padding-bottom: 5px;
-  }
-  .gear-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 15px;
-    margin-bottom: 20px;
-  }
-  .gear-card {
-    background: rgba(255,255,255,0.02);
-    border: 1px solid var(--border);
-    border-left: 3px solid var(--border);
-    padding: 15px;
-    border-radius: 8px;
-    transition: all 0.2s;
-  }
-  .gear-card:hover {
-    border-left-color: var(--accent);
-    background: rgba(179, 58, 58, 0.05);
-  }
-  .gear-card-name {
-    color: #fff;
-    font-weight: bold;
-    font-size: 0.95rem;
-    margin-bottom: 5px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .gear-card-desc {
-    color: #a9b2bc;
-    font-size: 0.85rem;
-    line-height: 1.5;
-  }
-
-  /* ====== СЕКРЕТКА ====== */
-  .vn-overlay {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.95); display: flex; align-items: center; justify-content: center;
-    z-index: 9999; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; overflow: hidden;
-  }
+  .gear-category { font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--dim); margin: 25px 0 10px; border-bottom: 1px dashed var(--border); padding-bottom: 5px; }
+  .gear-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px; margin-bottom: 20px; }
+  .gear-card { background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-left: 3px solid var(--border); padding: 15px; border-radius: 8px; transition: all 0.2s; }
+  .gear-card:hover { border-left-color: var(--accent); background: rgba(179, 58, 58, 0.05); }
+  .gear-card-name { color: #fff; font-weight: bold; font-size: 0.95rem; margin-bottom: 5px; display: flex; align-items: center; gap: 8px; }
+  .gear-card-desc { color: #a9b2bc; font-size: 0.85rem; line-height: 1.5; }
+  .vn-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.95); display: flex; align-items: center; justify-content: center; z-index: 9999; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; overflow: hidden; }
   .vn-overlay.active { opacity: 1; pointer-events: auto; }
-  .vn-overlay::before {
-    content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background: radial-gradient(circle, rgba(255,0,0,0.2) 0%, transparent 60%); z-index: 1;
-  }
+  .vn-overlay::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, rgba(255,0,0,0.2) 0%, transparent 60%); z-index: 1; }
   .vn-overlay.active::before { animation: sirenPulse 1s infinite alternate; }
   @keyframes sirenPulse { 0% { opacity: 0.3; transform: scale(1); } 100% { opacity: 0.8; transform: scale(1.5); } }
-
-  .vn-container {
-    position: relative; width: 100%; height: 100%; max-width: 1200px;
-    z-index: 2; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 40px;
-  }
-  .vn-monokuma {
-    position: absolute; bottom: 150px; left: 10%; height: 350px; width: auto; z-index: 3;
-    filter: drop-shadow(0 0 20px rgba(255, 0, 0, 0.5)); transition: transform 0.2s, opacity 0.2s;
-  }
+  .vn-container { position: relative; width: 100%; height: 100%; max-width: 1200px; z-index: 2; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 40px; }
+  .vn-monokuma { position: absolute; bottom: 150px; left: 10%; height: 350px; width: auto; z-index: 3; filter: drop-shadow(0 0 20px rgba(255, 0, 0, 0.5)); transition: transform 0.2s, opacity 0.2s; }
   .vn-monokuma.talking { transform: translateY(-10px) scale(1.05); }
   .vn-monokuma.hidden { opacity: 0; transform: translateY(20px); }
-
-  .vn-nagito {
-    position: absolute; bottom: 130px; right: 5%; height: 380px; width: auto; z-index: 3;
-    transition: transform 0.2s, opacity 0.2s; cursor: pointer;
-  }
+  .vn-nagito { position: absolute; bottom: 130px; right: 5%; height: 380px; width: auto; z-index: 3; transition: transform 0.2s, opacity 0.2s; cursor: pointer; }
   .vn-nagito.talking { transform: translateY(-10px) scale(1.05); filter: drop-shadow(0 0 20px rgba(255,255,255,0.4)); }
   .vn-nagito.hidden { opacity: 0; transform: translateY(20px); }
   .vn-nagito:hover { filter: drop-shadow(0 0 25px rgba(255,255,255,0.6)); }
-  
   .vn-nagito.appearing { animation: nagitoAppear 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
   @keyframes nagitoAppear { 0% { opacity: 0; transform: translateY(100px) scale(0.5); filter: brightness(5); } 100% { opacity: 1; transform: translateY(0) scale(1); filter: brightness(1); } }
-
-  .vn-dialog-box {
-    position: relative; z-index: 4; width: 90%; max-width: 900px;
-    background: #000; border: 2px solid #fff; border-radius: 10px;
-    box-shadow: 0 0 30px rgba(255, 0, 0, 0.3); padding: 0;
-    display: flex; flex-direction: column; overflow: hidden;
-  }
-  .vn-name-tag {
-    position: absolute; top: -35px; left: 20px; background: #fff; color: #000;
-    font-family: "Merriweather", serif; font-weight: bold; font-size: 1.1rem; padding: 5px 20px;
-    border-radius: 5px 5px 0 0; border: 2px solid #fff; border-bottom: none;
-    text-transform: uppercase; letter-spacing: 2px; box-shadow: 0 -5px 15px rgba(0,0,0,0.5);
-    transition: all 0.3s;
-  }
-  .vn-text-content {
-    padding: 30px 40px; font-family: "Merriweather", serif; font-size: 1.15rem; color: #fff;
-    line-height: 1.6; min-height: 120px; display: flex; align-items: center;
-  }
-  
+  .vn-dialog-box { position: relative; z-index: 4; width: 90%; max-width: 900px; background: #000; border: 2px solid #fff; border-radius: 10px; box-shadow: 0 0 30px rgba(255, 0, 0, 0.3); padding: 0; display: flex; flex-direction: column; overflow: hidden; }
+  .vn-name-tag { position: absolute; top: -35px; left: 20px; background: #fff; color: #000; font-family: "Merriweather", serif; font-weight: bold; font-size: 1.1rem; padding: 5px 20px; border-radius: 5px 5px 0 0; border: 2px solid #fff; border-bottom: none; text-transform: uppercase; letter-spacing: 2px; box-shadow: 0 -5px 15px rgba(0,0,0,0.5); transition: all 0.3s; }
+  .vn-text-content { padding: 30px 40px; font-family: "Merriweather", serif; font-size: 1.15rem; color: #fff; line-height: 1.6; min-height: 120px; display: flex; align-items: center; }
   .vn-choices { display: none; gap: 20px; padding: 0 40px 30px 40px; justify-content: center; }
-  .vn-choice-btn {
-    background: #111; color: #fff; border: 2px solid var(--border);
-    padding: 10px 30px; font-family: inherit; font-size: 1rem; font-weight: bold;
-    cursor: pointer; transition: all 0.2s; text-transform: uppercase; letter-spacing: 1px;
-    border-radius: 5px; flex: 1; max-width: 250px;
-  }
+  .vn-choice-btn { background: #111; color: #fff; border: 2px solid var(--border); padding: 10px 30px; font-family: inherit; font-size: 1rem; font-weight: bold; cursor: pointer; transition: all 0.2s; text-transform: uppercase; letter-spacing: 1px; border-radius: 5px; flex: 1; max-width: 250px; }
   .vn-choice-btn.hope { border-color: #5ca85c; color: #5ca85c; }
   .vn-choice-btn.hope:hover { background: #5ca85c; color: #000; box-shadow: 0 0 15px rgba(92, 168, 92, 0.5); }
-  
-  .flash-overlay {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: #fff; z-index: 10000; pointer-events: none;
-    opacity: 0; transition: opacity 0.2s ease;
-  }
+  .flash-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #fff; z-index: 10000; pointer-events: none; opacity: 0; transition: opacity 0.2s ease; }
   .flash-overlay.active { animation: flashAnim 0.6s ease-out forwards; }
   @keyframes flashAnim { 0% { opacity: 1; } 100% { opacity: 0; } }
-
   .vn-controls { position: absolute; top: 20px; right: 20px; z-index: 10; display: flex; gap: 10px; }
-  .vn-btn {
-    background: rgba(0,0,0,0.6); border: 1px solid var(--border); color: var(--dim);
-    padding: 8px 15px; border-radius: 5px; font-family: inherit; font-size: 0.8rem;
-    cursor: pointer; transition: all 0.2s; text-transform: uppercase;
-  }
+  .vn-btn { background: rgba(0,0,0,0.6); border: 1px solid var(--border); color: var(--dim); padding: 8px 15px; border-radius: 5px; font-family: inherit; font-size: 0.8rem; cursor: pointer; transition: all 0.2s; text-transform: uppercase; }
   .vn-btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
-
   @media (max-width: 800px) {
     .layout { flex-direction: column; }
     aside { width: 100%; height: auto; max-height: 180px; border-right: none; border-bottom: 1px solid var(--border); border-radius: 0; margin-top: 0; border-top: none;}
@@ -321,11 +170,9 @@
     .aside-footer { display: none; }
     main { padding: 15px; }
     .dossier-wrapper { padding: 20px 15px; }
-    
     .stamp-bg { width: 100px; height: 100px; opacity: 0.1; }
     .tabs { gap: 10px; }
     .tab-btn { padding: 8px 12px; font-size: 0.75rem; letter-spacing: 1px; }
-    
     .vn-monokuma { height: 220px; left: -20px; bottom: 180px; }
     .vn-nagito { height: 240px; right: -20px; bottom: 160px; }
     .vn-dialog-box { width: 95%; margin-bottom: 20px; }
@@ -364,6 +211,7 @@
   </aside>
 
   <main id="main-content">
+    <!-- ВСТАВЬ СЮДА ВСЕ 4 БЛОКА <article> ИЗ ЧАСТИ 2 -->
         <!-- ДЕЛО 1: Кокичи -->
     <article class="dossier-wrapper" id="d03">
       <div class="stamp-bg"></div>
@@ -546,13 +394,13 @@
       </div>
       <div class="tab-content" id="d11-hist">
         <div class="lore-text">
-          <p>Маки Харукава — абсолютная охотница. В свои 17 лет она уже обладает не только звериной грацией, но и ценой, которую платит за выживание: на руках когти, а на теле есть несколько шрамов от когтей самих зверей. На одежде есть "пластери", говоря о том что она на скорой руки штопала еë.</p>
+          <p>Маки Харукава — абсолютная охотница. В свои 18.5 лет она уже обладает не только звериной грацией, но и ценой, которую платит за выживание: на руках когти, а на теле есть несколько шрамов от когтей самих зверей. На одежде есть "пластери", говоря о том что она на скорую руки штопала еë.</p>
           <p>Ее детство до 7 лет прошло в глухой деревне среди лесов. Технологии были ей почти неизвестны: лишь изредка она видела в руках отца кнопочный телефон, по которому он связывался с внешним миром. Семья Маки была невелика. Отец, будучи главой дома, добывал мех на продажу, чтобы обеспечить семью пропитанием, но работа забирала у него все силы, оставляя лишь изнурительные смены и тяжелый сон. Мать же мечтала стать швыёй по ручной изделии. Поэтому она учила Маки рукоделию, шила ей вещи и постепенно передавала навыки: как правильно кроить ткань и подгонять её по фигуре. (Заранее сшила ей наряд фиолетовый, чтоб та могла разгуливать по деревни)</p>
           <p>Маки быстро освоила вышивку, хотя сложное конструирование моделей (выйкрайка) давалось ей с трудом. Но однажды отец вернулся с работы необычайно воодушевленным. «Меня повысили! Завтра переезжаем в город, — объявил он. — И в честь этого я наконец обучу тебя настоящей охоте». Маки, завороженная его радостью, только улыбалась, стремясь разделить этот момент с самым близким человеком.</p>
           <p>Однако счастье оказалось недолгим. Во время первой совместной вывески в лесную глушь, когда сани с тремя псами и снаряжением плавно скользили по снегу, отец обучал дочь основам промысла: капканам, ловушкам и приманкам. Когда дело дошло до стрельбы, Маки, вместо ружья, получила арбалет. С первого же выстрела ей удалось пробить оленю голову. Отец был в восторге, говоря своей дочке во всю лыбу. "С такой точностью,ты точно станешь абсолютной охотницей!" Но девочка лишь скромно улыбнулась, не в силах выразить восторг словами.</p>
           <p>Обратный путь был омрачен странным запахом гари. Подъехав к деревне, они застали деревню в огне — мародеры не пощадили никого. Маки замерла в оцепенении: маленькая девочка не могла противостоять разгулу насилия. Она видела, как отец забегает дома и выносит раненую мать из огненного ада, видела безумный блеск в глазах грабителей. Вспышка выстрела, крик, и вот отец, истекая кровью, падает рядом с мëртвой женой. Прежде чем окончательно угаснуть, он прошептал: "Уезжай, доченька... Не оглядывайся. Ищи свое счастье..."</p>
           <p>Маки забрала у родителей их последнее сокровище - фамильные кулоны, и, собрав волю в кулак, погнала псов прочь от деревни. В два дня пути она достигла юго-западных лесов. Чтобы выжить, ей пришлось занять пещеру медведя, убив спящего гризли кинжалом. С тех пор её жизнь превратилась в бесконечный цикл выживания: обустройство убежища, разделка добычи, хранение запасов трав и инструментов. Старые псы ушли в мир иной от старости, и Маки не решалась заводить новых, боясь что новые съедят еë.</p>
-          <p>Прошло время. Теперь Маки 18.5 летния - опытный охотник. Ее жилище в пещере превратилось в полноценную станцию: здесь висят шкуры, стоят полки с травами и эликсирами, а на столе разложена энциклопедия по кулинарии. А так же есть отдельный шкафчик с одеждой, футболки, шорты, белье.</p>
+          <p>Прошло время. Теперь Маки 18.5 летняя - опытный охотник. Ее жилище в пещере превратилось в полноценную станцию: здесь висят шкуры, стоят полки с травами и эликсирами, а на столе разложена энциклопедия по кулинарии. А так же есть отдельный шкафчик с одеждой, футболки, шорты, белье.</p>
           <p>Однажды гуляя по лесу медленным шагом, она услышала крики и почувствовав запах крови, Маки мгновенно среагировала. Прибежав, не целясь, она выстрелила из арбалета, мгновенно сразив волка прямо в голову напавшего на мальчика. Хладнокровно она за секунды расправилась с двумя хищниками, а затем, без лишних эмоций, оттащила раненого юношу в свое убежище. Маки обработала его раны, используя найденные в лесу медикаменты, и обеспечила ему покой.</p>
           <p>Его звали Джатаро Кимури. Наблюдая за тем, как он растет, обретая амбиции и надежду, то Маки почувствовала к нему нечто, похожее на привязанность как одного из родственника. Она даже планировала подарить ему отцовский кулон, видя в нем нового члена своей семьи, хоть и продолжала вести себя холодно по отношению к нему.</p>
           <p>Но один ночей, сидя у костра пока мальчик спал.. Она рассматривала этот кулон от отца, пока маменый лежал у неë в сумке.. Она заметила письмо у порога самой берлоги, взяв в руки и прочитав о чëм она.. То Маки все же отложила свой кулон, думая что после обучения он получит еë как знак уважение и любви к нему.. Обсудив всë с маленьким мальчиком, то вы отправились сам пик надежды ради новых знаний для Кимури.. (Она не собирается учиться, она просто якобы пошла, но ради того чтобы приглядывать за своим учеником)</p>
@@ -581,18 +429,15 @@
   </div>
   
   <div class="vn-container" onclick="nextMonokumaPhrase(event)">
-    <!-- Спрайты -->
     <img src="monokuma.png" id="vnMonokuma" class="vn-monokuma" alt="Монокума">
     <img src="nagito.png" id="vnNagito" class="vn-nagito hidden" alt="Нагито">
     
-    <!-- Диалоговое окно -->
     <div class="vn-dialog-box">
       <div class="vn-name-tag" id="vnName">Монокума</div>
       <div class="vn-text-content" id="vnText">
         Пип-пип! Нашёл секрет? Только никому не говори, иначе я тебя накажу! ПУХ-ХА-ХА!
       </div>
       
-      <!-- Кнопка выбора Надежды -->
       <div class="vn-choices" id="vnChoices">
         <button class="vn-choice-btn hope" onclick="chooseHope()">Надежда</button>
       </div>
@@ -601,18 +446,14 @@
 </div>
 
 <script>
-  // Смена иконки при открытии/закрытии секретки
   function setFavicon(file) {
     document.getElementById('dynamic-favicon').href = file;
   }
 
-  // Логика переключения меню
   function openDossier(id, btn) {
     document.querySelectorAll('.dossier-wrapper').forEach(d => d.classList.add('hidden'));
     const target = document.getElementById(id);
     target.classList.remove('hidden');
-    
-    // Перезапуск анимации появления
     target.style.animation = 'none';
     target.offsetHeight; 
     target.style.animation = 'slideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
@@ -624,7 +465,6 @@
     const activeDossier = document.getElementById(id);
     activeDossier.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
     activeDossier.querySelector('.tab-content[id$="-off"]').classList.add('active');
-    
     activeDossier.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
     activeDossier.querySelector('.tab-btn').classList.add('active');
 
@@ -632,7 +472,6 @@
     if (copyBtn) copyBtn.classList.remove('hidden-btn');
   }
 
-  // Логика переключения вкладок (Дело / История / Снаряжение)
   function openTab(dossierId, tabType, btn) {
     const dossier = document.getElementById(dossierId);
     dossier.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
@@ -640,25 +479,19 @@
     
     dossier.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
-    
     document.getElementById('main-content').scrollTop = 0;
 
     const copyBtn = dossier.querySelector('.copy-btn');
     if (copyBtn) {
-      if (tabType === 'off') {
-        copyBtn.classList.remove('hidden-btn');
-      } else {
-        copyBtn.classList.add('hidden-btn');
-      }
+      if (tabType === 'off') copyBtn.classList.remove('hidden-btn');
+      else copyBtn.classList.add('hidden-btn');
     }
   }
 
-  // Логика копирования дела
   function copyDossier(id, btn) {
     const dossier = document.getElementById(id);
     let text = "———————————————————————\n";
     text += dossier.querySelector('.dossier-title').innerText + "\n";
-    
     dossier.querySelectorAll('.dossier-meta div').forEach(div => {
       text += div.innerText.replace(" | ", "\n") + "\n";
     });
@@ -687,7 +520,6 @@
     }).catch(err => alert("Ошибка при копировании"));
   }
 
-  // ====== ЛОГИКА СЕКРЕТКИ ======
   let debateLoop = null;
   let isDebating = false;
   let currentMonokumaPhrase = "";
@@ -708,9 +540,7 @@
 
   function showMonokuma() {
     document.getElementById('vnOverlay').classList.add('active');
-    setFavicon('favicon_alert.png'); // МЕНЯЕМ ИКОНКУ НА ТРЕВОЖНУЮ
-    
-    // Сброс интерфейса
+    setFavicon('favicon_alert.png?v=2');
     document.getElementById('vnNagito').classList.add('hidden');
     document.getElementById('vnNagito').src = 'nagito.png';
     document.getElementById('vnNagito').classList.remove('talking');
@@ -730,7 +560,7 @@
 
   function closeVN() {
     document.getElementById('vnOverlay').classList.remove('active');
-    setFavicon('favicon.png'); // ВОЗВРАЩАЕМ ОБЫЧНУЮ ИКОНКУ
+    setFavicon('favicon.png?v=2');
     if(debateLoop) clearInterval(debateLoop);
     isDebating = false;
   }
@@ -761,7 +591,6 @@
 
   function chooseHope() {
     if (isDebating) return;
-    
     document.getElementById('vnChoices').style.display = "none"; 
     const flash = document.getElementById('flashOverlay');
     flash.classList.add('active');
@@ -771,14 +600,12 @@
         const imgNagito = document.getElementById('vnNagito');
         imgNagito.classList.remove('hidden');
         imgNagito.classList.add('appearing');
-        
         startAutoDebate();
     }, 300);
   }
 
   function startAutoDebate() {
     isDebating = true;
-    
     const imgNagito = document.getElementById('vnNagito');
     const imgMonokuma = document.getElementById('vnMonokuma');
     const textElement = document.getElementById('vnText');
@@ -800,11 +627,9 @@
     function playNextLine() {
       if (currentStep >= debateScript.length) {
         clearInterval(debateLoop);
-        
         const overlay = document.getElementById('vnOverlay');
         overlay.style.transition = "opacity 0.8s ease";
         overlay.style.opacity = "0";
-        
         setTimeout(() => {
           overlay.classList.remove('active');
           overlay.style.opacity = ""; 
@@ -812,14 +637,12 @@
           document.getElementById('vnNagito').classList.add('hidden');
           document.getElementById('vnNagito').classList.remove('appearing');
           isDebating = false;
-          setFavicon('favicon.png'); // Возвращаем обычную иконку
+          setFavicon('favicon.png?v=2');
         }, 800);
-        
         return;
       }
       
       const line = debateScript[currentStep];
-      
       imgNagito.src = line.spriteN;
       imgMonokuma.src = line.spriteM;
       textElement.innerText = line.text;
@@ -837,10 +660,8 @@
         imgMonokuma.classList.add('talking');
         imgNagito.classList.remove('talking');
       }
-
       currentStep++; 
     }
-
     playNextLine();
     debateLoop = setInterval(playNextLine, 4000);
   }
