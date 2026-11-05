@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Архив личных дел — Пик Надежды</title>
-<link rel="icon" type="image/png" href="favicon.png?v=15" id="dynamic-favicon">
+<link rel="icon" type="image/png" href="favicon.png?v=16" id="dynamic-favicon">
 <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -118,6 +118,7 @@
   .dossier-wrapper:hover::after { bottom: 5px; right: 5px; border-color: var(--accent); opacity: 1; }
   .dossier-wrapper:hover { border-color: var(--accent); box-shadow: 0 0 30px var(--accent-glow), 0 15px 40px rgba(0,0,0,0.7); }
 
+  /* Убрали хардкод цвета для d01, теперь всё берется из JS */
   #d01 { --accent: #d4e1e8; --accent-glow: rgba(212, 225, 232, 0.3); }
   #d03 { --accent: #9b59b6; --accent-glow: rgba(155, 89, 182, 0.3); border-top-color: #9b59b6 !important; }
   #d04 { --accent: #8b5a2b; --accent-glow: rgba(139, 90, 43, 0.3); border-top-color: #8b5a2b !important; }
@@ -246,8 +247,7 @@
   <aside>
     <div class="aside-header"><h2>Оглавление архива</h2></div>
     <ul class="aside-list">
-      <!-- Прямое указание цвета для 1-го дела, чтобы полоска сразу была правильной -->
-      <li><button class="nav-btn active" data-color="#d4e1e8" style="border-left-color: #d4e1e8; --active-nav-color: #d4e1e8;" onclick="openDossier('d01', this)"><div class="nav-icon">🪶</div><div class="nav-info"><span class="num">№01-Ш</span><span class="name">Шуичи Сайхара</span></div></button></li>
+      <li><button class="nav-btn active" data-color="#d4e1e8" style="border-left-color: #d4e1e8; --active-nav-color: #d4e1e8;" onclick="openDossier('d01', this)"><div class="nav-icon">✒️</div><div class="nav-info"><span class="num">№01-Ш</span><span class="name">Шуичи Сайхара</span></div></button></li>
       <li><button class="nav-btn" data-color="#9b59b6" onclick="openDossier('d03', this)"><div class="nav-icon">🎭</div><div class="nav-info"><span class="num">№03-К</span><span class="name">Кокичи Ома</span></div></button></li>
       <li><button class="nav-btn" data-color="#8b5a2b" onclick="openDossier('d04', this)"><div class="nav-icon">⚙️</div><div class="nav-info"><span class="num">№04-К</span><span class="name">Джатаро Кемури</span></div></button></li>
       <li><button class="nav-btn" data-color="#27ae60" onclick="openDossier('d07', this)"><div class="nav-icon">🧭</div><div class="nav-info"><span class="num">№07-А</span><span class="name">Рантаро Амами</span></div></button></li>
@@ -262,7 +262,7 @@
   <main id="main-content">
     <!-- ВСТАВЬ СЮДА ВСЕ 5 ДЕЛ ИЗ ЧАСТИ 2 -->
         <!-- ДЕЛО 0: Шуичи (Йи Санг) -->
-    <article class="dossier-wrapper" id="d01" style="border-top: 3px solid #2a2e35; box-shadow: 0 0 20px rgba(212, 225, 232, 0.05);">
+    <article class="dossier-wrapper" id="d01" style="border-top: 3px solid #2a2e35;">
       <div class="stamp-bg"></div>
       <div class="dossier-title">ЛИЧНОЕ ДЕЛО №01-Ш</div>
       <div class="dossier-meta"><div><span class="label">Имя:</span> Йи Санг (Шуичи Сайхара)</div><div><span class="label">Возраст:</span> 29 лет | <span class="label">Статус:</span> Жив</div><div><span class="label">Талант:</span> Абсолютный Архитектор Судьбы</div></div>
@@ -667,7 +667,7 @@
 
   function showMonokuma() {
     document.getElementById('vnOverlay').classList.add('active');
-    setFavicon('favicon_alert.png?v=15');
+    setFavicon('favicon_alert.png?v=16');
     document.getElementById('vnNagito').classList.add('hidden');
     document.getElementById('vnNagito').src = 'nagito.png';
     document.getElementById('vnNagito').classList.remove('talking');
@@ -687,7 +687,7 @@
 
   function closeVN() {
     document.getElementById('vnOverlay').classList.remove('active');
-    setFavicon('favicon.png?v=15');
+    setFavicon('favicon.png?v=16');
     if(debateLoop) clearInterval(debateLoop);
     isDebating = false;
   }
@@ -764,7 +764,7 @@
           document.getElementById('vnNagito').classList.add('hidden');
           document.getElementById('vnNagito').classList.remove('appearing');
           isDebating = false;
-          setFavicon('favicon.png?v=15');
+          setFavicon('favicon.png?v=16');
         }, 800);
         return;
       }
