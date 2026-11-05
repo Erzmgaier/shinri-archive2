@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Архив личных дел — Пик Надежды</title>
-<link rel="icon" type="image/png" href="favicon.png?v=12" id="dynamic-favicon">
+<link rel="icon" type="image/png" href="favicon.png?v=14" id="dynamic-favicon">
 <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -118,11 +118,13 @@
   .dossier-wrapper:hover::after { bottom: 5px; right: 5px; border-color: var(--accent); opacity: 1; }
   .dossier-wrapper:hover { border-color: var(--accent); box-shadow: 0 0 30px var(--accent-glow), 0 15px 40px rgba(0,0,0,0.7); }
 
+  #d01 { --accent: #d4e1e8; --accent-glow: rgba(212, 225, 232, 0.3); border-top-color: #2a2e35 !important; border-left-color: #1f252e !important; border-right-color: #1f252e !important; border-bottom-color: #1f252e !important; }
   #d03 { --accent: #9b59b6; --accent-glow: rgba(155, 89, 182, 0.3); border-top-color: #9b59b6 !important; }
   #d04 { --accent: #8b5a2b; --accent-glow: rgba(139, 90, 43, 0.3); border-top-color: #8b5a2b !important; }
   #d07 { --accent: #27ae60; --accent-glow: rgba(39, 174, 96, 0.3); border-top-color: #27ae60 !important; }
   #d11 { --accent: #9b59b6; --accent-glow: rgba(241, 196, 15, 0.3); border-top-color: #9b59b6 !important; }
 
+  #d01 .tab-btn.active { color: #fff; border-bottom-color: #d4e1e8; }
   #d03 .tab-btn.active { color: #fff; border-bottom-color: #fff; }
   #d04 .tab-btn.active { color: #fff; border-bottom-color: #8b5a2b; }
   #d07 .tab-btn.active { color: #fff; border-bottom-color: #27ae60; }
@@ -244,7 +246,8 @@
   <aside>
     <div class="aside-header"><h2>Оглавление архива</h2></div>
     <ul class="aside-list">
-      <li><button class="nav-btn active" data-color="#9b59b6" onclick="openDossier('d03', this)"><div class="nav-icon">🎭</div><div class="nav-info"><span class="num">№03-К</span><span class="name">Кокичи Ома</span></div></button></li>
+      <li><button class="nav-btn active" data-color="#d4e1e8" onclick="openDossier('d01', this)"><div class="nav-icon">🪶</div><div class="nav-info"><span class="num">№01-Ш</span><span class="name">Шуичи Сайхара</span></div></button></li>
+      <li><button class="nav-btn" data-color="#9b59b6" onclick="openDossier('d03', this)"><div class="nav-icon">🎭</div><div class="nav-info"><span class="num">№03-К</span><span class="name">Кокичи Ома</span></div></button></li>
       <li><button class="nav-btn" data-color="#8b5a2b" onclick="openDossier('d04', this)"><div class="nav-icon">⚙️</div><div class="nav-info"><span class="num">№04-К</span><span class="name">Джатаро Кемури</span></div></button></li>
       <li><button class="nav-btn" data-color="#27ae60" onclick="openDossier('d07', this)"><div class="nav-icon">🧭</div><div class="nav-info"><span class="num">№07-А</span><span class="name">Рантаро Амами</span></div></button></li>
       <li><button class="nav-btn" data-color="#f1c40f" onclick="openDossier('d11', this)"><div class="nav-icon">🏹</div><div class="nav-info"><span class="num">№11-Х</span><span class="name">Маки Харукава</span></div></button></li>
@@ -256,9 +259,60 @@
   </aside>
 
   <main id="main-content">
-    <!-- ВСТАВЬ СЮДА ВСЕ 4 ДЕЛА ИЗ ЧАСТИ 2 -->
-        <!-- ДЕЛО 1: Кокичи -->
-    <article class="dossier-wrapper" id="d03" style="border-top: 3px solid #9b59b6;">
+    <!-- ВСТАВЬ СЮДА ВСЕ 5 ДЕЛ ИЗ ЧАСТИ 2 -->
+        <!-- ДЕЛО 0: Шуичи (Йи Санг) -->
+    <article class="dossier-wrapper" id="d01" style="border-top: 3px solid #2a2e35; box-shadow: 0 0 20px rgba(212, 225, 232, 0.05);">
+      <div class="stamp-bg"></div>
+      <div class="dossier-title">ЛИЧНОЕ ДЕЛО №01-Ш</div>
+      <div class="dossier-meta"><div><span class="label">Имя:</span> Йи Санг (Шуичи Сайхара)</div><div><span class="label">Возраст:</span> 29 лет | <span class="label">Статус:</span> Жив</div><div><span class="label">Талант:</span> Абсолютный Архитектор Судьбы</div></div>
+      <button class="copy-btn" onclick="copyDossier('d01', this)">Скопировать для RP</button>
+      <div class="tabs">
+        <button class="tab-btn active" onclick="openTab('d01', 'off', this)">Официальное дело</button>
+        <button class="tab-btn" onclick="openTab('d01', 'hist', this)">Личная история</button>
+        <button class="tab-btn" onclick="openTab('d01', 'gear', this)">Снаряжение</button>
+      </div>
+      <div class="tab-content active" id="d01-off">
+        <div class="block-title">Особые приметы</div>
+        <p class="block-text">Бледная кожа, потухший взгляд, под глазами глубокие тени от хронического недосыпа. Носит длинное белое пальто с обгоревшими краями поверх строгого костюма и красного галстука. На левом бедре — длинный кинжал в ножнах, который он использует скорее как инструмент для вскрытия замков или разрезания тканей, чем как оружие. На поясе висит потрёпанная серая сумка с блокнотом. Говорит тихо, монотонно, с длинными паузами. Часто отвечает загадками, цитатами или обрывками стихов. В моменты сильного стресса или озарения его голос становится холодным и пугающе точным.</p>
+        <div class="block-title">Краткая сводка</div>
+        <p class="block-text">В прошлом — гениальный исследователь и архитектор, возглавлявший закрытый проект «Лига Девяти», целью которого было создание технологии, способной моделировать альтернативные варианты развития событий. В ходе финального эксперимента произошла катастрофа, унесшая жизни всех членов его команды. Оставшись в полном одиночестве, Йи Санг возненавидел свой талант, считая, что именно его расчёты привели друзей к гибели. Он совершил попытку самоубийства, но выжил, после чего его эмоциональный фон был зафиксирован как «глубокое отчаяние с признаками полной апатии». С тех пор он ведёт затворнический образ жизни, записывая свои мысли в блокнот. В Академию прибыл по принудительному приглашению, воспринимая это как неизбежность, а не как шанс на новую жизнь.</p>
+        <div class="block-title">Причина присвоения таланта</div>
+        <p class="block-text">Йи Санг видит мир как сложную архитектурную конструкцию. Его дар заключается в способности просчитывать любые системы — от механизмов до человеческой психики — на несколько шагов вперёд, мгновенно находя «слабые звенья» и «трещины». В ходе расследований это позволяет ему реконструировать события с пугающей точностью, опираясь лишь на микродетали. Отмечается, что субъект может предугадать преступление до того, как оно случится, но чаще всего не вмешивается, считая, что падение системы неизбежно. На судах он редко говорит первым, предпочитая молчать 90% времени, а затем выдать одну фразу, которая кардинально меняет ход обсуждения.</p>
+        <div class="block-title">Цель прибытия</div>
+        <p class="block-text">Официально — изучение архивов и архитектуры Академии, а также завершение личных исследовательских проектов. Служба безопасности отмечает, что субъект не проявляет интереса к социальной жизни и учебному процессу. Фактически, по данным скрытого наблюдения, он ищет в стенах Академии некую «точку опоры», чтобы завершить работу своей жизни (или, наоборот, поставить в ней точку). Рекомендуется не оставлять его одного в замкнутых помещениях из-за склонности к самокопанию и суицидальным настроениям. При контакте не повышать голос и не делать резких движений.</p>
+      </div>
+      <div class="tab-content" id="d01-hist">
+        <div class="lore-text">
+          <p>Йи Санг никогда не был обычным ребёнком. В то время как другие дети играли на улицах, он часами наблюдал за тем, как устроены вещи: как трескается лёд на лужах, как падают тени от деревьев, как рушится песочный замок. Его разум искал структуру во всём, что видел. Повзрослев, он стал блестящим архитектором и исследователем, чьи проекты опережали время на десятилетия. Вокруг него сплотилась группа таких же гениев — «Лига Девяти». Они верили, что с помощью науки и искусства можно построить идеальный мир, где не будет места боли и ошибкам.</p>
+          <p>Венцом их работы стал амбициозный проект, который сам Йи Санг называл «Зеркалом». Это была технология, способная смоделировать любую ситуацию, просчитать все возможные варианты развития событий и показать, как избежать катастрофы. Он был одержим идеей создать идеальную формулу судьбы, чтобы защитить своих друзей от любых невзгод. Но он не учёл одного: человеческая природа не подчиняется формулам.</p>
+          <p>В день финального испытания что-то пошло не так. Система, которая должна была предсказать будущее, вместо этого обрушила на них само разрушение. Вспышка, грохот, крики — и тишина. Когда Йи Санг очнулся, он был единственным выжившим. Все члены его «Лиги» погибли. Его гениальный расчёт, его идеальное уравнение обернулось могилой для тех, кого он любил.</p>
+          <p>С тех пор он перестал верить в свои способности. Он считал, что его разум — это проклятие, которое приносит только смерть. В отчаянии он пытался покончить с собой, но его спасли. Врачи отметили, что его психика полностью разрушена: он впал в состояние глубокой апатии, отказываясь разговаривать с кем-либо. Единственное, что осталось от прежнего Йи Санга — это его блокнот и длинный кинжал, который он носит с собой как напоминание о том, что когда-то он был воином, а теперь стал лишь тенью.</p>
+          <p>Он почти перестал спать. Ночью он сидит в своей комнате, смотрит на пламя свечи и записывает в блокнот странные стихи, в которых пытается найти ответ на вопрос: «Почему я всё ещё жив, если всё, что я создал, обратилось в прах?». Он не ждёт спасения. Он просто ждёт, когда всё закончится.</p>
+          <p>В Академию он прибыл не потому, что хотел учиться. Служба безопасности вычислила его местоположение и принудительно доставила его сюда, считая, что его знания могут быть полезны (или опасны). Сам Йи Санг воспринимает это место как очередную клетку, в которой он может наконец найти ту самую «точку опоры» — либо для того, чтобы начать всё заново, либо для того, чтобы поставить в своей жизни точку. Он редко выходит из своей комнаты. Но если он появляется, все замолкают: его взгляд, полный печали и пустоты, говорит больше, чем любые слова.</p>
+        </div>
+      </div>
+      <div class="tab-content" id="d01-gear">
+        <div class="gear-category">Личные вещи</div>
+        <div class="gear-grid">
+          <div class="gear-card">
+            <div class="gear-card-name">🗡️ Кинжал</div>
+            <div class="gear-card-desc">Длинный, слегка изогнутый клинок в потёртых ножнах. Используется как инструмент для точных манипуляций, а не для боя.</div>
+          </div>
+          <div class="gear-card">
+            <div class="gear-card-name">📓 Блокнот</div>
+            <div class="gear-card-desc">Потрёпанная серая записная книжка. Исписана мелким почерком, страницы забиты странными стихами и обрывочными фразами.</div>
+          </div>
+          <div class="gear-card">
+            <div class="gear-card-name">💊 Аспирин</div>
+            <div class="gear-card-desc">Небольшой пузырёк с белыми таблетками. Он часто принимает их от головной боли, хотя это уже давно стало привычкой, а не лечением.</div>
+          </div>
+        </div>
+      </div>
+      <div class="dossier-author">Автор идеи: <span>Erzmagier</span></div>
+    </article>
+
+    <!-- ДЕЛО 1: Кокичи -->
+    <article class="dossier-wrapper hidden" id="d03" style="border-top: 3px solid #9b59b6;">
       <div class="stamp-bg"></div>
       <div class="dossier-title">ЛИЧНОЕ ДЕЛО №03-К</div>
       <div class="dossier-meta"><div><span class="label">Имя:</span> Кокичи Ома</div><div><span class="label">Возраст:</span> 20 лет | <span class="label">Статус:</span> Жив</div><div><span class="label">Талант:</span> Абсолютный Шут Хаоса</div></div>
@@ -608,7 +662,7 @@
 
   function showMonokuma() {
     document.getElementById('vnOverlay').classList.add('active');
-    setFavicon('favicon_alert.png?v=12');
+    setFavicon('favicon_alert.png?v=14');
     document.getElementById('vnNagito').classList.add('hidden');
     document.getElementById('vnNagito').src = 'nagito.png';
     document.getElementById('vnNagito').classList.remove('talking');
@@ -628,7 +682,7 @@
 
   function closeVN() {
     document.getElementById('vnOverlay').classList.remove('active');
-    setFavicon('favicon.png?v=12');
+    setFavicon('favicon.png?v=14');
     if(debateLoop) clearInterval(debateLoop);
     isDebating = false;
   }
@@ -705,7 +759,7 @@
           document.getElementById('vnNagito').classList.add('hidden');
           document.getElementById('vnNagito').classList.remove('appearing');
           isDebating = false;
-          setFavicon('favicon.png?v=12');
+          setFavicon('favicon.png?v=14');
         }, 800);
         return;
       }
