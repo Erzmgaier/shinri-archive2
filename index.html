@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Архив личных дел — Пик Надежды</title>
-<!-- ИКОНКА САЙТА (добавлено ?v=2 для сброса кэша) -->
-<link rel="icon" type="image/png" href="favicon.png?v=2" id="dynamic-favicon">
+<!-- ИКОНКА САЙТА (добавлено ?v=3 для сброса кэша) -->
+<link rel="icon" type="image/png" href="favicon.png?v=3" id="dynamic-favicon">
 <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -100,6 +100,7 @@
   .dossier-wrapper:hover { border-color: rgba(179, 58, 58, 0.4); box-shadow: 0 0 30px rgba(179, 58, 58, 0.15), 0 15px 40px rgba(0,0,0,0.7); }
   .stamp-bg { position: absolute; top: 15px; right: 15px; width: 140px; height: 140px; background-image: url('stamp.png'); background-size: cover; background-position: center; background-repeat: no-repeat; border-radius: 50%; opacity: 0.15; transform: rotate(15deg); pointer-events: none; z-index: 0; }
   .dossier-wrapper.hidden { display: none; }
+  /* УБРАНА ТРЯСКА ЗАГОЛОВКА */
   .dossier-title { position: relative; z-index: 1; text-align: center; font-family: "Merriweather", serif; font-size: 1.4rem; letter-spacing: 4px; color: #fff; margin: 0 0 20px; font-weight: bold; cursor: default; }
   .dossier-meta { position: relative; z-index: 1; text-align: center; font-size: 0.85rem; margin-bottom: 30px; letter-spacing: 1px;}
   .dossier-meta div { margin: 6px 0; }
@@ -538,7 +539,7 @@
 
   function showMonokuma() {
     document.getElementById('vnOverlay').classList.add('active');
-    setFavicon('favicon_alert.png?v=2');
+    setFavicon('favicon_alert.png?v=3');
     document.getElementById('vnNagito').classList.add('hidden');
     document.getElementById('vnNagito').src = 'nagito.png';
     document.getElementById('vnNagito').classList.remove('talking');
@@ -558,7 +559,7 @@
 
   function closeVN() {
     document.getElementById('vnOverlay').classList.remove('active');
-    setFavicon('favicon.png?v=2');
+    setFavicon('favicon.png?v=3');
     if(debateLoop) clearInterval(debateLoop);
     isDebating = false;
   }
@@ -635,7 +636,7 @@
           document.getElementById('vnNagito').classList.add('hidden');
           document.getElementById('vnNagito').classList.remove('appearing');
           isDebating = false;
-          setFavicon('favicon.png?v=2');
+          setFavicon('favicon.png?v=3');
         }, 800);
         return;
       }
