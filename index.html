@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Архив личных дел — Пик Надежды</title>
-<link rel="icon" type="image/png" href="favicon.png?v=7" id="dynamic-favicon">
+<link rel="icon" type="image/png" href="favicon.png?v=8" id="dynamic-favicon">
 <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -27,7 +27,6 @@
     background-attachment: fixed;
   }
 
-  /* Затемнение и сетка поверх стекла */
   body::before {
     content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background-color: rgba(5, 6, 8, 0.88); 
@@ -37,7 +36,6 @@
   }
   @keyframes gridMove { 0% { transform: translate(0, 0); } 100% { transform: translate(-50px, -50px); } }
 
-  /* Монокума, выглядывающий из дыры */
   body::after {
     content: ""; position: fixed; 
     top: 5%; right: 2%; 
@@ -160,8 +158,16 @@
   .dossier-meta { position: relative; z-index: 1; text-align: center; font-size: 0.85rem; margin-bottom: 30px; letter-spacing: 1px;}
   .dossier-meta div { margin: 6px 0; }
   .dossier-meta .label { color: var(--dim); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 2px;}
-  .tabs, .tab-content, .copy-btn { position: relative; z-index: 1; }
+  
+  .dossier-author {
+    position: relative; z-index: 1; text-align: center; 
+    font-size: 0.75rem; letter-spacing: 2px; color: var(--dim); 
+    margin-top: 40px; padding-top: 15px; border-top: 1px dashed var(--border);
+    text-transform: uppercase;
+  }
+  .dossier-author span { color: var(--accent); font-weight: bold; text-shadow: 0 0 5px var(--accent-glow); }
 
+  .tabs, .tab-content, .copy-btn { position: relative; z-index: 1; }
   .copy-btn { display: block; width: fit-content; margin: 0 auto 20px auto; padding: 8px 16px; background: rgba(255,255,255,0.05); color: var(--text); border: 1px solid var(--border); border-radius: 6px; font-family: inherit; font-size: 0.8rem; cursor: pointer; transition: all 0.2s; text-transform: uppercase; letter-spacing: 1px; }
   .copy-btn:hover { background: rgba(255,255,255,0.1); border-color: #fff; color: #fff; }
   .copy-btn.copied { background: #5ca85c; border-color: #5ca85c; color: #fff; }
@@ -320,6 +326,7 @@
           </div>
         </div>
       </div>
+      <div class="dossier-author">Автор идеи: <span>Erzmagier</span></div>
     </article>
 
     <!-- ДЕЛО 2: Джатаро -->
@@ -380,6 +387,7 @@
           </div>
         </div>
       </div>
+      <div class="dossier-author">Автор идеи: <span>Erzmagier</span></div>
     </article>
 
     <!-- ДЕЛО 3: Рантаро -->
@@ -429,6 +437,7 @@
           </div>
         </div>
       </div>
+      <div class="dossier-author">Автор идеи: <span>Erzmagier</span></div>
     </article>
 
     <!-- ДЕЛО 4: Маки -->
@@ -475,6 +484,7 @@
           </div>
         </div>
       </div>
+      <div class="dossier-author">Автор идеи: <span>fialka</span></div>
     </article>
 
   </main>
@@ -558,9 +568,14 @@
     const dossier = document.getElementById(id);
     let text = "———————————————————————\n";
     text += dossier.querySelector('.dossier-title').innerText + "\n";
+    
     dossier.querySelectorAll('.dossier-meta div').forEach(div => {
       text += div.innerText.replace(" | ", "\n") + "\n";
     });
+    
+    const authorText = dossier.querySelector('.dossier-author').innerText;
+    text += "———————————————————————\n";
+    text += authorText + "\n";
     text += "———————————————————————\n\n";
 
     const offTab = dossier.querySelector('.tab-content[id$="-off"]');
@@ -606,7 +621,7 @@
 
   function showMonokuma() {
     document.getElementById('vnOverlay').classList.add('active');
-    setFavicon('favicon_alert.png?v=7');
+    setFavicon('favicon_alert.png?v=8');
     document.getElementById('vnNagito').classList.add('hidden');
     document.getElementById('vnNagito').src = 'nagito.png';
     document.getElementById('vnNagito').classList.remove('talking');
@@ -626,7 +641,7 @@
 
   function closeVN() {
     document.getElementById('vnOverlay').classList.remove('active');
-    setFavicon('favicon.png?v=7');
+    setFavicon('favicon.png?v=8');
     if(debateLoop) clearInterval(debateLoop);
     isDebating = false;
   }
@@ -703,7 +718,7 @@
           document.getElementById('vnNagito').classList.add('hidden');
           document.getElementById('vnNagito').classList.remove('appearing');
           isDebating = false;
-          setFavicon('favicon.png?v=7');
+          setFavicon('favicon.png?v=8');
         }, 800);
         return;
       }
