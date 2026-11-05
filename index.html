@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Архив личных дел — Пик Надежды</title>
-<link rel="icon" type="image/png" href="favicon.png?v=8" id="dynamic-favicon">
+<link rel="icon" type="image/png" href="favicon.png?v=9" id="dynamic-favicon">
 <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -36,19 +36,32 @@
   }
   @keyframes gridMove { 0% { transform: translate(0, 0); } 100% { transform: translate(-50px, -50px); } }
 
+  /* Монокума, выглядывающий из дыры через маску */
   body::after {
     content: ""; position: fixed; 
     top: 5%; right: 2%; 
     width: 450px; height: 450px;
+    
+    /* Картинка Монокумы */
     background-image: url('monokuma_peek.png'); 
-    background-size: contain;
+    background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
-    opacity: 0.15; 
-    filter: blur(1px) drop-shadow(0 0 20px rgba(0,0,0,0.8)); 
+    
+    /* Маска дыры (черный силуэт) */
+    -webkit-mask-image: url('hole-mask.png');
+    mask-image: url('hole-mask.png');
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    
+    opacity: 0.3; 
+    filter: drop-shadow(0 0 30px rgba(0,0,0,0.9)); 
     z-index: -1; 
     pointer-events: none;
-    transform: rotate(-15deg); 
+    transform: rotate(-10deg); 
   }
   
   header {
@@ -621,7 +634,7 @@
 
   function showMonokuma() {
     document.getElementById('vnOverlay').classList.add('active');
-    setFavicon('favicon_alert.png?v=8');
+    setFavicon('favicon_alert.png?v=9');
     document.getElementById('vnNagito').classList.add('hidden');
     document.getElementById('vnNagito').src = 'nagito.png';
     document.getElementById('vnNagito').classList.remove('talking');
@@ -641,7 +654,7 @@
 
   function closeVN() {
     document.getElementById('vnOverlay').classList.remove('active');
-    setFavicon('favicon.png?v=8');
+    setFavicon('favicon.png?v=9');
     if(debateLoop) clearInterval(debateLoop);
     isDebating = false;
   }
@@ -718,7 +731,7 @@
           document.getElementById('vnNagito').classList.add('hidden');
           document.getElementById('vnNagito').classList.remove('appearing');
           isDebating = false;
-          setFavicon('favicon.png?v=8');
+          setFavicon('favicon.png?v=9');
         }, 800);
         return;
       }
