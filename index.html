@@ -185,11 +185,46 @@
   .lore-text p:last-child { margin-bottom: 0; }
 
   /* Стили для вкладки снаряжения */
-  .gear-list { list-style: none; padding: 0; margin: 0; }
-  .gear-list li { 
-    background: rgba(255,255,255,0.03); border: 1px solid var(--border); 
-    padding: 12px 18px; margin-bottom: 10px; border-radius: 8px; 
-    color: #fff; font-weight: 500; font-size: 0.95rem;
+  .gear-category {
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--dim);
+    margin: 25px 0 10px;
+    border-bottom: 1px dashed var(--border);
+    padding-bottom: 5px;
+  }
+  .gear-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+  .gear-card {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--border);
+    padding: 15px;
+    border-radius: 8px;
+    transition: all 0.2s;
+  }
+  .gear-card:hover {
+    border-left-color: var(--accent);
+    background: rgba(179, 58, 58, 0.05);
+  }
+  .gear-card-name {
+    color: #fff;
+    font-weight: bold;
+    font-size: 0.95rem;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .gear-card-desc {
+    color: #a9b2bc;
+    font-size: 0.85rem;
+    line-height: 1.5;
   }
 
   /* ====== СЕКРЕТКА ====== */
@@ -327,7 +362,7 @@
   </aside>
 
   <main id="main-content">
-        <!-- ДЕЛО 1: Кокичи -->
+    <!-- ДЕЛО 1: Кокичи -->
     <article class="dossier-wrapper" id="d03">
       <div class="stamp-bg"></div>
       <div class="dossier-title">ЛИЧНОЕ ДЕЛО №03-К</div>
@@ -359,12 +394,21 @@
         </div>
       </div>
       <div class="tab-content" id="d03-gear">
-        <div class="block-title">Реквизит для отыгровки</div>
-        <ul class="gear-list">
-          <li>Хрустальный шар</li>
-          <li>Наручники</li>
-          <li>Блокнот</li>
-        </ul>
+        <div class="gear-category">Реквизит</div>
+        <div class="gear-grid">
+          <div class="gear-card">
+            <div class="gear-card-name">🔮 Хрустальный шар</div>
+            <div class="gear-card-desc">Используется как реквизит для «предсказаний» и жонглирования.</div>
+          </div>
+          <div class="gear-card">
+            <div class="gear-card-name">⛓️ Наручники</div>
+            <div class="gear-card-desc">Настоящие наручники, которые Ома носит с собой для розыгрышей и запугивания.</div>
+          </div>
+          <div class="gear-card">
+            <div class="gear-card-name">📓 Блокнот</div>
+            <div class="gear-card-desc">Записная книжка с «компроматом» на всех учеников (на самом деле может быть пустой).</div>
+          </div>
+        </div>
       </div>
     </article>
 
@@ -402,14 +446,29 @@
         </div>
       </div>
       <div class="tab-content" id="d04-gear">
-        <div class="block-title">Реквизит для отыгровки</div>
-        <ul class="gear-list">
-          <li>Отвёртка</li>
-          <li>Блокнот с личным дневником</li>
-          <li>Блокнот с набросками чертежей и списком деталей</li>
-          <li>Молоток</li>
-          <li>Обычная аптечка</li>
-        </ul>
+        <div class="gear-category">Инструменты и снаряжение</div>
+        <div class="gear-grid">
+          <div class="gear-card">
+            <div class="gear-card-name">🪛 Отвёртка</div>
+            <div class="gear-card-desc">Многофункциональная отвёртка со сменными насадками. Основной инструмент для точной работы.</div>
+          </div>
+          <div class="gear-card">
+            <div class="gear-card-name">📓 Блокнот с дневником</div>
+            <div class="gear-card-desc">Личный дневник в потёртой обложке. Исписан мелким почерком, страницы загнуты.</div>
+          </div>
+          <div class="gear-card">
+            <div class="gear-card-name">📝 Блокнот с чертежами</div>
+            <div class="gear-card-desc">Блокнот с набросками ловушек и списком необходимых деталей.</div>
+          </div>
+          <div class="gear-card">
+            <div class="gear-card-name">🔨 Молоток</div>
+            <div class="gear-card-desc">Небольшой, но тяжёлый молоток. Используется для сколачивания деревянных конструкций.</div>
+          </div>
+          <div class="gear-card">
+            <div class="gear-card-name">🩹 Аптечка</div>
+            <div class="gear-card-desc">Компактная аптечка с бинтами, антисептиком и обезболивающим.</div>
+          </div>
+        </div>
       </div>
     </article>
 
@@ -444,12 +503,21 @@
         </div>
       </div>
       <div class="tab-content" id="d07-gear">
-        <div class="block-title">Реквизит для отыгровки</div>
-        <ul class="gear-list">
-          <li>Обычный фонарик</li>
-          <li>Блокноты</li>
-          <li>Кухонный нож</li>
-        </ul>
+        <div class="gear-category">Инструменты и снаряжение</div>
+        <div class="gear-grid">
+          <div class="gear-card">
+            <div class="gear-card-name">🔦 Фонарик</div>
+            <div class="gear-card-desc">Обычный, но надёжный тактический фонарик. Питается от батареек.</div>
+          </div>
+          <div class="gear-card">
+            <div class="gear-card-name">📓 Блокноты</div>
+            <div class="gear-card-desc">Несколько блокнотов с записями маршрутов, заметками о находках и наблюдениями.</div>
+          </div>
+          <div class="gear-card">
+            <div class="gear-card-name">🔪 Кухонный нож</div>
+            <div class="gear-card-desc">Простой кухонный нож в чехле. Используется как универсальный инструмент.</div>
+          </div>
+        </div>
       </div>
     </article>
 
@@ -489,10 +557,13 @@
         </div>
       </div>
       <div class="tab-content" id="d11-gear">
-        <div class="block-title">Реквизит для отыгровки</div>
-        <ul class="gear-list">
-          <li>Обычный нож</li>
-        </ul>
+        <div class="gear-category">Инструменты и снаряжение</div>
+        <div class="gear-grid">
+          <div class="gear-card">
+            <div class="gear-card-name">🔪 Обычный нож</div>
+            <div class="gear-card-desc">Простой, грубо сделанный нож. Используется как для ближнего боя, так и для бытовых нужд.</div>
+          </div>
+        </div>
       </div>
     </article>
 
