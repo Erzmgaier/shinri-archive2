@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Архив личных дел — Пик Надежды</title>
-<link rel="icon" type="image/png" href="favicon.png?v=9" id="dynamic-favicon">
+<link rel="icon" type="image/png" href="favicon.png?v=10" id="dynamic-favicon">
 <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -20,49 +20,18 @@
     margin: 0; background: var(--bg); color: var(--text);
     font-family: "Roboto Mono", monospace; line-height: 1.6;
     height: 100vh; display: flex; flex-direction: column; overflow: hidden;
-    background-image: url('broken-glass-bg.jpg'); 
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+    /* Убрали фоновые картинки, оставили чистый фон */
   }
 
+  /* Оставили только затемнение и сетку */
   body::before {
     content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background-color: rgba(5, 6, 8, 0.88); 
+    background-color: rgba(5, 6, 8, 0.9); 
     background-image: linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
     background-size: 50px 50px; 
     z-index: -2; pointer-events: none; animation: gridMove 20s linear infinite;
   }
   @keyframes gridMove { 0% { transform: translate(0, 0); } 100% { transform: translate(-50px, -50px); } }
-
-  /* Монокума, выглядывающий из дыры через маску */
-  body::after {
-    content: ""; position: fixed; 
-    top: 5%; right: 2%; 
-    width: 450px; height: 450px;
-    
-    /* Картинка Монокумы */
-    background-image: url('monokuma_peek.png'); 
-    background-size: cover;
-    background-position: center;
-    
-    /* Маска дыры (черный силуэт) */
-    -webkit-mask-image: url('hole-mask.png');
-    mask-image: url('hole-mask.png');
-    -webkit-mask-size: contain;
-    mask-size: contain;
-    -webkit-mask-position: center;
-    mask-position: center;
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    
-    opacity: 0.3; 
-    filter: drop-shadow(0 0 30px rgba(0,0,0,0.9)); 
-    z-index: -1; 
-    pointer-events: none;
-    transform: rotate(-10deg); 
-  }
   
   header {
     padding: 20px 30px; border-bottom: 1px solid var(--border); background: rgba(8, 10, 12, 0.9);
@@ -258,7 +227,6 @@
     .vn-name-tag { font-size: 0.9rem; padding: 4px 15px; top: -30px; left: 10px;}
     .vn-choices { padding: 0 20px 20px 20px; gap: 10px; }
     .vn-choice-btn { font-size: 0.8rem; padding: 8px 15px; }
-    body::after { width: 250px; height: 250px; top: 10%; right: -20px; opacity: 0.1; }
   }
 </style>
 </head>
@@ -634,7 +602,7 @@
 
   function showMonokuma() {
     document.getElementById('vnOverlay').classList.add('active');
-    setFavicon('favicon_alert.png?v=9');
+    setFavicon('favicon_alert.png?v=10');
     document.getElementById('vnNagito').classList.add('hidden');
     document.getElementById('vnNagito').src = 'nagito.png';
     document.getElementById('vnNagito').classList.remove('talking');
@@ -654,7 +622,7 @@
 
   function closeVN() {
     document.getElementById('vnOverlay').classList.remove('active');
-    setFavicon('favicon.png?v=9');
+    setFavicon('favicon.png?v=10');
     if(debateLoop) clearInterval(debateLoop);
     isDebating = false;
   }
@@ -731,7 +699,7 @@
           document.getElementById('vnNagito').classList.add('hidden');
           document.getElementById('vnNagito').classList.remove('appearing');
           isDebating = false;
-          setFavicon('favicon.png?v=9');
+          setFavicon('favicon.png?v=10');
         }, 800);
         return;
       }
