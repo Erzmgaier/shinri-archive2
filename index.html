@@ -19,7 +19,6 @@
     background-image: radial-gradient(circle at 50% 0%, #11161c 0%, var(--bg) 70%);
   }
 
-  /* Анимированный фон-сетка */
   body::before {
     content: ""; position: fixed; top: 0; left: 0; width: 200%; height: 200%;
     background-image: 
@@ -29,10 +28,7 @@
     z-index: -1; pointer-events: none;
     animation: gridMove 20s linear infinite;
   }
-  @keyframes gridMove {
-    0% { transform: translate(0, 0); }
-    100% { transform: translate(-50px, -50px); }
-  }
+  @keyframes gridMove { 0% { transform: translate(0, 0); } 100% { transform: translate(-50px, -50px); } }
 
   header {
     padding: 20px 30px; border-bottom: 1px solid var(--border);
@@ -52,10 +48,7 @@
     mix-blend-mode: screen; filter: invert(1) grayscale(1) brightness(1.5) drop-shadow(0 0 8px rgba(255,255,255,0.2));
     animation: spin3D 6s linear infinite; transform-style: preserve-3d;
   }
-  @keyframes spin3D {
-    0% { transform: rotateY(0deg); }
-    100% { transform: rotateY(360deg); }
-  }
+  @keyframes spin3D { 0% { transform: rotateY(0deg); } 100% { transform: rotateY(360deg); } }
   .header-text { text-align: left; }
   .header-text h1 { font-family: "Merriweather", serif; margin: 0 0 6px; font-size: 1.5rem; letter-spacing: 6px; text-transform: uppercase; color: #dce3eb; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
   .header-text p { margin: 0; color: var(--accent); font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; opacity: 0.8; }
@@ -82,16 +75,12 @@
   .nav-btn:hover { background: rgba(255,255,255,0.03); border-color: var(--border); }
   .nav-btn.active { background: rgba(179, 58, 58, 0.1); border-color: var(--accent); border-left-color: var(--accent); }
   
-  /* Пульсирующая красная полоса */
   .nav-btn.active::after {
     content: ""; position: absolute; right: 0; top: 20%; height: 60%; width: 4px;
     background: var(--accent); border-radius: 2px;
     box-shadow: 0 0 10px var(--accent); animation: pulseLine 1.5s infinite alternate;
   }
-  @keyframes pulseLine {
-    0% { opacity: 0.5; transform: scaleY(0.8); }
-    100% { opacity: 1; transform: scaleY(1); }
-  }
+  @keyframes pulseLine { 0% { opacity: 0.5; transform: scaleY(0.8); } 100% { opacity: 1; transform: scaleY(1); } }
 
   .nav-icon { width: 32px; height: 32px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; color: var(--dim); transition: all 0.2s; border-radius: 6px; }
   .nav-btn.active .nav-icon { color: var(--accent); border-color: var(--accent); background: rgba(179, 58, 58, 0.1); }
@@ -114,12 +103,8 @@
     animation: slideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1); border-radius: 12px;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
   }
-  @keyframes slideIn {
-    from { opacity: 0; transform: translateY(30px) scale(0.98); }
-    to { opacity: 1; transform: translateY(0) scale(1); }
-  }
+  @keyframes slideIn { from { opacity: 0; transform: translateY(30px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
 
-  /* Угловые скобки */
   .dossier-wrapper::before,
   .dossier-wrapper::after {
     content: "";
@@ -131,26 +116,15 @@
     opacity: 0.5;
     z-index: 2;
   }
-  .dossier-wrapper::before {
-    top: 10px; left: 10px;
-    border-right: none; border-bottom: none;
-  }
-  .dossier-wrapper::after {
-    bottom: 10px; right: 10px;
-    border-left: none; border-top: none;
-  }
-  .dossier-wrapper:hover::before {
-    top: 5px; left: 5px; border-color: var(--accent); opacity: 1;
-  }
-  .dossier-wrapper:hover::after {
-    bottom: 5px; right: 5px; border-color: var(--accent); opacity: 1;
-  }
+  .dossier-wrapper::before { top: 10px; left: 10px; border-right: none; border-bottom: none; }
+  .dossier-wrapper::after { bottom: 10px; right: 10px; border-left: none; border-top: none; }
+  .dossier-wrapper:hover::before { top: 5px; left: 5px; border-color: var(--accent); opacity: 1; }
+  .dossier-wrapper:hover::after { bottom: 5px; right: 5px; border-color: var(--accent); opacity: 1; }
   .dossier-wrapper:hover {
     border-color: rgba(179, 58, 58, 0.4);
     box-shadow: 0 0 30px rgba(179, 58, 58, 0.15), 0 15px 40px rgba(0,0,0,0.7);
   }
 
-  /* ШТАМП */
   .stamp-bg {
     position: absolute;
     top: 15px; right: 15px;
@@ -168,15 +142,12 @@
 
   .dossier-wrapper.hidden { display: none; }
   
-  /* Заголовок с эффектом глитча */
   .dossier-title { 
     position: relative; z-index: 1; text-align: center; font-family: "Merriweather", serif; 
     font-size: 1.4rem; letter-spacing: 4px; color: #fff; margin: 0 0 20px; font-weight: bold; 
     cursor: default;
   }
-  .dossier-title:hover {
-    animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
-  }
+  .dossier-title:hover { animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite; }
   @keyframes glitch {
     0% { transform: translate(0); text-shadow: 2px 0 red, -2px 0 blue; }
     20% { transform: translate(-2px, 2px); text-shadow: -2px 0 red, 2px 0 blue; }
@@ -196,7 +167,7 @@
   .copy-btn.copied { background: #5ca85c; border-color: #5ca85c; color: #fff; }
   .copy-btn.hidden-btn { display: none; }
 
-  .tabs { display: flex; justify-content: center; border-bottom: 1px solid var(--border); margin-bottom: 35px; gap: 20px; }
+  .tabs { display: flex; justify-content: center; border-bottom: 1px solid var(--border); margin-bottom: 35px; gap: 20px; flex-wrap: wrap; }
   .tab-btn { background: transparent; border: none; color: var(--dim); font-family: inherit; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; padding: 12px 20px; cursor: pointer; border-bottom: 3px solid transparent; transition: all 0.2s; font-weight: 500; }
   .tab-btn:hover { color: #fff; }
   .tab-btn.active { color: #fff; border-bottom-color: var(--accent); }
@@ -212,6 +183,14 @@
   .lore-text { font-size: 0.95rem; color: #a9b2bc; text-align: justify; line-height: 1.8; }
   .lore-text p { margin: 0 0 20px; text-indent: 25px; }
   .lore-text p:last-child { margin-bottom: 0; }
+
+  /* Стили для вкладки снаряжения */
+  .gear-list { list-style: none; padding: 0; margin: 0; }
+  .gear-list li { 
+    background: rgba(255,255,255,0.03); border: 1px solid var(--border); 
+    padding: 12px 18px; margin-bottom: 10px; border-radius: 8px; 
+    color: #fff; font-weight: 500; font-size: 0.95rem;
+  }
 
   /* ====== СЕКРЕТКА ====== */
   .vn-overlay {
@@ -246,13 +225,8 @@
   .vn-nagito.hidden { opacity: 0; transform: translateY(20px); }
   .vn-nagito:hover { filter: drop-shadow(0 0 25px rgba(255,255,255,0.6)); }
   
-  .vn-nagito.appearing {
-    animation: nagitoAppear 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-  }
-  @keyframes nagitoAppear {
-    0% { opacity: 0; transform: translateY(100px) scale(0.5); filter: brightness(5); }
-    100% { opacity: 1; transform: translateY(0) scale(1); filter: brightness(1); }
-  }
+  .vn-nagito.appearing { animation: nagitoAppear 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+  @keyframes nagitoAppear { 0% { opacity: 0; transform: translateY(100px) scale(0.5); filter: brightness(5); } 100% { opacity: 1; transform: translateY(0) scale(1); filter: brightness(1); } }
 
   .vn-dialog-box {
     position: relative; z-index: 4; width: 90%; max-width: 900px;
@@ -272,10 +246,7 @@
     line-height: 1.6; min-height: 120px; display: flex; align-items: center;
   }
   
-  .vn-choices {
-    display: none; gap: 20px; padding: 0 40px 30px 40px;
-    justify-content: center;
-  }
+  .vn-choices { display: none; gap: 20px; padding: 0 40px 30px 40px; justify-content: center; }
   .vn-choice-btn {
     background: #111; color: #fff; border: 2px solid var(--border);
     padding: 10px 30px; font-family: inherit; font-size: 1rem; font-weight: bold;
@@ -315,6 +286,8 @@
     .dossier-wrapper { padding: 20px 15px; }
     
     .stamp-bg { width: 100px; height: 100px; opacity: 0.1; }
+    .tabs { gap: 10px; }
+    .tab-btn { padding: 8px 12px; font-size: 0.75rem; letter-spacing: 1px; }
     
     .vn-monokuma { height: 220px; left: -20px; bottom: 180px; }
     .vn-nagito { height: 240px; right: -20px; bottom: 160px; }
@@ -363,6 +336,7 @@
       <div class="tabs">
         <button class="tab-btn active" onclick="openTab('d03', 'off', this)">Официальное дело</button>
         <button class="tab-btn" onclick="openTab('d03', 'hist', this)">Личная история</button>
+        <button class="tab-btn" onclick="openTab('d03', 'gear', this)">Снаряжение</button>
       </div>
       <div class="tab-content active" id="d03-off">
         <div class="block-title">Особые приметы</div>
@@ -384,6 +358,14 @@
           <p>На сцене Кокичи казался невинным ребенком, но за секунду мог превратиться в коварного кукловода, играющего на эмоциях публики. Для двадцатилетнего Шута Хаоса весь мир стал огромной сценой. Заставляя людей смеяться, злиться или паниковать, Ома преследовал свой собственный, глубоко скрытый мотив: он жаждал срывать фальшивые маски с этого лицемерного мира и выведывать самые грязные, мрачные секреты, которые влиятельные люди так тщательно прятали от чужих глаз.</p>
         </div>
       </div>
+      <div class="tab-content" id="d03-gear">
+        <div class="block-title">Реквизит для отыгровки</div>
+        <ul class="gear-list">
+          <li>Хрустальный шар</li>
+          <li>Игрушечные наручники</li>
+          <li>Блокнот</li>
+        </ul>
+      </div>
     </article>
 
     <!-- ДЕЛО 2: Джатаро -->
@@ -395,6 +377,7 @@
       <div class="tabs">
         <button class="tab-btn active" onclick="openTab('d04', 'off', this)">Официальное дело</button>
         <button class="tab-btn" onclick="openTab('d04', 'hist', this)">Личная история</button>
+        <button class="tab-btn" onclick="openTab('d04', 'gear', this)">Снаряжение</button>
       </div>
       <div class="tab-content active" id="d04-off">
         <div class="block-title">Особые приметы</div>
@@ -418,6 +401,16 @@
           <p>Спустя три года после побега, которые Джатаро провел под надежным крылом Харукавы, они вместе приняли важное решение — поступить в престижную Академию «Пик Надежды». Охотница поддержала мальчика в этом стремлении. Они понимали, что лесных ресурсов и старых деталей уже недостаточно: Джатаро было необходимо получить гораздо больше фундаментальных знаний и разобраться в современных передовых технологиях, чтобы вывести свои инженерные навыки на совершенно новый уровень.</p>
         </div>
       </div>
+      <div class="tab-content" id="d04-gear">
+        <div class="block-title">Реквизит для отыгровки</div>
+        <ul class="gear-list">
+          <li>Отвёртка</li>
+          <li>Блокнот с личным дневником</li>
+          <li>Блокнот с набросками чертежей и списком деталей</li>
+          <li>Молоток</li>
+          <li>Обычная аптечка</li>
+        </ul>
+      </div>
     </article>
 
     <!-- ДЕЛО 3: Рантаро -->
@@ -429,6 +422,7 @@
       <div class="tabs">
         <button class="tab-btn active" onclick="openTab('d07', 'off', this)">Официальное дело</button>
         <button class="tab-btn" onclick="openTab('d07', 'hist', this)">Личная история</button>
+        <button class="tab-btn" onclick="openTab('d07', 'gear', this)">Снаряжение</button>
       </div>
       <div class="tab-content active" id="d07-off">
         <div class="block-title">Особые приметы</div>
@@ -449,6 +443,14 @@
           <p>Жизнь на улицах научила Рантаро видеть людей насквозь, поэтому он остался одним из очень немногих, кого Ома никогда не мог обвести вокруг пальца своей ложью. Амами искренне рад, что дело его названого брата обрело такой невероятный международный масштаб, позволяя выступать перед главами могущественных синдикатов и семей вроде Тогами и Кузурю. Он знает, какая колоссальная работа стоит за этим триумфом, и всегда готов прикрыть спину Кокичи, в какие бы опасные авантюры тот ни ввязался.</p>
         </div>
       </div>
+      <div class="tab-content" id="d07-gear">
+        <div class="block-title">Реквизит для отыгровки</div>
+        <ul class="gear-list">
+          <li>Обычный фонарик</li>
+          <li>Блокноты</li>
+          <li>Кухонный нож</li>
+        </ul>
+      </div>
     </article>
 
     <!-- ДЕЛО 4: Маки -->
@@ -460,6 +462,7 @@
       <div class="tabs">
         <button class="tab-btn active" onclick="openTab('d11', 'off', this)">Официальное дело</button>
         <button class="tab-btn" onclick="openTab('d11', 'hist', this)">Личная история</button>
+        <button class="tab-btn" onclick="openTab('d11', 'gear', this)">Снаряжение</button>
       </div>
       <div class="tab-content active" id="d11-off">
         <div class="block-title">Особые приметы</div>
@@ -484,6 +487,12 @@
           <p>Его звали Джатаро Кимури. Наблюдая за тем, как он растет, обретая амбиции и надежду, то Маки почувствовала к нему нечто, похожее на привязанность как одного из родственника. Она даже планировала подарить ему отцовский кулон, видя в нем нового члена своей семьи, хоть и продолжала вести себя холодно по отношению к нему.</p>
           <p>Но один ночей, сидя у костра пока мальчик спал.. Она рассматривала этот кулон от отца, пока маменый лежал у неë в сумке.. Она заметила письмо у порога самой берлоги, взяв в руки и прочитав о чëм она.. То Маки все же отложила свой кулон, думая что после обучения он получит еë как знак уважение и любви к нему.. Обсудив всë с маленьким мальчиком, то вы отправились сам пик надежды ради новых знаний для Кимури.. (Она не собирается учиться, она просто якобы пошла, но ради того чтобы приглядывать за своим учеником)</p>
         </div>
+      </div>
+      <div class="tab-content" id="d11-gear">
+        <div class="block-title">Реквизит для отыгровки</div>
+        <ul class="gear-list">
+          <li>Обычный нож</li>
+        </ul>
       </div>
     </article>
 
@@ -545,7 +554,7 @@
     if (copyBtn) copyBtn.classList.remove('hidden-btn');
   }
 
-  // Логика переключения вкладок (Дело / История)
+  // Логика переключения вкладок (Дело / История / Снаряжение)
   function openTab(dossierId, tabType, btn) {
     const dossier = document.getElementById(dossierId);
     dossier.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
@@ -558,10 +567,10 @@
 
     const copyBtn = dossier.querySelector('.copy-btn');
     if (copyBtn) {
-      if (tabType === 'hist') {
-        copyBtn.classList.add('hidden-btn');
-      } else {
+      if (tabType === 'off') {
         copyBtn.classList.remove('hidden-btn');
+      } else {
+        copyBtn.classList.add('hidden-btn');
       }
     }
   }
