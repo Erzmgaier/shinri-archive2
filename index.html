@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Архив личных дел — Пик Надежды</title>
-<link rel="icon" type="image/png" href="favicon.png?v=5" id="dynamic-favicon">
+<link rel="icon" type="image/png" href="favicon.png?v=6" id="dynamic-favicon">
 <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -12,6 +12,7 @@
     --text: #c9d1d9; --dim: #6e7681; --secret: #d4a017; 
     --hover: #151a21;
     --accent-default: #b33a3a;
+    --active-nav-color: #b33a3a;
   }
   * { box-sizing: border-box; }
   body {
@@ -60,6 +61,7 @@
   aside h2 { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 3px; color: var(--accent-default); margin: 0; }
   .aside-list { list-style: none; padding: 15px 0; margin: 0; flex: 1; overflow-y: auto; }
   .aside-list li { margin-bottom: 4px; padding: 0 15px;}
+  
   .nav-btn { 
     width: 100%; text-align: left; background: transparent; border: 1px solid transparent; 
     border-left: 3px solid transparent; color: var(--text); padding: 12px 15px; 
@@ -67,16 +69,17 @@
     display: flex; align-items: center; gap: 15px; border-radius: 8px; position: relative;
   }
   .nav-btn:hover { background: rgba(255,255,255,0.03); border-color: var(--border); }
-  .nav-btn.active { background: rgba(255, 255, 255, 0.05); border-color: var(--border); border-left-color: var(--accent-default); }
   
+  /* Активное состояние теперь зависит от переменной */
+  .nav-btn.active { background: rgba(255, 255, 255, 0.05); border-color: var(--border); border-left-color: var(--active-nav-color); }
   .nav-btn.active::after {
     content: ""; position: absolute; right: 0; top: 20%; height: 60%; width: 4px;
-    background: var(--accent-default); border-radius: 2px; box-shadow: 0 0 10px var(--accent-default); animation: pulseLine 1.5s infinite alternate;
+    background: var(--active-nav-color); border-radius: 2px; box-shadow: 0 0 10px var(--active-nav-color); animation: pulseLine 1.5s infinite alternate;
   }
   @keyframes pulseLine { 0% { opacity: 0.5; transform: scaleY(0.8); } 100% { opacity: 1; transform: scaleY(1); } }
 
   .nav-icon { width: 32px; height: 32px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; color: var(--dim); transition: all 0.2s; border-radius: 50%; }
-  .nav-btn.active .nav-icon { color: #fff; border-color: var(--border); background: rgba(255,255,255,0.1); }
+  .nav-btn.active .nav-icon { color: var(--active-nav-color); border-color: var(--active-nav-color); background: rgba(255,255,255,0.1); }
   .nav-info { display: flex; flex-direction: column; }
   .nav-btn .num { color: var(--dim); font-size: 0.65rem; margin-bottom: 2px; letter-spacing: 1px;}
   .nav-btn .name { font-weight: 500; letter-spacing: 0.5px; font-size: 0.9rem; }
@@ -109,7 +112,7 @@
   .dossier-wrapper:hover::after { bottom: 5px; right: 5px; border-color: var(--accent); opacity: 1; }
   .dossier-wrapper:hover { border-color: var(--accent); box-shadow: 0 0 30px var(--accent-glow), 0 15px 40px rgba(0,0,0,0.7); }
 
-  /* Индивидуальные цвета */
+  /* Цвета обводки карточек */
   #d03 { --accent: #9b59b6; --accent-glow: rgba(155, 89, 182, 0.3); border-top-color: #9b59b6 !important; }
   #d04 { --accent: #8b5a2b; --accent-glow: rgba(139, 90, 43, 0.3); border-top-color: #8b5a2b !important; }
   #d07 { --accent: #27ae60; --accent-glow: rgba(39, 174, 96, 0.3); border-top-color: #27ae60 !important; }
@@ -193,7 +196,7 @@
     .aside-list { display: flex; flex-direction: row; overflow-x: auto; padding: 10px 15px; gap: 10px; white-space: nowrap; }
     .aside-list li { margin-bottom: 0; padding: 0; flex-shrink: 0; }
     .nav-btn { padding: 8px 12px; flex-direction: row; gap: 8px; width: auto; background: rgba(255,255,255,0.03); border: 1px solid var(--border); }
-    .nav-btn.active { background: rgba(179, 58, 58, 0.15); border-color: var(--accent-default); border-left-width: 1px; }
+    .nav-btn.active { background: rgba(255, 255, 255, 0.1); border-color: var(--active-nav-color); border-left-width: 1px; }
     .nav-btn.active::after { display: none; }
     .nav-icon { width: 24px; height: 24px; font-size: 0.8rem; border: none; background: transparent; }
     .aside-footer { display: none; }
@@ -228,10 +231,11 @@
   <aside>
     <div class="aside-header"><h2>Оглавление архива</h2></div>
     <ul class="aside-list">
-      <li><button class="nav-btn active" onclick="openDossier('d03', this)"><div class="nav-icon">🎭</div><div class="nav-info"><span class="num">№03-К</span><span class="name">Кокичи Ома</span></div></button></li>
-      <li><button class="nav-btn" onclick="openDossier('d04', this)"><div class="nav-icon">⚙️</div><div class="nav-info"><span class="num">№04-К</span><span class="name">Джатаро Кемури</span></div></button></li>
-      <li><button class="nav-btn" onclick="openDossier('d07', this)"><div class="nav-icon">🧭</div><div class="nav-info"><span class="num">№07-А</span><span class="name">Рантаро Амами</span></div></button></li>
-      <li><button class="nav-btn" onclick="openDossier('d11', this)"><div class="nav-icon">🏹</div><div class="nav-info"><span class="num">№11-Х</span><span class="name">Маки Харукава</span></div></button></li>
+      <!-- Передаем цвет в data-color -->
+      <li><button class="nav-btn active" data-color="#9b59b6" onclick="openDossier('d03', this)"><div class="nav-icon">🎭</div><div class="nav-info"><span class="num">№03-К</span><span class="name">Кокичи Ома</span></div></button></li>
+      <li><button class="nav-btn" data-color="#8b5a2b" onclick="openDossier('d04', this)"><div class="nav-icon">⚙️</div><div class="nav-info"><span class="num">№04-К</span><span class="name">Джатаро Кемури</span></div></button></li>
+      <li><button class="nav-btn" data-color="#27ae60" onclick="openDossier('d07', this)"><div class="nav-icon">🧭</div><div class="nav-info"><span class="num">№07-А</span><span class="name">Рантаро Амами</span></div></button></li>
+      <li><button class="nav-btn" data-color="#f1c40f" onclick="openDossier('d11', this)"><div class="nav-icon">🏹</div><div class="nav-info"><span class="num">№11-Х</span><span class="name">Маки Харукава</span></div></button></li>
     </ul>
     <div class="aside-footer">
       <div class="status"><div class="status-dot"></div> Система активна</div>
@@ -479,18 +483,30 @@
     document.getElementById('dynamic-favicon').href = file;
   }
 
+  // Логика открытия дела + смена цвета меню
   function openDossier(id, btn) {
+    // Скрываем все дела и убираем активный класс с кнопок
     document.querySelectorAll('.dossier-wrapper').forEach(d => d.classList.add('hidden'));
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    
+    // Показываем нужное дело и делаем кнопку активной
     const target = document.getElementById(id);
     target.classList.remove('hidden');
+    btn.classList.add('active');
+
+    // Меняем цвет в сайдбаре
+    const activeColor = btn.getAttribute('data-color');
+    if (activeColor) {
+      document.documentElement.style.setProperty('--active-nav-color', activeColor);
+    }
+
+    // Перезапуск анимации
     target.style.animation = 'none';
     target.offsetHeight; 
     target.style.animation = 'slideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
-    
-    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
     document.getElementById('main-content').scrollTop = 0;
     
+    // Сброс вкладок
     const activeDossier = document.getElementById(id);
     activeDossier.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
     activeDossier.querySelector('.tab-content[id$="-off"]').classList.add('active');
@@ -569,7 +585,7 @@
 
   function showMonokuma() {
     document.getElementById('vnOverlay').classList.add('active');
-    setFavicon('favicon_alert.png?v=5');
+    setFavicon('favicon_alert.png?v=6');
     document.getElementById('vnNagito').classList.add('hidden');
     document.getElementById('vnNagito').src = 'nagito.png';
     document.getElementById('vnNagito').classList.remove('talking');
@@ -589,7 +605,7 @@
 
   function closeVN() {
     document.getElementById('vnOverlay').classList.remove('active');
-    setFavicon('favicon.png?v=5');
+    setFavicon('favicon.png?v=6');
     if(debateLoop) clearInterval(debateLoop);
     isDebating = false;
   }
@@ -666,7 +682,7 @@
           document.getElementById('vnNagito').classList.add('hidden');
           document.getElementById('vnNagito').classList.remove('appearing');
           isDebating = false;
-          setFavicon('favicon.png?v=5');
+          setFavicon('favicon.png?v=6');
         }, 800);
         return;
       }
