@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Архив личных дел — Пик Надежды</title>
-<link rel="icon" type="image/png" href="favicon.png?v=10" id="dynamic-favicon">
+<link rel="icon" type="image/png" href="favicon.png?v=11" id="dynamic-favicon">
 <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -20,10 +20,8 @@
     margin: 0; background: var(--bg); color: var(--text);
     font-family: "Roboto Mono", monospace; line-height: 1.6;
     height: 100vh; display: flex; flex-direction: column; overflow: hidden;
-    /* Убрали фоновые картинки, оставили чистый фон */
   }
 
-  /* Оставили только затемнение и сетку */
   body::before {
     content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background-color: rgba(5, 6, 8, 0.9); 
@@ -602,7 +600,7 @@
 
   function showMonokuma() {
     document.getElementById('vnOverlay').classList.add('active');
-    setFavicon('favicon_alert.png?v=10');
+    setFavicon('favicon_alert.png?v=11');
     document.getElementById('vnNagito').classList.add('hidden');
     document.getElementById('vnNagito').src = 'nagito.png';
     document.getElementById('vnNagito').classList.remove('talking');
@@ -622,7 +620,7 @@
 
   function closeVN() {
     document.getElementById('vnOverlay').classList.remove('active');
-    setFavicon('favicon.png?v=10');
+    setFavicon('favicon.png?v=11');
     if(debateLoop) clearInterval(debateLoop);
     isDebating = false;
   }
@@ -644,7 +642,8 @@
         textElement.innerText = currentMonokumaPhrase;
     }
 
-    if (currentMonokumaPhrase.includes("Надежда — это иллюзия")) {
+    // Показываем кнопку только на этой фразе, иначе скрываем
+    if (currentMonokumaPhrase === "Надежда — это иллюзия! Сдавайтесь и примите отчаяние!") {
         document.getElementById('vnChoices').style.display = "flex";
     } else {
         document.getElementById('vnChoices').style.display = "none";
@@ -699,7 +698,7 @@
           document.getElementById('vnNagito').classList.add('hidden');
           document.getElementById('vnNagito').classList.remove('appearing');
           isDebating = false;
-          setFavicon('favicon.png?v=10');
+          setFavicon('favicon.png?v=11');
         }, 800);
         return;
       }
