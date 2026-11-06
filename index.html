@@ -4,176 +4,95 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Архив личных дел — Пик Надежды</title>
-<link rel="icon" type="image/png" href="favicon.png?v=30" id="dynamic-favicon">
+<link rel="icon" type="image/png" href="favicon.png?v=33" id="dynamic-favicon">
 <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #050608; --panel: #0a0c10; --border: #1f252e; 
-    --text: #c9d1d9; --dim: #6e7681; --secret: #d4a017; 
-    --hover: #151a21;
-    --accent-default: #b33a3a;
-    --active-nav-color: #b33a3a;
-  }
+  :root { --bg: #050608; --panel: #0a0c10; --border: #1f252e; --text: #c9d1d9; --dim: #6e7681; --secret: #d4a017; --hover: #151a21; --accent-default: #b33a3a; --active-nav-color: #b33a3a; }
   * { box-sizing: border-box; }
-  
-  body {
-    margin: 0; background: var(--bg); color: var(--text);
-    font-family: "Roboto Mono", monospace; line-height: 1.6;
-    height: 100vh; display: flex; flex-direction: column; overflow: hidden;
-  }
-
-  body::before {
-    content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background-color: rgba(5, 6, 8, 0.9); 
-    background-image: linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-    background-size: 50px 50px; 
-    z-index: -2; pointer-events: none; animation: gridMove 20s linear infinite;
-  }
+  body { margin: 0; background: var(--bg); color: var(--text); font-family: "Roboto Mono", monospace; line-height: 1.6; height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+  body::before { content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(5, 6, 8, 0.9); background-image: linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px); background-size: 50px 50px; z-index: -2; pointer-events: none; animation: gridMove 20s linear infinite; }
   @keyframes gridMove { 0% { transform: translate(0, 0); } 100% { transform: translate(-50px, -50px); } }
-  
-  header {
-    padding: 20px 30px; border-bottom: 1px solid var(--border); background: rgba(8, 10, 12, 0.9);
-    flex-shrink: 0; display: flex; align-items: center; justify-content: center; gap: 25px;
-    z-index: 10; box-shadow: 0 4px 20px rgba(0,0,0,0.8); position: relative; backdrop-filter: blur(10px);
-  }
-  .header-logo-container {
-    width: 70px; height: 70px; display: flex; align-items: center; justify-content: center;
-    background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
-    border-radius: 50%; perspective: 1000px; cursor: pointer; transition: transform 0.2s;
-  }
+  header { padding: 20px 30px; border-bottom: 1px solid var(--border); background: rgba(8, 10, 12, 0.9); flex-shrink: 0; display: flex; align-items: center; justify-content: center; gap: 25px; z-index: 10; box-shadow: 0 4px 20px rgba(0,0,0,0.8); position: relative; backdrop-filter: blur(10px); }
+  .header-logo-container { width: 70px; height: 70px; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%); border-radius: 50%; perspective: 1000px; cursor: pointer; transition: transform 0.2s; }
   .header-logo-container:hover { transform: scale(1.05); }
-  .header-logo {
-    width: 100%; height: 100%; object-fit: contain; border-radius: 50%;
-    mix-blend-mode: screen; filter: invert(1) grayscale(1) brightness(1.5) drop-shadow(0 0 8px rgba(255,255,255,0.2));
-    animation: spin3D 6s linear infinite; transform-style: preserve-3d;
-  }
+  .header-logo { width: 100%; height: 100%; object-fit: contain; border-radius: 50%; mix-blend-mode: screen; filter: invert(1) grayscale(1) brightness(1.5) drop-shadow(0 0 8px rgba(255,255,255,0.2)); animation: spin3D 6s linear infinite; transform-style: preserve-3d; }
   @keyframes spin3D { 0% { transform: rotateY(0deg); } 100% { transform: rotateY(360deg); } }
   .header-text { text-align: left; }
   .header-text h1 { font-family: "Merriweather", serif; margin: 0 0 6px; font-size: 1.5rem; letter-spacing: 6px; text-transform: uppercase; color: #dce3eb; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
   .header-text p { margin: 0; color: var(--accent-default); font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; opacity: 0.8; }
-.layout { display: flex; flex: 1; overflow: hidden; z-index: 5; }
-
-aside { 
-  width: 320px; 
-  background: rgba(10, 12, 16, 0.95); 
-  border-right: 1px solid var(--border); 
-  display: flex; flex-direction: column; flex-shrink: 0; position: relative; 
-  background-image: linear-gradient(180deg, rgba(20,25,30,0.5) 0%, transparent 100%);
-  border-top-right-radius: 12px; margin-top: 5px; border-top: 1px solid var(--border); 
-  backdrop-filter: blur(10px);
-}
-.aside-header { padding: 25px 25px 15px; border-bottom: 1px dashed var(--border); }
-aside h2 { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 3px; color: var(--accent-default); margin: 0; }
-.aside-list { list-style: none; padding: 15px 0; margin: 0; flex: 1; overflow-y: auto; }
-.aside-list li { margin-bottom: 4px; padding: 0 15px;}
-
-.nav-btn { 
-  width: 100%; text-align: left; background: transparent; border: 1px solid transparent; 
-  border-left: 3px solid transparent; color: var(--text); padding: 12px 15px; 
-  font-family: inherit; font-size: 0.85rem; cursor: pointer; transition: all .2s ease; 
-  display: flex; align-items: center; gap: 15px; border-radius: 8px; position: relative;
-}
-.nav-btn:hover { background: rgba(255,255,255,0.03); border-color: var(--border); }
-
-.nav-btn.active { background: rgba(255, 255, 255, 0.05); border-color: var(--border); border-left-color: var(--active-nav-color); }
-.nav-btn.active::after {
-  content: ""; position: absolute; right: 0; top: 20%; height: 60%; width: 4px;
-  background: var(--active-nav-color); border-radius: 2px; box-shadow: 0 0 10px var(--active-nav-color); animation: pulseLine 1.5s infinite alternate;
-}
-@keyframes pulseLine { 0% { opacity: 0.5; transform: scaleY(0.8); } 100% { opacity: 1; transform: scaleY(1); } }
-
-.nav-icon { width: 32px; height: 32px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; color: var(--dim); transition: all 0.2s; border-radius: 50%; }
-.nav-btn.active .nav-icon { color: var(--active-nav-color); border-color: var(--active-nav-color); background: rgba(255,255,255,0.1); }
-.nav-info { display: flex; flex-direction: column; }
-.nav-btn .num { color: var(--dim); font-size: 0.65rem; margin-bottom: 2px; letter-spacing: 1px;}
-.nav-btn .name { font-weight: 500; letter-spacing: 0.5px; font-size: 0.9rem; }
-.nav-btn.active .num, .nav-btn.active .name { color: #fff; }
-
-.aside-footer { padding: 20px 25px; border-top: 1px solid var(--border); background: rgba(0,0,0,0.2); font-size: 0.65rem; color: var(--dim); line-height: 1.5; border-bottom-right-radius: 12px; }
-.aside-footer .status { display: flex; align-items: center; gap: 8px; color: #5ca85c; margin-bottom: 10px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
-.status-dot { width: 6px; height: 6px; background: #5ca85c; border-radius: 50%; box-shadow: 0 0 6px #5ca85c; animation: pulse 2s infinite; }
-@keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
-main { flex: 1; overflow-y: auto; padding: 40px; position: relative; }
-
-.dossier-wrapper { 
-  position: relative; 
-  max-width: 850px; margin: 0 auto; 
-  background: rgba(10, 12, 16, 0.95);
-  border: 1px solid var(--border); border-top: 3px solid var(--accent-default); 
-  padding: 40px 50px; box-shadow: 0 15px 40px rgba(0,0,0,0.9); 
-  animation: slideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1); border-radius: 12px;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-@keyframes slideIn { from { opacity: 0; transform: translateY(30px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
-
-.dossier-wrapper::before, .dossier-wrapper::after {
-  content: ""; position: absolute; width: 20px; height: 20px; border: 2px solid var(--dim);
-  transition: all 0.3s ease; pointer-events: none; opacity: 0.5; z-index: 2;
-}
-.dossier-wrapper::before { top: 10px; left: 10px; border-right: none; border-bottom: none; }
-.dossier-wrapper::after { bottom: 10px; right: 10px; border-left: none; border-top: none; }
-.dossier-wrapper:hover::before { top: 5px; left: 5px; border-color: var(--accent); opacity: 1; }
-.dossier-wrapper:hover::after { bottom: 5px; right: 5px; border-color: var(--accent); opacity: 1; }
-.dossier-wrapper:hover { border-color: var(--accent); box-shadow: 0 0 30px var(--accent-glow), 0 15px 40px rgba(0,0,0,0.7); }
-
-#d01 { --accent: #d4e1e8; --accent-glow: rgba(212, 225, 232, 0.3); }
-#d03 { --accent: #9b59b6; --accent-glow: rgba(155, 89, 182, 0.3); border-top-color: #9b59b6 !important; }
-#d04 { --accent: #8b5a2b; --accent-glow: rgba(139, 90, 43, 0.3); border-top-color: #8b5a2b !important; }
-#d07 { --accent: #27ae60; --accent-glow: rgba(39, 174, 96, 0.3); border-top-color: #27ae60 !important; }
-#d11 { --accent: #9b59b6; --accent-glow: rgba(241, 196, 15, 0.3); border-top-color: #9b59b6 !important; }
-#d09 { --accent: #e74c3c; --accent-glow: rgba(231, 76, 60, 0.3); border-top-color: #e74c3c !important; }
-
-#d01 .tab-btn.active { color: #fff; border-bottom-color: #d4e1e8; }
-#d03 .tab-btn.active { color: #fff; border-bottom-color: #fff; }
-#d04 .tab-btn.active { color: #fff; border-bottom-color: #8b5a2b; }
-#d07 .tab-btn.active { color: #fff; border-bottom-color: #27ae60; }
-#d11 .tab-btn.active { color: #f1c40f; border-bottom-color: #f1c40f; }
-#d09 .tab-btn.active { color: #fff; border-bottom-color: #e74c3c; }
-
-.stamp-bg {
-  position: absolute; top: 15px; right: 15px; width: 140px; height: 140px;
-  background-image: url('stamp.png'); background-size: cover; background-position: center; background-repeat: no-repeat;
-  border-radius: 50%; opacity: 0.15; transform: rotate(15deg); pointer-events: none; z-index: 0; 
-}
-.dossier-wrapper.hidden { display: none; }
-.dossier-title { position: relative; z-index: 1; text-align: center; font-family: "Merriweather", serif; font-size: 1.4rem; letter-spacing: 4px; color: #fff; margin: 0 0 20px; font-weight: bold; cursor: default; }
-.dossier-meta { position: relative; z-index: 1; text-align: center; font-size: 0.85rem; margin-bottom: 30px; letter-spacing: 1px;}
-.dossier-meta div { margin: 6px 0; }
-.dossier-meta .label { color: var(--dim); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 2px;}
-
-.dossier-author {
-  position: relative; z-index: 1; text-align: center; 
-  font-size: 0.75rem; letter-spacing: 2px; color: var(--dim); 
-  margin-top: 40px; padding-top: 15px; border-top: 1px dashed var(--border);
-  text-transform: uppercase;
-}
-.dossier-author span { color: var(--accent); font-weight: bold; text-shadow: 0 0 5px var(--accent-glow); }
-.tabs, .tab-content, .copy-btn { position: relative; z-index: 1; }
-.copy-btn { display: block; width: fit-content; margin: 0 auto 20px auto; padding: 8px 16px; background: rgba(255,255,255,0.05); color: var(--text); border: 1px solid var(--border); border-radius: 6px; font-family: inherit; font-size: 0.8rem; cursor: pointer; transition: all 0.2s; text-transform: uppercase; letter-spacing: 1px; }
-.copy-btn:hover { background: rgba(255,255,255,0.1); border-color: #fff; color: #fff; }
-.copy-btn.copied { background: #5ca85c; border-color: #5ca85c; color: #fff; }
-.copy-btn.hidden-btn { display: none; }
-
-.tabs { display: flex; justify-content: center; border-bottom: 1px solid var(--border); margin-bottom: 35px; gap: 20px; flex-wrap: wrap; }
-.tab-btn { background: transparent; border: none; color: var(--dim); font-family: inherit; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; padding: 12px 20px; cursor: pointer; border-bottom: 3px solid transparent; transition: all 0.2s; font-weight: 500; }
-.tab-btn:hover { color: #fff; }
-.tab-content { display: none; }
-.tab-content.active { display: block; }
-
-.block-title { font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin: 35px 0 15px; display: flex; align-items: center; font-weight: 500; }
-.block-title::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, var(--border) 0%, transparent 100%); margin-left: 20px; }
-.block-text { margin: 0 0 20px; text-align: justify; font-size: 0.95rem; color: #a9b2bc; line-height: 1.7; }
-.secret { color: var(--secret); background: rgba(212, 160, 23, 0.05); border: 1px dashed rgba(212, 160, 23, 0.4); padding: 2px 6px; font-size: 0.85em; cursor: help; }
-.lore-text { font-size: 0.95rem; color: #a9b2bc; text-align: justify; line-height: 1.8; }
-.lore-text p { margin: 0 0 20px; text-indent: 25px; }
-.lore-text p:last-child { margin-bottom: 0; }
-
-.gear-category { font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--dim); margin: 25px 0 10px; border-bottom: 1px dashed var(--border); padding-bottom: 5px; }
-.gear-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px; margin-bottom: 20px; }
-.gear-card { background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-left: 3px solid var(--border); padding: 15px; border-radius: 8px; transition: all 0.2s; }
-.gear-card:hover { border-left-color: var(--accent); background: rgba(255, 255, 255, 0.05); }
-.gear-card-name { color: #fff; font-weight: bold; font-size: 0.95rem; margin-bottom: 5px; display: flex; align-items: center; gap: 8px; }
-.gear-card-desc { color: #a9b2bc; font-size: 0.85rem; line-height: 1.5; }
+  .layout { display: flex; flex: 1; overflow: hidden; z-index: 5; }
+  aside { width: 320px; background: rgba(10, 12, 16, 0.95); border-right: 1px solid var(--border); display: flex; flex-direction: column; flex-shrink: 0; position: relative; background-image: linear-gradient(180deg, rgba(20,25,30,0.5) 0%, transparent 100%); border-top-right-radius: 12px; margin-top: 5px; border-top: 1px solid var(--border); backdrop-filter: blur(10px); }
+  .aside-header { padding: 25px 25px 15px; border-bottom: 1px dashed var(--border); }
+  aside h2 { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 3px; color: var(--accent-default); margin: 0; }
+  .aside-list { list-style: none; padding: 15px 0; margin: 0; flex: 1; overflow-y: auto; }
+  .aside-list li { margin-bottom: 4px; padding: 0 15px;}
+  .nav-btn { width: 100%; text-align: left; background: transparent; border: 1px solid transparent; border-left: 3px solid transparent; color: var(--text); padding: 12px 15px; font-family: inherit; font-size: 0.85rem; cursor: pointer; transition: all .2s ease; display: flex; align-items: center; gap: 15px; border-radius: 8px; position: relative; }
+  .nav-btn:hover { background: rgba(255,255,255,0.03); border-color: var(--border); }
+  .nav-btn.active { background: rgba(255, 255, 255, 0.05); border-color: var(--border); border-left-color: var(--active-nav-color); }
+  .nav-btn.active::after { content: ""; position: absolute; right: 0; top: 20%; height: 60%; width: 4px; background: var(--active-nav-color); border-radius: 2px; box-shadow: 0 0 10px var(--active-nav-color); animation: pulseLine 1.5s infinite alternate; }
+  @keyframes pulseLine { 0% { opacity: 0.5; transform: scaleY(0.8); } 100% { opacity: 1; transform: scaleY(1); } }
+  .nav-icon { width: 32px; height: 32px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; color: var(--dim); transition: all 0.2s; border-radius: 50%; }
+  .nav-btn.active .nav-icon { color: var(--active-nav-color); border-color: var(--active-nav-color); background: rgba(255,255,255,0.1); }
+  .nav-info { display: flex; flex-direction: column; }
+  .nav-btn .num { color: var(--dim); font-size: 0.65rem; margin-bottom: 2px; letter-spacing: 1px;}
+  .nav-btn .name { font-weight: 500; letter-spacing: 0.5px; font-size: 0.9rem; }
+  .nav-btn.active .num, .nav-btn.active .name { color: #fff; }
+  .aside-footer { padding: 20px 25px; border-top: 1px solid var(--border); background: rgba(0,0,0,0.2); font-size: 0.65rem; color: var(--dim); line-height: 1.5; border-bottom-right-radius: 12px; }
+  .aside-footer .status { display: flex; align-items: center; gap: 8px; color: #5ca85c; margin-bottom: 10px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
+  .status-dot { width: 6px; height: 6px; background: #5ca85c; border-radius: 50%; box-shadow: 0 0 6px #5ca85c; animation: pulse 2s infinite; }
+  @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
+  main { flex: 1; overflow-y: auto; padding: 40px; position: relative; }
+  .dossier-wrapper { position: relative; max-width: 850px; margin: 0 auto; background: rgba(10, 12, 16, 0.95); border: 1px solid var(--border); border-top: 3px solid var(--accent-default); padding: 40px 50px; box-shadow: 0 15px 40px rgba(0,0,0,0.9); animation: slideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1); border-radius: 12px; transition: border-color 0.3s ease, box-shadow 0.3s ease; }
+  @keyframes slideIn { from { opacity: 0; transform: translateY(30px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+  .dossier-wrapper::before, .dossier-wrapper::after { content: ""; position: absolute; width: 20px; height: 20px; border: 2px solid var(--dim); transition: all 0.3s ease; pointer-events: none; opacity: 0.5; z-index: 2; }
+  .dossier-wrapper::before { top: 10px; left: 10px; border-right: none; border-bottom: none; }
+  .dossier-wrapper::after { bottom: 10px; right: 10px; border-left: none; border-top: none; }
+  .dossier-wrapper:hover::before { top: 5px; left: 5px; border-color: var(--accent); opacity: 1; }
+  .dossier-wrapper:hover::after { bottom: 5px; right: 5px; border-color: var(--accent); opacity: 1; }
+  .dossier-wrapper:hover { border-color: var(--accent); box-shadow: 0 0 30px var(--accent-glow), 0 15px 40px rgba(0,0,0,0.7); }
+  #d01 { --accent: #d4e1e8; --accent-glow: rgba(212, 225, 232, 0.3); }
+  #d03 { --accent: #9b59b6; --accent-glow: rgba(155, 89, 182, 0.3); border-top-color: #9b59b6 !important; }
+  #d04 { --accent: #8b5a2b; --accent-glow: rgba(139, 90, 43, 0.3); border-top-color: #8b5a2b !important; }
+  #d07 { --accent: #27ae60; --accent-glow: rgba(39, 174, 96, 0.3); border-top-color: #27ae60 !important; }
+  #d11 { --accent: #9b59b6; --accent-glow: rgba(241, 196, 15, 0.3); border-top-color: #9b59b6 !important; }
+  #d09 { --accent: #e74c3c; --accent-glow: rgba(231, 76, 60, 0.3); border-top-color: #e74c3c !important; }
+  #d01 .tab-btn.active { color: #fff; border-bottom-color: #d4e1e8; }
+  #d03 .tab-btn.active { color: #fff; border-bottom-color: #fff; }
+  #d04 .tab-btn.active { color: #fff; border-bottom-color: #8b5a2b; }
+  #d07 .tab-btn.active { color: #fff; border-bottom-color: #27ae60; }
+  #d11 .tab-btn.active { color: #f1c40f; border-bottom-color: #f1c40f; }
+  #d09 .tab-btn.active { color: #fff; border-bottom-color: #e74c3c; }
+  .stamp-bg { position: absolute; top: 15px; right: 15px; width: 140px; height: 140px; background-image: url('stamp.png'); background-size: cover; background-position: center; background-repeat: no-repeat; border-radius: 50%; opacity: 0.15; transform: rotate(15deg); pointer-events: none; z-index: 0; }
+  .dossier-wrapper.hidden { display: none; }
+  .dossier-title { position: relative; z-index: 1; text-align: center; font-family: "Merriweather", serif; font-size: 1.4rem; letter-spacing: 4px; color: #fff; margin: 0 0 20px; font-weight: bold; cursor: default; }
+  .dossier-meta { position: relative; z-index: 1; text-align: center; font-size: 0.85rem; margin-bottom: 30px; letter-spacing: 1px;}
+  .dossier-meta div { margin: 6px 0; }
+  .dossier-meta .label { color: var(--dim); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 2px;}
+  .dossier-author { position: relative; z-index: 1; text-align: center; font-size: 0.75rem; letter-spacing: 2px; color: var(--dim); margin-top: 40px; padding-top: 15px; border-top: 1px dashed var(--border); text-transform: uppercase; }
+  .dossier-author span { color: var(--accent); font-weight: bold; text-shadow: 0 0 5px var(--accent-glow); }
+  .tabs, .tab-content, .copy-btn { position: relative; z-index: 1; }
+  .copy-btn { display: block; width: fit-content; margin: 0 auto 20px auto; padding: 8px 16px; background: rgba(255,255,255,0.05); color: var(--text); border: 1px solid var(--border); border-radius: 6px; font-family: inherit; font-size: 0.8rem; cursor: pointer; transition: all 0.2s; text-transform: uppercase; letter-spacing: 1px; }
+  .copy-btn:hover { background: rgba(255,255,255,0.1); border-color: #fff; color: #fff; }
+  .copy-btn.copied { background: #5ca85c; border-color: #5ca85c; color: #fff; }
+  .copy-btn.hidden-btn { display: none; }
+  .tabs { display: flex; justify-content: center; border-bottom: 1px solid var(--border); margin-bottom: 35px; gap: 20px; flex-wrap: wrap; }
+  .tab-btn { background: transparent; border: none; color: var(--dim); font-family: inherit; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; padding: 12px 20px; cursor: pointer; border-bottom: 3px solid transparent; transition: all 0.2s; font-weight: 500; }
+  .tab-btn:hover { color: #fff; }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+  .block-title { font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin: 35px 0 15px; display: flex; align-items: center; font-weight: 500; }
+  .block-title::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, var(--border) 0%, transparent 100%); margin-left: 20px; }
+  .block-text { margin: 0 0 20px; text-align: justify; font-size: 0.95rem; color: #a9b2bc; line-height: 1.7; }
+  .secret { color: var(--secret); background: rgba(212, 160, 23, 0.05); border: 1px dashed rgba(212, 160, 23, 0.4); padding: 2px 6px; font-size: 0.85em; cursor: help; }
+  .lore-text { font-size: 0.95rem; color: #a9b2bc; text-align: justify; line-height: 1.8; }
+  .lore-text p { margin: 0 0 20px; text-indent: 25px; }
+  .lore-text p:last-child { margin-bottom: 0; }
+  .gear-category { font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--dim); margin: 25px 0 10px; border-bottom: 1px dashed var(--border); padding-bottom: 5px; }
+  .gear-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px; margin-bottom: 20px; }
+  .gear-card { background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-left: 3px solid var(--border); padding: 15px; border-radius: 8px; transition: all 0.2s; }
+  .gear-card:hover { border-left-color: var(--accent); background: rgba(255, 255, 255, 0.05); }
+  .gear-card-name { color: #fff; font-weight: bold; font-size: 0.95rem; margin-bottom: 5px; display: flex; align-items: center; gap: 8px; }
+  .gear-card-desc { color: #a9b2bc; font-size: 0.85rem; line-height: 1.5; }
   .vn-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.95); display: flex; align-items: center; justify-content: center; z-index: 9999; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; overflow: hidden; }
   .vn-overlay.active { opacity: 1; pointer-events: auto; }
   .vn-overlay::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, rgba(255,0,0,0.2) 0%, transparent 60%); z-index: 1; }
@@ -202,62 +121,25 @@ main { flex: 1; overflow-y: auto; padding: 40px; position: relative; }
   .vn-controls { position: absolute; top: 20px; right: 20px; z-index: 10; display: flex; gap: 10px; }
   .vn-btn { background: rgba(0,0,0,0.6); border: 1px solid var(--border); color: var(--dim); padding: 8px 15px; border-radius: 5px; font-family: inherit; font-size: 0.8rem; cursor: pointer; transition: all 0.2s; text-transform: uppercase; }
   .vn-btn:hover { background: var(--accent-default); color: #fff; border-color: var(--accent-default); }
-
-  @media (max-width: 800px) {
-    .layout { flex-direction: column; }
-    aside { width: 100%; height: auto; max-height: 180px; border-right: none; border-bottom: 1px solid var(--border); border-radius: 0; margin-top: 0; border-top: none;}
-    .aside-list { display: flex; flex-direction: row; overflow-x: auto; padding: 10px 15px; gap: 10px; white-space: nowrap; }
-    .aside-list li { margin-bottom: 0; padding: 0; flex-shrink: 0; }
-    .nav-btn { padding: 8px 12px; flex-direction: row; gap: 8px; width: auto; background: rgba(255,255,255,0.03); border: 1px solid var(--border); }
-    .nav-btn.active { background: rgba(255, 255, 255, 0.1); border-color: var(--active-nav-color); border-left-width: 1px; }
-    .nav-btn.active::after { display: none; }
-    .nav-icon { width: 24px; height: 24px; font-size: 0.8rem; border: none; background: transparent; }
-    .aside-footer { display: none; }
-    main { padding: 15px; }
-    .dossier-wrapper { padding: 20px 15px; }
-    .stamp-bg { width: 100px; height: 100px; opacity: 0.1; }
-    .tabs { gap: 10px; }
-    .tab-btn { padding: 8px 12px; font-size: 0.75rem; letter-spacing: 1px; }
-    .vn-monokuma { height: 220px; left: -20px; bottom: 180px; }
-    .vn-nagito { height: 240px; right: -20px; bottom: 160px; }
-    .vn-dialog-box { width: 95%; margin-bottom: 20px; }
-    .vn-text-content { font-size: 0.95rem; padding: 20px; min-height: 100px; }
-    .vn-name-tag { font-size: 0.9rem; padding: 4px 15px; top: -30px; left: 10px;}
-    .vn-choices { padding: 0 20px 20px 20px; gap: 10px; }
-    .vn-choice-btn { font-size: 0.8rem; padding: 8px 15px; }
-  }
+  @media (max-width: 800px) { .layout { flex-direction: column; } aside { width: 100%; height: auto; max-height: 180px; border-right: none; border-bottom: 1px solid var(--border); border-radius: 0; margin-top: 0; border-top: none;} .aside-list { display: flex; flex-direction: row; overflow-x: auto; padding: 10px 15px; gap: 10px; white-space: nowrap; } .aside-list li { margin-bottom: 0; padding: 0; flex-shrink: 0; } .nav-btn { padding: 8px 12px; flex-direction: row; gap: 8px; width: auto; background: rgba(255,255,255,0.03); border: 1px solid var(--border); } .nav-btn.active { background: rgba(255, 255, 255, 0.1); border-color: var(--active-nav-color); border-left-width: 1px; } .nav-btn.active::after { display: none; } .nav-icon { width: 24px; height: 24px; font-size: 0.8rem; border: none; background: transparent; } .aside-footer { display: none; } main { padding: 15px; } .dossier-wrapper { padding: 20px 15px; } .stamp-bg { width: 100px; height: 100px; opacity: 0.1; } .tabs { gap: 10px; } .tab-btn { padding: 8px 12px; font-size: 0.75rem; letter-spacing: 1px; } .vn-monokuma { height: 220px; left: -20px; bottom: 180px; } .vn-nagito { height: 240px; right: -20px; bottom: 160px; } .vn-dialog-box { width: 95%; margin-bottom: 20px; } .vn-text-content { font-size: 0.95rem; padding: 20px; min-height: 100px; } .vn-name-tag { font-size: 0.9rem; padding: 4px 15px; top: -30px; left: 10px;} .vn-choices { padding: 0 20px 20px 20px; gap: 10px; } .vn-choice-btn { font-size: 0.8rem; padding: 8px 15px; } }
 </style>
 </head>
 <body>
-
-<header>
-  <div class="header-logo-container" onclick="showMonokuma()">
-    <img src="logo.png" alt="Герб Академии" class="header-logo">
-  </div>
-  <div class="header-text">
-    <h1>Архив личных дел</h1>
-    <p>Академия «Пик Надежды» · Служба Безопасности</p>
-  </div>
-</header>
-
+<header><div class="header-logo-container" onclick="showMonokuma()"><img src="logo.png" alt="Герб Академии" class="header-logo"></div><div class="header-text"><h1>Архив личных дел</h1><p>Академия «Пик Надежды» · Служба Безопасности</p></div></header>
 <div class="layout">
-  <aside>
-    <div class="aside-header"><h2>Оглавление архива</h2></div>
-    <ul class="aside-list">
-      <li><button class="nav-btn" data-color="#d4e1e8" onclick="openDossier('d01', this)"><div class="nav-icon">✒️</div><div class="nav-info"><span class="num">№01-Ш</span><span class="name">Шуичи Сайхара</span></div></button></li>
-      <li><button class="nav-btn" data-color="#9b59b6" onclick="openDossier('d03', this)"><div class="nav-icon">🎭</div><div class="nav-info"><span class="num">№03-К</span><span class="name">Кокичи Ома</span></div></button></li>
-      <li><button class="nav-btn" data-color="#8b5a2b" onclick="openDossier('d04', this)"><div class="nav-icon">⚙️</div><div class="nav-info"><span class="num">№04-К</span><span class="name">Джатаро Кемури</span></div></button></li>
-      <li><button class="nav-btn" data-color="#27ae60" onclick="openDossier('d07', this)"><div class="nav-icon">🧭</div><div class="nav-info"><span class="num">№07-А</span><span class="name">Рантаро Амами</span></div></button></li>
-      <li><button class="nav-btn" data-color="#f1c40f" onclick="openDossier('d11', this)"><div class="nav-icon">🏹</div><div class="nav-info"><span class="num">№11-Х</span><span class="name">Маки Харукава</span></div></button></li>
-      <li><button class="nav-btn" data-color="#e74c3c" onclick="openDossier('d09', this)"><div class="nav-icon">🌙</div><div class="nav-info"><span class="num">№09-Ю</span><span class="name">Химико Юмено</span></div></button></li>
-    </ul>
-    <div class="aside-footer">
-      <div class="status"><div class="status-dot"></div> Система активна</div>
-      <div>Уровень доступа: S-2<br>Зашифровано: AES-256</div>
-    </div>
-  </aside>
-
-  <main id="main-content">
+<aside>
+<div class="aside-header"><h2>Оглавление архива</h2></div>
+<ul class="aside-list">
+<li><button class="nav-btn" data-color="#d4e1e8" onclick="openDossier('d01', this)"><div class="nav-icon">✒️</div><div class="nav-info"><span class="num">№01-Ш</span><span class="name">Шуичи Сайхара</span></div></button></li>
+<li><button class="nav-btn" data-color="#9b59b6" onclick="openDossier('d03', this)"><div class="nav-icon">🎭</div><div class="nav-info"><span class="num">№03-К</span><span class="name">Кокичи Ома</span></div></button></li>
+<li><button class="nav-btn" data-color="#8b5a2b" onclick="openDossier('d04', this)"><div class="nav-icon">⚙️</div><div class="nav-info"><span class="num">№04-К</span><span class="name">Джатаро Кемури</span></div></button></li>
+<li><button class="nav-btn" data-color="#27ae60" onclick="openDossier('d07', this)"><div class="nav-icon">🧭</div><div class="nav-info"><span class="num">№07-А</span><span class="name">Рантаро Амами</span></div></button></li>
+<li><button class="nav-btn" data-color="#f1c40f" onclick="openDossier('d11', this)"><div class="nav-icon">🏹</div><div class="nav-info"><span class="num">№11-Х</span><span class="name">Маки Харукава</span></div></button></li>
+<li><button class="nav-btn" data-color="#e74c3c" onclick="openDossier('d09', this)"><div class="nav-icon">🌙</div><div class="nav-info"><span class="num">№09-Ю</span><span class="name">Химико Юмено</span></div></button></li>
+</ul>
+<div class="aside-footer"><div class="status"><div class="status-dot"></div> Система активна</div><div>Уровень доступа: S-2<br>Зашифровано: AES-256</div></div>
+</aside>
+<main id="main-content">
 <!-- ДЕЛО 0: Йи Санг (Шуичи) -->
 <article class="dossier-wrapper" id="d01" style="border-top: 3px solid #2a2e35;">
   <div class="stamp-bg"></div>
@@ -275,50 +157,35 @@ main { flex: 1; overflow-y: auto; padding: 40px; position: relative; }
   </div>
   <div class="tab-content active" id="d01-off">
     <div class="block-title">Особые приметы</div>
-    <p class="block-text">Бледная кожа, потухший взгляд, под глазами глубокие тени от хронического недосыпа. Носит длинное белое пальто с обгоревшими краями поверх строгого костюма и красного галстука. На левом бедре — нож в ножнах, который он использует скорее как инструмент для вскрытия замков или разрезания тканей, чем как оружие. На поясе висит потрёпанная серая сумка с блокнотом. Говорит тихо, монотонно, с длинными паузами. Часто отвечает загадками, цитатами или обрывками стихов. В моменты сильного стресса или озарения его голос становится холодным и пугающе точным.</p>
+    <p class="block-text">Бледная кожа, потухший взгляд, под глазами глубокие тени от хронического недосыпа. Носит длинное белое пальто с обгоревшими краями поверх строгого костюма и красного галстука. На левом бедре — нож в ножнах, который он использует скорее как инструмент для вскрытия замков или разрезания тканей, чем как оружие. На поясе висит потрёпанная серая сумка с блокнотом. Говорит тихо, монотонно, с длинными паузами. Часто отвечает загадками, цитатами или обрывками стихов.</p>
     <div class="block-title">Краткая сводка</div>
-    <p class="block-text">В прошлом — гениальный исследователь и архитектор, возглавлявший закрытый проект «Лига Девяти», целью которого было создание технологии, способной моделировать альтернативные варианты развития событий. После катастрофы, унесшей жизни его команды, Йи Санг впал в глубокую депрессию. Однако Академия «Пик Надежды» выкупила его контракт и назначила преподавателем аналитики, посчитав, что его уникальный разум нельзя терять. Официально он числится как Шуичи Сайхара (по документам, из-за путаницы в архивах), но сам просит называть его просто Йи Санг. Ведёт затворнический образ жизни, появляясь на занятиях лишь для того, чтобы дать задание и тут же уйти.</p>
+    <p class="block-text">В прошлом — гениальный исследователь и архитектор, возглавлявший закрытый проект «Лига Девяти», целью которого было создание технологии, способной моделировать альтернативные варианты развития событий. После катастрофы, унесшей жизни его команды, Йи Санг впал в глубокую депрессию. Однако Академия «Пик Надежды» выкупила его контракт и назначила преподавателем аналитики. Официально он числится как Шуичи Сайхара, но сам просит называть его просто Йи Санг. Ведёт затворнический образ жизни, появляясь на занятиях лишь для того, чтобы дать задание и тут же уйти.</p>
     <div class="block-title">Причина присвоения таланта</div>
-    <p class="block-text">Йи Санг видит мир как сложную архитектурную конструкцию. Его дар заключается в способности просчитывать любые системы — от механизмов до человеческой психики — на несколько шагов вперёд, мгновенно находя «слабые звенья» и «трещины». Как учитель, он не столько обучает подростков дедукции, сколько заставляет их смотреть на преступления под другим углом, задавая странные философские вопросы, на которые нет однозначного ответа.</p>
+    <p class="block-text">Йи Санг видит мир как сложную архитектурную конструкцию. Его дар заключается в способности просчитывать любые системы — от механизмов до человеческой психики — на несколько шагов вперёд, мгновенно находя «слабые звенья» и «трещины». Как учитель, он не столько обучает подростков дедукции, сколько заставляет их смотреть на преступления под другим углом, задавая странные философские вопросы.</p>
     <div class="block-title">Цель прибытия</div>
-    <p class="block-text">Официально — преподавательская деятельность и кураторство над «особо одаренными» учениками. Служба безопасности отмечает, что субъект не проявляет интереса к социальной жизни и учебному процессу. Фактически, по данным скрытого наблюдения, он воспринимает Академию как безопасное убежище, где можно спрятаться от своего прошлого. Рекомендуется не оставлять его одного в замкнутых помещениях из-за склонности к самокопанию. Студентам не рекомендуется приходить к нему на консультации после заката — он может читать стихи до утра и не заметить, как вы уснули.</p>
+    <p class="block-text">Официально — преподавательская деятельность и кураторство над «особо одаренными» учениками. Фактически, по данным скрытого наблюдения, он воспринимает Академию как безопасное убежище, где можно спрятаться от своего прошлого. Рекомендуется не оставлять его одного в замкнутых помещениях из-за склонности к самокопанию. Студентам не рекомендуется приходить к нему на консультации после заката — он может читать стихи до утра и не заметить, как вы уснули.</p>
   </div>
   <div class="tab-content" id="d01-hist">
     <div class="lore-text">
       <p>Йи Санг никогда не был обычным ребёнком. В то время как другие дети играли на улицах, он часами наблюдал за тем, как устроены вещи: как трескается лёд на лужах, как падают тени от деревьев, как рушится песочный замок. Его разум искал структуру во всём, что видел. Повзрослев, он стал блестящим архитектором и исследователем, чьи проекты опережали время на десятилетия. Вокруг него сплотилась группа таких же гениев — «Лига Девяти». Они верили, что с помощью науки и искусства можно построить идеальный мир, где не будет места боли и ошибкам.</p>
-      <p>Венцом их работы стал амбициозный проект, который сам Йи Санг называл «Зеркалом». Это была технология, способная смоделировать любую ситуацию, просчитать все возможные варианты развития событий и показать, как избежать катастрофы. Он был одержим идеей создать идеальную формулу судьбы, чтобы защитить своих друзей от любых невзгод. Но он не учёл одного: человеческая природа не подчиняется формулам.</p>
-      <p>В день финального испытания что-то пошло не так. Система, которая должна была предсказать будущее, вместо этого обрушила на них само разрушение. Вспышка, грохот, крики — и тишина. Когда Йи Санг очнулся, он был единственным выжившим. Все члены его «Лиги» погибли. Его гениальный расчёт, его идеальное уравнение обернулось могилой для тех, кого он любил.</p>
-      <p>С тех пор он перестал верить в свои способности. Он считал, что его разум — это проклятие, которое приносит только смерть. В отчаянии он пытался покончить с собой, но его спасли. Врачи отметили, что его психика полностью разрушена: он впал в состояние глубокой апатии, отказываясь разговаривать с кем-либо. Единственное, что осталось от прежнего Йи Санга — это его блокнот и длинный нож, который он носит с собой как напоминание о том, что когда-то он был воином, а теперь стал лишь тенью.</p>
-      <p>Он почти перестал спать. Ночью он сидит в своей комнате, смотрит на пламя свечи и записывает в блокнот странные стихи, в которых пытается найти ответ на вопрос: «Почему я всё ещё жив, если всё, что я создал, обратилось в прах?». Он не ждёт спасения. Он просто ждёт, когда всё закончится.</p>
-      <p>В Академию он прибыл не потому, что хотел учиться. Служба безопасности вычислила его местоположение и принудительно доставила его сюда, считая, что его знания могут быть полезны (или опасны). Сам Йи Санг воспринимает это место как очередную клетку, в которой он может наконец найти ту самую «точку опоры» — либо для того, чтобы начать всё заново, либо для того, чтобы поставить в своей жизни точку. Он редко выходит из своей комнаты. Но если он появляется, все замолкают: его взгляд, полный печали и пустоты, говорит больше, чем любые слова.</p>
+      <p>Венцом их работы стал амбициозный проект, который сам Йи Санг называл «Зеркалом». Это была технология, способная смоделировать любую ситуацию, просчитать все возможные варианты развития событий и показать, как избежать катастрофы. Он был одержим идеей создать идеальную формулу судьбы, чтобы защитить своих друзей от любых невзгод. Но он не учёл одного: человеческая природа не подчиняется формулам. В день финального испытания что-то пошло не так. Система, которая должна была предсказать будущее, вместо этого обрушила на них само разрушение. Когда Йи Санг очнулся, он был единственным выжившим. Все члены его «Лиги» погибли. Его гениальный расчёт обернулся могилой для тех, кого он любил.</p>
+      <p>С тех пор он перестал верить в свои способности. Он считал, что его разум — это проклятие, которое приносит только смерть. В отчаянии он пытался покончить с собой, но его спасли. Врачи отметили, что его психика полностью разрушена: он впал в состояние глубокой апатии, отказываясь разговаривать с кем-либо. Единственное, что осталось от прежнего Йи Санга — это его блокнот и длинный нож, который он носит с собой как напоминание о том, что когда-то он был воином, а теперь стал лишь тенью. Он почти перестал спать. Ночью он сидит в своей комнате, смотрит на пламя свечи и записывает в блокнот странные стихи, в которых пытается найти ответ на вопрос: «Почему я всё ещё жив, если всё, что я создал, обратилось в прах?».</p>
+      <p>В Академию он прибыл не потому, что хотел учиться. Служба безопасности вычислила его местоположение и принудительно доставила его сюда. Сам Йи Санг воспринимает это место как очередную клетку, в которой он может наконец найти ту самую «точку опоры» — либо для того, чтобы начать всё заново, либо для того, чтобы поставить в своей жизни точку.</p>
     </div>
   </div>
   <div class="tab-content" id="d01-gear">
     <div class="gear-category">Личные вещи</div>
-    <p style="font-size: 0.8rem; color: var(--dim); font-style: italic; margin-bottom: 20px; text-align: center;">
-      * Желательно иметь при себе для полной отыгровки, если вы сами этого пожелаете.
-    </p>
+    <p style="font-size: 0.8rem; color: var(--dim); font-style: italic; margin-bottom: 20px; text-align: center;">* Желательно иметь при себе для полной отыгровки, если вы сами этого пожелаете.</p>
     <div class="gear-grid">
-      <div class="gear-card">
-        <div class="gear-card-name">🔪 Нож</div>
-        <div class="gear-card-desc">Длинный, слегка изогнутый клинок в потёртых ножнах. Используется как инструмент для точных манипуляций, а не для боя.</div>
-      </div>
-      <div class="gear-card">
-        <div class="gear-card-name">📓 Блокнот</div>
-        <div class="gear-card-desc">Потрёпанная серая записная книжка. Исписана мелким почерком, страницы забиты странными стихами и обрывочными фразами.</div>
-      </div>
-      <div class="gear-card">
-        <div class="gear-card-name">💊 Банка с лекарствами</div>
-        <div class="gear-card-desc">Небольшая жестяная банка с белыми таблетками. Он часто принимает их от головной боли, хотя это уже давно стало привычкой, а не лечением.</div>
-      </div>
-      <div class="gear-card">
-        <div class="gear-card-name">💤 Снотворное</div>
-        <div class="gear-card-desc">Пузырёк с мутной жидкостью. Используется им, когда мысли становятся слишком громкими, чтобы он мог заснуть.</div>
-      </div>
+      <div class="gear-card"><div class="gear-card-name">🔪 Нож</div><div class="gear-card-desc">Длинный, слегка изогнутый клинок в потёртых ножнах. Используется как инструмент для точных манипуляций, а не для боя.</div></div>
+      <div class="gear-card"><div class="gear-card-name">📓 Блокнот</div><div class="gear-card-desc">Потрёпанная серая записная книжка. Исписана мелким почерком, страницы забиты странными стихами и обрывочными фразами.</div></div>
+      <div class="gear-card"><div class="gear-card-name">💊 Банка с лекарствами</div><div class="gear-card-desc">Небольшая жестяная банка с белыми таблетками. Он часто принимает их от головной боли, хотя это уже давно стало привычкой, а не лечением.</div></div>
+      <div class="gear-card"><div class="gear-card-name">💤 Снотворное</div><div class="gear-card-desc">Пузырёк с мутной жидкостью. Используется им, когда мысли становятся слишком громкими, чтобы он мог заснуть.</div></div>
     </div>
   </div>
   <div class="dossier-author">Автор идеи: <span>Erzmagier</span></div>
 </article>
+
 <!-- ДЕЛО 1: Кокичи -->
 <article class="dossier-wrapper hidden" id="d03" style="border-top: 3px solid #9b59b6;">
   <div class="stamp-bg"></div>
@@ -342,36 +209,25 @@ main { flex: 1; overflow-y: auto; padding: 40px; position: relative; }
     <div class="block-title">Причина присвоения таланта</div>
     <p class="block-text">Способен превратить любое событие в управляемый спектакль и удерживать внимание аудитории любой статусной принадлежности. Демонстрирует незаурядное мастерство манипуляции: под прикрытием представлений проворачивает кражи, подмены документов и взломы, оставаясь неуличённым. Умеет читать толпу и отдельного человека, подстраивая сценарий под реакции. Отдельно отмечается парадоксальная черта: субъект лжёт почти постоянно, однако в критических ситуациях, связанных с Амами, действует безошибочно и без обмана — комиссия фиксирует это как аномалию.</p>
     <div class="block-title">Цель прибытия</div>
-    <p class="block-text">Официально зачислен в Академию «Пик Надежды» для освоения программы по профилю таланта и расширения репертуара труппы. Академия и прежде пользовалась известностью в округах, однако именно поступление Омы привлекло к ней дополнительное внимание: число желающих поступить и посетить учреждение заметно выросло, а администрация не скрывает, что намерена использовать имя субъекта в своих интересах. Фактически, по данным скрытого наблюдения, Ома относится к обучению как к очередной сцене и посещает лишь те занятия, где может получить доступ к <span class="secret">[ИНФОРМАЦИЯ ЗАСЕКРЕЧЕНА]</span>. Администрация предупреждает: субъект не боится разоблачения, не реагирует на стандартные угрозы и способен склонить окружающих к нужному ему решению, оставаясь при этом обаятельным. При проведении допросов рекомендуется присутствие второго наблюдателя.</p>
+    <p class="block-text">Официально зачислен в Академию «Пик Надежды» для освоения программы по профилю таланта и расширения репертуара труппы. Фактически, по данным скрытого наблюдения, Ома относится к обучению как к очередной сцене и посещает лишь те занятия, где может получить доступ к <span class="secret">[ИНФОРМАЦИЯ ЗАСЕКРЕЧЕНА]</span>. Администрация предупреждает: субъект не боится разоблачения, не реагирует на стандартные угрозы и способен склонить окружающих к нужному ему решению, оставаясь при этом обаятельным. При проведении допросов рекомендуется присутствие второго наблюдателя.</p>
   </div>
   <div class="tab-content" id="d03-hist">
     <div class="lore-text">
       <p>Кокичи Ома — Абсолютный Шут Хаоса. Человек, способный превратить любое событие в грандиозный, непредсказуемый спектакль, и двадцатилетний бессменный лидер всемирно известной бродячей труппы «D.I.C.E.». К своим двадцати годам Кокичи превратил свою команду из обычной уличной банды в неуловимый международный феномен. О безумных перформансах этой труппы слагают легенды по всему земному шару: они проводят масштабные выступления и веселят не только обычный люд, но и легко находят язык с самыми опасными, влиятельными и высокопоставленными фигурами этого мира.</p>
-      <p>Мало кто знает, но за этим триумфом скрываются годы выживания на самом дне. Кокичи вырос в тех же голодных и опасных трущобах, что и его самый близкий друг — Рантаро Амами. Они вместе пробивали себе дорогу в жизнь, деля последнюю корку хлеба и помогая друг другу выпутываться из передряг. В знак этой нерушимой связи, зародившейся еще на улицах, Кокичи никогда не расстается с особым аксессуаром. Перед каждым выходом на сцену, продумывая очередной безумный трюк, Ома сосредоточенно крутит в руках старинный карманный компас на тяжелой цепочке — подарок от Рантаро, привезенный из его первой экспедиции. Для Кокичи эта вещь стала личным талисманом, напоминающим о том, откуда он начал свой путь.</p>
+      <p>Мало кто знает, но за этим триумфом скрываются годы выживания на самом дне. Кокичи вырос в тех же голодных и опасных трущобах, что и его самый близкий друг — Рантаро Амами. Они вместе пробивали себе дорогу в жизнь, деля последнюю корку хлеба и помогая друг другу выпутываться из передряг. В знак этой нерушимой связи, зародившейся еще на улицах, Кокичи никогда не расстается с особым аксессуаром. Перед каждым выходом на сцену, продумывая очередной безумный трюк, Ома сосредоточенно крутит в руках старинный карманный компас на тяжелой цепочке — подарок от Рантаро. Для Кокичи эта вещь стала личным талисманом, напоминающим о том, откуда он начал свой путь.</p>
       <p>Стиль его труппы тоже стал результатом их общего прошлого и одной судьбоносной встречи. Во время своих опасных странствий по Шанхаю Рантаро пересёкся с Цумуги Широганэ — тогда ещё неизвестной, но гениальной Абсолютной Косплеершей. Цумуги загорелась идеей Омы и сотворила настоящий шедевр: по архивным эскизам уличных карнавалов, которые Рантаро привёз из Франции и Италии, она лично разработала и пошила сложнейший, пугающий и одновременно притягательный костюм Шута. Когда Ома впервые примерил эту идеальную работу Широганэ, он пришел в полный восторг — наряд сидел как влитой, скрывая его истинное лицо и позволяя начать грандиозную игру с мировыми элитами.</p>
-      <p>Обретя этот образ, Кокичи начал крутить лицемерным миром. Его труппа одинаково изящно организовывала закрытые шоу для криминального клана Якудза Кузурю и умудрялась заставить высокомерно ухмыляться главу многомиллиардного конгломерата Тогами. Одним из самых громких триумфов Абсолютного Шута Хаоса стало выступление перед королевской семьей Новоселик. Пожилые министры и строгие советники европейского государства ожидали увидеть классическое благопристойное шоу, но Кокичи превратил дворцовый зал в театр абсурда. Он дерзко пародировал вековые монаршие традиции, жонглировал бесценными фамильными реликвиями прямо над головами придворных и умудрился «случайно» подменить коронационные документы на шуточные указы. Королевская стража держала руки на эфесах шпаг, готовая казнить наглеца в любую секунду, но безупречная харизма Омы заставила королевскую верхушку признать: это было самое живое и непредсказуемое зрелище, которое когда-либо видел этот замок.</p>
+      <p>Обретя этот образ, Кокичи начал крутить лицемерным миром. Его труппа одинаково изящно организовывала закрытые шоу для криминального клана Якудза Кузурю и умудрялась заставить высокомерно ухмыляться главу многомиллиардного конгломерата Тогами. Одним из самых громких триумфов Абсолютного Шута Хаоса стало выступление перед королевской семьей Новоселик. Пожилые министры и строгие советники ожидали увидеть классическое благопристойное шоу, но Кокичи превратил дворцовый зал в театр абсурда. Он дерзко пародировал вековые монаршие традиции, жонглировал бесценными фамильными реликвиями прямо над головами придворных и умудрился «случайно» подменить коронационные документы на шуточные указы. Королевская стража держала руки на эфесах шпаг, готовая казнить наглеца в любую секунду, но безупречная харизма Омы заставила королевскую верхушку признать: это было самое живое и непредсказуемое зрелище, которое когда-либо видел этот замок.</p>
       <p>Следующей целью «D.I.C.E.» стал высокотехнологичный Город Това — база могущественного конгломерата «Towa Group». Специально для совета директоров Кокичи срежиссировал масштабный техно-перформанс. Пока на сцене взрывались неоновые огни, а актеры в масках разыгрывали комедию о восстании машин, сам Ома провернул главный фокус за кулисами. Используя хаос представления как идеальную ширму, его труппа взломала внутреннюю сеть корпорации, выведав несколько грязных коммерческих тайн руководства. В итоге директора Towa Group вежливо аплодировали Шуту Хаоса, даже не подозревая, что их репутация теперь целиком и полностью находится в его кармане. Взамен на такие услуги Кокичи получал от Рантаро редкие карты и зацепки для его экспедиций, а «D.I.C.E.» тайно оберегала двенадцать сестер Амами, пока тот был в разъездах.</p>
       <p>На сцене Кокичи казался невинным ребенком, но за секунду мог превратиться в коварного кукловода, играющего на эмоциях публики. Для двадцатилетнего Шута Хаоса весь мир стал огромной сценой. Заставляя людей смеяться, злиться или паниковать, Ома преследовал свой собственный, глубоко скрытый мотив: он жаждал срывать фальшивые маски с этого лицемерного мира и выведывать самые грязные, мрачные секреты, которые влиятельные люди так тщательно прятали от чужих глаз.</p>
     </div>
   </div>
   <div class="tab-content" id="d03-gear">
     <div class="gear-category">Реквизит</div>
-    <p style="font-size: 0.8rem; color: var(--dim); font-style: italic; margin-bottom: 20px; text-align: center;">
-      * Желательно иметь при себе для полной отыгровки, если вы сами этого пожелаете.
-    </p>
+    <p style="font-size: 0.8rem; color: var(--dim); font-style: italic; margin-bottom: 20px; text-align: center;">* Желательно иметь при себе для полной отыгровки, если вы сами этого пожелаете.</p>
     <div class="gear-grid">
-      <div class="gear-card">
-        <div class="gear-card-name">🔮 Хрустальный шар</div>
-        <div class="gear-card-desc">Используется как реквизит для «предсказаний» и жонглирования.</div>
-      </div>
-      <div class="gear-card">
-        <div class="gear-card-name">⛓️ Наручники</div>
-        <div class="gear-card-desc">Настоящие наручники, которые Ома носит с собой для розыгрышей и запугивания.</div>
-      </div>
-      <div class="gear-card">
-        <div class="gear-card-name">📓 Блокнот</div>
-        <div class="gear-card-desc">Записная книжка с «компроматом» на всех учеников (на самом деле может быть пустой).</div>
-      </div>
+      <div class="gear-card"><div class="gear-card-name">🔮 Хрустальный шар</div><div class="gear-card-desc">Используется как реквизит для «предсказаний» и жонглирования.</div></div>
+      <div class="gear-card"><div class="gear-card-name">⛓️ Наручники</div><div class="gear-card-desc">Настоящие наручники, которые Ома носит с собой для розыгрышей и запугивания.</div></div>
+      <div class="gear-card"><div class="gear-card-name">📓 Блокнот</div><div class="gear-card-desc">Записная книжка с «компроматом» на всех учеников (на самом деле может быть пустой).</div></div>
     </div>
   </div>
   <div class="dossier-author">Автор идеи: <span>Erzmagier</span></div>
@@ -757,7 +613,7 @@ const monokumaPhrases = [
 
 function showMonokuma() {
   document.getElementById('vnOverlay').classList.add('active');
-  setFavicon('favicon_alert.png?v=31');
+  setFavicon('favicon_alert.png?v=35');
   document.getElementById('vnNagito').classList.add('hidden');
   document.getElementById('vnNagito').src = 'nagito.png';
   document.getElementById('vnNagito').classList.remove('talking');
@@ -777,88 +633,7 @@ function showMonokuma() {
 
 function closeVN() {
   document.getElementById('vnOverlay').classList.remove('active');
-  setFavicon('favicon.png?v=31');
-  if(debateLoop) clearInterval(debateLoop);
-  isDebating = false;
-}
-function copyDossier(id, btn) {
-  const dossier = document.getElementById(id);
-  let text = "———————————————————————\n";
-  text += dossier.querySelector('.dossier-title').innerText + "\n";
-  
-  dossier.querySelectorAll('.dossier-meta div').forEach(div => {
-    text += div.innerText.replace(" | ", "\n") + "\n";
-  });
-  
-  const authorText = dossier.querySelector('.dossier-author').innerText;
-  text += "———————————————————————\n";
-  text += authorText + "\n";
-  text += "———————————————————————\n\n";
-
-  const offTab = dossier.querySelector('.tab-content[id$="-off"]');
-  const elements = offTab.children;
-  
-  for (let i = 0; i < elements.length; i++) {
-    if (elements[i].classList.contains('block-title')) {
-      text += elements[i].innerText.toUpperCase() + ":\n";
-    } else if (elements[i].classList.contains('block-text')) {
-      text += elements[i].innerText + "\n";
-      text += "———————————————————————\n";
-    }
-  }
-
-  navigator.clipboard.writeText(text).then(() => {
-    const originalText = btn.innerText;
-    btn.innerText = "Успешно скопировано!";
-    btn.classList.add('copied');
-    setTimeout(() => {
-      btn.innerText = originalText;
-      btn.classList.remove('copied');
-    }, 2000);
-  }).catch(err => alert("Ошибка при копировании"));
-}
-
-let debateLoop = null;
-let isDebating = false;
-let currentMonokumaPhrase = "";
-
-const monokumaPhrases = [
-  "Итак, начнем Убийственную Игру?! Правила просты: убей кого-нибудь и не попадись!",
-  "Эй, не смей трогать мой архив! Там записаны все ваши грязные секретики!",
-  "Таланты, таланты, таланты... Они такие хрупкие, когда дело доходит до отчаяния!",
-  "Ну что, кто из них сломается первым? Убийца или жертва?",
-  "Ах, я так люблю запах отчаяния по утрам! Он бодрит лучше кофе!",
-  "Ты ведь не думаешь, что это просто игра, правда? Это... УБИЙСТВЕННАЯ ИГРА!",
-  "Смотри в оба! Ведь убийца может быть прямо за твоей спиной... Или это ты?",
-  "Надежда — это иллюзия! Сдавайтесь и примите отчаяние!",
-  "Если ты нарушишь правила Академии... я лично вырву твое сердце! Хи-хи-хи!",
-  "Все эти личные дела... Интересно, кто из них первым решится на убийство?",
-  "Не заставляй меня нажимать на кнопку! Ты же знаешь, что будет потом!"
-];
-
-function showMonokuma() {
-  document.getElementById('vnOverlay').classList.add('active');
-  setFavicon('favicon_alert.png?v=31');
-  document.getElementById('vnNagito').classList.add('hidden');
-  document.getElementById('vnNagito').src = 'nagito.png';
-  document.getElementById('vnNagito').classList.remove('talking');
-  document.getElementById('vnNagito').classList.remove('appearing');
-  
-  document.getElementById('vnMonokuma').src = 'monokuma.png';
-  document.getElementById('vnMonokuma').classList.add('talking');
-  
-  document.getElementById('vnName').innerText = "Монокума";
-  document.getElementById('vnName').style.color = "#000";
-  document.getElementById('vnName').style.background = "#fff";
-  document.getElementById('vnText').innerText = "Пип-пип! Нашёл секрет? Только никому не говори, иначе я тебя накажу! ПУХ-ХА-ХА!";
-  
-  document.getElementById('vnChoices').style.display = "none"; 
-  currentMonokumaPhrase = "";
-}
-
-function closeVN() {
-  document.getElementById('vnOverlay').classList.remove('active');
-  setFavicon('favicon.png?v=31');
+  setFavicon('favicon.png?v=35');
   if(debateLoop) clearInterval(debateLoop);
   isDebating = false;
 }
@@ -934,7 +709,7 @@ function closeVN() {
           document.getElementById('vnNagito').classList.add('hidden');
           document.getElementById('vnNagito').classList.remove('appearing');
           isDebating = false;
-          setFavicon('favicon.png?v=31');
+          setFavicon('favicon.png?v=35');
         }, 800);
         return;
       }
