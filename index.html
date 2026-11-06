@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Архив личных дел — Пик Надежды</title>
-<link rel="icon" type="image/png" href="favicon.png?v=38" id="dynamic-favicon">
+<link rel="icon" type="image/png" href="favicon.png?v=39" id="dynamic-favicon">
 <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root { --bg: #050608; --panel: #0a0c10; --border: #1f252e; --text: #c9d1d9; --dim: #6e7681; --secret: #d4a017; --hover: #151a21; --accent-default: #b33a3a; --active-nav-color: #b33a3a; }
@@ -26,6 +26,7 @@
   aside h2 { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 3px; color: var(--accent-default); margin: 0; }
   .aside-list { list-style: none; padding: 15px 0; margin: 0; flex: 1; overflow-y: auto; }
   .aside-list li { margin-bottom: 4px; padding: 0 15px;}
+  .nav-category { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 2px; color: var(--dim); margin: 20px 15px 8px 15px; font-weight: bold; pointer-events: none; opacity: 0.6; }
   .nav-btn { width: 100%; text-align: left; background: transparent; border: 1px solid transparent; border-left: 3px solid transparent; color: var(--text); padding: 12px 15px; font-family: inherit; font-size: 0.85rem; cursor: pointer; transition: all .2s ease; display: flex; align-items: center; gap: 15px; border-radius: 8px; position: relative; }
   .nav-btn:hover { background: rgba(255,255,255,0.03); border-color: var(--border); }
   .nav-btn.active { background: rgba(255, 255, 255, 0.05); border-color: var(--border); border-left-color: var(--active-nav-color); }
@@ -122,7 +123,7 @@
   .vn-controls { position: absolute; top: 20px; right: 20px; z-index: 10; display: flex; gap: 10px; }
   .vn-btn { background: rgba(0,0,0,0.6); border: 1px solid var(--border); color: var(--dim); padding: 8px 15px; border-radius: 5px; font-family: inherit; font-size: 0.8rem; cursor: pointer; transition: all 0.2s; text-transform: uppercase; }
   .vn-btn:hover { background: var(--accent-default); color: #fff; border-color: var(--accent-default); }
-  @media (max-width: 800px) { .layout { flex-direction: column; } aside { width: 100%; height: auto; max-height: 180px; border-right: none; border-bottom: 1px solid var(--border); border-radius: 0; margin-top: 0; border-top: none;} .aside-list { display: flex; flex-direction: row; overflow-x: auto; padding: 10px 15px; gap: 10px; white-space: nowrap; } .aside-list li { margin-bottom: 0; padding: 0; flex-shrink: 0; } .nav-btn { padding: 8px 12px; flex-direction: row; gap: 8px; width: auto; background: rgba(255,255,255,0.03); border: 1px solid var(--border); } .nav-btn.active { background: rgba(255, 255, 255, 0.1); border-color: var(--active-nav-color); border-left-width: 1px; } .nav-btn.active::after { display: none; } .nav-icon { width: 24px; height: 24px; font-size: 0.8rem; border: none; background: transparent; } .aside-footer { display: none; } main { padding: 15px; } .dossier-wrapper { padding: 20px 15px; } .stamp-bg { width: 100px; height: 100px; opacity: 0.1; } .tabs { gap: 10px; } .tab-btn { padding: 8px 12px; font-size: 0.75rem; letter-spacing: 1px; } .vn-monokuma { height: 220px; left: -20px; bottom: 180px; } .vn-nagito { height: 240px; right: -20px; bottom: 160px; } .vn-dialog-box { width: 95%; margin-bottom: 20px; } .vn-text-content { font-size: 0.95rem; padding: 20px; min-height: 100px; } .vn-name-tag { font-size: 0.9rem; padding: 4px 15px; top: -30px; left: 10px;} .vn-choices { padding: 0 20px 20px 20px; gap: 10px; } .vn-choice-btn { font-size: 0.8rem; padding: 8px 15px; } }
+  @media (max-width: 800px) { .layout { flex-direction: column; } aside { width: 100%; height: auto; max-height: 180px; border-right: none; border-bottom: 1px solid var(--border); border-radius: 0; margin-top: 0; border-top: none;} .aside-list { display: flex; flex-direction: row; overflow-x: auto; padding: 10px 15px; gap: 10px; white-space: nowrap; } .aside-list li { margin-bottom: 0; padding: 0; flex-shrink: 0; } .nav-category { display: none; } .nav-btn { padding: 8px 12px; flex-direction: row; gap: 8px; width: auto; background: rgba(255,255,255,0.03); border: 1px solid var(--border); } .nav-btn.active { background: rgba(255, 255, 255, 0.1); border-color: var(--active-nav-color); border-left-width: 1px; } .nav-btn.active::after { display: none; } .nav-icon { width: 24px; height: 24px; font-size: 0.8rem; border: none; background: transparent; } .aside-footer { display: none; } main { padding: 15px; } .dossier-wrapper { padding: 20px 15px; } .stamp-bg { width: 100px; height: 100px; opacity: 0.1; } .tabs { gap: 10px; } .tab-btn { padding: 8px 12px; font-size: 0.75rem; letter-spacing: 1px; } .vn-monokuma { height: 220px; left: -20px; bottom: 180px; } .vn-nagito { height: 240px; right: -20px; bottom: 160px; } .vn-dialog-box { width: 95%; margin-bottom: 20px; } .vn-text-content { font-size: 0.95rem; padding: 20px; min-height: 100px; } .vn-name-tag { font-size: 0.9rem; padding: 4px 15px; top: -30px; left: 10px;} .vn-choices { padding: 0 20px 20px 20px; gap: 10px; } .vn-choice-btn { font-size: 0.8rem; padding: 8px 15px; } }
 </style>
 </head>
 <body>
@@ -134,14 +135,21 @@
   <aside>
     <div class="aside-header"><h2>Оглавление архива</h2></div>
     <ul class="aside-list">
-      <li><button class="nav-btn" data-color="#d4e1e8" onclick="openDossier('d01', this)"><div class="nav-icon">✒️</div><div class="nav-info"><span class="num">№01-Ш · Erzmagier</span><span class="name">Шуичи Сайхара</span></div></button></li>
-      <li><button class="nav-btn" data-color="#9b59b6" onclick="openDossier('d03', this)"><div class="nav-icon">🎭</div><div class="nav-info"><span class="num">№03-К · Erzmagier</span><span class="name">Кокичи Ома</span></div></button></li>
-      <li><button class="nav-btn" data-color="#8b5a2b" onclick="openDossier('d04', this)"><div class="nav-icon">⚙️</div><div class="nav-info"><span class="num">№04-К · Erzmagier</span><span class="name">Джатаро Кемури</span></div></button></li>
-      <li><button class="nav-btn" data-color="#27ae60" onclick="openDossier('d07', this)"><div class="nav-icon">🧭</div><div class="nav-info"><span class="num">№07-А · Erzmagier</span><span class="name">Рантаро Амами</span></div></button></li>
-      <li><button class="nav-btn" data-color="#e74c3c" onclick="openDossier('d09', this)"><div class="nav-icon">🌙</div><div class="nav-info"><span class="num">№09-Ю · Erzmagier</span><span class="name">Химико Юмено</span></div></button></li>
-      <li><button class="nav-btn" data-color="#f1c40f" onclick="openDossier('d11', this)"><div class="nav-icon">🏹</div><div class="nav-info"><span class="num">№11-Х · fialka</span><span class="name">Маки Харукава</span></div></button></li>
+      <li class="nav-category">Работы Erzmagier</li>
       
-      <li style="margin-top: 15px; padding-top: 15px; border-top: 1px solid var(--border);"><button class="nav-btn" data-color="#555" onclick="openDossier('d-tech', this)"><div class="nav-icon">🛠️</div><div class="nav-info"><span class="num">T-00</span><span class="name">Тех. работы</span></div></button></li>
+      <li><button class="nav-btn" data-color="#d4e1e8" onclick="openDossier('d01', this)"><div class="nav-icon">✒️</div><div class="nav-info"><span class="num">№01-Ш</span><span class="name">Шуичи Сайхара</span></div></button></li>
+      <li><button class="nav-btn" data-color="#9b59b6" onclick="openDossier('d03', this)"><div class="nav-icon">🎭</div><div class="nav-info"><span class="num">№03-К</span><span class="name">Кокичи Ома</span></div></button></li>
+      <li><button class="nav-btn" data-color="#8b5a2b" onclick="openDossier('d04', this)"><div class="nav-icon">⚙️</div><div class="nav-info"><span class="num">№04-К</span><span class="name">Джатаро Кемури</span></div></button></li>
+      <li><button class="nav-btn" data-color="#27ae60" onclick="openDossier('d07', this)"><div class="nav-icon">🧭</div><div class="nav-info"><span class="num">№07-А</span><span class="name">Рантаро Амами</span></div></button></li>
+      <li><button class="nav-btn" data-color="#e74c3c" onclick="openDossier('d09', this)"><div class="nav-icon">🌙</div><div class="nav-info"><span class="num">№09-Ю</span><span class="name">Химико Юмено</span></div></button></li>
+
+      <li class="nav-category">Работы fialka</li>
+      
+      <li><button class="nav-btn" data-color="#f1c40f" onclick="openDossier('d11', this)"><div class="nav-icon">🏹</div><div class="nav-info"><span class="num">№11-Х</span><span class="name">Маки Харукава</span></div></button></li>
+      
+      <li class="nav-category" style="margin-top: 15px; border-top: 1px solid var(--border); padding-top: 15px;">Служебные записи</li>
+      
+      <li><button class="nav-btn" data-color="#555" onclick="openDossier('d-tech', this)"><div class="nav-icon">🛠️</div><div class="nav-info"><span class="num">T-00</span><span class="name">Тех. работы</span></div></button></li>
     </ul>
     <div class="aside-footer">
       <div class="status"><div class="status-dot"></div> Система активна</div>
@@ -595,7 +603,7 @@
 
   function showMonokuma() {
     document.getElementById('vnOverlay').classList.add('active');
-    setFavicon('favicon_alert.png?v=38');
+    setFavicon('favicon_alert.png?v=39');
     document.getElementById('vnNagito').classList.add('hidden');
     document.getElementById('vnNagito').src = 'nagito.png';
     document.getElementById('vnNagito').classList.remove('talking');
@@ -615,7 +623,7 @@
 
   function closeVN() {
     document.getElementById('vnOverlay').classList.remove('active');
-    setFavicon('favicon.png?v=38');
+    setFavicon('favicon.png?v=39');
     if(debateLoop) clearInterval(debateLoop);
     isDebating = false;
   }
@@ -692,7 +700,7 @@
           document.getElementById('vnNagito').classList.add('hidden');
           document.getElementById('vnNagito').classList.remove('appearing');
           isDebating = false;
-          setFavicon('favicon.png?v=38');
+          setFavicon('favicon.png?v=39');
         }, 800);
         return;
       }
