@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Архив личных дел — Пик Надежды</title>
-<link rel="icon" type="image/png" href="favicon.png?v=20" id="dynamic-favicon">
+<link rel="icon" type="image/png" href="favicon.png?v=25" id="dynamic-favicon">
 <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -94,81 +94,81 @@
   .aside-footer .status { display: flex; align-items: center; gap: 8px; color: #5ca85c; margin-bottom: 10px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
   .status-dot { width: 6px; height: 6px; background: #5ca85c; border-radius: 50%; box-shadow: 0 0 6px #5ca85c; animation: pulse 2s infinite; }
   @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
+main { flex: 1; overflow-y: auto; padding: 40px; position: relative; }
 
-  main { flex: 1; overflow-y: auto; padding: 40px; position: relative; }
-  
-  .dossier-wrapper { 
-    position: relative; 
-    max-width: 850px; margin: 0 auto; 
-    background: rgba(10, 12, 16, 0.95);
-    border: 1px solid var(--border); border-top: 3px solid var(--accent-default); 
-    padding: 40px 50px; box-shadow: 0 15px 40px rgba(0,0,0,0.9); 
-    animation: slideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1); border-radius: 12px;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  }
-  @keyframes slideIn { from { opacity: 0; transform: translateY(30px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+.dossier-wrapper { 
+  position: relative; 
+  max-width: 850px; margin: 0 auto; 
+  background: rgba(10, 12, 16, 0.95);
+  border: 1px solid var(--border); border-top: 3px solid var(--accent-default); 
+  padding: 40px 50px; box-shadow: 0 15px 40px rgba(0,0,0,0.9); 
+  animation: slideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1); border-radius: 12px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+@keyframes slideIn { from { opacity: 0; transform: translateY(30px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
 
-  .dossier-wrapper::before, .dossier-wrapper::after {
-    content: ""; position: absolute; width: 20px; height: 20px; border: 2px solid var(--dim);
-    transition: all 0.3s ease; pointer-events: none; opacity: 0.5; z-index: 2;
-  }
-  .dossier-wrapper::before { top: 10px; left: 10px; border-right: none; border-bottom: none; }
-  .dossier-wrapper::after { bottom: 10px; right: 10px; border-left: none; border-top: none; }
-  .dossier-wrapper:hover::before { top: 5px; left: 5px; border-color: var(--accent); opacity: 1; }
-  .dossier-wrapper:hover::after { bottom: 5px; right: 5px; border-color: var(--accent); opacity: 1; }
-  .dossier-wrapper:hover { border-color: var(--accent); box-shadow: 0 0 30px var(--accent-glow), 0 15px 40px rgba(0,0,0,0.7); }
+.dossier-wrapper::before, .dossier-wrapper::after {
+  content: ""; position: absolute; width: 20px; height: 20px; border: 2px solid var(--dim);
+  transition: all 0.3s ease; pointer-events: none; opacity: 0.5; z-index: 2;
+}
+.dossier-wrapper::before { top: 10px; left: 10px; border-right: none; border-bottom: none; }
+.dossier-wrapper::after { bottom: 10px; right: 10px; border-left: none; border-top: none; }
+.dossier-wrapper:hover::before { top: 5px; left: 5px; border-color: var(--accent); opacity: 1; }
+.dossier-wrapper:hover::after { bottom: 5px; right: 5px; border-color: var(--accent); opacity: 1; }
+.dossier-wrapper:hover { border-color: var(--accent); box-shadow: 0 0 30px var(--accent-glow), 0 15px 40px rgba(0,0,0,0.7); }
 
-  #d01 { --accent: #d4e1e8; --accent-glow: rgba(212, 225, 232, 0.3); }
-  #d03 { --accent: #9b59b6; --accent-glow: rgba(155, 89, 182, 0.3); border-top-color: #9b59b6 !important; }
-  #d04 { --accent: #8b5a2b; --accent-glow: rgba(139, 90, 43, 0.3); border-top-color: #8b5a2b !important; }
-  #d07 { --accent: #27ae60; --accent-glow: rgba(39, 174, 96, 0.3); border-top-color: #27ae60 !important; }
-  #d11 { --accent: #9b59b6; --accent-glow: rgba(241, 196, 15, 0.3); border-top-color: #9b59b6 !important; }
+#d01 { --accent: #d4e1e8; --accent-glow: rgba(212, 225, 232, 0.3); }
+#d03 { --accent: #9b59b6; --accent-glow: rgba(155, 89, 182, 0.3); border-top-color: #9b59b6 !important; }
+#d04 { --accent: #8b5a2b; --accent-glow: rgba(139, 90, 43, 0.3); border-top-color: #8b5a2b !important; }
+#d07 { --accent: #27ae60; --accent-glow: rgba(39, 174, 96, 0.3); border-top-color: #27ae60 !important; }
+#d11 { --accent: #9b59b6; --accent-glow: rgba(241, 196, 15, 0.3); border-top-color: #9b59b6 !important; }
+#d09 { --accent: #e74c3c; --accent-glow: rgba(231, 76, 60, 0.3); border-top-color: #e74c3c !important; }
 
-  #d01 .tab-btn.active { color: #fff; border-bottom-color: #d4e1e8; }
-  #d03 .tab-btn.active { color: #fff; border-bottom-color: #fff; }
-  #d04 .tab-btn.active { color: #fff; border-bottom-color: #8b5a2b; }
-  #d07 .tab-btn.active { color: #fff; border-bottom-color: #27ae60; }
-  #d11 .tab-btn.active { color: #f1c40f; border-bottom-color: #f1c40f; }
+#d01 .tab-btn.active { color: #fff; border-bottom-color: #d4e1e8; }
+#d03 .tab-btn.active { color: #fff; border-bottom-color: #fff; }
+#d04 .tab-btn.active { color: #fff; border-bottom-color: #8b5a2b; }
+#d07 .tab-btn.active { color: #fff; border-bottom-color: #27ae60; }
+#d11 .tab-btn.active { color: #f1c40f; border-bottom-color: #f1c40f; }
+#d09 .tab-btn.active { color: #fff; border-bottom-color: #e74c3c; }
 
-  .stamp-bg {
-    position: absolute; top: 15px; right: 15px; width: 140px; height: 140px;
-    background-image: url('stamp.png'); background-size: cover; background-position: center; background-repeat: no-repeat;
-    border-radius: 50%; opacity: 0.15; transform: rotate(15deg); pointer-events: none; z-index: 0; 
-  }
-  .dossier-wrapper.hidden { display: none; }
-  .dossier-title { position: relative; z-index: 1; text-align: center; font-family: "Merriweather", serif; font-size: 1.4rem; letter-spacing: 4px; color: #fff; margin: 0 0 20px; font-weight: bold; cursor: default; }
-  .dossier-meta { position: relative; z-index: 1; text-align: center; font-size: 0.85rem; margin-bottom: 30px; letter-spacing: 1px;}
-  .dossier-meta div { margin: 6px 0; }
-  .dossier-meta .label { color: var(--dim); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 2px;}
-  
-  .dossier-author {
-    position: relative; z-index: 1; text-align: center; 
-    font-size: 0.75rem; letter-spacing: 2px; color: var(--dim); 
-    margin-top: 40px; padding-top: 15px; border-top: 1px dashed var(--border);
-    text-transform: uppercase;
-  }
-  .dossier-author span { color: var(--accent); font-weight: bold; text-shadow: 0 0 5px var(--accent-glow); }
+.stamp-bg {
+  position: absolute; top: 15px; right: 15px; width: 140px; height: 140px;
+  background-image: url('stamp.png'); background-size: cover; background-position: center; background-repeat: no-repeat;
+  border-radius: 50%; opacity: 0.15; transform: rotate(15deg); pointer-events: none; z-index: 0; 
+}
+.dossier-wrapper.hidden { display: none; }
+.dossier-title { position: relative; z-index: 1; text-align: center; font-family: "Merriweather", serif; font-size: 1.4rem; letter-spacing: 4px; color: #fff; margin: 0 0 20px; font-weight: bold; cursor: default; }
+.dossier-meta { position: relative; z-index: 1; text-align: center; font-size: 0.85rem; margin-bottom: 30px; letter-spacing: 1px;}
+.dossier-meta div { margin: 6px 0; }
+.dossier-meta .label { color: var(--dim); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 2px;}
 
-  .tabs, .tab-content, .copy-btn { position: relative; z-index: 1; }
-  .copy-btn { display: block; width: fit-content; margin: 0 auto 20px auto; padding: 8px 16px; background: rgba(255,255,255,0.05); color: var(--text); border: 1px solid var(--border); border-radius: 6px; font-family: inherit; font-size: 0.8rem; cursor: pointer; transition: all 0.2s; text-transform: uppercase; letter-spacing: 1px; }
-  .copy-btn:hover { background: rgba(255,255,255,0.1); border-color: #fff; color: #fff; }
-  .copy-btn.copied { background: #5ca85c; border-color: #5ca85c; color: #fff; }
-  .copy-btn.hidden-btn { display: none; }
+.dossier-author {
+  position: relative; z-index: 1; text-align: center; 
+  font-size: 0.75rem; letter-spacing: 2px; color: var(--dim); 
+  margin-top: 40px; padding-top: 15px; border-top: 1px dashed var(--border);
+  text-transform: uppercase;
+}
+.dossier-author span { color: var(--accent); font-weight: bold; text-shadow: 0 0 5px var(--accent-glow); }
 
-  .tabs { display: flex; justify-content: center; border-bottom: 1px solid var(--border); margin-bottom: 35px; gap: 20px; flex-wrap: wrap; }
-  .tab-btn { background: transparent; border: none; color: var(--dim); font-family: inherit; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; padding: 12px 20px; cursor: pointer; border-bottom: 3px solid transparent; transition: all 0.2s; font-weight: 500; }
-  .tab-btn:hover { color: #fff; }
-  .tab-content { display: none; }
-  .tab-content.active { display: block; }
+.tabs, .tab-content, .copy-btn { position: relative; z-index: 1; }
+.copy-btn { display: block; width: fit-content; margin: 0 auto 20px auto; padding: 8px 16px; background: rgba(255,255,255,0.05); color: var(--text); border: 1px solid var(--border); border-radius: 6px; font-family: inherit; font-size: 0.8rem; cursor: pointer; transition: all 0.2s; text-transform: uppercase; letter-spacing: 1px; }
+.copy-btn:hover { background: rgba(255,255,255,0.1); border-color: #fff; color: #fff; }
+.copy-btn.copied { background: #5ca85c; border-color: #5ca85c; color: #fff; }
+.copy-btn.hidden-btn { display: none; }
 
-  .block-title { font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin: 35px 0 15px; display: flex; align-items: center; font-weight: 500; }
-  .block-title::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, var(--border) 0%, transparent 100%); margin-left: 20px; }
-  .block-text { margin: 0 0 20px; text-align: justify; font-size: 0.95rem; color: #a9b2bc; line-height: 1.7; }
-  .secret { color: var(--secret); background: rgba(212, 160, 23, 0.05); border: 1px dashed rgba(212, 160, 23, 0.4); padding: 2px 6px; font-size: 0.85em; cursor: help; }
-  .lore-text { font-size: 0.95rem; color: #a9b2bc; text-align: justify; line-height: 1.8; }
-  .lore-text p { margin: 0 0 20px; text-indent: 25px; }
-  .lore-text p:last-child { margin-bottom: 0; }
+.tabs { display: flex; justify-content: center; border-bottom: 1px solid var(--border); margin-bottom: 35px; gap: 20px; flex-wrap: wrap; }
+.tab-btn { background: transparent; border: none; color: var(--dim); font-family: inherit; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; padding: 12px 20px; cursor: pointer; border-bottom: 3px solid transparent; transition: all 0.2s; font-weight: 500; }
+.tab-btn:hover { color: #fff; }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
 
+.block-title { font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin: 35px 0 15px; display: flex; align-items: center; font-weight: 500; }
+.block-title::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, var(--border) 0%, transparent 100%); margin-left: 20px; }
+.block-text { margin: 0 0 20px; text-align: justify; font-size: 0.95rem; color: #a9b2bc; line-height: 1.7; }
+.secret { color: var(--secret); background: rgba(212, 160, 23, 0.05); border: 1px dashed rgba(212, 160, 23, 0.4); padding: 2px 6px; font-size: 0.85em; cursor: help; }
+.lore-text { font-size: 0.95rem; color: #a9b2bc; text-align: justify; line-height: 1.8; }
+.lore-text p { margin: 0 0 20px; text-indent: 25px; }
+.lore-text p:last-child { margin-bottom: 0; }
   .gear-category { font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--dim); margin: 25px 0 10px; border-bottom: 1px dashed var(--border); padding-bottom: 5px; }
   .gear-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px; margin-bottom: 20px; }
   .gear-card { background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-left: 3px solid var(--border); padding: 15px; border-radius: 8px; transition: all 0.2s; }
@@ -251,6 +251,7 @@
       <li><button class="nav-btn" data-color="#8b5a2b" onclick="openDossier('d04', this)"><div class="nav-icon">⚙️</div><div class="nav-info"><span class="num">№04-К</span><span class="name">Джатаро Кемури</span></div></button></li>
       <li><button class="nav-btn" data-color="#27ae60" onclick="openDossier('d07', this)"><div class="nav-icon">🧭</div><div class="nav-info"><span class="num">№07-А</span><span class="name">Рантаро Амами</span></div></button></li>
       <li><button class="nav-btn" data-color="#f1c40f" onclick="openDossier('d11', this)"><div class="nav-icon">🏹</div><div class="nav-info"><span class="num">№11-Х</span><span class="name">Маки Харукава</span></div></button></li>
+      <li><button class="nav-btn" data-color="#e74c3c" onclick="openDossier('d09', this)"><div class="nav-icon">🌙</div><div class="nav-info"><span class="num">№09-Ю</span><span class="name">Химико Юмено</span></div></button></li>
     </ul>
     <div class="aside-footer">
       <div class="status"><div class="status-dot"></div> Система активна</div>
@@ -259,277 +260,276 @@
   </aside>
 
   <main id="main-content">
-    <!-- ВСТАВЬ СЮДА ВСЕ 5 ДЕЛ ИЗ ЧАСТИ 2 -->
-        <!-- ДЕЛО 0: Йи Санг (Шуичи) -->
-    <article class="dossier-wrapper" id="d01" style="border-top: 3px solid #2a2e35;">
-      <div class="stamp-bg"></div>
-      <div class="dossier-title">ЛИЧНОЕ ДЕЛО №01-Ш</div>
-      <div class="dossier-meta">
-        <div><span class="label">Имя:</span> Йи Санг (Шуичи Сайхара)</div>
-        <div><span class="label">Возраст:</span> 29 лет | <span class="label">Статус:</span> Жив | <span class="label">Должность:</span> Учитель / Куратор</div>
-        <div><span class="label">Талант:</span> Абсолютный Архитектор Судьбы</div>
+<!-- ДЕЛО 0: Йи Санг (Шуичи) -->
+<article class="dossier-wrapper" id="d01" style="border-top: 3px solid #2a2e35;">
+  <div class="stamp-bg"></div>
+  <div class="dossier-title">ЛИЧНОЕ ДЕЛО №01-Ш</div>
+  <div class="dossier-meta">
+    <div><span class="label">Имя:</span> Йи Санг (Шуичи Сайхара)</div>
+    <div><span class="label">Возраст:</span> 29 лет | <span class="label">Статус:</span> Жив | <span class="label">Должность:</span> Учитель</div>
+    <div><span class="label">Талант:</span> Абсолютный Архитектор Судьбы</div>
+  </div>
+  <button class="copy-btn" onclick="copyDossier('d01', this)">Скопировать для RP</button>
+  <div class="tabs">
+    <button class="tab-btn active" onclick="openTab('d01', 'off', this)">Официальное дело</button>
+    <button class="tab-btn" onclick="openTab('d01', 'hist', this)">Личная история</button>
+    <button class="tab-btn" onclick="openTab('d01', 'gear', this)">Снаряжение</button>
+  </div>
+  <div class="tab-content active" id="d01-off">
+    <div class="block-title">Особые приметы</div>
+    <p class="block-text">Бледная кожа, потухший взгляд, под глазами глубокие тени от хронического недосыпа. Носит длинное белое пальто с обгоревшими краями поверх строгого костюма и красного галстука. На левом бедре — нож в ножнах, который он использует скорее как инструмент для вскрытия замков или разрезания тканей, чем как оружие. На поясе висит потрёпанная серая сумка с блокнотом. Говорит тихо, монотонно, с длинными паузами. Часто отвечает загадками, цитатами или обрывками стихов. В моменты сильного стресса или озарения его голос становится холодным и пугающе точным.</p>
+    <div class="block-title">Краткая сводка</div>
+    <p class="block-text">В прошлом — гениальный исследователь и архитектор, возглавлявший закрытый проект «Лига Девяти», целью которого было создание технологии, способной моделировать альтернативные варианты развития событий. После катастрофы, унесшей жизни его команды, Йи Санг впал в глубокую депрессию. Однако Академия «Пик Надежды» выкупила его контракт и назначила преподавателем аналитики, посчитав, что его уникальный разум нельзя терять. Официально он числится как Шуичи Сайхара (по документам, из-за путаницы в архивах), но сам просит называть его просто Йи Санг. Ведёт затворнический образ жизни, появляясь на занятиях лишь для того, чтобы дать задание и тут же уйти.</p>
+    <div class="block-title">Причина присвоения таланта</div>
+    <p class="block-text">Йи Санг видит мир как сложную архитектурную конструкцию. Его дар заключается в способности просчитывать любые системы — от механизмов до человеческой психики — на несколько шагов вперёд, мгновенно находя «слабые звенья» и «трещины». Как учитель, он не столько обучает подростков дедукции, сколько заставляет их смотреть на преступления под другим углом, задавая странные философские вопросы, на которые нет однозначного ответа. Отмечается, что субъект может предугадать преступление до того, как оно случится, но чаще всего не вмешивается, считая, что падение системы неизбежно.</p>
+    <div class="block-title">Цель прибытия</div>
+    <p class="block-text">Официально — преподавательская деятельность и кураторство над «особо одаренными» учениками. Служба безопасности отмечает, что субъект не проявляет интереса к социальной жизни и учебному процессу. Фактически, по данным скрытого наблюдения, он воспринимает Академию как безопасное убежище, где можно спрятаться от своего прошлого. Рекомендуется не оставлять его одного в замкнутых помещениях из-за склонности к самокопанию. Студентам не рекомендуется приходить к нему на консультации после заката — он может читать стихи до утра и не заметить, как вы уснули.</p>
+  </div>
+  <div class="tab-content" id="d01-hist">
+    <div class="lore-text">
+      <p>Йи Санг никогда не был обычным ребёнком. В то время как другие дети играли на улицах, он часами наблюдал за тем, как устроены вещи: как трескается лёд на лужах, как падают тени от деревьев, как рушится песочный замок. Его разум искал структуру во всём, что видел. Повзрослев, он стал блестящим архитектором и исследователем, чьи проекты опережали время на десятилетия. Вокруг него сплотилась группа таких же гениев — «Лига Девяти». Они верили, что с помощью науки и искусства можно построить идеальный мир, где не будет места боли и ошибкам.</p>
+      <p>Венцом их работы стал амбициозный проект, который сам Йи Санг называл «Зеркалом». Это была технология, способная смоделировать любую ситуацию, просчитать все возможные варианты развития событий и показать, как избежать катастрофы. Он был одержим идеей создать идеальную формулу судьбы, чтобы защитить своих друзей от любых невзгод. Но он не учёл одного: человеческая природа не подчиняется формулам.</p>
+      <p>В день финального испытания что-то пошло не так. Система, которая должна была предсказать будущее, вместо этого обрушила на них само разрушение. Вспышка, грохот, крики — и тишина. Когда Йи Санг очнулся, он был единственным выжившим. Все члены его «Лиги» погибли. Его гениальный расчёт, его идеальное уравнение обернулось могилой для тех, кого он любил.</p>
+      <p>С тех пор он перестал верить в свои способности. Он считал, что его разум — это проклятие, которое приносит только смерть. В отчаянии он пытался покончить с собой, но его спасли. Врачи отметили, что его психика полностью разрушена: он впал в состояние глубокой апатии, отказываясь разговаривать с кем-либо. Единственное, что осталось от прежнего Йи Санга — это его блокнот и длинный нож, который он носит с собой как напоминание о том, что когда-то он был воином, а теперь стал лишь тенью.</p>
+      <p>Он почти перестал спать. Ночью он сидит в своей комнате, смотрит на пламя свечи и записывает в блокнот странные стихи, в которых пытается найти ответ на вопрос: «Почему я всё ещё жив, если всё, что я создал, обратилось в прах?». Он не ждёт спасения. Он просто ждёт, когда всё закончится.</p>
+      <p>В Академию он прибыл не потому, что хотел учиться. Служба безопасности вычислила его местоположение и принудительно доставила его сюда, считая, что его знания могут быть полезны (или опасны). Сам Йи Санг воспринимает это место как очередную клетку, в которой он может наконец найти ту самую «точку опоры» — либо для того, чтобы начать всё заново, либо для того, чтобы поставить в своей жизни точку. Он редко выходит из своей комнаты. Но если он появляется, все замолкают: его взгляд, полный печали и пустоты, говорит больше, чем любые слова.</p>
+    </div>
+  </div>
+  <div class="tab-content" id="d01-gear">
+    <div class="gear-category">Личные вещи</div>
+    <p style="font-size: 0.8rem; color: var(--dim); font-style: italic; margin-bottom: 20px; text-align: center;">
+      * Желательно иметь при себе для полной отыгровки, если вы сами этого пожелаете.
+    </p>
+    <div class="gear-grid">
+      <div class="gear-card">
+        <div class="gear-card-name">🔪 Нож</div>
+        <div class="gear-card-desc">Длинный, слегка изогнутый клинок в потёртых ножнах. Используется как инструмент для точных манипуляций, а не для боя.</div>
       </div>
-      <button class="copy-btn" onclick="copyDossier('d01', this)">Скопировать для RP</button>
-      <div class="tabs">
-        <button class="tab-btn active" onclick="openTab('d01', 'off', this)">Официальное дело</button>
-        <button class="tab-btn" onclick="openTab('d01', 'hist', this)">Личная история</button>
-        <button class="tab-btn" onclick="openTab('d01', 'gear', this)">Снаряжение</button>
+      <div class="gear-card">
+        <div class="gear-card-name">📓 Блокнот</div>
+        <div class="gear-card-desc">Потрёпанная серая записная книжка. Исписана мелким почерком, страницы забиты странными стихами и обрывочными фразами.</div>
       </div>
-      <div class="tab-content active" id="d01-off">
-        <div class="block-title">Особые приметы</div>
-        <p class="block-text">Бледная кожа, потухший взгляд, под глазами глубокие тени от хронического недосыпа. Носит длинное белое пальто с обгоревшими краями поверх строгого костюма и красного галстука. На левом бедре — нож в ножнах, который он использует скорее как инструмент для вскрытия замков или разрезания тканей, чем как оружие. На поясе висит потрёпанная серая сумка с блокнотом. Говорит тихо, монотонно, с длинными паузами. Часто отвечает загадками, цитатами или обрывками стихов. В моменты сильного стресса или озарения его голос становится холодным и пугающе точным.</p>
-        <div class="block-title">Краткая сводка</div>
-        <p class="block-text">В прошлом — гениальный исследователь и архитектор, возглавлявший закрытый проект «Лига Девяти», целью которого было создание технологии, способной моделировать альтернативные варианты развития событий. После катастрофы, унесшей жизни его команды, Йи Санг впал в глубокую депрессию. Однако Академия «Пик Надежды» выкупила его контракт и назначила преподавателем аналитики, посчитав, что его уникальный разум нельзя терять. Официально он числится как Шуичи Сайхара (по документам, из-за путаницы в архивах), но сам просит называть его просто Йи Санг. Ведёт затворнический образ жизни, появляясь на занятиях лишь для того, чтобы дать задание и тут же уйти.</p>
-        <div class="block-title">Причина присвоения таланта</div>
-        <p class="block-text">Йи Санг видит мир как сложную архитектурную конструкцию. Его дар заключается в способности просчитывать любые системы — от механизмов до человеческой психики — на несколько шагов вперёд, мгновенно находя «слабые звенья» и «трещины». Как учитель, он не столько обучает подростков дедукции, сколько заставляет их смотреть на преступления под другим углом, задавая странные философские вопросы, на которые нет однозначного ответа. Отмечается, что субъект может предугадать преступление до того, как оно случится, но чаще всего не вмешивается, считая, что падение системы неизбежно.</p>
-        <div class="block-title">Цель прибытия</div>
-        <p class="block-text">Официально — преподавательская деятельность и кураторство над «особо одаренными» учениками. Служба безопасности отмечает, что субъект не проявляет интереса к социальной жизни и учебному процессу. Фактически, по данным скрытого наблюдения, он воспринимает Академию как безопасное убежище, где можно спрятаться от своего прошлого. Рекомендуется не оставлять его одного в замкнутых помещениях из-за склонности к самокопанию. Студентам не рекомендуется приходить к нему на консультации после заката — он может читать стихи до утра и не заметить, как вы уснули.</p>
+      <div class="gear-card">
+        <div class="gear-card-name">💊 Банка с лекарствами</div>
+        <div class="gear-card-desc">Небольшая жестяная банка с белыми таблетками. Он часто принимает их от головной боли, хотя это уже давно стало привычкой, а не лечением.</div>
       </div>
-      <div class="tab-content" id="d01-hist">
-        <div class="lore-text">
-          <p>Йи Санг никогда не был обычным ребёнком. В то время как другие дети играли на улицах, он часами наблюдал за тем, как устроены вещи: как трескается лёд на лужах, как падают тени от деревьев, как рушится песочный замок. Его разум искал структуру во всём, что видел. Повзрослев, он стал блестящим архитектором и исследователем, чьи проекты опережали время на десятилетия. Вокруг него сплотилась группа таких же гениев — «Лига Девяти». Они верили, что с помощью науки и искусства можно построить идеальный мир, где не будет места боли и ошибкам.</p>
-          <p>Венцом их работы стал амбициозный проект, который сам Йи Санг называл «Зеркалом». Это была технология, способная смоделировать любую ситуацию, просчитать все возможные варианты развития событий и показать, как избежать катастрофы. Он был одержим идеей создать идеальную формулу судьбы, чтобы защитить своих друзей от любых невзгод. Но он не учёл одного: человеческая природа не подчиняется формулам.</p>
-          <p>В день финального испытания что-то пошло не так. Система, которая должна была предсказать будущее, вместо этого обрушила на них само разрушение. Вспышка, грохот, крики — и тишина. Когда Йи Санг очнулся, он был единственным выжившим. Все члены его «Лиги» погибли. Его гениальный расчёт, его идеальное уравнение обернулось могилой для тех, кого он любил.</p>
-          <p>С тех пор он перестал верить в свои способности. Он считал, что его разум — это проклятие, которое приносит только смерть. В отчаянии он пытался покончить с собой, но его спасли. Врачи отметили, что его психика полностью разрушена: он впал в состояние глубокой апатии, отказываясь разговаривать с кем-либо. Единственное, что осталось от прежнего Йи Санга — это его блокнот и длинный нож, который он носит с собой как напоминание о том, что когда-то он был воином, а теперь стал лишь тенью.</p>
-          <p>Он почти перестал спать. Ночью он сидит в своей комнате, смотрит на пламя свечи и записывает в блокнот странные стихи, в которых пытается найти ответ на вопрос: «Почему я всё ещё жив, если всё, что я создал, обратилось в прах?». Он не ждёт спасения. Он просто ждёт, когда всё закончится.</p>
-          <p>В Академию он прибыл не потому, что хотел учиться. Служба безопасности вычислила его местоположение и принудительно доставила его сюда, считая, что его знания могут быть полезны (или опасны). Сам Йи Санг воспринимает это место как очередную клетку, в которой он может наконец найти ту самую «точку опоры» — либо для того, чтобы начать всё заново, либо для того, чтобы поставить в своей жизни точку. Он редко выходит из своей комнаты. Но если он появляется, все замолкают: его взгляд, полный печали и пустоты, говорит больше, чем любые слова.</p>
-        </div>
+      <div class="gear-card">
+        <div class="gear-card-name">💤 Снотворное</div>
+        <div class="gear-card-desc">Пузырёк с мутной жидкостью. Используется им, когда мысли становятся слишком громкими, чтобы он мог заснуть.</div>
       </div>
-      <div class="tab-content" id="d01-gear">
-        <div class="gear-category">Личные вещи</div>
-        <p style="font-size: 0.8rem; color: var(--dim); font-style: italic; margin-bottom: 20px; text-align: center;">
-          * Желательно иметь при себе для полной отыгровки, если вы сами этого пожелаете.
-        </p>
-        <div class="gear-grid">
-          <div class="gear-card">
-            <div class="gear-card-name">🔪 Нож</div>
-            <div class="gear-card-desc">Длинный, слегка изогнутый клинок в потёртых ножнах. Используется как инструмент для точных манипуляций, а не для боя.</div>
-          </div>
-          <div class="gear-card">
-            <div class="gear-card-name">📓 Блокнот</div>
-            <div class="gear-card-desc">Потрёпанная серая записная книжка. Исписана мелким почерком, страницы забиты странными стихами и обрывочными фразами.</div>
-          </div>
-          <div class="gear-card">
-            <div class="gear-card-name">💊 Банка с лекарствами</div>
-            <div class="gear-card-desc">Небольшая жестяная банка с белыми таблетками. Он часто принимает их от головной боли, хотя это уже давно стало привычкой, а не лечением.</div>
-          </div>
-          <div class="gear-card">
-            <div class="gear-card-name">💤 Снотворное</div>
-            <div class="gear-card-desc">Пузырёк с мутной жидкостью. Используется им, когда мысли становятся слишком громкими, чтобы он мог заснуть.</div>
-          </div>
-        </div>
-      </div>
-      <div class="dossier-author">Автор идеи: <span>Erzmagier</span></div>
-    </article>
+    </div>
+  </div>
+  <div class="dossier-author">Автор идеи: <span>Erzmagier</span></div>
+</article>
 
-    <!-- ДЕЛО 1: Кокичи -->
-    <article class="dossier-wrapper hidden" id="d03" style="border-top: 3px solid #9b59b6;">
-      <div class="stamp-bg"></div>
-      <div class="dossier-title">ЛИЧНОЕ ДЕЛО №03-К</div>
-      <div class="dossier-meta">
-        <div><span class="label">Имя:</span> Кокичи Ома</div>
-        <div><span class="label">Возраст:</span> 20 лет | <span class="label">Статус:</span> Жив | <span class="label">Статус:</span> Ученик</div>
-        <div><span class="label">Талант:</span> Абсолютный Шут Хаоса</div>
+<!-- ДЕЛО 1: Кокичи -->
+<article class="dossier-wrapper hidden" id="d03" style="border-top: 3px solid #9b59b6;">
+  <div class="stamp-bg"></div>
+  <div class="dossier-title">ЛИЧНОЕ ДЕЛО №03-К</div>
+  <div class="dossier-meta">
+    <div><span class="label">Имя:</span> Кокичи Ома</div>
+    <div><span class="label">Возраст:</span> 20 лет | <span class="label">Статус:</span> Жив | <span class="label">Статус:</span> Ученик</div>
+    <div><span class="label">Талант:</span> Абсолютный Шут Хаоса</div>
+  </div>
+  <button class="copy-btn" onclick="copyDossier('d03', this)">Скопировать для RP</button>
+  <div class="tabs">
+    <button class="tab-btn active" onclick="openTab('d03', 'off', this)">Официальное дело</button>
+    <button class="tab-btn" onclick="openTab('d03', 'hist', this)">Личная история</button>
+    <button class="tab-btn" onclick="openTab('d03', 'gear', this)">Снаряжение</button>
+  </div>
+  <div class="tab-content active" id="d03-off">
+    <div class="block-title">Особые приметы</div>
+    <p class="block-text">Костюм Шута, скрывающий истинное лицо субъекта; вне выступлений Ома держится подчёркнуто открыто, но о своей внешности говорит уклончиво, и причины этого <span class="secret">[ДАННЫЕ ОТ СЛУЖБЫ БЕЗОПАСНОСТИ ЗАСЕКРЕЧЕНЫ]</span>. На поясе — старинный карманный компас на тяжёлой цепочке, с которым он никогда не расстаётся. Манеры игривые, речь театральная, с внезапными переходами от детской непосредственности к холодному расчёту. При общении с незнакомыми людьми постоянно «прощупывает» их реакциями — проверяет на страх, жадность, тщеславие. Обладает высокой стрессоустойчивостью, в критических ситуациях сохраняет ледяное спокойствие.</p>
+    <div class="block-title">Краткая сводка</div>
+    <p class="block-text">Вырос в трущобах, с ранних лет выживал на улице вместе с Рантаро Амами (см. дело №07-А), который стал его ближайшим другом и тылом. Из уличной банды создал международную бродячую труппу «D.I.C.E.», чьи перформансы прогремели от криминального клана Кузурю до совета директоров Towa Group и королевского двора Новоселик. Костюм Шута Хаоса создан Цумуги Широганэ по референсам, собранным Амами в Италии и Франции. За кулисами представлений труппа добывает компромат на влиятельных лиц; часть добытых данных передаётся Амами для экспедиций, взамен D.I.C.E. обеспечивает безопасность его сестёр, чьи имена и местонахождение <span class="secret">[ИНФОРМАЦИЯ ЗАСЕКРЕЧЕНА]</span> и изъяты из общего доступа в целях безопасности субъекта.</p>
+    <div class="block-title">Причина присвоения таланта</div>
+    <p class="block-text">Способен превратить любое событие в управляемый спектакль и удерживать внимание аудитории любой статусной принадлежности. Демонстрирует незаурядное мастерство манипуляции: под прикрытием представлений проворачивает кражи, подмены документов и взломы, оставаясь неуличённым. Умеет читать толпу и отдельного человека, подстраивая сценарий под реакции. Отдельно отмечается парадоксальная черта: субъект лжёт почти постоянно, однако в критических ситуациях, связанных с Амами, действует безошибочно и без обмана — комиссия фиксирует это как аномалию.</p>
+    <div class="block-title">Цель прибытия</div>
+    <p class="block-text">Официально зачислен в Академию «Пик Надежды» для освоения программы по профилю таланта и расширения репертуара труппы. Академия и прежде пользовалась известностью в округах, однако именно поступление Омы привлекло к ней дополнительное внимание: число желающих поступить и посетить учреждение заметно выросло, а администрация не скрывает, что намерена использовать имя субъекта в своих интересах. Фактически, по данным скрытого наблюдения, Ома относится к обучению как к очередной сцене и посещает лишь те занятия, где может получить доступ к <span class="secret">[ИНФОРМАЦИЯ ЗАСЕКРЕЧЕНА]</span>. Администрация предупреждает: субъект не боится разоблачения, не реагирует на стандартные угрозы и способен склонить окружающих к нужному ему решению, оставаясь при этом обаятельным. При проведении допросов рекомендуется присутствие второго наблюдателя.</p>
+  </div>
+  <div class="tab-content" id="d03-hist">
+    <div class="lore-text">
+      <p>Кокичи Ома — Абсолютный Шут Хаоса. Человек, способный превратить любое событие в грандиозный, непредсказуемый спектакль, и двадцатилетний бессменный лидер всемирно известной бродячей труппы «D.I.C.E.». К своим двадцати годам Кокичи превратил свою команду из обычной уличной банды в неуловимый международный феномен. О безумных перформансах этой труппы слагают легенды по всему земному шару: они проводят масштабные выступления и веселят не только обычный люд, но и легко находят язык с самыми опасными, влиятельными и высокопоставленными фигурами этого мира.</p>
+      <p>Мало кто знает, но за этим триумфом скрываются годы выживания на самом дне. Кокичи вырос в тех же голодных и опасных трущобах, что и его самый близкий друг — Рантаро Амами. Они вместе пробивали себе дорогу в жизнь, деля последнюю корку хлеба и помогая друг другу выпутываться из передряг. В знак этой нерушимой связи, зародившейся еще на улицах, Кокичи никогда не расстается с особым аксессуаром. Перед каждым выходом на сцену, продумывая очередной безумный трюк, Ома сосредоточенно крутит в руках старинный карманный компас на тяжелой цепочке — подарок от Рантаро, привезенный из его первой экспедиции. Для Кокичи эта вещь стала личным талисманом, напоминающим о том, откуда он начал свой путь.</p>
+      <p>Стиль его труппы тоже стал результатом их общего прошлого и одной судьбоносной встречи. Во время своих опасных странствий по Шанхаю Рантаро пересёкся с Цумуги Широганэ — тогда ещё неизвестной, но гениальной Абсолютной Косплеершей. Цумуги загорелась идеей Омы и сотворила настоящий шедевр: по архивным эскизам уличных карнавалов, которые Рантаро привёз из Франции и Италии, она лично разработала и пошила сложнейший, пугающий и одновременно притягательный костюм Шута. Когда Ома впервые примерил эту идеальную работу Широганэ, он пришел в полный восторг — наряд сидел как влитой, скрывая его истинное лицо и позволяя начать грандиозную игру с мировыми элитами.</p>
+      <p>Обретя этот образ, Кокичи начал крутить лицемерным миром. Его труппа одинаково изящно организовывала закрытые шоу для криминального клана Якудза Кузурю и умудрялась заставить высокомерно ухмыляться главу многомиллиардного конгломерата Тогами. Одним из самых громких триумфов Абсолютного Шута Хаоса стало выступление перед королевской семьей Новоселик. Пожилые министры и строгие советники европейского государства ожидали увидеть классическое благопристойное шоу, но Кокичи превратил дворцовый зал в театр абсурда. Он дерзко пародировал вековые монаршие традиции, жонглировал бесценными фамильными реликвиями прямо над головами придворных и умудрился «случайно» подменить коронационные документы на шуточные указы. Королевская стража держала руки на эфесах шпаг, готовая казнить наглеца в любую секунду, но безупречная харизма Омы заставила королевскую верхушку признать: это было самое живое и непредсказуемое зрелище, которое когда-либо видел этот замок.</p>
+      <p>Следующей целью «D.I.C.E.» стал высокотехнологичный Город Това — база могущественного конгломерата «Towa Group». Специально для совета директоров Кокичи срежиссировал масштабный техно-перформанс. Пока на сцене взрывались неоновые огни, а актеры в масках разыгрывали комедию о восстании машин, сам Ома провернул главный фокус за кулисами. Используя хаос представления как идеальную ширму, его труппа взломала внутреннюю сеть корпорации, выведав несколько грязных коммерческих тайн руководства. В итоге директора Towa Group вежливо аплодировали Шуту Хаоса, даже не подозревая, что их репутация теперь целиком и полностью находится в его кармане. Взамен на такие услуги Кокичи получал от Рантаро редкие карты и зацепки для его экспедиций, а «D.I.C.E.» тайно оберегала двенадцать сестер Амами, пока тот был в разъездах.</p>
+      <p>На сцене Кокичи казался невинным ребенком, но за секунду мог превратиться в коварного кукловода, играющего на эмоциях публики. Для двадцатилетнего Шута Хаоса весь мир стал огромной сценой. Заставляя людей смеяться, злиться или паниковать, Ома преследовал свой собственный, глубоко скрытый мотив: он жаждал срывать фальшивые маски с этого лицемерного мира и выведывать самые грязные, мрачные секреты, которые влиятельные люди так тщательно прятали от чужих глаз.</p>
+    </div>
+  </div>
+  <div class="tab-content" id="d03-gear">
+    <div class="gear-category">Реквизит</div>
+    <p style="font-size: 0.8rem; color: var(--dim); font-style: italic; margin-bottom: 20px; text-align: center;">
+      * Желательно иметь при себе для полной отыгровки, если вы сами этого пожелаете.
+    </p>
+    <div class="gear-grid">
+      <div class="gear-card">
+        <div class="gear-card-name">🔮 Хрустальный шар</div>
+        <div class="gear-card-desc">Используется как реквизит для «предсказаний» и жонглирования.</div>
       </div>
-      <button class="copy-btn" onclick="copyDossier('d03', this)">Скопировать для RP</button>
-      <div class="tabs">
-        <button class="tab-btn active" onclick="openTab('d03', 'off', this)">Официальное дело</button>
-        <button class="tab-btn" onclick="openTab('d03', 'hist', this)">Личная история</button>
-        <button class="tab-btn" onclick="openTab('d03', 'gear', this)">Снаряжение</button>
+      <div class="gear-card">
+        <div class="gear-card-name">⛓️ Наручники</div>
+        <div class="gear-card-desc">Настоящие наручники, которые Ома носит с собой для розыгрышей и запугивания.</div>
       </div>
-      <div class="tab-content active" id="d03-off">
-        <div class="block-title">Особые приметы</div>
-        <p class="block-text">Костюм Шута, скрывающий истинное лицо субъекта; вне выступлений Ома держится подчёркнуто открыто, но о своей внешности говорит уклончиво, и причины этого <span class="secret">[ДАННЫЕ ОТ СЛУЖБЫ БЕЗОПАСНОСТИ ЗАСЕКРЕЧЕНЫ]</span>. На поясе — старинный карманный компас на тяжёлой цепочке, с которым он никогда не расстаётся. Манеры игривые, речь театральная, с внезапными переходами от детской непосредственности к холодному расчёту. При общении с незнакомыми людьми постоянно «прощупывает» их реакциями — проверяет на страх, жадность, тщеславие. Обладает высокой стрессоустойчивостью, в критических ситуациях сохраняет ледяное спокойствие.</p>
-        <div class="block-title">Краткая сводка</div>
-        <p class="block-text">Вырос в трущобах, с ранних лет выживал на улице вместе с Рантаро Амами (см. дело №07-А), который стал его ближайшим другом и тылом. Из уличной банды создал международную бродячую труппу «D.I.C.E.», чьи перформансы прогремели от криминального клана Кузурю до совета директоров Towa Group и королевского двора Новоселик. Костюм Шута Хаоса создан Цумуги Широганэ по референсам, собранным Амами в Италии и Франции. За кулисами представлений труппа добывает компромат на влиятельных лиц; часть добытых данных передаётся Амами для экспедиций, взамен D.I.C.E. обеспечивает безопасность его сестёр, чьи имена и местонахождение <span class="secret">[ИНФОРМАЦИЯ ЗАСЕКРЕЧЕНА]</span> и изъяты из общего доступа в целях безопасности субъекта.</p>
-        <div class="block-title">Причина присвоения таланта</div>
-        <p class="block-text">Способен превратить любое событие в управляемый спектакль и удерживать внимание аудитории любой статусной принадлежности. Демонстрирует незаурядное мастерство манипуляции: под прикрытием представлений проворачивает кражи, подмены документов и взломы, оставаясь неуличённым. Умеет читать толпу и отдельного человека, подстраивая сценарий под реакции. Отдельно отмечается парадоксальная черта: субъект лжёт почти постоянно, однако в критических ситуациях, связанных с Амами, действует безошибочно и без обмана — комиссия фиксирует это как аномалию.</p>
-        <div class="block-title">Цель прибытия</div>
-        <p class="block-text">Официально зачислен в Академию «Пик Надежды» для освоения программы по профилю таланта и расширения репертуара труппы. Академия и прежде пользовалась известностью в округах, однако именно поступление Омы привлекло к ней дополнительное внимание: число желающих поступить и посетить учреждение заметно выросло, а администрация не скрывает, что намерена использовать имя субъекта в своих интересах. Фактически, по данным скрытого наблюдения, Ома относится к обучению как к очередной сцене и посещает лишь те занятия, где может получить доступ к <span class="secret">[ИНФОРМАЦИЯ ЗАСЕКРЕЧЕНА]</span>. Администрация предупреждает: субъект не боится разоблачения, не реагирует на стандартные угрозы и способен склонить окружающих к нужному ему решению, оставаясь при этом обаятельным. При проведении допросов рекомендуется присутствие второго наблюдателя.</p>
+      <div class="gear-card">
+        <div class="gear-card-name">📓 Блокнот</div>
+        <div class="gear-card-desc">Записная книжка с «компроматом» на всех учеников (на самом деле может быть пустой).</div>
       </div>
-      <div class="tab-content" id="d03-hist">
-        <div class="lore-text">
-          <p>Кокичи Ома — Абсолютный Шут Хаоса. Человек, способный превратить любое событие в грандиозный, непредсказуемый спектакль, и двадцатилетний бессменный лидер всемирно известной бродячей труппы «D.I.C.E.». К своим двадцати годам Кокичи превратил свою команду из обычной уличной банды в неуловимый международный феномен. О безумных перформансах этой труппы слагают легенды по всему земному шару: они проводят масштабные выступления и веселят не только обычный люд, но и легко находят язык с самыми опасными, влиятельными и высокопоставленными фигурами этого мира.</p>
-          <p>Мало кто знает, но за этим триумфом скрываются годы выживания на самом дне. Кокичи вырос в тех же голодных и опасных трущобах, что и его самый близкий друг — Рантаро Амами. Они вместе пробивали себе дорогу в жизнь, деля последнюю корку хлеба и помогая друг другу выпутываться из передряг. В знак этой нерушимой связи, зародившейся еще на улицах, Кокичи никогда не расстается с особым аксессуаром. Перед каждым выходом на сцену, продумывая очередной безумный трюк, Ома сосредоточенно крутит в руках старинный карманный компас на тяжелой цепочке — подарок от Рантаро, привезенный из его первой экспедиции. Для Кокичи эта вещь стала личным талисманом, напоминающим о том, откуда он начал свой путь.</p>
-          <p>Стиль его труппы тоже стал результатом их общего прошлого и одной судьбоносной встречи. Во время своих опасных странствий по Шанхаю Рантаро пересёкся с Цумуги Широганэ — тогда ещё неизвестной, но гениальной Абсолютной Косплеершей. Цумуги загорелась идеей Омы и сотворила настоящий шедевр: по архивным эскизам уличных карнавалов, которые Рантаро привёз из Франции и Италии, она лично разработала и пошила сложнейший, пугающий и одновременно притягательный костюм Шута. Когда Ома впервые примерил эту идеальную работу Широганэ, он пришел в полный восторг — наряд сидел как влитой, скрывая его истинное лицо и позволяя начать грандиозную игру с мировыми элитами.</p>
-          <p>Обретя этот образ, Кокичи начал крутить лицемерным миром. Его труппа одинаково изящно организовывала закрытые шоу для криминального клана Якудза Кузурю и умудрялась заставить высокомерно ухмыляться главу многомиллиардного конгломерата Тогами. Одним из самых громких триумфов Абсолютного Шута Хаоса стало выступление перед королевской семьей Новоселик. Пожилые министры и строгие советники европейского государства ожидали увидеть классическое благопристойное шоу, но Кокичи превратил дворцовый зал в театр абсурда. Он дерзко пародировал вековые монаршие традиции, жонглировал бесценными фамильными реликвиями прямо над головами придворных и умудрился «случайно» подменить коронационные документы на шуточные указы. Королевская стража держала руки на эфесах шпаг, готовая казнить наглеца в любую секунду, но безупречная харизма Омы заставила королевскую верхушку признать: это было самое живое и непредсказуемое зрелище, которое когда-либо видел этот замок.</p>
-          <p>Следующей целью «D.I.C.E.» стал высокотехнологичный Город Това — база могущественного конгломерата «Towa Group». Специально для совета директоров Кокичи срежиссировал масштабный техно-перформанс. Пока на сцене взрывались неоновые огни, а актеры в масках разыгрывали комедию о восстании машин, сам Ома провернул главный фокус за кулисами. Используя хаос представления как идеальную ширму, его труппа взломала внутреннюю сеть корпорации, выведав несколько грязных коммерческих тайн руководства. В итоге директора Towa Group вежливо аплодировали Шуту Хаоса, даже не подозревая, что их репутация теперь целиком и полностью находится в его кармане. Взамен на такие услуги Кокичи получал от Рантаро редкие карты и зацепки для его экспедиций, а «D.I.C.E.» тайно оберегала двенадцать сестер Амами, пока тот был в разъездах.</p>
-          <p>На сцене Кокичи казался невинным ребенком, но за секунду мог превратиться в коварного кукловода, играющего на эмоциях публики. Для двадцатилетнего Шута Хаоса весь мир стал огромной сценой. Заставляя людей смеяться, злиться или паниковать, Ома преследовал свой собственный, глубоко скрытый мотив: он жаждал срывать фальшивые маски с этого лицемерного мира и выведывать самые грязные, мрачные секреты, которые влиятельные люди так тщательно прятали от чужих глаз.</p>
-        </div>
-      </div>
-      <div class="tab-content" id="d03-gear">
-        <div class="gear-category">Реквизит</div>
-        <p style="font-size: 0.8rem; color: var(--dim); font-style: italic; margin-bottom: 20px; text-align: center;">
-          * Желательно иметь при себе для полной отыгровки, если вы сами этого пожелаете.
-        </p>
-        <div class="gear-grid">
-          <div class="gear-card">
-            <div class="gear-card-name">🔮 Хрустальный шар</div>
-            <div class="gear-card-desc">Используется как реквизит для «предсказаний» и жонглирования.</div>
-          </div>
-          <div class="gear-card">
-            <div class="gear-card-name">⛓️ Наручники</div>
-            <div class="gear-card-desc">Настоящие наручники, которые Ома носит с собой для розыгрышей и запугивания.</div>
-          </div>
-          <div class="gear-card">
-            <div class="gear-card-name">📓 Блокнот</div>
-            <div class="gear-card-desc">Записная книжка с «компроматом» на всех учеников (на самом деле может быть пустой).</div>
-          </div>
-        </div>
-      </div>
-      <div class="dossier-author">Автор идеи: <span>Erzmagier</span></div>
-    </article>
+    </div>
+  </div>
+  <div class="dossier-author">Автор идеи: <span>Erzmagier</span></div>
+</article>
 
-    <!-- ДЕЛО 2: Джатаро -->
-    <article class="dossier-wrapper hidden" id="d04" style="border-top: 3px solid #8b5a2b;">
-      <div class="stamp-bg"></div>
-      <div class="dossier-title">ЛИЧНОЕ ДЕЛО №04-К</div>
-      <div class="dossier-meta">
-        <div><span class="label">Имя:</span> Джатаро Кемури</div>
-        <div><span class="label">Возраст:</span> 12 лет | <span class="label">Статус:</span> Жив | <span class="label">Статус:</span> Ученик</div>
-        <div><span class="label">Талант:</span> Маленький Абсолютный Изобретатель</div>
+<!-- ДЕЛО 2: Джатаро -->
+<article class="dossier-wrapper hidden" id="d04" style="border-top: 3px solid #8b5a2b;">
+  <div class="stamp-bg"></div>
+  <div class="dossier-title">ЛИЧНОЕ ДЕЛО №04-К</div>
+  <div class="dossier-meta">
+    <div><span class="label">Имя:</span> Джатаро Кемури</div>
+    <div><span class="label">Возраст:</span> 12 лет | <span class="label">Статус:</span> Жив | <span class="label">Статус:</span> Ученик</div>
+    <div><span class="label">Талант:</span> Маленький Абсолютный Изобретатель</div>
+  </div>
+  <button class="copy-btn" onclick="copyDossier('d04', this)">Скопировать для RP</button>
+  <div class="tabs">
+    <button class="tab-btn active" onclick="openTab('d04', 'off', this)">Официальное дело</button>
+    <button class="tab-btn" onclick="openTab('d04', 'hist', this)">Личная история</button>
+    <button class="tab-btn" onclick="openTab('d04', 'gear', this)">Снаряжение</button>
+  </div>
+  <div class="tab-content active" id="d04-off">
+    <div class="block-title">Особые приметы</div>
+    <p class="block-text">Левая рука полностью изуродована (последствия нападения хищника), скрыта под толстым слоем грязных бинтов. Маску на лице не носит, одежда и рукава выглядят потрёпанными. Проявляет признаки острой социофобии: при контакте с другими учениками ведет себя пугливо, избегает зрительного контакта. Наблюдается тремор рук при громких звуках или резких движениях. В стрессовых ситуациях склонен забиваться в углы искать укрытия.</p>
+    <div class="block-title">Краткая сводка</div>
+    <p class="block-text">Первые годы жизни провел запертым в сыром подвале родного дома. В возрасте 9 лет совершил побег в тайгу, где попал в медвежий капкан и подвергся нападению волчьей стаи. Был спасен некой <span class="secret">[ИНФОРМАЦИЯ ЗАСЕКРЕЧЕНА]</span>, под чьим негласным надзором скрывался в глухом лесу. Спустя год его родное поселение вместе с родителями было уничтожено бандой мародеров <span class="secret">[ДАННЫЕ УДАЛЕНЫ]</span>. О произошедшем узнал от наставницы, окончательно разорвав связи с прошлым. На данный момент не поддерживает контакт с внешним миром.</p>
+    <div class="block-title">Причина присвоения таланта</div>
+    <p class="block-text">За время нахождения в изоляции субъект научился из ржавого охотничьего хлама, деталей и лесных трав создавать автономные сигнальные системы, бесшумные растяжки и скрытые капканы, начиненные парализующим ядом собственного производства. Продемонстрировал уникальный гениальный сплав механики и полевой химии. Устройства субъекта способны эффективно блокировать периметр, обездвиживать и ликвидировать живые цели без прямого контакта. Отмечается нестандартность мышления и способность импровизировать с подручными материалами.</p>
+    <div class="block-title">Цель прибытия</div>
+    <p class="block-text">Направлен в Академию для освоения передовых технологий и получения фундаментальных знаний с целью дальнейшего развития своих навыков. Администрация предупреждает: субъект обладает гениальными инженерными способностями в области создания смертоносных ловушек. Рекомендуется соблюдать повышенную осторожность при совместном обучении. Попытки грубого физического контакта или внезапные приближения могут спровоцировать защитную агрессию и использование скрытых устройств самообороны.</p>
+  </div>
+  <div class="tab-content" id="d04-hist">
+    <div class="lore-text">
+      <p>Ранее Джатаро жил в крайне неблагополучной и абьюзивной семье. Его мать беспробудно пила на пару с отцом, а порой они употребляли и запрещённые вещества. Мальчика постоянно держали запертым в сыром темном подвале словно вещь и лишь изредка выпускали на улицу. В один из январских дней, когда его в очередной раз выпихнули подышать воздухом, Джатаро решился на отчаянный шаг. Под покровом ночи ребёнок сбежал в глухой лес. Ему казалось, что там будет гораздо безопаснее, чем дома, но это стало его роковой ошибкой.</p>
+      <p>Январь — это как раз начало брачного периода у волков, когда хищники сбиваются в стаи и становятся особенно агрессивными и опасными. Как бы Кемури ни старался быть осторожным, он быстро заблудился в темноте и случайно угодил ногой в старый медвежий капкан. Вскоре на зажатого в стальные тиски мальчика наткнулись три волчицы, одна из которых была вконец измучена голодом. Удача полностью отвернулась от мальчишки: он не успел даже опомниться, как истощенная волчица мертвой хваткой вцепилась в его левую руку. Джатаро охватила дикая паника, и от невыносимой боли он начал терять сознание...</p>
+      <p>Как вдруг тяжелый металлический болт, выпущенный из арбалета, насквозь пробил череп изголодавшемуся зверю за долю секунды до того, как тот перегрыз бы мальчику горло.</p>
+      <p>Джатаро пришел в себя уже в полутемном, надежно укрытом от непогоды лесном убежище. Жуткая боль в растерзанной руке и ноге немного утихла — раны были тщательно промыты, обработаны какими-то травами и туго забинтованы. Его спасительницей оказалась молчаливая девушка в приметном походном наряде: на ней было темное платье и фиолетовый плащ-капюшон с ушками, а сам капюшон украшала небольшая фигурка, выполненная в виде головы волчонка. Это была Маки Харукава, Абсолютная Охотница, которая в тот вечер выслеживала эту самую стаю.</p>
+      <p>Пока раны затягивались, Джатаро, все еще вздрагивая от любого шороха, решился довериться своей спасительнице. Дрожащим голосом он поведал ей всю историю своей жизни: про подвал, побои и родителей. Маки выслушала его рассказ молча, не издав ни звука, а ее лицо оставалось пугающе холодным и непроницаемым. Однако в ее глазах промелькнула едва заметная тень глубокого отвращения к его семье — она слишком хорошо знала, что такое сломанное детство. Не говоря лишних слов, Маки проявила сострадание: она просто позволила мальчику остаться под своим крылом и взяла его под негласную защиту.</p>
+      <p>Она стала для Кемури строгой Наставницей, обучив его базовым и самым жестким правилам выживания в тайге: маскировке, чтению следов и ориентированию. Джатаро же, помогая ей обустраивать быт, быстро нашел применение своей тяге к конструированию. Из старого охотничьего хлама, ржавых деталей и лесных трав он начал создавать по-настоящему применимые и опасные вещи. Он модернизировал обычные медвежьи капканы, оснащая их скрытыми ампулами с парализующим ядом собственного варева, собирал бесшумные механические растяжки из тонкой проволоки и мастерил автономные сигнальные системы, которые намертво блокировали периметр лагеря от диких зверей. Именно этот уникальный сплав механики и полевой химии, созданный для выживания в глухом лесу, развил его навыки до гениального уровня, за что Кемури в итоге и получил талант Маленького Абсолютного Изобретателя.</p>
+      <p>Спустя год после побега Джатаро, та самая банда жестоких мародёров, которая когда-то сожгла родную деревню Маки, продвинулась вглубь региона. Ночью они совершили набег на неблагополучный посёлок его родителей. Находившиеся в очередном угаре отец и мать даже не успели понять, что происходит — бандиты разграбили дома и подожгли поселение дотла. Чтобы скрыться от расследования, мародёры решили уйти через глухую тайгу, случайно зайдя на территорию Охотницы и Изобретателя. Почувствовав запах гари и выследив отряд, Маки мгновенно узнала убийц своих родителей по их почерку. Вместо безрассудной атаки она использовала гений Джатаро: хладнокровно загнала банду прямо в «слепую зону» его ядовитых ловушек, а выживших безжалостно ликвидировала из арбалета. Обыскивая труп главаря, Маки нашла обгоревшую вещь из разрушенного дома Джатаро и поняла, что его родителей больше нет. Вернувшись в берлогу, она не стала вдаваться в кровавые подробности, а просто отдала эту деталь мальчику. Кемури всё понял без слов: его прошлое сгорело, а мучители были мертвы. В тот вечер Маки затянула бинты на его руке чуть крепче обычного — это стало их негласным знаком того, что теперь они одна семья.</p>
+      <p>Спустя три года после побега, которые Джатаро провел под надежным крылом Харукавы, они вместе приняли важное решение — поступить в престижную Академию «Пик Надежды». Охотница поддержала мальчика в этом стремлении. Они понимали, что лесных ресурсов и старых деталей уже недостаточно: Джатаро было необходимо получить гораздо больше фундаментальных знаний и разобраться в современных передовых технологиях, чтобы вывести свои инженерные навыки на совершенно новый уровень.</p>
+    </div>
+  </div>
+  <div class="tab-content" id="d04-gear">
+    <div class="gear-category">Инструменты и снаряжение</div>
+    <p style="font-size: 0.8rem; color: var(--dim); font-style: italic; margin-bottom: 20px; text-align: center;">
+      * Желательно иметь при себе для полной отыгровки, если вы сами этого пожелаете.
+    </p>
+    <div class="gear-grid">
+      <div class="gear-card">
+        <div class="gear-card-name">🪛 Отвёртка</div>
+        <div class="gear-card-desc">Многофункциональная отвёртка со сменными насадками. Основной инструмент для точной работы.</div>
       </div>
-      <button class="copy-btn" onclick="copyDossier('d04', this)">Скопировать для RP</button>
-      <div class="tabs">
-        <button class="tab-btn active" onclick="openTab('d04', 'off', this)">Официальное дело</button>
-        <button class="tab-btn" onclick="openTab('d04', 'hist', this)">Личная история</button>
-        <button class="tab-btn" onclick="openTab('d04', 'gear', this)">Снаряжение</button>
+      <div class="gear-card">
+        <div class="gear-card-name">📓 Блокнот с дневником</div>
+        <div class="gear-card-desc">Личный дневник в потёртой обложке. Исписан мелким почерком, страницы загнуты.</div>
       </div>
-      <div class="tab-content active" id="d04-off">
-        <div class="block-title">Особые приметы</div>
-        <p class="block-text">Левая рука полностью изуродована (последствия нападения хищника), скрыта под толстым слоем грязных бинтов. Маску на лице не носит, одежда и рукава выглядят потрёпанными. Проявляет признаки острой социофобии: при контакте с другими учениками ведет себя пугливо, избегает зрительного контакта. Наблюдается тремор рук при громких звуках или резких движениях. В стрессовых ситуациях склонен забиваться в углы искать укрытия.</p>
-        <div class="block-title">Краткая сводка</div>
-        <p class="block-text">Первые годы жизни провел запертым в сыром подвале родного дома. В возрасте 9 лет совершил побег в тайгу, где попал в медвежий капкан и подвергся нападению волчьей стаи. Был спасен некой <span class="secret">[ИНФОРМАЦИЯ ЗАСЕКРЕЧЕНА]</span>, под чьим негласным надзором скрывался в глухом лесу. Спустя год его родное поселение вместе с родителями было уничтожено бандой мародеров <span class="secret">[ДАННЫЕ УДАЛЕНЫ]</span>. О произошедшем узнал от наставницы, окончательно разорвав связи с прошлым. На данный момент не поддерживает контакт с внешним миром.</p>
-        <div class="block-title">Причина присвоения таланта</div>
-        <p class="block-text">За время нахождения в изоляции субъект научился из ржавого охотничьего хлама, деталей и лесных трав создавать автономные сигнальные системы, бесшумные растяжки и скрытые капканы, начиненные парализующим ядом собственного производства. Продемонстрировал уникальный гениальный сплав механики и полевой химии. Устройства субъекта способны эффективно блокировать периметр, обездвиживать и ликвидировать живые цели без прямого контакта. Отмечается нестандартность мышления и способность импровизировать с подручными материалами.</p>
-        <div class="block-title">Цель прибытия</div>
-        <p class="block-text">Направлен в Академию для освоения передовых технологий и получения фундаментальных знаний с целью дальнейшего развития своих навыков. Администрация предупреждает: субъект обладает гениальными инженерными способностями в области создания смертоносных ловушек. Рекомендуется соблюдать повышенную осторожность при совместном обучении. Попытки грубого физического контакта или внезапные приближения могут спровоцировать защитную агрессию и использование скрытых устройств самообороны.</p>
+      <div class="gear-card">
+        <div class="gear-card-name">📝 Блокнот с чертежами</div>
+        <div class="gear-card-desc">Блокнот с набросками ловушек и списком необходимых деталей.</div>
       </div>
-      <div class="tab-content" id="d04-hist">
-        <div class="lore-text">
-          <p>Ранее Джатаро жил в крайне неблагополучной и абьюзивной семье. Его мать беспробудно пила на пару с отцом, а порой они употребляли и запрещённые вещества. Мальчика постоянно держали запертым в сыром темном подвале словно вещь и лишь изредка выпускали на улицу. В один из январских дней, когда его в очередной раз выпихнули подышать воздухом, Джатаро решился на отчаянный шаг. Под покровом ночи ребёнок сбежал в глухой лес. Ему казалось, что там будет гораздо безопаснее, чем дома, но это стало его роковой ошибкой.</p>
-          <p>Январь — это как раз начало брачного периода у волков, когда хищники сбиваются в стаи и становятся особенно агрессивными и опасными. Как бы Кемури ни старался быть осторожным, он быстро заблудился в темноте и случайно угодил ногой в старый медвежий капкан. Вскоре на зажатого в стальные тиски мальчика наткнулись три волчицы, одна из которых была вконец измучена голодом. Удача полностью отвернулась от мальчишки: он не успел даже опомниться, как истощенная волчица мертвой хваткой вцепилась в его левую руку. Джатаро охватила дикая паника, и от невыносимой боли он начал терять сознание...</p>
-          <p>Как вдруг тяжелый металлический болт, выпущенный из арбалета, насквозь пробил череп изголодавшемуся зверю за долю секунды до того, как тот перегрыз бы мальчику горло.</p>
-          <p>Джатаро пришел в себя уже в полутемном, надежно укрытом от непогоды лесном убежище. Жуткая боль в растерзанной руке и ноге немного утихла — раны были тщательно промыты, обработаны какими-то травами и туго забинтованы. Его спасительницей оказалась молчаливая девушка в приметном походном наряде: на ней было темное платье и фиолетовый плащ-капюшон с ушками, а сам капюшон украшала небольшая фигурка, выполненная в виде головы волчонка. Это была Маки Харукава, Абсолютная Охотница, которая в тот вечер выслеживала эту самую стаю.</p>
-          <p>Пока раны затягивались, Джатаро, все еще вздрагивая от любого шороха, решился довериться своей спасительнице. Дрожащим голосом он поведал ей всю историю своей жизни: про подвал, побои и родителей. Маки выслушала его рассказ молча, не издав ни звука, а ее лицо оставалось пугающе холодным и непроницаемым. Однако в ее глазах промелькнула едва заметная тень глубокого отвращения к его семье — она слишком хорошо знала, что такое сломанное детство. Не говоря лишних слов, Маки проявила сострадание: она просто позволила мальчику остаться под своим крылом и взяла его под негласную защиту.</p>
-          <p>Она стала для Кемури строгой Наставницей, обучив его базовым и самым жестким правилам выживания в тайге: маскировке, чтению следов и ориентированию. Джатаро же, помогая ей обустраивать быт, быстро нашел применение своей тяге к конструированию. Из старого охотничьего хлама, ржавых деталей и лесных трав он начал создавать по-настоящему применимые и опасные вещи. Он модернизировал обычные медвежьи капканы, оснащая их скрытыми ампулами с парализующим ядом собственного варева, собирал бесшумные механические растяжки из тонкой проволоки и мастерил автономные сигнальные системы, которые намертво блокировали периметр лагеря от диких зверей. Именно этот уникальный сплав механики и полевой химии, созданный для выживания в глухом лесу, развил его навыки до гениального уровня, за что Кемури в итоге и получил талант Маленького Абсолютного Изобретателя.</p>
-          <p>Спустя год после побега Джатаро, та самая банда жестоких мародёров, которая когда-то сожгла родную деревню Маки, продвинулась вглубь региона. Ночью они совершили набег на неблагополучный посёлок его родителей. Находившиеся в очередном угаре отец и мать даже не успели понять, что происходит — бандиты разграбили дома и подожгли поселение дотла. Чтобы скрыться от расследования, мародёры решили уйти через глухую тайгу, случайно зайдя на территорию Охотницы и Изобретателя. Почувствовав запах гари и выследив отряд, Маки мгновенно узнала убийц своих родителей по их почерку. Вместо безрассудной атаки она использовала гений Джатаро: хладнокровно загнала банду прямо в «слепую зону» его ядовитых ловушек, а выживших безжалостно ликвидировала из арбалета. Обыскивая труп главаря, Маки нашла обгоревшую вещь из разрушенного дома Джатаро и поняла, что его родителей больше нет. Вернувшись в берлогу, она не стала вдаваться в кровавые подробности, а просто отдала эту деталь мальчику. Кемури всё понял без слов: его прошлое сгорело, а мучители были мертвы. В тот вечер Маки затянула бинты на его руке чуть крепче обычного — это стало их негласным знаком того, что теперь они одна семья.</p>
-          <p>Спустя три года после побега, которые Джатаро провел под надежным крылом Харукавы, они вместе приняли важное решение — поступить в престижную Академию «Пик Надежды». Охотница поддержала мальчика в этом стремлении. Они понимали, что лесных ресурсов и старых деталей уже недостаточно: Джатаро было необходимо получить гораздо больше фундаментальных знаний и разобраться в современных передовых технологиях, чтобы вывести свои инженерные навыки на совершенно новый уровень.</p>
-        </div>
+      <div class="gear-card">
+        <div class="gear-card-name">🔨 Молоток</div>
+        <div class="gear-card-desc">Небольшой, но тяжёлый молоток. Используется для сколачивания деревянных конструкций.</div>
       </div>
-      <div class="tab-content" id="d04-gear">
-        <div class="gear-category">Инструменты и снаряжение</div>
-        <p style="font-size: 0.8rem; color: var(--dim); font-style: italic; margin-bottom: 20px; text-align: center;">
-          * Желательно иметь при себе для полной отыгровки, если вы сами этого пожелаете.
-        </p>
-        <div class="gear-grid">
-          <div class="gear-card">
-            <div class="gear-card-name">🪛 Отвёртка</div>
-            <div class="gear-card-desc">Многофункциональная отвёртка со сменными насадками. Основной инструмент для точной работы.</div>
-          </div>
-          <div class="gear-card">
-            <div class="gear-card-name">📓 Блокнот с дневником</div>
-            <div class="gear-card-desc">Личный дневник в потёртой обложке. Исписан мелким почерком, страницы загнуты.</div>
-          </div>
-          <div class="gear-card">
-            <div class="gear-card-name">📝 Блокнот с чертежами</div>
-            <div class="gear-card-desc">Блокнот с набросками ловушек и списком необходимых деталей.</div>
-          </div>
-          <div class="gear-card">
-            <div class="gear-card-name">🔨 Молоток</div>
-            <div class="gear-card-desc">Небольшой, но тяжёлый молоток. Используется для сколачивания деревянных конструкций.</div>
-          </div>
-          <div class="gear-card">
-            <div class="gear-card-name">🌿 Пучок сушёных трав</div>
-            <div class="gear-card-desc">Связка ароматных лесных трав, собранных в тайге. Используется для создания ядов и успокоительных настоев.</div>
-          </div>
-        </div>
+      <div class="gear-card">
+        <div class="gear-card-name">🌿 Пучок сушёных трав</div>
+        <div class="gear-card-desc">Связка ароматных лесных трав, собранных в тайге. Используется для создания ядов и успокоительных настоев.</div>
       </div>
-      <div class="dossier-author">Автор идеи: <span>Erzmagier</span></div>
-    </article>
+    </div>
+  </div>
+  <div class="dossier-author">Автор идеи: <span>Erzmagier</span></div>
+</article>
 
-    <!-- ДЕЛО 3: Рантаро -->
-    <article class="dossier-wrapper hidden" id="d07" style="border-top: 3px solid #27ae60;">
-      <div class="stamp-bg"></div>
-      <div class="dossier-title">ЛИЧНОЕ ДЕЛО №07-А</div>
-      <div class="dossier-meta">
-        <div><span class="label">Имя:</span> Рантаро Амами</div>
-        <div><span class="label">Возраст:</span> 20 лет | <span class="label">Статус:</span> Жив | <span class="label">Статус:</span> Ученик</div>
-        <div><span class="label">Талант:</span> Абсолютный Авантюрист</div>
+<!-- ДЕЛО 3: Рантаро -->
+<article class="dossier-wrapper hidden" id="d07" style="border-top: 3px solid #27ae60;">
+  <div class="stamp-bg"></div>
+  <div class="dossier-title">ЛИЧНОЕ ДЕЛО №07-А</div>
+  <div class="dossier-meta">
+    <div><span class="label">Имя:</span> Рантаро Амами</div>
+    <div><span class="label">Возраст:</span> 20 лет | <span class="label">Статус:</span> Жив | <span class="label">Статус:</span> Ученик</div>
+    <div><span class="label">Талант:</span> Абсолютный Авантюрист</div>
+  </div>
+  <button class="copy-btn" onclick="copyDossier('d07', this)">Скопировать для RP</button>
+  <div class="tabs">
+    <button class="tab-btn active" onclick="openTab('d07', 'off', this)">Официальное дело</button>
+    <button class="tab-btn" onclick="openTab('d07', 'hist', this)">Личная история</button>
+    <button class="tab-btn" onclick="openTab('d07', 'gear', this)">Снаряжение</button>
+  </div>
+  <div class="tab-content active" id="d07-off">
+    <div class="block-title">Особые приметы</div>
+    <p class="block-text">Светло-зелёные волосы с выбритыми висками, пирсинг, серебряные кольца. На теле множество шрамов от старых экспедиций, происхождение которых <span class="secret">[ДАННЫЕ ОТ СЛУЖБЫ БЕЗОПАСНОСТИ ЗАСЕКРЕЧЕНЫ]</span> — при упоминании о них субъект заметно меняет тему. Держится расслабленно и дружелюбно, однако взгляд постоянно сканирует окружение, а спит крайне чутко. О прошлом говорит уклончиво, легко переводит разговор.</p>
+    <div class="block-title">Краткая сводка</div>
+    <p class="block-text">Вырос в трущобах старшим сыном в семье с двенадцатью младшими сёстрами, с ранних лет брался за любую опасную работу ради их пропитания. На одной из подработок познакомился с Кокичи Омой (см. дело №03-К) и стал для него надёжным тылом; в ответ труппа «D.I.C.E.» тайно обеспечивает безопасность его сестёр. Совместно с Цумуги Широганэ участвовал в создании образа «Шута Хаоса» — собирал визуальные референсы в карнавальных городах Италии и уличных театрах Франции. В ходе одной из экспедиций субъект провёл <span class="secret">[ИНФОРМАЦИЯ ЗАСЕКРЕЧЕНА]</span> дней в одиночестве без связи и припасов, после чего был найден живым, но с провалом в памяти о произошедшем; детали инцидента не восстановлены до сих пор.</p>
+    <div class="block-title">Причина присвоения таланта</div>
+    <p class="block-text">Совершил множество экспедиций в зоны повышенной опасности — гробницы Египта, храмы инков в джунглях Южной Америки, криминальные кварталы азиатских мегаполисов. Выживал там, где гибли подготовленные группы, сохраняя хладнокровие и трезвый расчёт в ситуациях, провоцирующих панику. Обладает редкой способностью выстраивать доверие с маргинальными элементами, не теряя контроля над ситуацией. Отдельно отмечается, что субъект поддерживает тесную связь с Кокичи Омой и по его просьбе неоднократно выступал посредником и помощником в делах труппы «D.I.C.E.», оставаясь при этом в тени.</p>
+    <div class="block-title">Цель прибытия</div>
+    <p class="block-text">Официально зачислен в Академию «Пик Надежды» для систематизации полевых знаний и освоения передовых методов исследований. Фактически, по данным скрытого наблюдения, субъект воспринимает обучение как удобное прикрытие: занятия посещает выборочно, а основное время уделяет <span class="secret">[ИНФОРМАЦИЯ ЗАСЕКРЕЧЕНА]</span>, что и стало условием его согласия на прибытие. Администрация предупреждает: субъект не склонен к панике, не поддаётся стандартному давлению и обладает связями за пределами Академии. При угрозе другим ученикам ожидается активное вмешательство с непредсказуемыми последствиями.</p>
+  </div>
+  <div class="tab-content" id="d07-hist">
+    <div class="lore-text">
+      <p>Двадцатилетний Рантаро Амами, Абсолютный Авантюрист, — человек, чья жизнь соткана из бесконечных дорог, древних тайн и опасных экспедиций. За его плечами остались зыбучие пески египетских гробниц, заброшенные в густых джунглях Южной Америки храмы инков и леденящие кровь полулегальные кварталы азиатских мегаполисов. Но мало кто знает, через какой ад ему пришлось пройти, прежде чем получить свой титул. Рантаро вырос в голодных трущобах. Будучи старшим сыном, он с ранних лет нес на себе колоссальную ответственность — отчаянно пытался вытянуть из нищеты свою огромную семью из двенадцати младших сестёр. Ради их пропитания, безопасности и счастья мальчик хватался за любую, даже самую опасную работу. Жизнь на самом дне закалила его характер, подарив невероятное самообладание и способность выживать там, где другие ломались.</p>
+      <p>Именно на одной из таких суровых подработок судьба свела его с Кокичи Омой. Они оба были детьми улиц, вынужденными каждый день бороться за существование, и эта общая борьба мгновенно сплотила их. Рантаро не раз выручал Кокичи в самые сложные, переломные моменты, став для него надежным тылом. В знак этой нерушимой связи они обменялись особыми аксессуарами, которые носят до сих пор. Кокичи всегда носит с собой старинный карманный компас на тяжелой цепочке, подаренный Рантаро, а на шее самого Амами, скрытый под одеждой, неизменно покоится серебряный амулет в виде ухмыляющейся маски — эксклюзивный подарок, который мастера из труппы «D.I.C.E.» вручную отлили специально для него по приказу Омы.</p>
+      <p>Их дружба быстро переросла во взаимовыгодное сотрудничество. Пока Рантаро колесил по миру ради собственных исследований, он всегда держал в голове планы Кокичи на создание величайшей труппы. Во время поездки в Китай, скрываясь от местных банд в туманных переулках Шанхая, Амами познакомился с Цумуги Широганэ — Абсолютной Косплеершей. Именно она показала ему архивные эскизы пугающе эксцентричного шутовского наряда. Поняв, что это идеальная находка, Рантаро отправился дальше: он посетил древние карнавальные города Италии и уличные театры Франции, по крупицам собирая визуальные образы и отсылая наброски деталей Цумуги, которая в своей мастерской кропотливо воплощала костюм в реальность. Из этого готового костюма Широганэ Кокичи в итоге и сформировал образ «Шута Хаоса».</p>
+      <p>Кокичи, в свою очередь, платил другу той же монетой. Труппа «D.I.C.E.», имея доступ к высокопоставленным лицам, архивам корпораций и закрытым базам данных вроде Towa Group, часто добывала для Рантаро редкие зацепки, координаты утерянных реликвий и секретные карты для его новых авантюр. Но главное — люди Омы тайно помогали обеспечивать абсолютную безопасность и благополучие двенадцати сестер Амами, пока сам авантюрист пропадал на другом конце земного шара.</p>
+      <p>Жизнь на улицах научила Рантаро видеть людей насквозь, поэтому он остался одним из очень немногих, кого Ома никогда не мог обвести вокруг пальца своей ложью. Амами искренне рад, что дело его названого брата обрело такой невероятный международный масштаб, позволяя выступать перед главами могущественных синдикатов и семей вроде Тогами и Кузурю. Он знает, какая колоссальная работа стоит за этим триумфом, и всегда готов прикрыть спину Кокичи, в какие бы опасные авантюры тот ни ввязался.</p>
+    </div>
+  </div>
+  <div class="tab-content" id="d07-gear">
+    <div class="gear-category">Инструменты и снаряжение</div>
+    <p style="font-size: 0.8rem; color: var(--dim); font-style: italic; margin-bottom: 20px; text-align: center;">
+      * Желательно иметь при себе для полной отыгровки, если вы сами этого пожелаете.
+    </p>
+    <div class="gear-grid">
+      <div class="gear-card">
+        <div class="gear-card-name">🔦 Фонарик</div>
+        <div class="gear-card-desc">Обычный, но надёжный тактический фонарик. Питается от батареек.</div>
       </div>
-      <button class="copy-btn" onclick="copyDossier('d07', this)">Скопировать для RP</button>
-      <div class="tabs">
-        <button class="tab-btn active" onclick="openTab('d07', 'off', this)">Официальное дело</button>
-        <button class="tab-btn" onclick="openTab('d07', 'hist', this)">Личная история</button>
-        <button class="tab-btn" onclick="openTab('d07', 'gear', this)">Снаряжение</button>
+      <div class="gear-card">
+        <div class="gear-card-name">📓 Блокноты</div>
+        <div class="gear-card-desc">Несколько блокнотов с записями маршрутов, заметками о находках и наблюдениями.</div>
       </div>
-      <div class="tab-content active" id="d07-off">
-        <div class="block-title">Особые приметы</div>
-        <p class="block-text">Светло-зелёные волосы с выбритыми висками, пирсинг, серебряные кольца. На теле множество шрамов от старых экспедиций, происхождение которых <span class="secret">[ДАННЫЕ ОТ СЛУЖБЫ БЕЗОПАСНОСТИ ЗАСЕКРЕЧЕНЫ]</span> — при упоминании о них субъект заметно меняет тему. Держится расслабленно и дружелюбно, однако взгляд постоянно сканирует окружение, а спит крайне чутко. О прошлом говорит уклончиво, легко переводит разговор.</p>
-        <div class="block-title">Краткая сводка</div>
-        <p class="block-text">Вырос в трущобах старшим сыном в семье с двенадцатью младшими сёстрами, с ранних лет брался за любую опасную работу ради их пропитания. На одной из подработок познакомился с Кокичи Омой (см. дело №03-К) и стал для него надёжным тылом; в ответ труппа «D.I.C.E.» тайно обеспечивает безопасность его сестёр. Совместно с Цумуги Широганэ участвовал в создании образа «Шута Хаоса» — собирал визуальные референсы в карнавальных городах Италии и уличных театрах Франции. В ходе одной из экспедиций субъект провёл <span class="secret">[ИНФОРМАЦИЯ ЗАСЕКРЕЧЕНА]</span> дней в одиночестве без связи и припасов, после чего был найден живым, но с провалом в памяти о произошедшем; детали инцидента не восстановлены до сих пор.</p>
-        <div class="block-title">Причина присвоения таланта</div>
-        <p class="block-text">Совершил множество экспедиций в зоны повышенной опасности — гробницы Египта, храмы инков в джунглях Южной Америки, криминальные кварталы азиатских мегаполисов. Выживал там, где гибли подготовленные группы, сохраняя хладнокровие и трезвый расчёт в ситуациях, провоцирующих панику. Обладает редкой способностью выстраивать доверие с маргинальными элементами, не теряя контроля над ситуацией. Отдельно отмечается, что субъект поддерживает тесную связь с Кокичи Омой и по его просьбе неоднократно выступал посредником и помощником в делах труппы «D.I.C.E.», оставаясь при этом в тени.</p>
-        <div class="block-title">Цель прибытия</div>
-        <p class="block-text">Официально зачислен в Академию «Пик Надежды» для систематизации полевых знаний и освоения передовых методов исследований. Фактически, по данным скрытого наблюдения, субъект воспринимает обучение как удобное прикрытие: занятия посещает выборочно, а основное время уделяет <span class="secret">[ИНФОРМАЦИЯ ЗАСЕКРЕЧЕНА]</span>, что и стало условием его согласия на прибытие. Администрация предупреждает: субъект не склонен к панике, не поддаётся стандартному давлению и обладает связями за пределами Академии. При угрозе другим ученикам ожидается активное вмешательство с непредсказуемыми последствиями.</p>
+      <div class="gear-card">
+        <div class="gear-card-name">🔪 Нож</div>
+        <div class="gear-card-desc">Потрёпанный туристический нож с зазубринами на лезвии. Верный спутник во многих экспедициях, не раз спасавший жизнь в диких условиях.</div>
       </div>
-      <div class="tab-content" id="d07-hist">
-        <div class="lore-text">
-          <p>Двадцатилетний Рантаро Амами, Абсолютный Авантюрист, — человек, чья жизнь соткана из бесконечных дорог, древних тайн и опасных экспедиций. За его плечами остались зыбучие пески египетских гробниц, заброшенные в густых джунглях Южной Америки храмы инков и леденящие кровь полулегальные кварталы азиатских мегаполисов. Но мало кто знает, через какой ад ему пришлось пройти, прежде чем получить свой титул. Рантаро вырос в голодных трущобах. Будучи старшим сыном, он с ранних лет нес на себе колоссальную ответственность — отчаянно пытался вытянуть из нищеты свою огромную семью из двенадцати младших сестёр. Ради их пропитания, безопасности и счастья мальчик хватался за любую, даже самую опасную работу. Жизнь на самом дне закалила его характер, подарив невероятное самообладание и способность выживать там, где другие ломались.</p>
-          <p>Именно на одной из таких суровых подработок судьба свела его с Кокичи Омой. Они оба были детьми улиц, вынужденными каждый день бороться за существование, и эта общая борьба мгновенно сплотила их. Рантаро не раз выручал Кокичи в самые сложные, переломные моменты, став для него надежным тылом. В знак этой нерушимой связи они обменялись особыми аксессуарами, которые носят до сих пор. Кокичи всегда носит с собой старинный карманный компас на тяжелой цепочке, подаренный Рантаро, а на шее самого Амами, скрытый под одеждой, неизменно покоится серебряный амулет в виде ухмыляющейся маски — эксклюзивный подарок, который мастера из труппы «D.I.C.E.» вручную отлили специально для него по приказу Омы.</p>
-          <p>Их дружба быстро переросла во взаимовыгодное сотрудничество. Пока Рантаро колесил по миру ради собственных исследований, он всегда держал в голове планы Кокичи на создание величайшей труппы. Во время поездки в Китай, скрываясь от местных банд в туманных переулках Шанхая, Амами познакомился с Цумуги Широганэ — Абсолютной Косплеершей. Именно она показала ему архивные эскизы пугающе эксцентричного шутовского наряда. Поняв, что это идеальная находка, Рантаро отправился дальше: он посетил древние карнавальные города Италии и уличные театры Франции, по крупицам собирая визуальные образы и отсылая наброски деталей Цумуги, которая в своей мастерской кропотливо воплощала костюм в реальность. Из этого готового костюма Широганэ Кокичи в итоге и сформировал образ «Шута Хаоса».</p>
-          <p>Кокичи, в свою очередь, платил другу той же монетой. Труппа «D.I.C.E.», имея доступ к высокопоставленным лицам, архивам корпораций и закрытым базам данных вроде Towa Group, часто добывала для Рантаро редкие зацепки, координаты утерянных реликвий и секретные карты для его новых авантюр. Но главное — люди Омы тайно помогали обеспечивать абсолютную безопасность и благополучие двенадцати сестер Амами, пока сам авантюрист пропадал на другом конце земного шара.</p>
-          <p>Жизнь на улицах научила Рантаро видеть людей насквозь, поэтому он остался одним из очень немногих, кого Ома никогда не мог обвести вокруг пальца своей ложью. Амами искренне рад, что дело его названого брата обрело такой невероятный международный масштаб, позволяя выступать перед главами могущественных синдикатов и семей вроде Тогами и Кузурю. Он знает, какая колоссальная работа стоит за этим триумфом, и всегда готов прикрыть спину Кокичи, в какие бы опасные авантюры тот ни ввязался.</p>
-        </div>
-      </div>
-      <div class="tab-content" id="d07-gear">
-        <div class="gear-category">Инструменты и снаряжение</div>
-        <p style="font-size: 0.8rem; color: var(--dim); font-style: italic; margin-bottom: 20px; text-align: center;">
-          * Желательно иметь при себе для полной отыгровки, если вы сами этого пожелаете.
-        </p>
-        <div class="gear-grid">
-          <div class="gear-card">
-            <div class="gear-card-name">🔦 Фонарик</div>
-            <div class="gear-card-desc">Обычный, но надёжный тактический фонарик. Питается от батареек.</div>
-          </div>
-          <div class="gear-card">
-            <div class="gear-card-name">📓 Блокноты</div>
-            <div class="gear-card-desc">Несколько блокнотов с записями маршрутов, заметками о находках и наблюдениями.</div>
-          </div>
-          <div class="gear-card">
-            <div class="gear-card-name">🔪 Нож</div>
-            <div class="gear-card-desc">Потрёпанный туристический нож с зазубринами на лезвии. Верный спутник во многих экспедициях, не раз спасавший жизнь в диких условиях.</div>
-          </div>
-        </div>
-      </div>
-      <div class="dossier-author">Автор идеи: <span>Erzmagier</span></div>
-    </article>
+    </div>
+  </div>
+  <div class="dossier-author">Автор идеи: <span>Erzmagier</span></div>
+</article>
 
-    <!-- ДЕЛО 4: Маки -->
-    <article class="dossier-wrapper hidden" id="d11" style="border-top: 3px solid #9b59b6;">
-      <div class="stamp-bg"></div>
-      <div class="dossier-title">ЛИЧНОЕ ДЕЛО №11-Х</div>
-      <div class="dossier-meta">
-        <div><span class="label">Имя:</span> Маки Харукава</div>
-        <div><span class="label">Возраст:</span> 18.5 лет | <span class="label">Статус:</span> Жива | <span class="label">Статус:</span> Ученица</div>
-        <div><span class="label">Талант:</span> Абсолютная Охотница</div>
-      </div>
-      <button class="copy-btn" onclick="copyDossier('d11', this)">Скопировать для RP</button>
-      <div class="tabs">
-        <button class="tab-btn active" onclick="openTab('d11', 'off', this)">Официальное дело</button>
-        <button class="tab-btn" onclick="openTab('d11', 'hist', this)">Личная история</button>
-        <button class="tab-btn" onclick="openTab('d11', 'gear', this)">Снаряжение</button>
-      </div>
-      <div class="tab-content active" id="d11-off">
-        <div class="block-title">Особые приметы</div>
-        <p class="block-text">Обладает звериной грацией и аномально высокой скоростью реакции. На теле присутствуют многочисленные шрамы от когтей хищников, на руках — <span class="secret">[ДАННЫЕ ОТ СЛУЖБЫ БЕЗОПАСНОСТИ ЗАСЕКРЕЧЕНЫ]</span>. Одежда выглядит поношенной, со следами грубой ручной штопки и нашитыми пластырями. Почти не знакома с современными технологиями, с осторожностью относится к электронике. В общении замкнута, предпочитает молчание. Демонстрирует тотальное отсутствие страха перед физической болью.</p>
-        <div class="block-title">Краткая сводка</div>
-        <p class="block-text">До 7 лет росла в изолированной лесной деревне в семье промысловика. В ходе разбойного нападения мародёров деревня была полностью уничтожена, а родители субъекта погибли на её глазах. Харукава сумела скрыться в юго-западных лесах, где в одиночку заняла медвежью пещеру (убив хозяина) и провела более десяти лет в полной изоляции. Ведет жесткую борьбу за выживание. За это время выработала абсолютную адаптацию к дикой среде, но полностью утратила навыки социального взаимодействия.</p>
-        <div class="block-title">Причина присвоения таланта</div>
-        <p class="block-text">Продемонстрировала феноменальные навыки выживания в дикой природе, хладнокровие и абсолютную точность стрельбы из арбалета. Самостоятельно превратила дикую пещеру в оборудованную базу с запасами. В совершенстве владеет навыками свежевания туш, маскировки, ориентирования на местности и полевой медицины. Навыки ближнего и дальнего боя доведены до автоматизма. Способна выследить и устранить цель бесшумно, сливаясь с окружающей средой.</p>
-        <div class="block-title">Цель прибытия</div>
-        <p class="block-text">Официально зачислена после обнаружения пригласительного письма у её лагеря. Однако, по данным скрытого наблюдения, субъект проявляет полное безразличие к учебному процессу. Истинная цель прибытия в Академию — скрытый надзор и защита <span class="secret">[ИНФОРМАЦИЯ ЗАСЕКРЕЧЕНА]</span>. Администрация предупреждает учеников: субъект крайне скрытен, эмоционально холоден и потенциально опасен при попытках сближения или нарушения её личных границ. Рекомендуется не делать резких движений в её присутствии.</p>
-      </div>
+<!-- ДЕЛО 4: Маки -->
+<article class="dossier-wrapper hidden" id="d11" style="border-top: 3px solid #9b59b6;">
+  <div class="stamp-bg"></div>
+  <div class="dossier-title">ЛИЧНОЕ ДЕЛО №11-Х</div>
+  <div class="dossier-meta">
+    <div><span class="label">Имя:</span> Маки Харукава</div>
+    <div><span class="label">Возраст:</span> 18.5 лет | <span class="label">Статус:</span> Жива | <span class="label">Статус:</span> Ученица</div>
+    <div><span class="label">Талант:</span> Абсолютная Охотница</div>
+  </div>
+  <button class="copy-btn" onclick="copyDossier('d11', this)">Скопировать для RP</button>
+  <div class="tabs">
+    <button class="tab-btn active" onclick="openTab('d11', 'off', this)">Официальное дело</button>
+    <button class="tab-btn" onclick="openTab('d11', 'hist', this)">Личная история</button>
+    <button class="tab-btn" onclick="openTab('d11', 'gear', this)">Снаряжение</button>
+  </div>
+  <div class="tab-content active" id="d11-off">
+    <div class="block-title">Особые приметы</div>
+    <p class="block-text">Обладает звериной грацией и аномально высокой скоростью реакции. На теле присутствуют многочисленные шрамы от когтей хищников, на руках — <span class="secret">[ДАННЫЕ ОТ СЛУЖБЫ БЕЗОПАСНОСТИ ЗАСЕКРЕЧЕНЫ]</span>. Одежда выглядит поношенной, со следами грубой ручной штопки и нашитыми пластырями. Почти не знакома с современными технологиями, с осторожностью относится к электронике. В общении замкнута, предпочитает молчание. Демонстрирует тотальное отсутствие страха перед физической болью.</p>
+    <div class="block-title">Краткая сводка</div>
+    <p class="block-text">До 7 лет росла в изолированной лесной деревне в семье промысловика. В ходе разбойного нападения мародёров деревня была полностью уничтожена, а родители субъекта погибли на её глазах. Харукава сумела скрыться в юго-западных лесах, где в одиночку заняла медвежью пещеру (убив хозяина) и провела более десяти лет в полной изоляции. Ведет жесткую борьбу за выживание. За это время выработала абсолютную адаптацию к дикой среде, но полностью утратила навыки социального взаимодействия.</p>
+    <div class="block-title">Причина присвоения таланта</div>
+    <p class="block-text">Продемонстрировала феноменальные навыки выживания в дикой природе, хладнокровие и абсолютную точность стрельбы из арбалета. Самостоятельно превратила дикую пещеру в оборудованную базу с запасами. В совершенстве владеет навыками свежевания туш, маскировки, ориентирования на местности и полевой медицины. Навыки ближнего и дальнего боя доведены до автоматизма. Способна выследить и устранить цель бесшумно, сливаясь с окружающей средой.</p>
+    <div class="block-title">Цель прибытия</div>
+    <p class="block-text">Официально зачислена после обнаружения пригласительного письма у её лагеря. Однако, по данным скрытого наблюдения, субъект проявляет полное безразличие к учебному процессу. Истинная цель прибытия в Академию — скрытый надзор и защита <span class="secret">[ИНФОРМАЦИЯ ЗАСЕКРЕЧЕНА]</span>. Администрация предупреждает учеников: субъект крайне скрытен, эмоционально холоден и потенциально опасен при попытках сближения или нарушения её личных границ. Рекомендуется не делать резких движений в её присутствии.</p>
+  </div>
       <div class="tab-content" id="d11-hist">
         <div class="lore-text">
           <p>Маки Харукава — абсолютная охотница. В свои 18.5 лет она уже обладает не только звериной грацией, но и ценой, которую платит за выживание: на руках когти, а на теле есть несколько шрамов от когтей самих зверей. На одежде есть "пластери", говоря о том что она на скорую руки штопала еë.</p>
@@ -565,6 +565,74 @@
         </div>
       </div>
       <div class="dossier-author">Автор идеи: <span>fialka</span></div>
+    </article>
+  </main>
+</div>
+
+<!-- ДЕЛО 5: Химико -->
+<article class="dossier-wrapper hidden" id="d09" style="border-top: 3px solid #e74c3c;">
+  <div class="stamp-bg"></div>
+  <div class="dossier-title">ЛИЧНОЕ ДЕЛО №09-Ю</div>
+  <div class="dossier-meta">
+    <div><span class="label">Имя:</span> Химико Юмено</div>
+    <div><span class="label">Возраст:</span> 16 лет | <span class="label">Статус:</span> Жива | <span class="label">Статус:</span> Ученица</div>
+    <div><span class="label">Талант:</span> Абсолютная Хранительница Снов</div>
+  </div>
+  <button class="copy-btn" onclick="copyDossier('d09', this)">Скопировать для RP</button>
+  <div class="tabs">
+    <button class="tab-btn active" onclick="openTab('d09', 'off', this)">Официальное дело</button>
+    <button class="tab-btn" onclick="openTab('d09', 'hist', this)">Личная история</button>
+    <button class="tab-btn" onclick="openTab('d09', 'gear', this)">Снаряжение</button>
+  </div>
+  <div class="tab-content active" id="d09-off">
+    <div class="block-title">Особые приметы</div>
+    <p class="block-text">Выглядит постоянно измотанной, с тёмными кругами под глазами; движения замедленные, речь тихая с паузами. Одежда простая, будто надета второпях. Избегает прикосновений без предупреждения — при касании спящего может непроизвольно войти в его сон. На просьбы «поправить» чей-либо сон реагирует настороженно. <span class="secret">[ДАННЫЕ О ПРОИСХОЖДЕНИИ ЗАСЕКРЕЧЕНЫ]</span>.</p>
+    <div class="block-title">Краткая сводка</div>
+    <p class="block-text">До 8 лет росла в лесу в доме бабушки по материнской линии, <span class="secret">[ИНФОРМАЦИЯ ЗАСЕКРЕЧЕНА]</span>. С раннего детства у субъекта спонтанно возникали предвидящие сны, которые сбывались. Бабушка обучила её ремеслу хранительницы: вход в чужой сон возможен только при физическом контакте, на расстоянии — невозможен; вмешательство оставляет след в виде дежавю. После смерти бабушки субъект осталась одна; к ней начали обращаться посторонние с просьбами изменить чужой сон, что привело к истощению и отказу от контактов.</p>
+    <div class="block-title">Причина присвоения таланта</div>
+    <p class="block-text">Подтверждённая способность входить в сновидения других людей при физическом контакте, различать их структуру и вносить изменения. Предвидящие сны не контролирует — приходят в случайный момент. Физического воздействия на внешний мир не оказывает: влияние ограничено сознанием и решениями людей. После вмешательства у объекта остаётся дежавю и чувство потерянности. Владеет изготовлением снотворного из трав и минералов; лекарство помогает при кошмарах, но после пробуждения человек около десяти минут дезориентирован. <span class="secret">[СОСТАВ ЗАСЕКРЕЧЕН]</span>. На саму субъекта лекарство действует иначе — даёт ненадолго выспаться без снов.</p>
+    <div class="block-title">Цель прибытия</div>
+    <p class="block-text">Официально зачислена для обучения контролю над талантом и систематизации знаний. Однако, по данным скрытого наблюдения, субъект проявляет безразличие к учебному процессу. Истинная цель прибытия — поиск способа существовать с даром, не разрушая себя; дом без наставницы перестал быть убежищем. Администрация предупреждает: субъект склонен к уединению, не терпит вторжения в личное пространство. Попытки прикоснуться без предупреждения могут быть восприняты как попытка войти в сон. Рекомендуется не будить её резко и не использовать слово «помощь» в качестве рычага.</p>
+  </div>
+  <div class="tab-content" id="d09-hist">
+    <div class="lore-text">
+      <p>Химико Юмено не помнит города. Она родилась в лесу, в доме, который стоял там так давно, что никто уже не помнил, кто его построил. Бабушка — женщина с сухими руками и тяжёлым взглядом — никогда не говорила, откуда взялась девочка. На вопросы отвечала одинаково: «Ты здесь, потому что должна быть здесь». Химико перестала спрашивать лет в шесть, но привычка ждать ответа, которого нет, осталась с ней навсегда.</p>
+      <p>Дар проявился рано. Сначала — предвидящие сны. Химико снился снег в июле — и снег действительно выпадал. Снился незнакомый человек — и через неделю он стучал в дверь. Бабушка не удивлялась, только говорила: «Запоминай. Сны не врут, но и не говорят всего».</p>
+      <p>А потом случилось другое. Однажды бабушка заснула днём — просто уснула в кресле, уронив вязание, — и Химико, которой было лет семь, подошла и взяла её за руку. Не чтобы разбудить, не чтобы что-то сделать. Просто взяла. И оказалась внутри бабушкиного сна: та стояла на берегу реки, которой в лесу не было, и смотрела на воду. Химико испугалась и отняла руку — и сразу оказалась обратно, в комнате, где бабушка всё так же спала в кресле.</p>
+      <p>Бабушка проснулась через минуту и посмотрела на неё так, что Химико поняла: та всё знает. Не стала ругать, не стала расспрашивать. Только сказала: «Значит, и это тоже». И в тот же вечер начала учить.</p>
+      <p>Главное, что она сказала в первый же день, было про контакт. В чужой сон можно войти, но только если держишь человека за руку — кожа к коже. На расстоянии не работает: можно сколько угодно смотреть на спящего, ничего не увидишь. Химико тогда не поняла, почему бабушка говорит об этом так серьёзно, — ей казалось, что это просто правило, как «не выходи зимой без шапки». А бабушка объяснила: «Контакт — это согласие. Пока ты держишь человека за руку, он хотя бы может отнять руку. Не отнимай у него эту возможность». Химико кивнула. Только много позже она поняла, что это было единственное, что отделяло её от того, чтобы стать чем-то другим.</p>
+      <p>Училась она тихо и постепенно. Сначала на бабушке — та засыпала, а Химико входила в её сны и тренировалась не менять ничего, просто смотреть. Потом на лесных зверях, у которых сны были короткие, как вспышки. Бабушка учила различать свои сны и чужие, держать дистанцию, не путать отражение с приказом. И предупреждала о том, что Химико тогда казалось мелочью: после вмешательства остаётся след. Человек не помнит, что с ним сделали, но чувствует, что что-то было не так — лёгкое дежавю, потерянность, будто решение пришло извне. Это не лечится и не убирается. Химико не придавала значения — ей казалось, что цена маленькая, а польза большая.</p>
+      <p>Потом бабушка начала сдавать. Она тоже когда-то была хранительницей, которая помогала людям, — и выгорела: чужие сны, в которые она входила десятилетиями, не отпускали её даже в её собственных снах. Последние годы она почти не спала. Химико видела это каждый день — видела, как бабушка сидит у окна с закрытыми глазами и не спит, — и понимала, что смотрит в собственное будущее.</p>
+          <p>Тогда Химико начала делать лекарство. Не из жалости к другим — из страха за себя. Из местных трав и минералов, которые бабушка собирала и про которые знала больше, чем говорила. Состав давал людям с кошмарами и бессонницей несколько часов сна, но с дефектом: после пробуждения человек минут десять был дезориентирован, не понимал, где он, и только потом возвращался в себя. Убрать этот дефект Химико так и не смогла. На саму Химико лекарство действовало иначе: не давало десятой минуты потерянности, но и не лечило. Просто давало ненадолго выспаться — без снов, без чужих кошмаров. Несколько часов тишины. Она пила его сама, когда становилось совсем невмоготу, и знала, что это не лечение, а отсрочка.</p>
+          <p>Бабушка умерла тихо, во сне. Химико знала, что этот сон придёт, — он приснился ей за неделю, случайно, как и все предвидящие сны. Она не стала его менять, потому что предвидящий сон не меняется. Но могла бы попробовать. И до сих пор не знает, правильно ли сделала, что не попробовала.</p>
+          <p>После похорон Химико осталась в лесу одна, и вот тогда всё изменилось. Слух о «девочке, которая умеет поправлять сны», пошёл по окрестностям. Люди начали приходить — по одному, тихо, по слухам. Химико сначала отказывалась: бабушка учила говорить «нет», и она пыталась. Но потом вспомнила другое бабушкино слово — «если можешь помочь и не поможешь, ты не хранительница, а трус». И снова начала соглашаться. А после каждого вмешательства видела то, чего не видела раньше: человек уходил с дежавю, не помнил, что с ним сделали, но чувствовал, что что-то не так. Мужья возвращались, но с пустыми глазами. Сыновья брались за учёбу, но переставали смеяться. Химико поняла, что она не лечит — она подгоняет людей под чужие ожидания. И что бабушка была права: ключом пользуются, пока он не сломается.</p>
+          <p>Тогда она перестала брать людей за руку. Перестала выходить к ним. Но они всё равно приходили, и она слышала их шаги за дверью и не открывала. А тем, кто приходил не за вмешательством, а за сном, она через щель в двери передавала лекарство — с дефектом, но работающее. Люди брали, благодарили, а потом возвращались и говорили, что после него чувствуют себя странно. Химико знала. Она и сама пила его, чтобы хоть иногда спать.</p>
+          <p>Она снова начала недосыпать — теперь не только от чужих снов, но и от собственных. Предвидящие сны приходили чаще, и она не знала, когда очередной сбудется. Она перестала понимать, где заканчивается её дар и начинается она сама. И не была уверена, что та девочка, которая когда-то жила в лесу с бабушкой, вообще существовала.</p>
+          <p>Тогда и пришло письмо из Академии «Пик Надежды». Химико не сразу поняла, зачем ей туда: она не рвалась к славе и не искала учеников. Но в письме было сказано, что Академия собирает людей с талантами, которые «не вписываются в обычный мир», и что там можно научиться управлять своим даром так, чтобы он не управлял тобой. Для Химико это было не про учёбу — про то, чтобы найти хоть какое-то правило, которое позволит ей спать, не боясь, что она снова кого-то «поправит» и оставит след.</p>
+          <p>Она согласилась. Не потому, что хотела учиться, а потому, что дом без бабушки перестал быть домом, а лес перестал быть убежищем — люди нашли её и там.</p>
+        </div>
+      </div>
+      <div class="tab-content" id="d09-gear">
+        <div class="gear-category">Личные вещи</div>
+        <p style="font-size: 0.8rem; color: var(--dim); font-style: italic; margin-bottom: 20px; text-align: center;">
+          * Желательно иметь при себе для полной отыгровки, если вы сами этого пожелаете.
+        </p>
+        <div class="gear-grid">
+          <div class="gear-card">
+            <div class="gear-card-name">💊 Банка с лекарствами</div>
+            <div class="gear-card-desc">Потрёпанная жестяная банка. Внутри — самодельные пилюли из толчёных трав и коры. Пахнет горькой полынью. Помогает при кошмарах, но оставляет после себя чувство потерянности.</div>
+          </div>
+          <div class="gear-card">
+            <div class="gear-card-name">🌿 Связка сушёных трав</div>
+            <div class="gear-card-desc">Пучок высушенных растений, собранных в лесу. Используется для приготовления успокоительных настоев и снотворного.</div>
+          </div>
+          <div class="gear-card">
+            <div class="gear-card-name">📓 Старый дневник</div>
+            <div class="gear-card-desc">Потрёпанная записная книжка с пожелтевшими страницами. Внутри — обрывочные записи её снов и странные рисунки.</div>
+          </div>
+        </div>
+      </div>
+      <div class="dossier-author">Автор идеи: <span>Ты</span></div>
     </article>
 
   </main>
@@ -701,7 +769,7 @@
 
   function showMonokuma() {
     document.getElementById('vnOverlay').classList.add('active');
-    setFavicon('favicon_alert.png?v=20');
+    setFavicon('favicon_alert.png?v=26');
     document.getElementById('vnNagito').classList.add('hidden');
     document.getElementById('vnNagito').src = 'nagito.png';
     document.getElementById('vnNagito').classList.remove('talking');
@@ -721,7 +789,7 @@
 
   function closeVN() {
     document.getElementById('vnOverlay').classList.remove('active');
-    setFavicon('favicon.png?v=20');
+    setFavicon('favicon.png?v=26');
     if(debateLoop) clearInterval(debateLoop);
     isDebating = false;
   }
@@ -798,7 +866,7 @@
           document.getElementById('vnNagito').classList.add('hidden');
           document.getElementById('vnNagito').classList.remove('appearing');
           isDebating = false;
-          setFavicon('favicon.png?v=20');
+          setFavicon('favicon.png?v=26');
         }, 800);
         return;
       }
