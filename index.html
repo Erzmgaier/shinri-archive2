@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Архив личных дел — Пик Надежды</title>
-<link rel="icon" type="image/png" href="favicon.png?v=39" id="dynamic-favicon">
+<link rel="icon" type="image/png" href="favicon.png?v=40" id="dynamic-favicon">
 <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root { --bg: #050608; --panel: #0a0c10; --border: #1f252e; --text: #c9d1d9; --dim: #6e7681; --secret: #d4a017; --hover: #151a21; --accent-default: #b33a3a; --active-nav-color: #b33a3a; }
@@ -180,7 +180,7 @@
         <div class="block-title">Причина присвоения таланта</div>
         <p class="block-text">Йи Санг видит мир как сложную архитектурную конструкцию. Его дар заключается в способности просчитывать любые системы — от механизмов до человеческой психики — на несколько шагов вперёд, мгновенно находя «слабые звенья» и «трещины». Как учитель, он не столько обучает подростков дедукции, сколько заставляет их смотреть на преступления под другим углом, задавая странные философские вопросы, на которые нет однозначного ответа.</p>
         <div class="block-title">Цель прибытия</div>
-        <p class="block-text">Официально — преподавательская деятельность и кураторство над «особо одаренными» учениками. Служба безопасности отмечает, что субъект не проявляет интереса к социальной жизни и учебному процессу. Фактически, по данным скрытого наблюдения, он воспринимает Академию как безопасное убежище, где можно спрятаться от своего прошлого. Рекомендуется не оставлять его одного в замкнутых помещениях из-за склонности к самокопанию. Студентам не рекомендуется приходить к нему на консультации после заката — он может читать стихи до утра и не заметить, как вы уснули.</p>
+        <p class="block-text">Официально — преподавательская деятельность и кураторство над «особо одаренными» учениками. Служба безопасности отмечает, что субъект не проявляет интереса к социальной жизни и учебному процессу. Фактически, по данным скрытого наблюдения, он воспринимает Академию как безопасное убежище, где можно спрятаться от своего прошлого. Рекомендуется не оставлять его одного в замкнутых помещениях из-за склонности к суицидальным настроениям и рискам самоповреждения. Студентам не рекомендуется приходить к нему на консультации после заката — он может читать стихи до утра и не заметить, как вы уснули.</p>
       </div>
       <div class="tab-content" id="d01-hist">
         <div class="lore-text">
@@ -603,7 +603,7 @@
 
   function showMonokuma() {
     document.getElementById('vnOverlay').classList.add('active');
-    setFavicon('favicon_alert.png?v=39');
+    setFavicon('favicon_alert.png?v=40');
     document.getElementById('vnNagito').classList.add('hidden');
     document.getElementById('vnNagito').src = 'nagito.png';
     document.getElementById('vnNagito').classList.remove('talking');
@@ -623,7 +623,7 @@
 
   function closeVN() {
     document.getElementById('vnOverlay').classList.remove('active');
-    setFavicon('favicon.png?v=39');
+    setFavicon('favicon.png?v=40');
     if(debateLoop) clearInterval(debateLoop);
     isDebating = false;
   }
@@ -700,7 +700,7 @@
           document.getElementById('vnNagito').classList.add('hidden');
           document.getElementById('vnNagito').classList.remove('appearing');
           isDebating = false;
-          setFavicon('favicon.png?v=39');
+          setFavicon('favicon.png?v=40');
         }, 800);
         return;
       }
