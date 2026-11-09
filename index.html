@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Архив личных дел — Пик Надежды</title>
-<link rel="icon" type="image/png" href="favicon.png?v=46" id="dynamic-favicon">
+<link rel="icon" type="image/png" href="favicon.png?v=48" id="dynamic-favicon">
 <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root { --bg: #050608; --panel: #0a0c10; --border: #1f252e; --text: #c9d1d9; --dim: #6e7681; --secret: #d4a017; --hover: #151a21; --accent-default: #b33a3a; --active-nav-color: #b33a3a; }
@@ -99,49 +99,39 @@
   /* ====== ПЕРЕРАБОТАННАЯ СЕКРЕТКА ====== */
   .vn-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: flex; align-items: center; justify-content: center; z-index: 9999; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; overflow: hidden; }
   .vn-overlay.active { opacity: 1; pointer-events: auto; }
-  .vn-overlay::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 0, 0, 0.6) 3px, rgba(0, 0, 0, 0.6) 4px), radial-gradient(circle at center, rgba(179, 58, 58, 0.15) 0%, #000 80%); z-index: 1; animation: bgPulse 4s infinite alternate; }
-  @keyframes bgPulse { 0% { opacity: 0.8; } 100% { opacity: 1; } }
-  .vn-overlay::after { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: repeating-linear-gradient(90deg, transparent, transparent 100px, rgba(255, 255, 255, 0.02) 101px, rgba(255, 255, 255, 0.02) 102px); z-index: 2; pointer-events: none; animation: scanline 6s linear infinite; }
-  @keyframes scanline { 0% { transform: translateY(0); } 100% { transform: translateY(20px); } }
+  .vn-overlay::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at center, rgba(179, 58, 58, 0.2) 0%, rgba(0, 0, 0, 1) 80%); z-index: 1; transition: background 0.5s ease; }
+  .vn-overlay::after { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 0, 0, 0.5) 3px, rgba(0, 0, 0, 0.5) 4px); z-index: 2; pointer-events: none; opacity: 0.6; }
   
-  .vn-container { position: relative; width: 100%; height: 100%; max-width: 1200px; z-index: 3; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 50px; }
-  .vn-monokuma { position: absolute; bottom: 150px; left: 10%; height: 400px; width: auto; z-index: 4; filter: drop-shadow(0 0 30px rgba(255, 0, 0, 0.8)) contrast(1.1); transition: transform 0.2s, opacity 0.2s; }
-  .vn-monokuma.talking { transform: translateY(-10px) scale(1.05); }
-  .vn-monokuma.hidden { opacity: 0; transform: translateY(20px); }
-  .vn-nagito { position: absolute; bottom: 130px; right: 5%; height: 420px; width: auto; z-index: 4; transition: transform 0.2s, opacity 0.2s; cursor: pointer; filter: drop-shadow(0 0 40px rgba(255, 255, 255, 0.5)) brightness(1.1); }
-  .vn-nagito.talking { transform: translateY(-10px) scale(1.05); }
-  .vn-nagito.hidden { opacity: 0; transform: translateY(20px); }
+  /* ПЛАВНАЯ БИТВА ФОНОВ */
+  .vn-overlay.active.debate-active::before { background: linear-gradient(90deg, rgba(179, 58, 58, 0.8) 0%, rgba(30, 5, 5, 0.9) 30%, rgba(0, 0, 0, 1) 50%, rgba(20, 20, 25, 0.9) 70%, rgba(200, 200, 200, 0.7) 100%); }
+  .debate-left, .debate-right { display: none; }
+
+  .vn-container { position: relative; width: 100%; height: 100%; max-width: 1200px; z-index: 3; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 60px; }
+  .vn-monokuma { position: absolute; bottom: 140px; left: 8%; height: 450px; width: auto; z-index: 4; filter: drop-shadow(0 0 40px rgba(255, 0, 0, 0.6)); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+  .vn-monokuma.talking { transform: scale(1.05) translateY(-10px); }
+  .vn-monokuma.hidden { opacity: 0; }
+  .vn-nagito { position: absolute; bottom: 120px; right: 8%; height: 480px; width: auto; z-index: 4; filter: drop-shadow(0 0 40px rgba(255, 255, 255, 0.4)); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+  .vn-nagito.talking { transform: scale(1.05) translateY(-10px); }
+  .vn-nagito.hidden { opacity: 0; transform: translateY(50px) scale(0.9); }
   .vn-nagito.appearing { animation: glitchIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
-  @keyframes glitchIn { 0% { opacity: 0; transform: translateY(100px) scale(0.5); filter: brightness(5) hue-rotate(90deg); } 20% { opacity: 0.8; transform: translateX(-10px); filter: brightness(2) hue-rotate(-45deg); } 40% { opacity: 0.5; transform: translateX(10px); filter: brightness(1) hue-rotate(45deg); } 100% { opacity: 1; transform: translateY(0) scale(1); filter: brightness(1) hue-rotate(0deg); } }
-  
-  .vn-dialog-box { position: relative; z-index: 5; width: 90%; max-width: 900px; background: rgba(5, 5, 5, 0.95); border: 2px solid #b33a3a; border-radius: 2px; box-shadow: 0 0 40px rgba(179, 58, 58, 0.4), inset 0 0 20px rgba(179, 58, 58, 0.2); padding: 0; display: flex; flex-direction: column; overflow: hidden; backdrop-filter: blur(5px); }
-  .vn-dialog-box::before { content: ">"; position: absolute; top: 10px; right: 15px; color: #b33a3a; font-family: monospace; font-size: 1.5rem; animation: blink 1s step-end infinite; }
-  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
-  
-  .vn-name-tag { position: absolute; top: -35px; left: 20px; background: #b33a3a; color: #fff; font-family: "Merriweather", serif; font-weight: bold; font-size: 1.1rem; padding: 5px 25px; border-radius: 3px 3px 0 0; border: 2px solid #b33a3a; border-bottom: none; text-transform: uppercase; letter-spacing: 2px; box-shadow: 0 -5px 20px rgba(179, 58, 58, 0.6); transition: all 0.3s; }
-  .vn-text-content { padding: 40px; font-family: "Merriweather", serif; font-size: 1.2rem; color: #fff; line-height: 1.7; min-height: 140px; display: flex; align-items: center; text-shadow: 0 0 5px rgba(255, 255, 255, 0.3); letter-spacing: 1px; border-left: 3px solid #b33a3a; margin-left: 20px; }
+  @keyframes glitchIn { 0% { opacity: 0; transform: translateY(100px) scale(0.5); filter: brightness(5) hue-rotate(90deg); } 20% { opacity: 0.8; transform: translateX(-20px); filter: brightness(2) hue-rotate(-45deg); } 40% { opacity: 0.5; transform: translateX(20px); filter: brightness(1) hue-rotate(45deg); } 100% { opacity: 1; transform: translateY(0) scale(1); filter: brightness(1) hue-rotate(0deg); } }
+
+  .vn-dialog-box { position: relative; z-index: 5; width: 85%; max-width: 1000px; background: rgba(10, 10, 12, 0.95); border: 2px solid #333; border-radius: 12px; box-shadow: 0 20px 50px rgba(0,0,0,0.9), inset 0 0 0 1px rgba(255,255,255,0.1); padding: 0; display: flex; flex-direction: column; overflow: visible; backdrop-filter: blur(15px); }
+  .vn-name-tag { position: absolute; top: -24px; left: 30px; background: #b33a3a; color: #fff; font-family: "Merriweather", serif; font-weight: bold; font-size: 1.1rem; padding: 8px 30px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.5); text-transform: uppercase; letter-spacing: 2px; transition: all 0.3s; z-index: 6; }
+  .vn-text-content { padding: 45px 40px 40px 40px; font-family: "Merriweather", serif; font-size: 1.25rem; color: #e0e0e0; line-height: 1.7; min-height: 120px; display: flex; align-items: center; letter-spacing: 1px; }
   .vn-choices { display: none; gap: 20px; padding: 0 40px 30px 40px; justify-content: center; }
-  .vn-choice-btn { background: #111; color: #b33a3a; border: 2px solid #b33a3a; padding: 12px 35px; font-family: inherit; font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: all 0.3s; text-transform: uppercase; letter-spacing: 2px; border-radius: 3px; flex: 1; max-width: 300px; text-shadow: 0 0 5px rgba(179, 58, 58, 0.5); }
-  .vn-choice-btn.hope { border-color: #5ca85c; color: #5ca85c; text-shadow: 0 0 5px rgba(92, 168, 92, 0.5); }
-  .vn-choice-btn.hope:hover { background: #5ca85c; color: #000; box-shadow: 0 0 20px rgba(92, 168, 92, 0.8); text-shadow: none; }
+  .vn-choice-btn { background: #111; color: #b33a3a; border: 2px solid #b33a3a; padding: 12px 35px; font-family: inherit; font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: all 0.3s; text-transform: uppercase; letter-spacing: 2px; border-radius: 5px; flex: 1; max-width: 300px; }
+  .vn-choice-btn.hope { border-color: #5ca85c; color: #5ca85c; }
+  .vn-choice-btn.hope:hover { background: #5ca85c; color: #000; box-shadow: 0 0 20px rgba(92, 168, 92, 0.5); }
   
   .vn-controls { position: absolute; top: 20px; right: 20px; z-index: 10; display: flex; gap: 10px; }
-  .vn-btn { background: rgba(0,0,0,0.8); border: 1px solid #b33a3a; color: #b33a3a; padding: 10px 20px; border-radius: 0; font-family: inherit; font-size: 0.9rem; cursor: pointer; transition: all 0.2s; text-transform: uppercase; letter-spacing: 1px; }
-  .vn-btn:hover { background: #b33a3a; color: #fff; box-shadow: 0 0 15px rgba(179, 58, 58, 0.5); }
-  
-  /* ====== БИТВА ФОНОВ (для Нагито) ====== */
-  .vn-overlay.active.debate-active::before { background: linear-gradient(90deg, rgba(179, 58, 58, 0.9) 0%, rgba(0, 0, 0, 0.95) 40%, rgba(0, 0, 0, 0.95) 60%, rgba(255, 255, 255, 0.9) 100%); animation: none; }
-  .debate-left, .debate-right { position: absolute; top: 0; height: 100%; width: 50%; z-index: 1; pointer-events: none; opacity: 0; transition: opacity 0.5s ease; }
-  .debate-left { left: 0; background: rgba(179, 58, 58, 0.2); }
-  .debate-right { right: 0; background: rgba(255, 255, 255, 0.2); }
-  .vn-overlay.active.debate-active .debate-left { opacity: 1; animation: pulseRed 2s infinite alternate; }
-  .vn-overlay.active.debate-active .debate-right { opacity: 1; animation: pulseWhite 2s infinite alternate; }
-  @keyframes pulseRed { 0% { box-shadow: inset 0 0 100px rgba(179, 58, 58, 0.4); } 100% { box-shadow: inset 0 0 200px rgba(179, 58, 58, 0.8); } }
-  @keyframes pulseWhite { 0% { box-shadow: inset 0 0 100px rgba(255, 255, 255, 0.4); } 100% { box-shadow: inset 0 0 200px rgba(255, 255, 255, 0.8); } }
+  .vn-btn { background: rgba(0,0,0,0.8); border: 1px solid #444; color: #999; padding: 10px 20px; border-radius: 5px; font-family: inherit; font-size: 0.9rem; cursor: pointer; transition: all 0.2s; text-transform: uppercase; letter-spacing: 1px; }
+  .vn-btn:hover { background: #333; color: #fff; }
   
   .flash-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #fff; z-index: 10000; pointer-events: none; opacity: 0; transition: opacity 0.2s ease; }
   .flash-overlay.active { animation: flashAnim 0.6s ease-out forwards; }
   @keyframes flashAnim { 0% { opacity: 1; } 100% { opacity: 0; } }
+  
   @media (max-width: 800px) { .layout { flex-direction: column; } aside { width: 100%; height: auto; max-height: 180px; border-right: none; border-bottom: 1px solid var(--border); border-radius: 0; margin-top: 0; border-top: none;} .aside-list { display: flex; flex-direction: row; overflow-x: auto; padding: 10px 15px; gap: 10px; white-space: nowrap; } .aside-list li { margin-bottom: 0; padding: 0; flex-shrink: 0; } .nav-category { display: none; } .nav-btn { padding: 8px 12px; flex-direction: row; gap: 8px; width: auto; background: rgba(255,255,255,0.03); border: 1px solid var(--border); } .nav-btn.active { background: rgba(255, 255, 255, 0.1); border-color: var(--active-nav-color); border-left-width: 1px; } .nav-btn.active::after { display: none; } .nav-icon { width: 24px; height: 24px; font-size: 0.8rem; border: none; background: transparent; } .aside-footer { display: none; } main { padding: 15px; } .dossier-wrapper { padding: 20px 15px; } .stamp-bg { width: 100px; height: 100px; opacity: 0.1; } .tabs { gap: 10px; } .tab-btn { padding: 8px 12px; font-size: 0.75rem; letter-spacing: 1px; } .vn-monokuma { height: 220px; left: -20px; bottom: 180px; } .vn-nagito { height: 240px; right: -20px; bottom: 160px; } .vn-dialog-box { width: 95%; margin-bottom: 20px; } .vn-text-content { font-size: 0.95rem; padding: 20px; min-height: 100px; } .vn-name-tag { font-size: 0.9rem; padding: 4px 15px; top: -30px; left: 10px;} .vn-choices { padding: 0 20px 20px 20px; gap: 10px; } .vn-choice-btn { font-size: 0.8rem; padding: 8px 15px; } }
 </style>
 </head>
@@ -497,9 +487,6 @@
     <button class="vn-btn" onclick="closeVN()">Закрыть [X]</button>
   </div>
   
-  <div class="debate-left"></div>
-  <div class="debate-right"></div>
-  
   <div class="vn-container" onclick="nextMonokumaPhrase(event)">
     <img src="monokuma.png" id="vnMonokuma" class="vn-monokuma" alt="Монокума">
     <img src="nagito.png" id="vnNagito" class="vn-nagito hidden" alt="Нагито">
@@ -624,8 +611,8 @@
 
   function showMonokuma() {
     document.getElementById('vnOverlay').classList.add('active');
-    document.getElementById('vnOverlay').classList.remove('debate-active');
-    setFavicon('favicon_alert.png?v=46');
+    document.getElementById('vnOverlay').classList.remove('debate-active'); // Сброс фона
+    setFavicon('favicon_alert.png?v=48');
     document.getElementById('vnNagito').classList.add('hidden');
     document.getElementById('vnNagito').src = 'nagito.png';
     document.getElementById('vnNagito').classList.remove('talking');
@@ -636,7 +623,8 @@
     
     document.getElementById('vnName').innerText = "Монокума";
     document.getElementById('vnName').style.color = "#fff";
-    document.getElementById('vnName').style.background = "#b33a3a";
+    document.getElementById('vnName').style.background = "#b33a3a"; // Красный для Монокумы
+    
     document.getElementById('vnText').innerText = "Пип-пип! Нашёл секрет? Только никому не говори, иначе я тебя накажу! ПУХ-ХА-ХА!";
     
     document.getElementById('vnChoices').style.display = "none"; 
@@ -646,7 +634,7 @@
   function closeVN() {
     document.getElementById('vnOverlay').classList.remove('active');
     document.getElementById('vnOverlay').classList.remove('debate-active');
-    setFavicon('favicon.png?v=46');
+    setFavicon('favicon.png?v=48');
     if(debateLoop) clearInterval(debateLoop);
     isDebating = false;
   }
@@ -730,7 +718,7 @@
           document.getElementById('vnNagito').classList.add('hidden');
           document.getElementById('vnNagito').classList.remove('appearing');
           isDebating = false;
-          setFavicon('favicon.png?v=46');
+          setFavicon('favicon.png?v=48');
         }, 800);
         return;
       }
