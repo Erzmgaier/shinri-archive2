@@ -61,14 +61,12 @@
   #d04 { --accent: #8b5a2b; --accent-glow: rgba(139, 90, 43, 0.3); border-top-color: #8b5a2b !important; }
   #d07 { --accent: #27ae60; --accent-glow: rgba(39, 174, 96, 0.3); border-top-color: #27ae60 !important; }
   #d11 { --accent: #9b59b6; --accent-glow: rgba(241, 196, 15, 0.3); border-top-color: #9b59b6 !important; }
-  #d09 { --accent: #e74c3c; --accent-glow: rgba(231, 76, 60, 0.3); border-top-color: #e74c3c !important; }
   #d-tech { --accent: #555; --accent-glow: rgba(85, 85, 85, 0.3); border-top-color: #555 !important; }
   #d01 .tab-btn.active { color: #fff; border-bottom-color: #d4e1e8; }
   #d03 .tab-btn.active { color: #fff; border-bottom-color: #fff; }
   #d04 .tab-btn.active { color: #fff; border-bottom-color: #8b5a2b; }
   #d07 .tab-btn.active { color: #fff; border-bottom-color: #27ae60; }
   #d11 .tab-btn.active { color: #f1c40f; border-bottom-color: #f1c40f; }
-  #d09 .tab-btn.active { color: #fff; border-bottom-color: #e74c3c; }
   .stamp-bg { position: absolute; top: 15px; right: 15px; width: 140px; height: 140px; background-image: url('stamp.png'); background-size: cover; background-position: center; background-repeat: no-repeat; border-radius: 50%; opacity: 0.15; transform: rotate(15deg); pointer-events: none; z-index: 0; }
   .dossier-wrapper.hidden { display: none; }
   .dossier-title { position: relative; z-index: 1; text-align: center; font-family: "Merriweather", serif; font-size: 1.4rem; letter-spacing: 4px; color: #fff; margin: 0 0 20px; font-weight: bold; cursor: default; }
@@ -101,16 +99,12 @@
   .gear-card-name { color: #fff; font-weight: bold; font-size: 0.95rem; margin-bottom: 5px; display: flex; align-items: center; gap: 8px; }
   .gear-card-desc { color: #a9b2bc; font-size: 0.85rem; line-height: 1.5; }
   
-  /* ====== ПЕРЕРАБОТАННАЯ СЕКРЕТКА ====== */
   .vn-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: flex; align-items: center; justify-content: center; z-index: 9999; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; overflow: hidden; }
   .vn-overlay.active { opacity: 1; pointer-events: auto; }
   .vn-overlay::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at center, rgba(179, 58, 58, 0.2) 0%, rgba(0, 0, 0, 1) 80%); z-index: 1; transition: background 0.5s ease; }
   .vn-overlay::after { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 0, 0, 0.5) 3px, rgba(0, 0, 0, 0.5) 4px); z-index: 2; pointer-events: none; opacity: 0.6; }
-  
-  /* ПЛАВНАЯ БИТВА ФОНОВ */
   .vn-overlay.active.debate-active::before { background: linear-gradient(90deg, rgba(179, 58, 58, 0.8) 0%, rgba(30, 5, 5, 0.9) 30%, rgba(0, 0, 0, 1) 50%, rgba(20, 20, 25, 0.9) 70%, rgba(200, 200, 200, 0.7) 100%); }
   .debate-left, .debate-right { display: none; }
-
   .vn-container { position: relative; width: 100%; height: 100%; max-width: 1200px; z-index: 3; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 60px; }
   .vn-monokuma { position: absolute; bottom: 140px; left: 8%; height: 450px; width: auto; z-index: 4; filter: drop-shadow(0 0 40px rgba(255, 0, 0, 0.6)); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
   .vn-monokuma.talking { transform: scale(1.05) translateY(-10px); }
@@ -120,7 +114,6 @@
   .vn-nagito.hidden { opacity: 0; transform: translateY(50px) scale(0.9); }
   .vn-nagito.appearing { animation: glitchIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
   @keyframes glitchIn { 0% { opacity: 0; transform: translateY(100px) scale(0.5); filter: brightness(5) hue-rotate(90deg); } 20% { opacity: 0.8; transform: translateX(-20px); filter: brightness(2) hue-rotate(-45deg); } 40% { opacity: 0.5; transform: translateX(20px); filter: brightness(1) hue-rotate(45deg); } 100% { opacity: 1; transform: translateY(0) scale(1); filter: brightness(1) hue-rotate(0deg); } }
-
   .vn-dialog-box { position: relative; z-index: 5; width: 85%; max-width: 1000px; background: rgba(10, 10, 12, 0.95); border: 2px solid #333; border-radius: 12px; box-shadow: 0 20px 50px rgba(0,0,0,0.9), inset 0 0 0 1px rgba(255,255,255,0.1); padding: 0; display: flex; flex-direction: column; overflow: visible; backdrop-filter: blur(15px); }
   .vn-name-tag { position: absolute; top: -24px; left: 30px; background: #b33a3a; color: #fff; font-family: "Merriweather", serif; font-weight: bold; font-size: 1.1rem; padding: 8px 30px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.5); text-transform: uppercase; letter-spacing: 2px; transition: all 0.3s; z-index: 6; }
   .vn-text-content { padding: 45px 40px 40px 40px; font-family: "Merriweather", serif; font-size: 1.25rem; color: #e0e0e0; line-height: 1.7; min-height: 120px; display: flex; align-items: center; letter-spacing: 1px; }
@@ -128,11 +121,9 @@
   .vn-choice-btn { background: #111; color: #b33a3a; border: 2px solid #b33a3a; padding: 12px 35px; font-family: inherit; font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: all 0.3s; text-transform: uppercase; letter-spacing: 2px; border-radius: 5px; flex: 1; max-width: 300px; }
   .vn-choice-btn.hope { border-color: #5ca85c; color: #5ca85c; }
   .vn-choice-btn.hope:hover { background: #5ca85c; color: #000; box-shadow: 0 0 20px rgba(92, 168, 92, 0.5); }
-  
   .vn-controls { position: absolute; top: 20px; right: 20px; z-index: 10; display: flex; gap: 10px; }
   .vn-btn { background: rgba(0,0,0,0.8); border: 1px solid #444; color: #999; padding: 10px 20px; border-radius: 5px; font-family: inherit; font-size: 0.9rem; cursor: pointer; transition: all 0.2s; text-transform: uppercase; letter-spacing: 1px; }
   .vn-btn:hover { background: #333; color: #fff; }
-  
   .flash-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #fff; z-index: 10000; pointer-events: none; opacity: 0; transition: opacity 0.2s ease; }
   .flash-overlay.active { animation: flashAnim 0.6s ease-out forwards; }
   @keyframes flashAnim { 0% { opacity: 1; } 100% { opacity: 0; } }
@@ -155,7 +146,6 @@
       <li><button class="nav-btn" data-color="#9b59b6" onclick="openDossier('d03', this)"><div class="nav-icon">🎭</div><div class="nav-info"><span class="num">№03-К</span><span class="name">Кокичи Ома</span></div></button></li>
       <li><button class="nav-btn" data-color="#8b5a2b" onclick="openDossier('d04', this)"><div class="nav-icon">⚙️</div><div class="nav-info"><span class="num">№04-К</span><span class="name">Джатаро Кемури</span></div></button></li>
       <li><button class="nav-btn" data-color="#27ae60" onclick="openDossier('d07', this)"><div class="nav-icon">🧭</div><div class="nav-info"><span class="num">№07-А</span><span class="name">Рантаро Амами</span></div></button></li>
-      <li><button class="nav-btn" data-color="#e74c3c" onclick="openDossier('d09', this)"><div class="nav-icon">🌙</div><div class="nav-info"><span class="num">№09-Ю</span><span class="name">Химико Юмено</span></div></button></li>
 
       <li class="nav-category">Работы fialka</li>
       
@@ -412,60 +402,6 @@
       <div class="dossier-author">Автор идеи: <span>fialka</span></div>
     </article>
 
-    <!-- ДЕЛО 5: Химико -->
-    <article class="dossier-wrapper hidden" id="d09" style="border-top: 3px solid #e74c3c;">
-      <div class="stamp-bg"></div>
-      <div class="dossier-title">ЛИЧНОЕ ДЕЛО №09-Ю</div>
-      <div class="dossier-meta">
-        <div><span class="label">Имя:</span> Химико Юмено</div>
-        <div><span class="label">Возраст:</span> 16 лет | <span class="label">Статус:</span> Жива | <span class="label">Статус:</span> Ученица</div>
-        <div><span class="label">Талант:</span> Абсолютная Хранительница Снов</div>
-      </div>
-      <button class="copy-btn" onclick="copyDossier('d09', this)">Скопировать для RP</button>
-      <div class="tabs">
-        <button class="tab-btn active" onclick="openTab('d09', 'off', this)">Официальное дело</button>
-        <button class="tab-btn" onclick="openTab('d09', 'hist', this)">Личная история</button>
-        <button class="tab-btn" onclick="openTab('d09', 'gear', this)">Снаряжение</button>
-      </div>
-      <div class="tab-content active" id="d09-off">
-        <div class="block-title">Особые приметы</div>
-        <p class="block-text">Выглядит постоянно измотанной, с тёмными кругами под глазами; движения замедленные, речь тихая с паузами. Одежда простая, будто надета второпях. Избегает прикосновений без предупреждения — при касании спящего может непроизвольно войти в его сон. На просьбы «поправить» чей-либо сон реагирует настороженно и резко отказывается. <span class="secret">[ДАННЫЕ О ПРОИСХОЖДЕНИИ ЗАСЕКРЕЧЕНЫ]</span>.</p>
-        <div class="block-title">Краткая сводка</div>
-        <p class="block-text">До 8 лет росла в лесу в доме бабушки по материнской линии, <span class="secret">[ИНФОРМАЦИЯ ЗАСЕКРЕЧЕНА]</span>. С раннего детства у субъекта спонтанно возникали предвидящие сны, которые сбывались. Бабушка обучила её ремеслу хранительницы: вход в чужой сон возможен только при физическом контакте, на расстоянии — невозможен; вмешательство оставляет след в виде дежавю. После смерти бабушки субъект осталась одна; к ней начали обращаться посторонние с просьбами изменить чужой сон, что привело к истощению и отказу от контактов.</p>
-        <div class="block-title">Причина присвоения таланта</div>
-        <p class="block-text">Подтверждённая способность входить в сновидения других людей при физическом контакте, различать их структуру и вносить изменения. Предвидящие сны не контролирует — приходят в случайный момент. Физического воздействия на внешний мир не оказывает: влияние ограничено сознанием и решениями людей. После вмешательства у объекта остаётся дежавю и чувство потерянности. Владеет изготовлением снотворного из трав и минералов; лекарство помогает при кошмарах, но после пробуждения человек около десяти минут дезориентирован. <span class="secret">[СОСТАВ ЗАСЕКРЕЧЕН]</span>. На саму субъекта лекарство действует иначе — даёт ненадолго выспаться без снов.</p>
-        <div class="block-title">Цель прибытия</div>
-        <p class="block-text">Официально зачислена для обучения контролю над талантом и систематизации знаний. Однако, по данным скрытого наблюдения, субъект проявляет безразличие к учебному процессу. Истинная цель прибытия — поиск способа существовать с даром, не разрушая себя; дом без наставницы перестал быть убежищем. Администрация предупреждает: субъект склонен к уединению, не терпит вторжения в личное пространство. Попытки прикоснуться без предупреждения могут быть восприняты как попытка войти в сон. Рекомендуется не будить её резко и не использовать слово «помощь» в качестве рычага.</p>
-      </div>
-      <div class="tab-content" id="d09-hist">
-        <div class="lore-text">
-          <p>Химико Юмено не помнит города. Она родилась в лесу, в доме, который стоял там так давно, что никто уже не помнил, кто его построил. Бабушка — женщина с сухими руками и тяжёлым взглядом — никогда не говорила, откуда взялась девочка. На вопросы отвечала одинаково: «Ты здесь, потому что должна быть здесь». Химико перестала спрашивать лет в шесть, но привычка ждать ответа, которого нет, осталась с ней навсегда.</p>
-          <p>Дар проявился рано. Сначала — предвидящие сны. Химико снился снег в июле — и снег действительно выпадал. Снился незнакомый человек — и через неделю он стучал в дверь. Бабушка не удивлялась, только говорила: «Запоминай. Сны не врут, но и не говорят всего».</p>
-          <p>А потом случилось другое. Однажды бабушка заснула днём — просто уснула в кресле, уронив вязание, — и Химико, которой было лет семь, подошла и взяла её за руку. Не чтобы разбудить, не чтобы что-то сделать. Просто взяла. И оказалась внутри бабушкиного сна: та стояла на берегу реки, которой в лесу не было, и смотрела на воду. Химико испугалась и отняла руку — и сразу оказалась обратно, в комнате, где бабушка всё так же спала в кресле.</p>
-          <p>Бабушка проснулась через минуту и посмотрела на неё так, что Химико поняла: та всё знает. Не стала ругать, не стала расспрашивать. Только сказала: «Значит, и это тоже». И в тот же вечер начала учить. Главное правило, которое она вбила ей в голову в первый же день, касалось контакта. В чужой сон можно войти, но только если держишь человека за руку — кожа к коже. На расстоянии это не работает. Химико тогда не поняла, почему бабушка говорит об этом так серьёзно, — ей казалось, что это просто правило безопасности, вроде «не выходи зимой без шапки». Но бабушка объяснила иначе: «Контакт — это согласие. Пока ты держишь человека за руку, он хотя бы может отнять руку. Не отнимай у него эту возможность». Химико кивнула. Только много позже она осознала, что это было единственное, что отделяло её от того, чтобы стать чем-то по-настоящему опасным.</p>
-          <p>Училась она тихо и постепенно. Сначала на бабушке — та засыпала, а Химико входила в её сны и тренировалась не менять ничего, просто смотреть. Потом на лесных зверях, у которых сны были короткие, как вспышки. Бабушка учила различать свои сны и чужие, держать дистанцию, не путать отражение с приказом. И предупреждала о том, что Химико тогда казалось мелочью: после вмешательства остаётся след. Человек не помнит, что с ним сделали, но чувствует, что что-то было не так — лёгкое дежавю, потерянность, будто решение пришло извне. Это не лечится и не убирается. Химико не придавала значения — ей казалось, что цена маленькая, а польза большая.</p>
-          <p>Потом бабушка начала сдавать. Она тоже когда-то была хранительницей, которая помогала людям, — и выгорела: чужие сны, в которые она входила десятилетиями, не отпускали её даже в её собственных снах. Последние годы она почти не спала. Химико видела это каждый день — видела, как бабушка сидит у окна с закрытыми глазами и не спит, — и понимала, что смотрит в собственное будущее.</p>
-          <p>Тогда Химико начала делать лекарство. Не из жалости к другим — из страха за себя. Из местных трав и минералов, которые бабушка собирала и про которые знала больше, чем говорила. Состав давал людям с кошмарами и бессонницей несколько часов сна, но с дефектом: после пробуждения человек минут десять был дезориентирован, не понимал, где он, и только потом возвращался в себя. Убрать этот дефект Химико так и не смогла. На саму Химико лекарство действовало иначе: не давало десятой минуты потерянности, но и не лечило. Просто давало ненадолго выспаться — без снов, без чужих кошмаров. Несколько часов тишины. Она пила его сама, когда становилось совсем невмоготу, и знала, что это не лечение, а отсрочка.</p>
-          <p>Бабушка умерла тихо, во сне. Химико знала, что этот сон придёт, — он приснился ей за неделю, случайно, как и все предвидящие сны. Она не стала его менять, потому что предвидящий сон не меняется. Но могла бы попробовать. И до сих пор не знает, правильно ли сделала, что не попробовала.</p>
-          <p>После похорон Химико осталась в лесу одна, и вот тогда всё изменилось. Слух о «девочке, которая умеет поправлять сны», пошёл по окрестностям. Люди начали приходить — по одному, тихо, по слухам. Химико сначала отказывалась: бабушка учила говорить «нет», и она пыталась. Но потом вспомнила другое бабушкино слово — «если можешь помочь и не поможешь, ты не хранительница, а трус». И снова начала соглашаться. А после каждого вмешательства видела то, чего не видела раньше: человек уходил с дежавю, не помнил, что с ним сделали, но чувствовал, что что-то не так. Мужья возвращались, но с пустыми глазами. Сыновья брались за учёбу, но переставали смеяться. Химико поняла, что она не лечит — она подгоняет людей под чужие ожидания. И что бабушка была права: ключом пользуются, пока он не сломается.</p>
-          <p>Тогда она перестала брать людей за руку. Перестала выходить к ним. Но они всё равно приходили, и она слышала их шаги за дверью и не открывала. А тем, кто приходил не за вмешательством, а за сном, она через щель в двери передавала лекарство — с дефектом, но работающее. Люди брали, благодарили, а потом возвращались и говорили, что после него чувствуют себя странно. Химико знала. Она и сама пила его, чтобы хоть иногда спать.</p>
-          <p>Она снова начала недосыпать — теперь не только от чужих снов, но и от собственных. Предвидящие сны приходили чаще, и она не знала, когда очередной сбудется. Она перестала понимать, где заканчивается её дар и начинается она сама. И не была уверена, что та девочка, которая когда-то жила в лесу с бабушкой, вообще существовала.</p>
-          <p>Тогда и пришло письмо из Академии «Пик Надежды». Химико не сразу поняла, зачем ей туда: она не рвалась к славе и не искала учеников. Но в письме было сказано, что Академия собирает людей с талантами, которые «не вписываются в обычный мир», и что там можно научиться управлять своим даром так, чтобы он не управлял тобой. Для Химико это было не про учёбу — про то, чтобы найти хоть какое-то правило, которое позволит ей спать, не боясь, что она снова кого-то «поправит» и оставит след.</p>
-          <p>Она согласилась. Не потому, что хотела учиться, а потому, что дом без бабушки перестал быть домом, а лес перестал быть убежищем — люди нашли её и там.</p>
-        </div>
-      </div>
-      <div class="tab-content" id="d09-gear">
-        <div class="gear-category">Личные вещи</div>
-        <p style="font-size: 0.8rem; color: var(--dim); font-style: italic; margin-bottom: 20px; text-align: center;">* Желательно иметь при себе для полной отыгровки, если вы сами этого пожелаете.</p>
-        <div class="gear-grid">
-          <div class="gear-card"><div class="gear-card-name">💊 Банка с лекарствами</div><div class="gear-card-desc">Потрёпанная жестяная банка. Внутри — самодельные пилюли из толчёных трав и коры. Пахнет горькой полынью. Помогает при кошмарах, но оставляет после себя чувство потерянности.</div></div>
-          <div class="gear-card"><div class="gear-card-name">🌿 Связка сушёных трав</div><div class="gear-card-desc">Пучок высушенных растений, собранных в лесу. Используется для приготовления успокоительных настоев и снотворного.</div></div>
-          <div class="gear-card"><div class="gear-card-name">📓 Старый дневник</div><div class="gear-card-desc">Потрёпанная записная книжка с пожелтевшими страницами. Внутри — обрывочные записи её снов и странные рисунки.</div></div>
-        </div>
-      </div>
-      <div class="dossier-author">Автор идеи: <span>Erzmagier</span></div>
-    </article>
-
     <!-- ТЕХ. РАБОТЫ -->
     <article class="dossier-wrapper hidden" id="d-tech" style="border-top: 3px solid #555;">
       <div class="stamp-bg"></div>
@@ -601,10 +537,9 @@
 
   const monokumaPhrases = [
     "Пип-пип! Думаешь, твой талант спасёт тебя от отчаяния? Какой наивный Шут!",
-    "Пип-пип! Гениальный Архитектор, который не смог спасти свою команду! Скажи, ты и правда думаешь, что сможешь спасти хоть кого-то из них? Или снова будешь просто смотреть, как они умирают?",
+    "О-о-о, Детектив! А ты найдёшь улику, которая докажет, что ты не убийца? Или твой разум снова подведёт тебя?",
     "Маленький Изобретатель... Твои ловушки такие милые. Жаль, что они не спасут тебя от меня!",
     "Авантюрист, обожающий опасность... Добро пожаловать в самую опасную игру в твоей жизни!",
-    "Твои сны, Хранительница? Я превращу их в кошмары, от которых ты никогда не проснешься!",
     "Охотница... Ты привыкла выслеживать дичь. Но что, если дичью станешь ты?",
     "Пип-пип! Я вижу, как вы все дрожите. Это прекрасное чувство, не так ли?",
     "Убийство — это единственный способ выбраться. Ну, или смерть. Выбор за вами!",
