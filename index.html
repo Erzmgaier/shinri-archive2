@@ -13,7 +13,6 @@
   body::before { content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(5, 6, 8, 0.9); background-image: linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px); background-size: 50px 50px; z-index: -2; pointer-events: none; animation: gridMove 20s linear infinite; }
   @keyframes gridMove { 0% { transform: translate(0, 0); } 100% { transform: translate(-50px, -50px); } }
   
-  /* ====== ОБНОВЛЕННАЯ ШАПКА ====== */
   header { padding: 25px 30px; border-bottom: 1px solid var(--border); background: rgba(8, 10, 12, 0.95); flex-shrink: 0; display: flex; align-items: center; justify-content: center; gap: 25px; z-index: 10; box-shadow: 0 4px 20px rgba(0,0,0,0.6); position: relative; backdrop-filter: blur(10px); }
   header::after { content: ""; position: absolute; bottom: 0; left: 0; width: 100%; height: 1px; background: linear-gradient(90deg, transparent 0%, var(--active-nav-color) 20%, var(--active-nav-color) 80%, transparent 100%); opacity: 0.6; transition: background 0.3s, opacity 0.3s; }
   header:hover::after { opacity: 1; box-shadow: 0 0 10px var(--active-nav-color); }
@@ -47,6 +46,17 @@
   .aside-footer .status { display: flex; align-items: center; gap: 8px; color: #5ca85c; margin-bottom: 10px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
   .status-dot { width: 6px; height: 6px; background: #5ca85c; border-radius: 50%; box-shadow: 0 0 6px #5ca85c; animation: pulse 2s infinite; }
   @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
+  
+  .changelog-btn { width: 100%; padding: 10px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 6px; color: var(--text); font-family: inherit; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 20px; }
+  .changelog-btn:hover { background: rgba(255,255,255,0.1); border-color: var(--active-nav-color); color: #fff; box-shadow: 0 0 10px var(--active-nav-color); }
+  .modal-changelog { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 20000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s; backdrop-filter: blur(5px); }
+  .modal-changelog.active { opacity: 1; pointer-events: auto; }
+  .changelog-content { background: var(--panel); border: 1px solid var(--border); border-top: 3px solid var(--accent-default); padding: 30px; border-radius: 8px; width: 90%; max-width: 500px; box-shadow: 0 10px 30px rgba(0,0,0,0.8); }
+  .changelog-content h3 { color: #fff; margin-top: 0; font-family: "Merriweather", serif; letter-spacing: 2px; border-bottom: 1px dashed var(--border); padding-bottom: 15px; }
+  .changelog-content ul { list-style: none; padding: 0; margin: 20px 0; color: var(--text); font-size: 0.85rem; line-height: 1.8; }
+  .changelog-content li { margin-bottom: 10px; }
+  .changelog-content li strong { color: var(--active-nav-color); }
+
   main { flex: 1; overflow-y: auto; padding: 40px; position: relative; }
   .dossier-wrapper { position: relative; max-width: 850px; margin: 0 auto; background: rgba(10, 12, 16, 0.95); border: 1px solid var(--border); border-top: 3px solid var(--accent-default); padding: 40px 50px; box-shadow: 0 15px 40px rgba(0,0,0,0.9); animation: slideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1); border-radius: 12px; transition: border-color 0.3s ease, box-shadow 0.3s ease; }
   @keyframes slideIn { from { opacity: 0; transform: translateY(30px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
@@ -156,6 +166,7 @@
       <li><button class="nav-btn" data-color="#555" onclick="openDossier('d-tech', this)"><div class="nav-icon">🛠️</div><div class="nav-info"><span class="num">T-00</span><span class="name">Тех. работы</span></div></button></li>
     </ul>
     <div class="aside-footer">
+      <button class="changelog-btn" onclick="toggleChangelog(true)"><span>📋</span> Что нового?</button>
       <div class="status"><div class="status-dot"></div> Система активна</div>
       <div>Уровень доступа: S-2<br>Зашифровано: AES-256</div>
     </div>
@@ -445,7 +456,27 @@
   </div>
 </div>
 
+<!-- ====== ОКНО "ЧТО НОВОГО" ====== -->
+<div class="modal-changelog" id="changelogModal" onclick="toggleChangelog(false)">
+  <div class="changelog-content" onclick="event.stopPropagation()">
+    <h3>Журнал изменений</h3>
+    <ul>
+      <li><strong>[v1.1]</strong> Добавлена кнопка журнала изменений.</li>
+      <li><strong>[v1.1]</strong> Удален персонаж Химико Юмено.</li>
+      <li><strong>[v1.1]</strong> Обновлены фразы Монокумы (Шуичи и Охотница).</li>
+      <li><strong>[v1.0]</strong> Обновлен визуал шапки сайта.</li>
+    </ul>
+    <button class="vn-btn" style="width: 100%; margin-top: 10px;" onclick="toggleChangelog(false)">Закрыть</button>
+  </div>
+</div>
+
 <script>
+  function toggleChangelog(show) {
+    const modal = document.getElementById('changelogModal');
+    if (show) modal.classList.add('active');
+    else modal.classList.remove('active');
+  }
+
   function setFavicon(file) {
     document.getElementById('dynamic-favicon').href = file;
   }
@@ -540,7 +571,7 @@
     "Пип-пип! Гениальный Архитектор, который не смог спасти свою команду! Скажи, ты и правда думаешь, что сможешь спасти хоть кого-то из них? Или снова будешь просто смотреть, как они умирают?",
     "Маленький Изобретатель... Твои ловушки такие милые. Жаль, что они не спасут тебя от меня!",
     "Авантюрист, обожающий опасность... Добро пожаловать в самую опасную игру в твоей жизни!",
-    "Охотница... Ты пришла сюда защищать своего мальчика? А что, если я сделаю так, что он сам захочет тебя убить? Сможешь выстрелить в ответ?",
+    "Пип-пип! Охотница, ты так хорошо умеешь убивать зверей... Но когда-то ты не смогла спасти свою семью от мародёров. Как думаешь, кто теперь будет твоей добычей?",
     "Пип-пип! Я вижу, как вы все дрожите. Это прекрасное чувство, не так ли?",
     "Убийство — это единственный способ выбраться. Ну, или смерть. Выбор за вами!",
     "Твой дар — это проклятие. Ты сам это знаешь. Так почему бы не использовать его для убийства?",
