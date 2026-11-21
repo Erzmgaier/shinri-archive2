@@ -46,7 +46,6 @@
   .header-text h1 { font-family: var(--font-serif); margin: 0 0 4px; font-size: 1.6rem; letter-spacing: 8px; text-transform: uppercase; color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.2); }
   .header-text p { margin: 0; color: var(--active-nav-color); font-size: 0.75rem; letter-spacing: 4px; text-transform: uppercase; opacity: 0.9; }
 
-  /* УВЕЛИЧЕННЫЙ БЛОК ИНФО */
   .header-info { display: flex; flex-direction: column; align-items: flex-end; z-index: 1; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; color: var(--text); line-height: 1.6; background: rgba(0,0,0,0.4); padding: 10px 15px; border: 1px solid var(--border); border-radius: 4px; }
   .header-info .info-row { display: flex; gap: 20px; margin-bottom: 8px; }
   .header-info .info-item { display: flex; align-items: center; gap: 8px; }
@@ -218,6 +217,24 @@
   .flash-overlay.active { animation: flashAnim 0.6s ease-out forwards; }
   @keyframes flashAnim { 0% { opacity: 1; } 100% { opacity: 0; } }
   
+  /* ЭКРАН ВЫБОРА */
+  .welcome-screen { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; animation: fadeIn 0.5s ease-out; }
+  .welcome-title { font-family: var(--font-serif); font-size: 2rem; letter-spacing: 8px; color: #fff; margin-bottom: 40px; text-transform: uppercase; text-shadow: 0 0 15px rgba(255,255,255,0.2); }
+  .selection-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 20px; max-width: 900px; width: 100%; padding: 20px; }
+  .select-card { position: relative; background: #0c0e12; border: 2px solid #333; border-radius: 4px; display: flex; flex-direction: column; align-items: center; cursor: pointer; transition: all 0.3s ease; overflow: hidden; height: 220px; }
+  .select-card:hover { transform: translateY(-5px); border-color: var(--accent); box-shadow: 0 0 20px var(--accent-glow); }
+  .card-top { width: 100%; background: #1a1e26; color: var(--dim); text-align: center; font-size: 0.6rem; padding: 4px; border-bottom: 1px solid #333; letter-spacing: 1px; transition: all 0.3s; }
+  .select-card:hover .card-top { background: var(--accent); color: #fff; }
+  .card-photo { width: 100%; flex: 1; background: #151a21; display: flex; align-items: center; justify-content: center; color: #333; font-size: 0.7rem; text-transform: uppercase; border-bottom: 1px solid #333; position: relative; }
+  .card-photo::after { content: "[ ФОТО ]"; opacity: 0.3; font-weight: bold; letter-spacing: 2px; }
+  .card-name { width: 100%; padding: 12px 5px; text-align: center; font-family: var(--font-serif); font-weight: bold; font-size: 1rem; color: #fff; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s; }
+  .select-card[data-id="d01"] { --accent: #d4e1e8; --accent-glow: rgba(212, 225, 232, 0.4); }
+  .select-card[data-id="d03"] { --accent: #9b59b6; --accent-glow: rgba(155, 89, 182, 0.4); }
+  .select-card[data-id="d04"] { --accent: #8b5a2b; --accent-glow: rgba(139, 90, 43, 0.4); }
+  .select-card[data-id="d07"] { --accent: #27ae60; --accent-glow: rgba(39, 174, 96, 0.4); }
+  .select-card[data-id="d11"] { --accent: #f1c40f; --accent-glow: rgba(241, 196, 15, 0.4); }
+  .select-card[data-id="d-tech"] { --accent: #555; --accent-glow: rgba(85, 85, 85, 0.4); }
+
   @media (max-width: 800px) { 
     .layout { flex-direction: column; } 
     aside { width: 100%; height: auto; max-height: 180px; border-right: none; border-bottom: 1px solid var(--border); } 
@@ -243,6 +260,8 @@
     .changelog-content { padding: 20px; } 
     .changelog-header h3 { font-size: 1rem; }
     .header-info { display: none; } 
+    .selection-grid { grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); }
+    .card-name { font-size: 0.8rem; }
   }
 </style>
 </head>
@@ -290,8 +309,52 @@
     </div>
   </aside>
   <main id="main-content">
+        <!-- ЭКРАН ВЫБОРА -->
+    <div class="welcome-screen" id="welcomeScreen">
+      <div class="welcome-title">Выберите дело</div>
+      <div class="selection-grid">
+        
+        <div class="select-card" data-id="d01" onclick="openDossier('d01', document.querySelector('.nav-btn[data-color=\'#d4e1e8\']'))">
+          <div class="card-top">FILE: 01-Ш</div>
+          <div class="card-photo"></div>
+          <div class="card-name">Йи Санг</div>
+        </div>
+
+        <div class="select-card" data-id="d03" onclick="openDossier('d03', document.querySelector('.nav-btn[data-color=\'#9b59b6\']'))">
+          <div class="card-top">FILE: 03-К</div>
+          <div class="card-photo"></div>
+          <div class="card-name">Кокичи</div>
+        </div>
+
+        <div class="select-card" data-id="d04" onclick="openDossier('d04', document.querySelector('.nav-btn[data-color=\'#8b5a2b\']'))">
+          <div class="card-top">FILE: 04-К</div>
+          <div class="card-photo"></div>
+          <div class="card-name">Джатаро</div>
+        </div>
+
+        <div class="select-card" data-id="d07" onclick="openDossier('d07', document.querySelector('.nav-btn[data-color=\'#27ae60\']'))">
+          <div class="card-top">FILE: 07-А</div>
+          <div class="card-photo"></div>
+          <div class="card-name">Рантаро</div>
+        </div>
+
+        <div class="select-card" data-id="d11" onclick="openDossier('d11', document.querySelector('.nav-btn[data-color=\'#f1c40f\']'))">
+          <div class="card-top">FILE: 11-Х</div>
+          <div class="card-photo"></div>
+          <div class="card-name">Маки</div>
+        </div>
+
+        <div class="select-card" data-id="d-tech" onclick="openDossier('d-tech', document.querySelector('.nav-btn[data-color=\'#555\']'))">
+          <div class="card-top">SYS: T-00</div>
+          <div class="card-photo"></div>
+          <div class="card-name">Тех. Отдел</div>
+        </div>
+
+      </div>
+    </div>
+
     <!-- ДЕЛО 0: Йи Санг (Шуичи) -->
-    <article class="dossier-wrapper" id="d01">
+    <article class="dossier-wrapper hidden" id="d01">
       <div class="dossier-header-card">
         <div class="dossier-avatar"></div>
         <div class="dossier-header-info">
@@ -570,6 +633,7 @@
         <div class="dossier-author">Автор идеи: <span>fialka</span></div>
       </div>
     </article>
+
     <!-- ТЕХ. РАБОТЫ -->
     <article class="dossier-wrapper hidden" id="d-tech">
       <div class="dossier-header-card" style="justify-content: center; border-bottom: none; padding: 40px;">
@@ -627,18 +691,22 @@
       <button class="changelog-close" onclick="toggleChangelog(false)">✕</button>
     </div>
     <div class="changelog-body">
-      <p style="margin-top: 0; color: #8f98a0;">Опубликовано 17.11.2026 в 23:15. Следующие изменения уже активны:</p>
+      <p style="margin-top: 0; color: #8f98a0;">Опубликовано 19.11.2026. Следующие изменения уже активны:</p>
       <ul>
-        <li><strong>Исправление верстки:</strong>
+        <li><strong>Стартовый экран:</strong>
           <ul>
-            <li>Убрано дублирование шапки и сайдбара.</li>
-            <li>Исправлено наложение элементов.</li>
+            <li>При входе на сайт теперь отображается сетка карточек в стиле Limbus Company.</li>
+            <li>При клике на карточку открывается соответствующее личное дело.</li>
           </ul>
         </li>
-        <li><strong>Улучшение интерфейса:</strong>
+        <li><strong>Цитаты:</strong>
           <ul>
-            <li>Блок с часами и уровнем доступа в шапке увеличен и стал более читаемым.</li>
-            <li>Повышен контраст текста для лучшего восприятия.</li>
+            <li>Обновлены фразы персонажей на более уязвимые и человечные.</li>
+          </ul>
+        </li>
+        <li><strong>Интерфейс:</strong>
+          <ul>
+            <li>Убран автозапуск дела Шуичи при загрузке страницы.</li>
           </ul>
         </li>
       </ul>
@@ -668,6 +736,9 @@
   }
 
   function openDossier(id, btn) {
+    const welcomeScreen = document.getElementById('welcomeScreen');
+    if (welcomeScreen) welcomeScreen.style.display = 'none';
+
     document.querySelectorAll('.dossier-wrapper').forEach(d => d.classList.add('hidden'));
     document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
     
