@@ -303,6 +303,16 @@
       
       <li><button class="nav-btn" data-color="#555" onclick="openDossier('d-tech', this)"><div class="nav-icon">🛠️</div><div class="nav-info"><span class="num">T-00</span><span class="name">Тех. работы</span></div></button></li>
     </ul>
+
+    <div style="padding: 15px;">
+      <button class="nav-btn" onclick="showWelcomeScreen()" style="border: 1px dashed var(--border); justify-content: center; color: var(--dim);">
+        <div class="nav-icon" style="font-size: 0.9rem;">↩️</div>
+        <div class="nav-info">
+          <span class="name" style="font-size: 0.8rem;">Вернуться в архив</span>
+        </div>
+      </button>
+    </div>
+
     <div class="aside-footer">
       <div class="status"><div class="status-dot"></div> Система активна <span class="hidden-changelog-btn" onclick="toggleChangelog(true)" title="Логи"></span></div>
       <div>Уровень доступа: S-2<br>Зашифровано: AES-256</div>
@@ -342,12 +352,6 @@
           <div class="card-top">FILE: 11-Х</div>
           <div class="card-photo"></div>
           <div class="card-name">Маки</div>
-        </div>
-
-        <div class="select-card" data-id="d-tech" onclick="openDossier('d-tech', document.querySelector('.nav-btn[data-color=\'#555\']'))">
-          <div class="card-top">SYS: T-00</div>
-          <div class="card-photo"></div>
-          <div class="card-name">Тех. Отдел</div>
         </div>
 
       </div>
@@ -693,20 +697,16 @@
     <div class="changelog-body">
       <p style="margin-top: 0; color: #8f98a0;">Опубликовано 19.11.2026. Следующие изменения уже активны:</p>
       <ul>
+        <li><strong>Навигация:</strong>
+          <ul>
+            <li>Добавлена кнопка «Вернуться в архив» в левое меню.</li>
+            <li>Убрана карточка «Тех. Отдел» из экрана выбора.</li>
+          </ul>
+        </li>
         <li><strong>Стартовый экран:</strong>
           <ul>
-            <li>При входе на сайт теперь отображается сетка карточек в стиле Limbus Company.</li>
+            <li>При входе на сайт отображается сетка карточек в стиле Limbus Company.</li>
             <li>При клике на карточку открывается соответствующее личное дело.</li>
-          </ul>
-        </li>
-        <li><strong>Цитаты:</strong>
-          <ul>
-            <li>Обновлены фразы персонажей на более уязвимые и человечные.</li>
-          </ul>
-        </li>
-        <li><strong>Интерфейс:</strong>
-          <ul>
-            <li>Убран автозапуск дела Шуичи при загрузке страницы.</li>
           </ul>
         </li>
       </ul>
@@ -763,6 +763,16 @@
 
     const copyBtn = activeDossier.querySelector('.copy-btn');
     if (copyBtn) copyBtn.classList.remove('hidden-btn');
+  }
+
+  function showWelcomeScreen() {
+    document.querySelectorAll('.dossier-wrapper').forEach(d => d.classList.add('hidden'));
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    
+    const welcomeScreen = document.getElementById('welcomeScreen');
+    if (welcomeScreen) welcomeScreen.style.display = 'flex';
+    
+    document.documentElement.style.setProperty('--active-nav-color', 'var(--accent-default)');
   }
 
   function openTab(dossierId, tabType, btn) {
