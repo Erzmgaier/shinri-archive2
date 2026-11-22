@@ -233,7 +233,6 @@
   .select-card[data-id="d04"] { --accent: #8b5a2b; --accent-glow: rgba(139, 90, 43, 0.4); }
   .select-card[data-id="d07"] { --accent: #27ae60; --accent-glow: rgba(39, 174, 96, 0.4); }
   .select-card[data-id="d11"] { --accent: #f1c40f; --accent-glow: rgba(241, 196, 15, 0.4); }
-  .select-card[data-id="d-tech"] { --accent: #555; --accent-glow: rgba(85, 85, 85, 0.4); }
 
   @media (max-width: 800px) { 
     .layout { flex-direction: column; } 
@@ -304,7 +303,8 @@
       <li><button class="nav-btn" data-color="#555" onclick="openDossier('d-tech', this)"><div class="nav-icon">🛠️</div><div class="nav-info"><span class="num">T-00</span><span class="name">Тех. работы</span></div></button></li>
     </ul>
 
-    <div style="padding: 15px;">
+    <!-- Кнопка возврата, скрытая по умолчанию -->
+    <div id="backBtnContainer" style="padding: 15px; display: none;">
       <button class="nav-btn" onclick="showWelcomeScreen()" style="border: 1px dashed var(--border); justify-content: center; color: var(--dim);">
         <div class="nav-icon" style="font-size: 0.9rem;">↩️</div>
         <div class="nav-info">
@@ -699,14 +699,13 @@
       <ul>
         <li><strong>Навигация:</strong>
           <ul>
-            <li>Добавлена кнопка «Вернуться в архив» в левое меню.</li>
-            <li>Убрана карточка «Тех. Отдел» из экрана выбора.</li>
+            <li>Кнопка «Вернуться» теперь скрыта на стартовом экране и появляется только при открытии дела.</li>
+            <li>При клике на кнопку вы снова попадаете на экран выбора.</li>
           </ul>
         </li>
         <li><strong>Стартовый экран:</strong>
           <ul>
             <li>При входе на сайт отображается сетка карточек в стиле Limbus Company.</li>
-            <li>При клике на карточку открывается соответствующее личное дело.</li>
           </ul>
         </li>
       </ul>
@@ -738,6 +737,8 @@
   function openDossier(id, btn) {
     const welcomeScreen = document.getElementById('welcomeScreen');
     if (welcomeScreen) welcomeScreen.style.display = 'none';
+    
+    document.getElementById('backBtnContainer').style.display = 'block';
 
     document.querySelectorAll('.dossier-wrapper').forEach(d => d.classList.add('hidden'));
     document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
@@ -771,6 +772,8 @@
     
     const welcomeScreen = document.getElementById('welcomeScreen');
     if (welcomeScreen) welcomeScreen.style.display = 'flex';
+    
+    document.getElementById('backBtnContainer').style.display = 'none';
     
     document.documentElement.style.setProperty('--active-nav-color', 'var(--accent-default)');
   }
