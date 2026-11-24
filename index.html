@@ -109,7 +109,7 @@
   #d04 { --accent: #8b5a2b; --accent-glow: rgba(139, 90, 43, 0.4); border-top-color: #8b5a2b !important; }
   #d07 { --accent: #27ae60; --accent-glow: rgba(39, 174, 96, 0.4); border-top-color: #27ae60 !important; }
   #d11 { --accent: #f1c40f; --accent-glow: rgba(241, 196, 15, 0.4); border-top-color: #f1c40f !important; }
-  #d-tech { --accent: #555; --accent-glow: rgba(85, 85, 85, 0.4); border-top-color: #555 !important; }
+  #d-tech { --accent: #b33a3a; --accent-glow: rgba(179, 58, 58, 0.4); border-top-color: #b33a3a !important; }
 
   .dossier-wrapper.hidden { display: none; }
 
@@ -161,14 +161,23 @@
   .gear-card-name { color: #fff; font-weight: bold; font-size: 0.9rem; margin-bottom: 5px; display: flex; align-items: center; gap: 8px; }
   .gear-card-desc { color: var(--text); opacity: 0.8; font-size: 0.85rem; line-height: 1.5; }
 
-  /* ТЕХ РАБОТЫ */
+  /* ТЕХ РАБОТЫ (ПЕРЕРАБОТКА) */
   .tech-works { text-align: center; padding: 40px 20px; position: relative; z-index: 1; overflow: hidden; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; }
-  .tech-works h2 { color: #fff; font-family: var(--font-serif); font-size: 1.8rem; letter-spacing: 4px; margin: 0 0 10px; text-transform: uppercase; text-shadow: 0 0 15px rgba(241, 196, 15, 0.3); }
-  .tech-status { display: inline-block; background: rgba(241, 196, 15, 0.15); color: #f1c40f; padding: 5px 15px; border: 1px dashed #f1c40f; border-radius: 2px; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; font-weight: bold; margin-bottom: 30px; }
-  .tech-tape { width: 100%; background: repeating-linear-gradient(45deg, #f1c40f, #f1c40f 10px, #000 10px, #000 20px); height: 8px; margin-bottom: 30px; opacity: 0.8; box-shadow: 0 0 15px rgba(241, 196, 15, 0.2); position: relative; }
-  .tech-text { color: var(--text); font-size: 0.95rem; max-width: 500px; margin: 0 auto; line-height: 1.8; }
-  .tech-icon { font-size: 3rem; margin-bottom: 15px; animation: pulseTech 2s infinite alternate; display: inline-block; }
-  @keyframes pulseTech { 0% { transform: scale(1); opacity: 0.7; } 100% { transform: scale(1.1); opacity: 1; text-shadow: 0 0 20px #f1c40f; } }
+  .tech-works h2 { color: #b33a3a; font-family: var(--font-serif); font-size: 2rem; letter-spacing: 6px; margin: 0 0 10px; text-transform: uppercase; text-shadow: 0 0 20px rgba(179, 58, 58, 0.4); }
+  .tech-status { display: inline-block; background: rgba(179, 58, 58, 0.1); color: #b33a3a; padding: 5px 20px; border: 2px solid #b33a3a; border-radius: 2px; font-size: 0.9rem; letter-spacing: 3px; text-transform: uppercase; font-weight: bold; margin-bottom: 30px; animation: blinkRed 2s infinite; }
+  @keyframes blinkRed { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+  
+  /* Красная мигающая линия */
+  .tech-line { width: 100%; height: 2px; background: #b33a3a; margin-bottom: 40px; box-shadow: 0 0 15px #b33a3a; }
+  
+  .tech-text { color: var(--dim); font-size: 0.95rem; max-width: 500px; margin: 0 auto; line-height: 1.8; font-family: var(--font-mono); text-align: center; }
+  .tech-icon { font-size: 4rem; margin-bottom: 20px; display: inline-block; filter: grayscale(1) brightness(0.5); position: relative; }
+  
+  /* Глитч-эффект для иконки */
+  .tech-icon::after {
+    content: "🚧"; position: absolute; top: 0; left: 2px; color: #b33a3a; opacity: 0.5; animation: glitchTech 0.3s infinite; z-index: -1;
+  }
+  @keyframes glitchTech { 0% { transform: translate(0); } 50% { transform: translate(-2px, 2px); } 100% { transform: translate(2px, -2px); } }
 
   /* МОДАЛЬНОЕ ОКНО */
   .modal-changelog { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 20000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; backdrop-filter: blur(5px); }
@@ -300,7 +309,7 @@
       
       <li class="nav-category" style="margin-top: 15px; border-top: 1px solid var(--border); padding-top: 15px;">Служебные записи</li>
       
-      <li><button class="nav-btn" data-color="#555" onclick="openDossier('d-tech', this)"><div class="nav-icon">🛠️</div><div class="nav-info"><span class="num">T-00</span><span class="name">Тех. работы</span></div></button></li>
+      <li><button class="nav-btn" data-color="#b33a3a" onclick="openDossier('d-tech', this)"><div class="nav-icon">💀</div><div class="nav-info"><span class="num">ERR-00</span><span class="name">Тех. работы</span></div></button></li>
     </ul>
 
     <!-- Кнопка возврата, скрытая по умолчанию -->
@@ -638,24 +647,27 @@
       </div>
     </article>
 
-    <!-- ТЕХ. РАБОТЫ -->
+    <!-- ТЕХ. РАБОТЫ (ПЕРЕРАБОТКА) -->
     <article class="dossier-wrapper hidden" id="d-tech">
       <div class="dossier-header-card" style="justify-content: center; border-bottom: none; padding: 40px;">
         <div class="dossier-header-info" style="text-align: center;">
-          <div class="dossier-title-new" style="color: #f1c40f;">ТЕХ. РАБОТЫ</div>
-          <div class="dossier-subtitle" style="color: #f1c40f;">Статус: В разработке</div>
+          <div class="dossier-title-new" style="color: #b33a3a; text-shadow: 0 0 15px rgba(179, 58, 58, 0.4);">СЕКТОР ЗАБЛОКИРОВАН</div>
+          <div class="dossier-subtitle" style="color: #b33a3a;">ОШИБКА ДОСТУПА: 403</div>
         </div>
       </div>
       
       <div class="tab-content active" style="display: block; flex: 1;">
         <div class="tech-works">
-          <div class="tech-icon">🚧</div>
-          <div class="tech-status">Обновление архива</div>
+          <div class="tech-line"></div>
+          <div class="tech-icon">💀</div>
+          <h2>Данные повреждены</h2>
+          <div class="tech-status">Сбой системы</div>
           <p class="tech-text">
-            Здесь скоро появятся новые лица. Архив пополняется.<br>
-            Пожалуйста, ожидайте обновлений от Службы Безопасности Академии.
+            > ПОПЫТКА ДОСТУПА К СЕКТОРУ T-00 ПРЕРВАНА.<br>
+            > ПРИЧИНА: НЕДОСТАТОЧНО ПРАВ ИЛИ ФАЙЛЫ УДАЛЕНЫ.<br><br>
+            Ожидайте указаний от Службы Безопасности.
           </p>
-          <div class="tech-tape" style="margin-top: 40px;"></div>
+          <div class="tech-line" style="margin-top: 40px;"></div>
         </div>
       </div>
     </article>
@@ -697,15 +709,21 @@
     <div class="changelog-body">
       <p style="margin-top: 0; color: #8f98a0;">Опубликовано 19.11.2026. Следующие изменения уже активны:</p>
       <ul>
-        <li><strong>Навигация:</strong>
+        <li><strong>Переработка "Тех. работ":</strong>
           <ul>
-            <li>Кнопка «Вернуться» теперь скрыта на стартовом экране и появляется только при открытии дела.</li>
-            <li>При клике на кнопку вы снова попадаете на экран выбора.</li>
+            <li>Дизайн заменен на "Системный сбой" с красной мигающей линией.</li>
+            <li>Обновлен текст: теперь это выглядит как заблокированный сектор.</li>
+            <li>Иконка (💀) получила эффект глитча.</li>
           </ul>
         </li>
-        <li><strong>Стартовый экран:</strong>
+        <li><strong>Копирование:</strong>
           <ul>
-            <li>При входе на сайт отображается сетка карточек в стиле Limbus Company.</li>
+            <li>Из текста при копировании удалено имя автора идеи.</li>
+          </ul>
+        </li>
+        <li><strong>Навигация:</strong>
+          <ul>
+            <li>Кнопка «Вернуться» теперь скрыта на стартовом экране.</li>
           </ul>
         </li>
       </ul>
@@ -803,9 +821,7 @@
     });
     text = text.replace(/ \| $/, "\n");
     
-    const authorText = dossier.querySelector('.dossier-author').innerText;
-    text += "———————————————————————\n";
-    text += authorText + "\n";
+    // Убрали блок с автором
     text += "———————————————————————\n\n";
 
     const offTab = dossier.querySelector('.tab-content[id$="-off"]');
