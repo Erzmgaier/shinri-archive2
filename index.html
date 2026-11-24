@@ -1,280 +1,4 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Архив личных дел — Пик Надежды</title>
-<link rel="icon" type="image/png" href="favicon.png?v=48" id="dynamic-favicon">
-<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  :root { 
-    --bg: #050608; 
-    --panel: #0a0c10; 
-    --border: #2a3441; 
-    --text: #d1d9e0; 
-    --dim: #7a8694; 
-    --secret: #d4a017; 
-    --accent-default: #b33a3a; 
-    --active-nav-color: #b33a3a; 
-    --font-mono: "Roboto Mono", monospace;
-    --font-serif: "Merriweather", serif;
-  }
-  * { box-sizing: border-box; }
-  
-  ::-webkit-scrollbar { width: 8px; height: 8px; }
-  ::-webkit-scrollbar-track { background: var(--bg); border-left: 1px solid var(--border); }
-  ::-webkit-scrollbar-thumb { background: #3a4553; border: 1px solid #1a2028; }
-  ::-webkit-scrollbar-thumb:hover { background: var(--dim); }
-
-  body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--font-mono); line-height: 1.6; height: 100vh; display: flex; flex-direction: column; overflow: hidden; position: relative; }
-  
-  body::before { content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(5, 6, 8, 0.95); background-image: linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px); background-size: 40px 40px; z-index: -2; pointer-events: none; animation: gridMove 30s linear infinite; }
-  @keyframes gridMove { 0% { transform: translate(0, 0); } 100% { transform: translate(-40px, -40px); } }
-
-  /* ШАПКА */
-  header { padding: 20px 40px; border-bottom: 2px solid var(--border); background: rgba(8, 10, 14, 0.95); flex-shrink: 0; display: flex; align-items: center; justify-content: space-between; z-index: 10; position: relative; backdrop-filter: blur(10px); overflow: hidden; }
-  header::before { content: ""; position: absolute; top: 0; left: -50%; width: 50%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent); animation: scanBar 6s linear infinite; pointer-events: none; }
-  @keyframes scanBar { 0% { left: -50%; } 100% { left: 150%; } }
-
-  .header-left { display: flex; align-items: center; gap: 20px; z-index: 1; }
-  .header-logo-container { width: 65px; height: 65px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: transform 0.3s; }
-  .header-logo-container:hover { transform: rotate(15deg) scale(1.1); }
-  .header-logo { width: 100%; height: 100%; object-fit: contain; border-radius: 50%; filter: invert(1) grayscale(1) brightness(1.4) drop-shadow(0 0 8px rgba(255,255,255,0.2)); animation: spinSlow 10s linear infinite; }
-  @keyframes spinSlow { 0% { transform: rotateY(0deg); } 100% { transform: rotateY(360deg); } }
-  
-  .header-text { text-align: left; }
-  .header-text h1 { font-family: var(--font-serif); margin: 0 0 4px; font-size: 1.6rem; letter-spacing: 8px; text-transform: uppercase; color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.2); }
-  .header-text p { margin: 0; color: var(--active-nav-color); font-size: 0.75rem; letter-spacing: 4px; text-transform: uppercase; opacity: 0.9; }
-
-  .header-info { display: flex; flex-direction: column; align-items: flex-end; z-index: 1; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; color: var(--text); line-height: 1.6; background: rgba(0,0,0,0.4); padding: 10px 15px; border: 1px solid var(--border); border-radius: 4px; }
-  .header-info .info-row { display: flex; gap: 20px; margin-bottom: 8px; }
-  .header-info .info-item { display: flex; align-items: center; gap: 8px; }
-  .header-info .info-label { color: var(--dim); font-size: 0.7rem; }
-  .header-info .info-value { color: #fff; font-family: var(--font-mono); font-weight: bold; letter-spacing: 1px; }
-  .header-info .time-value { color: #fff; font-weight: bold; border: 1px solid var(--dim); padding: 4px 12px; border-radius: 2px; background: rgba(255,255,255,0.1); font-size: 0.9rem; letter-spacing: 2px; }
-
-  /* САЙДБАР */
-  .layout { display: flex; flex: 1; overflow: hidden; z-index: 5; }
-  aside { width: 300px; background: rgba(10, 12, 16, 0.9); border-right: 1px solid var(--border); display: flex; flex-direction: column; flex-shrink: 0; position: relative; }
-  .aside-header { padding: 20px 25px; border-bottom: 1px dashed var(--border); }
-  aside h2 { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 4px; color: var(--dim); margin: 0; }
-  .aside-list { list-style: none; padding: 15px 0; margin: 0; flex: 1; overflow-y: auto; }
-  .aside-list li { margin-bottom: 2px; padding: 0 15px; }
-  .nav-category { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 3px; color: var(--dim); margin: 20px 15px 10px 15px; font-weight: bold; opacity: 0.6; display: flex; align-items: center; gap: 10px; }
-  .nav-category::after { content: ""; flex: 1; height: 1px; background: var(--border); }
-  .nav-btn { width: 100%; text-align: left; background: transparent; border: 1px solid transparent; color: var(--text); padding: 10px 12px; font-family: inherit; font-size: 0.9rem; cursor: pointer; transition: all .2s ease; display: flex; align-items: center; gap: 12px; position: relative; }
-  .nav-btn:hover { background: rgba(255,255,255,0.04); }
-  .nav-btn.active { background: rgba(255,255,255,0.08); border-color: var(--border); border-left: 2px solid var(--active-nav-color); }
-  .nav-icon { font-size: 1.1rem; color: var(--dim); transition: all 0.2s; opacity: 0.8; }
-  .nav-btn.active .nav-icon { color: var(--active-nav-color); opacity: 1; text-shadow: 0 0 10px var(--active-nav-color); }
-  .nav-info { display: flex; flex-direction: column; }
-  .nav-btn .num { color: var(--dim); font-size: 0.65rem; letter-spacing: 1px; font-weight: bold; }
-  .nav-btn .name { font-weight: 500; letter-spacing: 0.5px; font-size: 0.95rem; color: var(--text); transition: color 0.2s; }
-  .nav-btn.active .name { color: #fff; text-shadow: 0 0 5px rgba(255,255,255,0.3); }
-  .nav-btn.active .num { color: var(--active-nav-color); }
-  .aside-footer { padding: 20px 25px; border-top: 1px solid var(--border); background: rgba(0,0,0,0.4); font-size: 0.7rem; color: var(--dim); line-height: 1.5; }
-  .aside-footer .status { display: flex; align-items: center; gap: 8px; color: #5ca85c; margin-bottom: 10px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; text-shadow: 0 0 5px rgba(92,168,92,0.3); }
-  .status-dot { width: 6px; height: 6px; background: #5ca85c; border-radius: 50%; box-shadow: 0 0 8px #5ca85c; animation: pulse 2s infinite; }
-  @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
-  .hidden-changelog-btn { display: inline-block; width: 6px; height: 6px; background: #555; border-radius: 50%; margin-left: 8px; cursor: pointer; transition: all 0.3s; vertical-align: middle; }
-  .hidden-changelog-btn:hover { background: var(--active-nav-color); box-shadow: 0 0 10px var(--active-nav-color); transform: scale(1.3); }
-
-  /* ОСНОВНОЙ ЭКРАН */
-  main { flex: 1; padding: 40px; position: relative; display: flex; flex-direction: column; align-items: center; overflow: hidden; }
-  
-  .dossier-wrapper { 
-    position: relative; 
-    max-width: 900px; 
-    width: 100%;
-    height: calc(100vh - 80px);
-    display: flex;
-    flex-direction: column;
-    background: #0c0f14; 
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
-    border: 1px solid var(--border); 
-    border-top: 3px solid var(--accent-default); 
-    padding: 0;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.9), inset 0 0 0 1px rgba(255,255,255,0.03); 
-    animation: slideIn 0.4s ease-out; 
-    transition: border-color 0.3s ease;
-    overflow: hidden;
-  }
-  .dossier-wrapper:hover { border-color: var(--accent); }
-
-  .dossier-wrapper::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.15) 3px, rgba(0,0,0,0.15) 4px); pointer-events: none; z-index: 0; opacity: 0.5; }
-  @keyframes slideIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
-  #d01 { --accent: #d4e1e8; --accent-glow: rgba(212, 225, 232, 0.4); border-top-color: #d4e1e8 !important; }
-  #d03 { --accent: #9b59b6; --accent-glow: rgba(155, 89, 182, 0.4); border-top-color: #9b59b6 !important; }
-  #d04 { --accent: #8b5a2b; --accent-glow: rgba(139, 90, 43, 0.4); border-top-color: #8b5a2b !important; }
-  #d07 { --accent: #27ae60; --accent-glow: rgba(39, 174, 96, 0.4); border-top-color: #27ae60 !important; }
-  #d11 { --accent: #f1c40f; --accent-glow: rgba(241, 196, 15, 0.4); border-top-color: #f1c40f !important; }
-  #d-tech { --accent: #b33a3a; --accent-glow: rgba(179, 58, 58, 0.4); border-top-color: #b33a3a !important; }
-
-  .dossier-wrapper.hidden { display: none; }
-
-  /* ШАПКА КАРТОЧКИ */
-  .dossier-header-card { display: flex; gap: 20px; padding: 30px 40px; background: rgba(0,0,0,0.3); border-bottom: 1px dashed var(--border); position: relative; z-index: 1; flex-shrink: 0; }
-  .dossier-avatar { width: 120px; height: 120px; background: #1a2028; border: 2px solid var(--accent); border-radius: 4px; display: flex; align-items: center; justify-content: center; color: var(--text); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; flex-shrink: 0; position: relative; box-shadow: 0 0 15px rgba(0,0,0,0.5); }
-  .dossier-avatar::after { content: "[ ФОТО ]"; opacity: 0.6; }
-  .dossier-header-info { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; }
-  .dossier-title-new { font-family: var(--font-serif); font-size: 1.8rem; letter-spacing: 4px; color: #fff; margin: 0 0 5px; font-weight: bold; text-transform: uppercase; text-shadow: 0 2px 5px rgba(0,0,0,0.5); }
-  .dossier-subtitle { font-size: 0.85rem; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; font-weight: bold; }
-  .dossier-quote { font-style: italic; color: var(--text); border-left: 2px solid var(--accent); padding-left: 10px; font-size: 0.9rem; margin-bottom: 10px; opacity: 0.9; }
-  .dossier-tags { display: flex; gap: 10px; flex-wrap: wrap; }
-  .dossier-tag { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); padding: 3px 10px; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; color: #fff; border-radius: 2px; }
-
-  /* Контентная часть */
-  .dossier-content-area { padding: 30px 40px 40px 40px; display: flex; flex-direction: column; flex: 1; overflow: hidden; position: relative; z-index: 1; }
-  .dossier-author { position: relative; z-index: 1; text-align: right; font-size: 0.75rem; letter-spacing: 2px; color: var(--dim); margin-top: 15px; padding-top: 15px; border-top: 1px dashed var(--border); text-transform: uppercase; flex-shrink: 0; }
-  .dossier-author span { color: var(--accent); font-weight: bold; }
-
-  .copy-btn { display: inline-block; background: rgba(0,0,0,0.5); color: var(--text); border: 1px solid var(--border); padding: 6px 16px; font-family: inherit; font-size: 0.8rem; cursor: pointer; transition: all 0.2s; text-transform: uppercase; letter-spacing: 1px; position: absolute; top: 15px; right: 15px; z-index: 2; border-radius: 2px; }
-  .copy-btn:hover { border-color: var(--accent); color: #fff; background: rgba(255,255,255,0.1); }
-  .copy-btn.copied { background: #5ca85c; border-color: #5ca85c; color: #fff; }
-  .copy-btn.hidden-btn { display: none; }
-
-  .tabs { display: flex; border-bottom: 1px solid var(--border); margin-bottom: 20px; gap: 5px; flex-wrap: wrap; position: relative; z-index: 1; flex-shrink: 0; }
-  .tab-btn { background: #0c0f14; border: 1px solid var(--border); border-bottom: none; color: var(--dim); font-family: inherit; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; padding: 8px 15px; cursor: pointer; transition: all 0.2s; position: relative; top: 1px; }
-  .tab-btn:hover { color: var(--text); background: rgba(255,255,255,0.05); }
-  .tab-btn.active { color: #fff; background: var(--panel); border-top: 2px solid var(--accent); border-bottom: 1px solid var(--panel); text-shadow: 0 0 10px var(--accent); }
-  
-  .tab-content { display: none; position: relative; z-index: 1; flex: 1; overflow-y: auto; padding-right: 15px; padding-bottom: 10px; }
-  .tab-content.active { display: block; animation: fadeIn 0.4s ease-out; }
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-  
-  .block-title { font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin: 25px 0 15px; display: flex; align-items: center; font-weight: bold; }
-  .block-title::before { content: "■"; margin-right: 10px; font-size: 0.7rem; opacity: 0.9; }
-  .block-title::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, var(--border) 0%, transparent 100%); margin-left: 15px; }
-  
-  .block-text { margin: 0 0 20px; text-align: justify; font-size: 0.95rem; line-height: 1.8; color: var(--text); }
-  .secret { color: var(--secret); background: rgba(212, 160, 23, 0.1); border: 1px dashed rgba(212, 160, 23, 0.6); padding: 2px 6px; font-size: 0.85em; cursor: help; font-weight: bold; }
-  
-  .lore-text { font-size: 0.95rem; line-height: 1.9; color: var(--text); text-align: justify; }
-  .lore-text p { margin: 0 0 15px; }
-  .lore-text p:first-child::first-letter { font-size: 3.2rem; font-family: var(--font-serif); float: left; line-height: 0.85; padding-top: 4px; padding-right: 8px; padding-left: 2px; color: var(--accent); text-shadow: 0 0 10px var(--accent-glow); }
-  
-  .gear-category { font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--dim); margin: 25px 0 15px; border-bottom: 1px dashed var(--border); padding-bottom: 5px; }
-  .gear-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 15px; margin-bottom: 20px; }
-  .gear-card { background: rgba(255,255,255,0.03); border: 1px solid var(--border); padding: 15px; transition: all 0.2s; }
-  .gear-card:hover { border-color: var(--accent); background: rgba(255,255,255,0.06); }
-  .gear-card-name { color: #fff; font-weight: bold; font-size: 0.9rem; margin-bottom: 5px; display: flex; align-items: center; gap: 8px; }
-  .gear-card-desc { color: var(--text); opacity: 0.8; font-size: 0.85rem; line-height: 1.5; }
-
-  /* ТЕХ РАБОТЫ (ПЕРЕРАБОТКА) */
-  .tech-works { text-align: center; padding: 40px 20px; position: relative; z-index: 1; overflow: hidden; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; }
-  .tech-works h2 { color: #b33a3a; font-family: var(--font-serif); font-size: 2rem; letter-spacing: 6px; margin: 0 0 10px; text-transform: uppercase; text-shadow: 0 0 20px rgba(179, 58, 58, 0.4); }
-  .tech-status { display: inline-block; background: rgba(179, 58, 58, 0.1); color: #b33a3a; padding: 5px 20px; border: 2px solid #b33a3a; border-radius: 2px; font-size: 0.9rem; letter-spacing: 3px; text-transform: uppercase; font-weight: bold; margin-bottom: 30px; animation: blinkRed 2s infinite; }
-  @keyframes blinkRed { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
-  
-  /* Красная мигающая линия */
-  .tech-line { width: 100%; height: 2px; background: #b33a3a; margin-bottom: 40px; box-shadow: 0 0 15px #b33a3a; }
-  
-  .tech-text { color: var(--dim); font-size: 0.95rem; max-width: 500px; margin: 0 auto; line-height: 1.8; font-family: var(--font-mono); text-align: center; }
-  .tech-icon { font-size: 4rem; margin-bottom: 20px; display: inline-block; filter: grayscale(1) brightness(0.5); position: relative; }
-  
-  /* Глитч-эффект для иконки */
-  .tech-icon::after {
-    content: "🚧"; position: absolute; top: 0; left: 2px; color: #b33a3a; opacity: 0.5; animation: glitchTech 0.3s infinite; z-index: -1;
-  }
-  @keyframes glitchTech { 0% { transform: translate(0); } 50% { transform: translate(-2px, 2px); } 100% { transform: translate(2px, -2px); } }
-
-  /* МОДАЛЬНОЕ ОКНО */
-  .modal-changelog { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 20000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; backdrop-filter: blur(5px); }
-  .modal-changelog.active { opacity: 1; pointer-events: auto; }
-  .changelog-content { position: relative; background: #0c0f14; border: 2px solid var(--border); border-top: 3px solid var(--active-nav-color); padding: 40px; width: 90%; max-width: 600px; max-height: 85vh; display: flex; flex-direction: column; box-shadow: 0 20px 50px rgba(0,0,0,0.9); transform: scale(0.95); transition: transform 0.3s; }
-  .modal-changelog.active .changelog-content { transform: scale(1); }
-  .changelog-header { padding-bottom: 15px; border-bottom: 1px dashed var(--border); display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-  .changelog-header h3 { margin: 0; color: #fff; font-family: var(--font-serif); font-size: 1.1rem; letter-spacing: 3px; text-transform: uppercase; }
-  .changelog-close { background: transparent; border: none; color: var(--text); font-family: inherit; font-size: 1.5rem; cursor: pointer; transition: color 0.2s; padding: 0; line-height: 1; }
-  .changelog-close:hover { color: var(--active-nav-color); }
-  .changelog-body { overflow-y: auto; font-size: 0.9rem; line-height: 1.7; color: var(--text); padding-right: 10px; }
-  .changelog-body p { margin-top: 0; margin-bottom: 20px; color: var(--dim); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; text-align: center; }
-  .changelog-body ul { margin: 0; padding-left: 0; list-style: none; }
-  .changelog-body li { margin-bottom: 10px; position: relative; padding-left: 15px; }
-  .changelog-body li::before { content: "►"; position: absolute; left: 0; top: 0; color: var(--active-nav-color); font-size: 0.6rem; }
-  .changelog-body ul ul { margin-top: 5px; padding-left: 15px; }
-  .changelog-body ul ul li::before { content: "—"; color: var(--dim); }
-  .changelog-body li strong { color: #fff; }
-
-  /* СЕКРЕТКА */
-  .vn-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: flex; align-items: center; justify-content: center; z-index: 9999; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; overflow: hidden; }
-  .vn-overlay.active { opacity: 1; pointer-events: auto; }
-  .vn-overlay::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at center, rgba(179, 58, 58, 0.15) 0%, rgba(0, 0, 0, 1) 80%); z-index: 1; transition: background 0.5s ease; }
-  .vn-overlay::after { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 0, 0, 0.5) 3px, rgba(0, 0, 0, 0.5) 4px); z-index: 2; pointer-events: none; opacity: 0.4; }
-  .vn-overlay.active.debate-active::before { background: linear-gradient(90deg, rgba(179, 58, 58, 0.7) 0%, rgba(30, 5, 5, 0.9) 30%, rgba(0, 0, 0, 1) 50%, rgba(20, 20, 25, 0.9) 70%, rgba(200, 200, 200, 0.6) 100%); }
-  .vn-container { position: relative; width: 100%; height: 100%; max-width: 1200px; z-index: 3; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 60px; }
-  .vn-monokuma { position: absolute; bottom: 140px; left: 8%; height: 450px; width: auto; z-index: 4; filter: drop-shadow(0 0 30px rgba(255, 0, 0, 0.5)); transition: transform 0.3s; }
-  .vn-monokuma.talking { transform: scale(1.05) translateY(-10px); }
-  .vn-monokuma.hidden { opacity: 0; }
-  .vn-nagito { position: absolute; bottom: 120px; right: 8%; height: 480px; width: auto; z-index: 4; filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.4)); transition: transform 0.3s; }
-  .vn-nagito.talking { transform: scale(1.05) translateY(-10px); }
-  .vn-nagito.hidden { opacity: 0; transform: translateY(50px) scale(0.9); }
-  .vn-nagito.appearing { animation: glitchIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
-  @keyframes glitchIn { 0% { opacity: 0; transform: translateY(100px) scale(0.5); filter: brightness(5) hue-rotate(90deg); } 20% { opacity: 0.8; transform: translateX(-20px); filter: brightness(2) hue-rotate(-45deg); } 40% { opacity: 0.5; transform: translateX(20px); filter: brightness(1) hue-rotate(45deg); } 100% { opacity: 1; transform: translateY(0) scale(1); filter: brightness(1) hue-rotate(0deg); } }
-  .vn-dialog-box { position: relative; z-index: 5; width: 85%; max-width: 900px; background: rgba(10, 12, 16, 0.95); border: 2px solid #444; border-radius: 4px; box-shadow: 0 20px 50px rgba(0,0,0,0.9); padding: 0; display: flex; flex-direction: column; overflow: visible; backdrop-filter: blur(10px); }
-  .vn-name-tag { position: absolute; top: -16px; left: 20px; background: #b33a3a; color: #fff; font-family: var(--font-serif); font-weight: bold; font-size: 0.9rem; padding: 4px 20px; border-radius: 2px; box-shadow: 0 5px 15px rgba(0,0,0,0.5); text-transform: uppercase; letter-spacing: 2px; transition: all 0.3s; z-index: 6; }
-  .vn-text-content { padding: 40px 30px 30px 30px; font-family: var(--font-serif); font-size: 1.1rem; color: #e0e0e0; line-height: 1.7; min-height: 100px; display: flex; align-items: center; letter-spacing: 0.5px; }
-  .vn-choices { display: none; gap: 15px; padding: 0 30px 25px 30px; justify-content: center; }
-  .vn-choice-btn { background: transparent; color: #b33a3a; border: 1px solid #b33a3a; padding: 10px 25px; font-family: inherit; font-size: 1rem; font-weight: bold; cursor: pointer; transition: all 0.3s; text-transform: uppercase; letter-spacing: 2px; border-radius: 2px; flex: 1; max-width: 250px; }
-  .vn-choice-btn.hope { border-color: #5ca85c; color: #5ca85c; }
-  .vn-choice-btn.hope:hover { background: #5ca85c; color: #000; box-shadow: 0 0 20px rgba(92, 168, 92, 0.4); }
-  .vn-controls { position: absolute; top: 20px; right: 20px; z-index: 10; display: flex; gap: 10px; }
-  .vn-btn { background: rgba(0,0,0,0.8); border: 1px solid #555; color: #ccc; padding: 8px 16px; border-radius: 2px; font-family: inherit; font-size: 0.8rem; cursor: pointer; transition: all 0.2s; text-transform: uppercase; letter-spacing: 1px; }
-  .vn-btn:hover { background: #333; color: #fff; }
-  .flash-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #fff; z-index: 10000; pointer-events: none; opacity: 0; transition: opacity 0.2s ease; }
-  .flash-overlay.active { animation: flashAnim 0.6s ease-out forwards; }
-  @keyframes flashAnim { 0% { opacity: 1; } 100% { opacity: 0; } }
-  
-  /* ЭКРАН ВЫБОРА */
-  .welcome-screen { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; animation: fadeIn 0.5s ease-out; }
-  .welcome-title { font-family: var(--font-serif); font-size: 2rem; letter-spacing: 8px; color: #fff; margin-bottom: 40px; text-transform: uppercase; text-shadow: 0 0 15px rgba(255,255,255,0.2); }
-  .selection-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 20px; max-width: 900px; width: 100%; padding: 20px; }
-  .select-card { position: relative; background: #0c0e12; border: 2px solid #333; border-radius: 4px; display: flex; flex-direction: column; align-items: center; cursor: pointer; transition: all 0.3s ease; overflow: hidden; height: 220px; }
-  .select-card:hover { transform: translateY(-5px); border-color: var(--accent); box-shadow: 0 0 20px var(--accent-glow); }
-  .card-top { width: 100%; background: #1a1e26; color: var(--dim); text-align: center; font-size: 0.6rem; padding: 4px; border-bottom: 1px solid #333; letter-spacing: 1px; transition: all 0.3s; }
-  .select-card:hover .card-top { background: var(--accent); color: #fff; }
-  .card-photo { width: 100%; flex: 1; background: #151a21; display: flex; align-items: center; justify-content: center; color: #333; font-size: 0.7rem; text-transform: uppercase; border-bottom: 1px solid #333; position: relative; }
-  .card-photo::after { content: "[ ФОТО ]"; opacity: 0.3; font-weight: bold; letter-spacing: 2px; }
-  .card-name { width: 100%; padding: 12px 5px; text-align: center; font-family: var(--font-serif); font-weight: bold; font-size: 1rem; color: #fff; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s; }
-  .select-card[data-id="d01"] { --accent: #d4e1e8; --accent-glow: rgba(212, 225, 232, 0.4); }
-  .select-card[data-id="d03"] { --accent: #9b59b6; --accent-glow: rgba(155, 89, 182, 0.4); }
-  .select-card[data-id="d04"] { --accent: #8b5a2b; --accent-glow: rgba(139, 90, 43, 0.4); }
-  .select-card[data-id="d07"] { --accent: #27ae60; --accent-glow: rgba(39, 174, 96, 0.4); }
-  .select-card[data-id="d11"] { --accent: #f1c40f; --accent-glow: rgba(241, 196, 15, 0.4); }
-
-  @media (max-width: 800px) { 
-    .layout { flex-direction: column; } 
-    aside { width: 100%; height: auto; max-height: 180px; border-right: none; border-bottom: 1px solid var(--border); } 
-    .aside-list { display: flex; flex-direction: row; overflow-x: auto; padding: 10px 15px; gap: 10px; white-space: nowrap; } 
-    .aside-list li { margin-bottom: 0; padding: 0; flex-shrink: 0; } 
-    .nav-category { display: none; } 
-    .nav-btn { padding: 8px 12px; flex-direction: row; gap: 8px; width: auto; background: rgba(255,255,255,0.05); border: 1px solid var(--border); } 
-    .nav-btn.active { border-left-width: 1px; } 
-    .nav-icon { width: 24px; height: 24px; font-size: 0.8rem; border: none; background: transparent; } 
-    .aside-footer { display: none; } 
-    main { padding: 15px; } 
-    .dossier-wrapper { height: calc(100vh - 30px); } 
-    .dossier-header-card { flex-direction: column; align-items: center; text-align: center; padding: 20px; } 
-    .dossier-quote { border-left: none; border-top: 1px dashed var(--border); padding: 10px 0; } 
-    .dossier-content-area { padding: 20px; } 
-    .vn-monokuma { height: 220px; left: -20px; bottom: 180px; } 
-    .vn-nagito { height: 240px; right: -20px; bottom: 160px; } 
-    .vn-dialog-box { width: 95%; margin-bottom: 20px; } 
-    .vn-text-content { font-size: 0.95rem; padding: 20px; min-height: 100px; } 
-    .vn-name-tag { font-size: 0.8rem; padding: 4px 15px; top: -14px; left: 10px; } 
-    .vn-choices { padding: 0 15px 15px 15px; gap: 10px; } 
-    .vn-choice-btn { font-size: 0.8rem; padding: 8px 15px; } 
-    .changelog-content { padding: 20px; } 
-    .changelog-header h3 { font-size: 1rem; }
-    .header-info { display: none; } 
-    .selection-grid { grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); }
-    .card-name { font-size: 0.8rem; }
-  }
-</style>
-</head>
-<body>
-  <header>
+<header>
   <div class="header-left">
     <div class="header-logo-container" onclick="showMonokuma()"><img src="logo.png" alt="Герб Академии" class="header-logo"></div>
     <div class="header-text">
@@ -309,10 +33,9 @@
       
       <li class="nav-category" style="margin-top: 15px; border-top: 1px solid var(--border); padding-top: 15px;">Служебные записи</li>
       
-      <li><button class="nav-btn" data-color="#b33a3a" onclick="openDossier('d-tech', this)"><div class="nav-icon">💀</div><div class="nav-info"><span class="num">ERR-00</span><span class="name">Тех. работы</span></div></button></li>
+      <li><button class="nav-btn" data-color="#f1c40f" onclick="openDossier('d-tech', this)"><div class="nav-icon">🚧</div><div class="nav-info"><span class="num">T-00</span><span class="name">Тех. работы</span></div></button></li>
     </ul>
 
-    <!-- Кнопка возврата, скрытая по умолчанию -->
     <div id="backBtnContainer" style="padding: 15px; display: none;">
       <button class="nav-btn" onclick="showWelcomeScreen()" style="border: 1px dashed var(--border); justify-content: center; color: var(--dim);">
         <div class="nav-icon" style="font-size: 0.9rem;">↩️</div>
@@ -647,27 +370,367 @@
       </div>
     </article>
 
-    <!-- ТЕХ. РАБОТЫ (ПЕРЕРАБОТКА) -->
+    <!-- ТЕХ. РАБОТЫ -->
     <article class="dossier-wrapper hidden" id="d-tech">
       <div class="dossier-header-card" style="justify-content: center; border-bottom: none; padding: 40px;">
         <div class="dossier-header-info" style="text-align: center;">
-          <div class="dossier-title-new" style="color: #b33a3a; text-shadow: 0 0 15px rgba(179, 58, 58, 0.4);">СЕКТОР ЗАБЛОКИРОВАН</div>
-          <div class="dossier-subtitle" style="color: #b33a3a;">ОШИБКА ДОСТУПА: 403</div>
+          <div class="dossier-title-new" style="color: #f1c40f;">ТЕХ. РАБОТЫ</div>
+          <div class="dossier-subtitle" style="color: #f1c40f;">Статус: В разработке</div>
         </div>
       </div>
       
       <div class="tab-content active" style="display: block; flex: 1;">
         <div class="tech-works">
-          <div class="tech-line"></div>
-          <div class="tech-icon">💀</div>
-          <h2>Данные повреждены</h2>
-          <div class="tech-status">Сбой системы</div>
+          <div class="tech-icon">🚧</div>
+          <div class="tech-status">Обновление архива</div>
           <p class="tech-text">
-            > ПОПЫТКА ДОСТУПА К СЕКТОРУ T-00 ПРЕРВАНА.<br>
-            > ПРИЧИНА: НЕДОСТАТОЧНО ПРАВ ИЛИ ФАЙЛЫ УДАЛЕНЫ.<br><br>
-            Ожидайте указаний от Службы Безопасности.
+            Здесь скоро появятся новые лица. Архив пополняется.<br>
+            Пожалуйста, ожидайте обновлений от Службы Безопасности Академии.
           </p>
-          <div class="tech-line" style="margin-top: 40px;"></div>
+          <div class="tech-tape" style="margin-top: 40px;"></div>
+        </div>
+      </div>
+    </article>
+
+  </main>
+</div>
+    <!-- ЭКРАН ВЫБОРА -->
+    <div class="welcome-screen" id="welcomeScreen">
+      <div class="welcome-title">Выберите дело</div>
+      <div class="selection-grid">
+        
+        <div class="select-card" data-id="d01" onclick="openDossier('d01', document.querySelector('.nav-btn[data-color=\'#d4e1e8\']'))">
+          <div class="card-top">FILE: 01-Ш</div>
+          <div class="card-photo"></div>
+          <div class="card-name">Йи Санг</div>
+        </div>
+
+        <div class="select-card" data-id="d03" onclick="openDossier('d03', document.querySelector('.nav-btn[data-color=\'#9b59b6\']'))">
+          <div class="card-top">FILE: 03-К</div>
+          <div class="card-photo"></div>
+          <div class="card-name">Кокичи</div>
+        </div>
+
+        <div class="select-card" data-id="d04" onclick="openDossier('d04', document.querySelector('.nav-btn[data-color=\'#8b5a2b\']'))">
+          <div class="card-top">FILE: 04-К</div>
+          <div class="card-photo"></div>
+          <div class="card-name">Джатаро</div>
+        </div>
+
+        <div class="select-card" data-id="d07" onclick="openDossier('d07', document.querySelector('.nav-btn[data-color=\'#27ae60\']'))">
+          <div class="card-top">FILE: 07-А</div>
+          <div class="card-photo"></div>
+          <div class="card-name">Рантаро</div>
+        </div>
+
+        <div class="select-card" data-id="d11" onclick="openDossier('d11', document.querySelector('.nav-btn[data-color=\'#f1c40f\']'))">
+          <div class="card-top">FILE: 11-Х</div>
+          <div class="card-photo"></div>
+          <div class="card-name">Маки</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ДЕЛО 0: Йи Санг (Шуичи) -->
+    <article class="dossier-wrapper hidden" id="d01">
+      <div class="dossier-header-card">
+        <div class="dossier-avatar"></div>
+        <div class="dossier-header-info">
+          <div class="dossier-title-new">ЛИЧНОЕ ДЕЛО №01-Ш</div>
+          <div class="dossier-subtitle">Йи Санг (Шуичи Сайхара) · Учитель</div>
+          <div class="dossier-quote">«Я уже видел, чем всё это закончится. И я не могу это изменить. Сколько раз я ни пытался.»</div>
+          <div class="dossier-tags">
+            <span class="dossier-tag">Абсолютный Архитектор Судьбы</span>
+            <span class="dossier-tag">Статус: Жив</span>
+            <span class="dossier-tag">29 лет</span>
+          </div>
+        </div>
+      </div>
+      <div class="dossier-content-area">
+        <button class="copy-btn" onclick="copyDossier('d01', this)">Скопировать для RP</button>
+        <div class="tabs">
+          <button class="tab-btn active" onclick="openTab('d01', 'off', this)">Официальное дело</button>
+          <button class="tab-btn" onclick="openTab('d01', 'hist', this)">Личная история</button>
+          <button class="tab-btn" onclick="openTab('d01', 'gear', this)">Снаряжение</button>
+        </div>
+        <div class="tab-content active" id="d01-off">
+          <div class="block-title">Особые приметы</div>
+          <p class="block-text">Бледная кожа, потухший взгляд, под глазами глубокие тени от хронического недосыпа. Носит длинное белое пальто с обгоревшими краями поверх строгого костюма и красного галстука. На левом бедре — нож в ножнах, который он использует скорее как инструмент для вскрытия замков или разрезания тканей, чем как оружие. На поясе висит потрёпанная серая сумка с блокнотом. Говорит тихо, монотонно, с длинными паузами. Часто отвечает загадками, цитатами или обрывками стихов. В моменты сильного стресса или озарения его голос становится холодным и пугающе точным.</p>
+          <div class="block-title">Краткая сводка</div>
+          <p class="block-text">В прошлом — гениальный исследователь и архитектор, возглавлявший закрытый проект «Лига Девяти», целью которого было создание технологии, способной моделировать альтернативные варианты развития событий. После катастрофы, унесшей жизни его команды, Йи Санг впал в глубокую депрессию. Однако Академия «Пик Надежды» выкупила его контракт и назначила преподавателем аналитики, посчитав, что его уникальный разум нельзя терять. Официально он числится как Шуичи Сайхара (по документам, из-за путаницы в архивах), но сам просит называть его просто Йи Санг. Ведёт затворнический образ жизни, появляясь на занятиях лишь для того, чтобы дать задание и тут же уйти.</p>
+          <div class="block-title">Причина присвоения таланта</div>
+          <p class="block-text">Йи Санг видит мир как сложную архитектурную конструкцию. Его дар заключается в способности просчитывать любые системы — от механизмов до человеческой психики — на несколько шагов вперёд, мгновенно находя «слабые звенья» и «трещины». Как учитель, он не столько обучает подростков дедукции, сколько заставляет их смотреть на преступления под другим углом, задавая странные философские вопросы, на которые нет однозначного ответа.</p>
+          <div class="block-title">Цель прибытия</div>
+          <p class="block-text">Официально — преподавательская деятельность и кураторство над «особо одаренными» учениками. Служба безопасности отмечает, что субъект не проявляет интереса к социальной жизни и учебному процессу. Фактически, по данным скрытого наблюдения, он воспринимает Академию как безопасное убежище, где можно спрятаться от своего прошлого. Рекомендуется не оставлять его одного в замкнутых помещениях из-за склонности к суицидальным настроениям и рискам самоповреждения. Студентам не рекомендуется приходить к нему на консультации после заката — он может читать стихи до утра и не заметить, как вы уснули.</p>
+        </div>
+        <div class="tab-content" id="d01-hist">
+          <div class="lore-text">
+            <p>Йи Санг никогда не был обычным ребёнком. В то время как другие дети играли на улицах, он часами наблюдал за тем, как устроены вещи: как трескается лёд на лужах, как падают тени от деревьев, как рушится песочный замок. Его разум искал структуру во всём, что видел. Повзрослев, он стал блестящим архитектором и исследователем, чьи проекты опережали время на десятилетия. Вокруг него сплотилась группа таких же гениев — «Лига Девяти». Они верили, что с помощью науки и искусства можно построить идеальный мир, где не будет места боли и ошибкам.</p>
+            <p>Венцом их работы стал амбициозный проект, который сам Йи Санг называл «Зеркалом». Это была технология, способная смоделировать любую ситуацию, просчитать все возможные варианты развития событий и показать, как избежать катастрофы. Он был одержим идеей создать идеальную формулу судьбы, чтобы защитить своих друзей от любых невзгод. Но он не учёл одного: человеческая природа не подчиняется формулам. В день финального испытания что-то пошло не так. Система, которая должна была предсказать будущее, вместо этого обрушила на них само разрушение. Когда Йи Санг очнулся, он был единственным выжившим. Все члены его «Лиги» погибли. Его гениальный расчёт обернулся могилой для тех, кого он любил.</p>
+            <p>С тех пор он перестал верить в свои способности. Он считал, что его разум — это проклятие, которое приносит только смерть. В отчаянии он пытался покончить с собой, но его спасли. Врачи отметили, что его психика полностью разрушена: он впал в состояние глубокой апатии, отказываясь разговаривать с кем-либо. Единственное, что осталось от прежнего Йи Санга — это его блокнот и длинный нож, который он носит с собой как напоминание о том, что когда-то он был воином, а теперь стал лишь тенью. Он почти перестал спать. Ночью он сидит в своей комнате, смотрит на пламя свечи и записывает в блокнот странные стихи, в которых пытается найти ответ на вопрос: «Почему я всё ещё жив, если всё, что я создал, обратилось в прах?».</p>
+            <p>В Академию он прибыл не потому, что хотел учиться. Служба безопасности вычислила его местоположение и принудительно доставила его сюда. Сам Йи Санг воспринимает это место как очередную клетку, в которой он может наконец найти ту самую «точку опоры» — либо для того, чтобы начать всё заново, либо для того, чтобы поставить в своей жизни точку.</p>
+          </div>
+        </div>
+        <div class="tab-content" id="d01-gear">
+          <div class="gear-category">Личные вещи</div>
+          <p style="font-size: 0.8rem; color: var(--dim); font-style: italic; margin-bottom: 20px; text-align: center;">* Желательно иметь при себе для полной отыгровки, если вы сами этого пожелаете.</p>
+          <div class="gear-grid">
+            <div class="gear-card"><div class="gear-card-name">🔪 Нож</div><div class="gear-card-desc">Длинный, слегка изогнутый клинок в потёртых ножнах. Используется как инструмент для точных манипуляций, а не для боя.</div></div>
+            <div class="gear-card"><div class="gear-card-name">📓 Блокнот</div><div class="gear-card-desc">Потрёпанная серая записная книжка. Исписана мелким почерком, страницы забиты странными стихами и обрывочными фразами.</div></div>
+            <div class="gear-card"><div class="gear-card-name">💊 Банка с лекарствами</div><div class="gear-card-desc">Небольшая жестяная банка с белыми таблетками. Он часто принимает их от головной боли, хотя это уже давно стало привычкой, а не лечением.</div></div>
+            <div class="gear-card"><div class="gear-card-name">💤 Снотворное</div><div class="gear-card-desc">Пузырёк с мутной жидкостью. Используется им, когда мысли становятся слишком громкими, чтобы он мог заснуть.</div></div>
+          </div>
+        </div>
+        <div class="dossier-author">Автор идеи: <span>Erzmagier</span></div>
+      </div>
+    </article>
+
+    <!-- ДЕЛО 1: Кокичи -->
+    <article class="dossier-wrapper hidden" id="d03">
+      <div class="dossier-header-card">
+        <div class="dossier-avatar"></div>
+        <div class="dossier-header-info">
+          <div class="dossier-title-new">ЛИЧНОЕ ДЕЛО №03-К</div>
+          <div class="dossier-subtitle">Кокичи Ома · Ученик</div>
+          <div class="dossier-quote">«Смеяться — это единственное, что помогает не закричать. Так что не мешай мне играть.»</div>
+          <div class="dossier-tags">
+            <span class="dossier-tag">Абсолютный Шут Хаоса</span>
+            <span class="dossier-tag">Статус: Жив</span>
+            <span class="dossier-tag">20 лет</span>
+          </div>
+        </div>
+      </div>
+      <div class="dossier-content-area">
+        <button class="copy-btn" onclick="copyDossier('d03', this)">Скопировать для RP</button>
+        <div class="tabs">
+          <button class="tab-btn active" onclick="openTab('d03', 'off', this)">Официальное дело</button>
+          <button class="tab-btn" onclick="openTab('d03', 'hist', this)">Личная история</button>
+          <button class="tab-btn" onclick="openTab('d03', 'gear', this)">Снаряжение</button>
+        </div>
+        <div class="tab-content active" id="d03-off">
+          <div class="block-title">Особые приметы</div>
+          <p class="block-text">Костюм Шута, скрывающий истинное лицо субъекта; вне выступлений Ома держится подчёркнуто открыто, но о своей внешности говорит уклончиво, и причины этого <span class="secret">[ДАННЫЕ ОТ СЛУЖБЫ БЕЗОПАСНОСТИ ЗАСЕКРЕЧЕНЫ]</span>. На поясе — старинный карманный компас на тяжёлой цепочке, с которым он никогда не расстаётся. Манеры игривые, речь театральная, с внезапными переходами от детской непосредственности к холодному расчёту. При общении с незнакомыми людьми постоянно «прощупывает» их реакциями — проверяет на страх, жадность, тщеславие. Обладает высокой стрессоустойчивостью, в критических ситуациях сохраняет ледяное спокойствие.</p>
+          <div class="block-title">Краткая сводка</div>
+          <p class="block-text">Вырос в трущобах, с ранних лет выживал на улице вместе с Рантаро Амами (см. дело №07-А), который стал его ближайшим другом и тылом. Из уличной банды создал международную бродячую труппу «D.I.C.E.», чьи перформансы прогремели от криминального клана Кузурю до совета директоров Towa Group и королевского двора Новоселик. Костюм Шута Хаоса создан Цумуги Широганэ по референсам, собранным Амами в Италии и Франции. За кулисами представлений труппа добывает компромат на влиятельных лиц; часть добытых данных передаётся Амами для экспедиций, взамен D.I.C.E. обеспечивает безопасность его сестёр, чьи имена и местонахождение <span class="secret">[ИНФОРМАЦИЯ ЗАСЕКРЕЧЕНА]</span> и изъяты из общего доступа в целях безопасности субъекта.</p>
+          <div class="block-title">Причина присвоения таланта</div>
+          <p class="block-text">Способен превратить любое событие в управляемый спектакль и удерживать внимание аудитории любой статусной принадлежности. Демонстрирует незаурядное мастерство манипуляции: под прикрытием представлений проворачивает кражи, подмены документов и взломы, оставаясь неуличённым. Умеет читать толпу и отдельного человека, подстраивая сценарий под реакции. Отдельно отмечается парадоксальная черта: субъект лжёт почти постоянно, однако в критических ситуациях, связанных с Амами, действует безошибочно и без обмана — комиссия фиксирует это как аномалию.</p>
+          <div class="block-title">Цель прибытия</div>
+          <p class="block-text">Официально зачислен в Академию «Пик Надежды» для освоения программы по профилю таланта и расширения репертуара труппы. Фактически, по данным скрытого наблюдения, Ома относится к обучению как к очередной сцене и посещает лишь те занятия, где может получить доступ к <span class="secret">[ИНФОРМАЦИЯ ЗАСЕКРЕЧЕНА]</span>. Администрация предупреждает: субъект не боится разоблачения, не реагирует на стандартные угрозы и способен склонить окружающих к нужному ему решению, оставаясь при этом обаятельным. При проведении допросов рекомендуется присутствие второго наблюдателя.</p>
+        </div>
+        <div class="tab-content" id="d03-hist">
+          <div class="lore-text">
+            <p>Кокичи Ома — Абсолютный Шут Хаоса. Человек, способный превратить любое событие в грандиозный, непредсказуемый спектакль, и двадцатилетний бессменный лидер всемирно известной бродячей труппы «D.I.C.E.». К своим двадцати годам Кокичи превратил свою команду из обычной уличной банды в неуловимый международный феномен. О безумных перформансах этой труппы слагают легенды по всему земному шару: они проводят масштабные выступления и веселят не только обычный люд, но и легко находят язык с самыми опасными, влиятельными и высокопоставленными фигурами этого мира.</p>
+            <p>Мало кто знает, но за этим триумфом скрываются годы выживания на самом дне. Кокичи вырос в тех же голодных и опасных трущобах, что и его самый близкий друг — Рантаро Амами. Они вместе пробивали себе дорогу в жизнь, деля последнюю корку хлеба и помогая друг другу выпутываться из передряг. В знак этой нерушимой связи, зародившейся еще на улицах, Кокичи никогда не расстается с особым аксессуаром. Перед каждым выходом на сцену, продумывая очередной безумный трюк, Ома сосредоточенно крутит в руках старинный карманный компас на тяжелой цепочке — подарок от Рантаро. Для Кокичи эта вещь стала личным талисманом, напоминающим о том, откуда он начал свой путь.</p>
+            <p>Стиль его труппы тоже стал результатом их общего прошлого и одной судьбоносной встречи. Во время своих опасных странствий по Шанхаю Рантаро пересёкся с Цумуги Широганэ — тогда ещё неизвестной, но гениальной Абсолютной Косплеершей. Цумуги загорелась идеей Омы и сотворила настоящий шедевр: по архивным эскизам уличных карнавалов, которые Рантаро привёз из Франции и Италии, она лично разработала и пошила сложнейший, пугающий и одновременно притягательный костюм Шута. Когда Ома впервые примерил эту идеальную работу Широганэ, он пришел в полный восторг — наряд сидел как влитой, скрывая его истинное лицо и позволяя начать грандиозную игру с мировыми элитами.</p>
+            <p>Обретя этот образ, Кокичи начал крутить лицемерным миром. Его труппа одинаково изящно организовывала закрытые шоу для криминального клана Якудза Кузурю и умудрялась заставить высокомерно ухмыляться главу многомиллиардного конгломерата Тогами. Одним из самых громких триумфов Абсолютного Шута Хаоса стало выступление перед королевской семьей Новоселик. Пожилые министры и строгие советники ожидали увидеть классическое благопристойное шоу, но Кокичи превратил дворцовый зал в театр абсурда. Он дерзко пародировал вековые монаршие традиции, жонглировал бесценными фамильными реликвиями прямо над головами придворных и умудрился «случайно» подменить коронационные документы на шуточные указы. Королевская стража держала руки на эфесах шпаг, готовая казнить наглеца в любую секунду, но безупречная харизма Омы заставила королевскую верхушку признать: это было самое живое и непредсказуемое зрелище, которое когда-либо видел этот замок.</p>
+            <p>Следующей целью «D.I.C.E.» стал высокотехнологичный Город Това — база могущественного конгломерата «Towa Group». Специально для совета директоров Кокичи срежиссировал масштабный техно-перформанс. Пока на сцене взрывались неоновые огни, а актеры в масках разыгрывали комедию о восстании машин, сам Ома провернул главный фокус за кулисами. Используя хаос представления как идеальную ширму, его труппа взломала внутреннюю сеть корпорации, выведав несколько грязных коммерческих тайн руководства. В итоге директора Towa Group вежливо аплодировали Шуту Хаоса, даже не подозревая, что их репутация теперь целиком и полностью находится в его кармане. Взамен на такие услуги Кокичи получал от Рантаро редкие карты и зацепки для его экспедиций, а «D.I.C.E.» тайно оберегала двенадцать сестер Амами, пока тот был в разъездах.</p>
+            <p>На сцене Кокичи казался невинным ребенком, но за секунду мог превратиться в коварного кукловода, играющего на эмоциях публики. Для двадцатилетнего Шута Хаоса весь мир стал огромной сценой. Заставляя людей смеяться, злиться или паниковать, Ома преследовал свой собственный, глубоко скрытый мотив: он жаждал срывать фальшивые маски с этого лицемерного мира и выведывать самые грязные, мрачные секреты, которые влиятельные люди так тщательно прятали от чужих глаз.</p>
+          </div>
+        </div>
+        <div class="tab-content" id="d03-gear">
+          <div class="gear-category">Реквизит</div>
+          <p style="font-size: 0.8rem; color: var(--dim); font-style: italic; margin-bottom: 20px; text-align: center;">* Желательно иметь при себе для полной отыгровки, если вы сами этого пожелаете.</p>
+          <div class="gear-grid">
+            <div class="gear-card"><div class="gear-card-name">🔮 Хрустальный шар</div><div class="gear-card-desc">Используется как реквизит для «предсказаний» и жонглирования.</div></div>
+            <div class="gear-card"><div class="gear-card-name">⛓️ Наручники</div><div class="gear-card-desc">Настоящие наручники, которые Ома носит с собой для розыгрышей и запугивания.</div></div>
+            <div class="gear-card"><div class="gear-card-name">📓 Блокнот</div><div class="gear-card-desc">Записная книжка с «компроматом» на всех учеников (на самом деле может быть пустой).</div></div>
+          </div>
+        </div>
+        <div class="dossier-author">Автор идеи: <span>Erzmagier</span></div>
+      </div>
+    </article>
+
+    <!-- ДЕЛО 2: Джатаро -->
+    <article class="dossier-wrapper hidden" id="d04">
+      <div class="dossier-header-card">
+        <div class="dossier-avatar"></div>
+        <div class="dossier-header-info">
+          <div class="dossier-title-new">ЛИЧНОЕ ДЕЛО №04-К</div>
+          <div class="dossier-subtitle">Джатаро Кемури · Ученик</div>
+          <div class="dossier-quote">«Пожалуйста... просто не подходи. Я не хочу, чтобы ты пострадал из-за меня.»</div>
+          <div class="dossier-tags">
+            <span class="dossier-tag">Маленький Абсолютный Изобретатель</span>
+            <span class="dossier-tag">Статус: Жив</span>
+            <span class="dossier-tag">12 лет</span>
+          </div>
+        </div>
+      </div>
+      <div class="dossier-content-area">
+        <button class="copy-btn" onclick="copyDossier('d04', this)">Скопировать для RP</button>
+        <div class="tabs">
+          <button class="tab-btn active" onclick="openTab('d04', 'off', this)">Официальное дело</button>
+          <button class="tab-btn" onclick="openTab('d04', 'hist', this)">Личная история</button>
+          <button class="tab-btn" onclick="openTab('d04', 'gear', this)">Снаряжение</button>
+        </div>
+        <div class="tab-content active" id="d04-off">
+          <div class="block-title">Особые приметы</div>
+          <p class="block-text">Левая рука полностью изуродована (последствия нападения хищника), скрыта под толстым слоем грязных бинтов. Маску на лице не носит, одежда и рукава выглядят потрёпанными. Проявляет признаки острой социофобии: при контакте с другими учениками ведет себя пугливо, избегает зрительного контакта. Наблюдается тремор рук при громких звуках или резких движениях. В стрессовых ситуациях склонен забиваться в углы искать укрытия.</p>
+          <div class="block-title">Краткая сводка</div>
+          <p class="block-text">Первые годы жизни провел запертым в сыром подвале родного дома. В возрасте 9 лет совершил побег в тайгу, где попал в медвежий капкан и подвергся нападению волчьей стаи. Был спасен некой <span class="secret">[ИНФОРМАЦИЯ ЗАСЕКРЕЧЕНА]</span>, под чьим негласным надзором скрывался в глухом лесу. Спустя год его родное поселение вместе с родителями было уничтожено бандой мародеров <span class="secret">[ДАННЫЕ УДАЛЕНЫ]</span>. О произошедшем узнал от наставницы, окончательно разорвав связи с прошлым. На данный момент не поддерживает контакт с внешним миром.</p>
+          <div class="block-title">Причина присвоения таланта</div>
+          <p class="block-text">За время нахождения в изоляции субъект научился из ржавого охотничьего хлама, деталей и лесных трав создавать автономные сигнальные системы, бесшумные растяжки и скрытые капканы, начиненные парализующим ядом собственного производства. Продемонстрировал уникальный гениальный сплав механики и полевой химии. Устройства субъекта способны эффективно блокировать периметр, обездвиживать и ликвидировать живые цели без прямого контакта. Отмечается нестандартность мышления и способность импровизировать с подручными материалами.</p>
+          <div class="block-title">Цель прибытия</div>
+          <p class="block-text">Направлен в Академию для освоения передовых технологий и получения фундаментальных знаний с целью дальнейшего развития своих навыков. Администрация предупреждает: субъект обладает гениальными инженерными способностями в области создания смертоносных ловушек. Рекомендуется соблюдать повышенную осторожность при совместном обучении. Попытки грубого физического контакта или внезапные приближения могут спровоцировать защитную агрессию и использование скрытых устройств самообороны.</p>
+        </div>
+        <div class="tab-content" id="d04-hist">
+          <div class="lore-text">
+            <p>Ранее Джатаро жил в крайне неблагополучной и абьюзивной семье. Его мать беспробудно пила на пару с отцом, а порой они употребляли и запрещённые вещества. Мальчика постоянно держали запертым в сыром темном подвале словно вещь и лишь изредка выпускали на улицу. В один из январских дней, когда его в очередной раз выпихнули подышать воздухом, Джатаро решился на отчаянный шаг. Под покровом ночи ребёнок сбежал в глухой лес. Ему казалось, что там будет гораздо безопаснее, чем дома, но это стало его роковой ошибкой.</p>
+            <p>Январь — это как раз начало брачного периода у волков, когда хищники сбиваются в стаи и становятся особенно агрессивными и опасными. Как бы Кемури ни старался быть осторожным, он быстро заблудился в темноте и случайно угодил ногой в старый медвежий капкан. Вскоре на зажатого в стальные тиски мальчика наткнулись три волчицы, одна из которых была вконец измучена голодом. Удача полностью отвернулась от мальчишки: он не успел даже опомниться, как истощенная волчица мертвой хваткой вцепилась в его левую руку. Джатаро охватила дикая паника, и от невыносимой боли он начал терять сознание...</p>
+            <p>Как вдруг тяжелый металлический болт, выпущенный из арбалета, насквозь пробил череп изголодавшемуся зверю за долю секунды до того, как тот перегрыз бы мальчику горло.</p>
+            <p>Джатаро пришел в себя уже в полутемном, надежно укрытом от непогоды лесном убежище. Жуткая боль в растерзанной руке и ноге немного утихла — раны были тщательно промыты, обработаны какими-то травами и туго забинтованы. Его спасительницей оказалась молчаливая девушка в приметном походном наряде: на ней было темное платье и фиолетовый плащ-капюшон с ушками, а сам капюшон украшала небольшая фигурка, выполненная в виде головы волчонка. Это была Маки Харукава, Абсолютная Охотница, которая в тот вечер выслеживала эту самую стаю.</p>
+            <p>Пока раны затягивались, Джатаро, все еще вздрагивая от любого шороха, решился довериться своей спасительнице. Дрожащим голосом он поведал ей всю историю своей жизни: про подвал, побои и родителей. Маки выслушала его рассказ молча, не издав ни звука, а ее лицо оставалось пугающе холодным и непроницаемым. Однако в ее глазах промелькнула едва заметная тень глубокого отвращения к его семье — она слишком хорошо знала, что такое сломанное детство. Не говоря лишних слов, Маки проявила сострадание: она просто позволила мальчику остаться под своим крылом и взяла его под негласную защиту.</p>
+            <p>Она стала для Кемури строгой Наставницей, обучив его базовым и самым жестким правилам выживания в тайге: маскировке, чтению следов и ориентированию. Джатаро же, помогая ей обустраивать быт, быстро нашел применение своей тяге к конструированию. Из старого охотничьего хлама, ржавых деталей и лесных трав он начал создавать по-настоящему применимые и опасные вещи. Он модернизировал обычные медвежьи капканы, оснащая их скрытыми ампулами с парализующим ядом собственного варева, собирал бесшумные механические растяжки из тонкой проволоки и мастерил автономные сигнальные системы, которые намертво блокировали периметр лагеря от диких зверей. Именно этот уникальный сплав механики и полевой химии, созданный для выживания в глухом лесу, развил его навыки до гениального уровня, за что Кемури в итоге и получил талант Маленького Абсолютного Изобретателя.</p>
+            <p>Спустя год после побега Джатаро, та самая банда жестоких мародёров, которая когда-то сожгла родную деревню Маки, продвинулась вглубь региона. Ночью они совершили набег на неблагополучный посёлок его родителей. Находившиеся в очередном угаре отец и мать даже не успели понять, что происходит — бандиты разграбили дома и подожгли поселение дотла. Чтобы скрыться от расследования, мародёры решили уйти через глухую тайгу, случайно зайдя на территорию Охотницы и Изобретателя. Почувствовав запах гари и выследив отряд, Маки мгновенно узнала убийц своих родителей по их почерку. Вместо безрассудной атаки она использовала гений Джатаро: хладнокровно загнала банду прямо в «слепую зону» его ядовитых ловушек, а выживших безжалостно ликвидировала из арбалета. Обыскивая труп главаря, Маки нашла обгоревшую вещь из разрушенного дома Джатаро и поняла, что его родителей больше нет. Вернувшись в берлогу, она не стала вдаваться в кровавые подробности, а просто отдала эту деталь мальчику. Кемури всё понял без слов: его прошлое сгорело, а мучители были мертвы. В тот вечер Маки затянула бинты на его руке чуть крепче обычного — это стало их негласным знаком того, что теперь они одна семья.</p>
+            <p>Спустя три года после побега, которые Джатаро провел под надежным крылом Харукавы, они вместе приняли важное решение — поступить в престижную Академию «Пик Надежды». Охотница поддержала мальчика в этом стремлении. Они понимали, что лесных ресурсов и старых деталей уже недостаточно: Джатаро было необходимо получить гораздо больше фундаментальных знаний и разобраться в современных передовых технологиях, чтобы вывести свои инженерные навыки на совершенно новый уровень.</p>
+          </div>
+        </div>
+        <div class="tab-content" id="d04-gear">
+          <div class="gear-category">Инструменты и снаряжение</div>
+          <p style="font-size: 0.8rem; color: var(--dim); font-style: italic; margin-bottom: 20px; text-align: center;">* Желательно иметь при себе для полной отыгровки, если вы сами этого пожелаете.</p>
+          <div class="gear-grid">
+            <div class="gear-card"><div class="gear-card-name">🪛 Отвёртка</div><div class="gear-card-desc">Многофункциональная отвёртка со сменными насадками. Основной инструмент для точной работы.</div></div>
+            <div class="gear-card"><div class="gear-card-name">📓 Блокнот с дневником</div><div class="gear-card-desc">Личный дневник в потёртой обложке. Исписан мелким почерком, страницы загнуты.</div></div>
+            <div class="gear-card"><div class="gear-card-name">📝 Блокнот с чертежами</div><div class="gear-card-desc">Блокнот с набросками ловушек и списком необходимых деталей.</div></div>
+            <div class="gear-card"><div class="gear-card-name">🔨 Молоток</div><div class="gear-card-desc">Небольшой, но тяжёлый молоток. Используется для сколачивания деревянных конструкций.</div></div>
+            <div class="gear-card"><div class="gear-card-name">🌿 Пучок сушёных трав</div><div class="gear-card-desc">Связка ароматных лесных трав, собранных в тайге. Используется для создания ядов и успокоительных настоев.</div></div>
+          </div>
+        </div>
+        <div class="dossier-author">Автор идеи: <span>Erzmagier</span></div>
+      </div>
+    </article>
+
+    <!-- ДЕЛО 3: Рантаро -->
+    <article class="dossier-wrapper hidden" id="d07">
+      <div class="dossier-header-card">
+        <div class="dossier-avatar"></div>
+        <div class="dossier-header-info">
+          <div class="dossier-title-new">ЛИЧНОЕ ДЕЛО №07-А</div>
+          <div class="dossier-subtitle">Рантаро Амами · Ученик</div>
+          <div class="dossier-quote">«Я не бесстрашный. Я просто давно смирился с тем, что могу умереть в любой момент.»</div>
+          <div class="dossier-tags">
+            <span class="dossier-tag">Абсолютный Авантюрист</span>
+            <span class="dossier-tag">Статус: Жив</span>
+            <span class="dossier-tag">20 лет</span>
+          </div>
+        </div>
+      </div>
+      <div class="dossier-content-area">
+        <button class="copy-btn" onclick="copyDossier('d07', this)">Скопировать для RP</button>
+        <div class="tabs">
+          <button class="tab-btn active" onclick="openTab('d07', 'off', this)">Официальное дело</button>
+          <button class="tab-btn" onclick="openTab('d07', 'hist', this)">Личная история</button>
+          <button class="tab-btn" onclick="openTab('d07', 'gear', this)">Снаряжение</button>
+        </div>
+        <div class="tab-content active" id="d07-off">
+          <div class="block-title">Особые приметы</div>
+          <p class="block-text">Светло-зелёные волосы с выбритыми висками, пирсинг, серебряные кольца. На теле множество шрамов от старых экспедиций, происхождение которых <span class="secret">[ДАННЫЕ ОТ СЛУЖБЫ БЕЗОПАСНОСТИ ЗАСЕКРЕЧЕНЫ]</span> — при упоминании о них субъект заметно меняет тему. Держится расслабленно и дружелюбно, однако взгляд постоянно сканирует окружение, а спит крайне чутко. О прошлом говорит уклончиво, легко переводит разговор.</p>
+          <div class="block-title">Краткая сводка</div>
+          <p class="block-text">Вырос в трущобах старшим сыном в семье с двенадцатью младшими сёстрами, с ранних лет брался за любую опасную работу ради их пропитания. На одной из подработок познакомился с Кокичи Омой (см. дело №03-К) и стал для него надёжным тылом; в ответ труппа «D.I.C.E.» тайно обеспечивает безопасность его сестёр. Совместно с Цумуги Широганэ участвовал в создании образа «Шута Хаоса» — собирал визуальные референсы в карнавальных городах Италии и уличных театрах Франции. В ходе одной из экспедиций субъект провёл <span class="secret">[ИНФОРМАЦИЯ ЗАСЕКРЕЧЕНА]</span> дней в одиночестве без связи и припасов, после чего был найден живым, но с провалом в памяти о произошедшем; детали инцидента не восстановлены до сих пор.</p>
+          <div class="block-title">Причина присвоения таланта</div>
+          <p class="block-text">Совершил множество экспедиций в зоны повышенной опасности — гробницы Египта, храмы инков в джунглях Южной Америки, криминальные кварталы азиатских мегаполисов. Выживал там, где гибли подготовленные группы, сохраняя хладнокровие и трезвый расчёт в ситуациях, провоцирующих панику. Обладает редкой способностью выстраивать доверие с маргинальными элементами, не теряя контроля над ситуацией. Отдельно отмечается, что субъект поддерживает тесную связь с Кокичи Омой и по его просьбе неоднократно выступал посредником и помощником в делах труппы «D.I.C.E.», оставаясь при этом в тени.</p>
+          <div class="block-title">Цель прибытия</div>
+          <p class="block-text">Официально зачислен в Академию «Пик Надежды» для систематизации полевых знаний и освоения передовых методов исследований. Фактически, по данным скрытого наблюдения, субъект воспринимает обучение как удобное прикрытие: занятия посещает выборочно, а основное время уделяет <span class="secret">[ИНФОРМАЦИЯ ЗАСЕКРЕЧЕНА]</span>, что и стало условием его согласия на прибытие. Администрация предупреждает: субъект не склонен к панике, не поддаётся стандартному давлению и обладает связями за пределами Академии. При угрозе другим ученикам ожидается активное вмешательство с непредсказуемыми последствиями.</p>
+        </div>
+        <div class="tab-content" id="d07-hist">
+          <div class="lore-text">
+            <p>Двадцатилетний Рантаро Амами, Абсолютный Авантюрист, — человек, чья жизнь соткана из бесконечных дорог, древних тайн и опасных экспедиций. За его плечами остались зыбучие пески египетских гробниц, заброшенные в густых джунглях Южной Америки храмы инков и леденящие кровь полулегальные кварталы азиатских мегаполисов. Но мало кто знает, через какой ад ему пришлось пройти, прежде чем получить свой титул. Рантаро вырос в голодных трущобах. Будучи старшим сыном, он с ранних лет нес на себе колоссальную ответственность — отчаянно пытался вытянуть из нищеты свою огромную семью из двенадцати младших сестёр. Ради их пропитания, безопасности и счастья мальчик хватался за любую, даже самую опасную работу. Жизнь на самом дне закалила его характер, подарив невероятное самообладание и способность выживать там, где другие ломались.</p>
+            <p>Именно на одной из таких суровых подработок судьба свела его с Кокичи Омой. Они оба были детьми улиц, вынужденными каждый день бороться за существование, и эта общая борьба мгновенно сплотила их. Рантаро не раз выручал Кокичи в самые сложные, переломные моменты, став для него надежным тылом. В знак этой нерушимой связи они обменялись особыми аксессуарами, которые носят до сих пор. Кокичи всегда носит с собой старинный карманный компас на тяжелой цепочке, подаренный Рантаро, а на шее самого Амами, скрытый под одеждой, неизменно покоится серебряный амулет в виде ухмыляющейся маски — эксклюзивный подарок, который мастера из труппы «D.I.C.E.» вручную отлили специально для него по приказу Омы.</p>
+            <p>Их дружба быстро переросла во взаимовыгодное сотрудничество. Пока Рантаро колесил по миру ради собственных исследований, он всегда держал в голове планы Кокичи на создание величайшей труппы. Во время поездки в Китай, скрываясь от местных банд в туманных переулках Шанхая, Амами познакомился с Цумуги Широганэ — Абсолютной Косплеершей. Именно она показала ему архивные эскизы пугающе эксцентричного шутовского наряда. Поняв, что это идеальная находка, Рантаро отправился дальше: он посетил древние карнавальные города Италии и уличные театры Франции, по крупицам собирая визуальные образы и отсылая наброски деталей Цумуги, которая в своей мастерской кропотливо воплощала костюм в реальность. Из этого готового костюма Широганэ Кокичи в итоге и сформировал образ «Шута Хаоса».</p>
+            <p>Кокичи, в свою очередь, платил другу той же монетой. Труппа «D.I.C.E.», имея доступ к высокопоставленным лицам, архивам корпораций и закрытым базам данных вроде Towa Group, часто добывала для Рантаро редкие зацепки, координаты утерянных реликвий и секретные карты для его новых авантюр. Но главное — люди Омы тайно помогали обеспечивать абсолютную безопасность и благополучие двенадцати сестер Амами, пока сам авантюрист пропадал на другом конце земного шара.</p>
+            <p>Жизнь на улицах научила Рантаро видеть людей насквозь, поэтому он остался одним из очень немногих, кого Ома никогда не мог обвести вокруг пальца своей ложью. Амами искренне рад, что дело его названого брата обрело такой невероятный международный масштаб, позволяя выступать перед главами могущественных синдикатов и семей вроде Тогами и Кузурю. Он знает, какая колоссальная работа стоит за этим триумфом, и всегда готов прикрыть спину Кокичи, в какие бы опасные авантюры тот ни ввязался.</p>
+          </div>
+        </div>
+        <div class="tab-content" id="d07-gear">
+          <div class="gear-category">Инструменты и снаряжение</div>
+          <p style="font-size: 0.8rem; color: var(--dim); font-style: italic; margin-bottom: 20px; text-align: center;">* Желательно иметь при себе для полной отыгровки, если вы сами этого пожелаете.</p>
+          <div class="gear-grid">
+            <div class="gear-card"><div class="gear-card-name">🔦 Фонарик</div><div class="gear-card-desc">Обычный, но надёжный тактический фонарик. Питается от батареек.</div></div>
+            <div class="gear-card"><div class="gear-card-name">📓 Блокноты</div><div class="gear-card-desc">Несколько блокнотов с записями маршрутов, заметками о находках и наблюдениями.</div></div>
+            <div class="gear-card"><div class="gear-card-name">🔪 Нож</div><div class="gear-card-desc">Потрёпанный туристический нож с зазубринами на лезвии. Верный спутник во многих экспедициях, не раз спасавший жизнь в диких условиях.</div></div>
+          </div>
+        </div>
+        <div class="dossier-author">Автор идеи: <span>Erzmagier</span></div>
+      </div>
+    </article>
+
+    <!-- ДЕЛО 4: Маки -->
+    <article class="dossier-wrapper hidden" id="d11">
+      <div class="dossier-header-card">
+        <div class="dossier-avatar"></div>
+        <div class="dossier-header-info">
+          <div class="dossier-title-new">ЛИЧНОЕ ДЕЛО №11-Х</div>
+          <div class="dossier-subtitle">Маки Харукава · Ученица</div>
+          <div class="dossier-quote">«Я не знаю, как разговаривать с людьми. Я знаю только, как выживать. Прости.»</div>
+          <div class="dossier-tags">
+            <span class="dossier-tag">Абсолютная Охотница</span>
+            <span class="dossier-tag">Статус: Жива</span>
+            <span class="dossier-tag">18.5 лет</span>
+          </div>
+        </div>
+      </div>
+      <div class="dossier-content-area">
+        <button class="copy-btn" onclick="copyDossier('d11', this)">Скопировать для RP</button>
+        <div class="tabs">
+          <button class="tab-btn active" onclick="openTab('d11', 'off', this)">Официальное дело</button>
+          <button class="tab-btn" onclick="openTab('d11', 'hist', this)">Личная история</button>
+          <button class="tab-btn" onclick="openTab('d11', 'gear', this)">Снаряжение</button>
+        </div>
+        <div class="tab-content active" id="d11-off">
+          <div class="block-title">Особые приметы</div>
+          <p class="block-text">Обладает звериной грацией и аномально высокой скоростью реакции. На теле присутствуют многочисленные шрамы от когтей хищников, на руках — <span class="secret">[ДАННЫЕ ОТ СЛУЖБЫ БЕЗОПАСНОСТИ ЗАСЕКРЕЧЕНЫ]</span>. Одежда выглядит поношенной, со следами грубой ручной штопки и нашитыми пластырями. Почти не знакома с современными технологиями, с осторожностью относится к электронике. В общении замкнута, предпочитает молчание. Демонстрирует тотальное отсутствие страха перед физической болью.</p>
+          <div class="block-title">Краткая сводка</div>
+          <p class="block-text">До 7 лет росла в изолированной лесной деревне в семье промысловика. В ходе разбойного нападения мародёров деревня была полностью уничтожена, а родители субъекта погибли на её глазах. Харукава сумела скрыться в юго-западных лесах, где в одиночку заняла медвежью пещеру (убив хозяина) и провела более десяти лет в полной изоляции. Ведет жесткую борьбу за выживание. За это время выработала абсолютную адаптацию к дикой среде, но полностью утратила навыки социального взаимодействия.</p>
+          <div class="block-title">Причина присвоения таланта</div>
+          <p class="block-text">Продемонстрировала феноменальные навыки выживания в дикой природе, хладнокровие и абсолютную точность стрельбы из арбалета. Самостоятельно превратила дикую пещеру в оборудованную базу с запасами. В совершенстве владеет навыками свежевания туш, маскировки, ориентирования на местности и полевой медицины. Навыки ближнего и дальнего боя доведены до автоматизма. Способна выследить и устранить цель бесшумно, сливаясь с окружающей средой.</p>
+          <div class="block-title">Цель прибытия</div>
+          <p class="block-text">Официально зачислена после обнаружения пригласительного письма у её лагеря. Однако, по данным скрытого наблюдения, субъект проявляет полное безразличие к учебному процессу. Истинная цель прибытия в Академию — скрытый надзор и защита <span class="secret">[ИНФОРМАЦИЯ ЗАСЕКРЕЧЕНА]</span>. Администрация предупреждает учеников: субъект крайне скрытен, эмоционально холоден и потенциально опасен при попытках сближения или нарушения её личных границ. Рекомендуется не делать резких движений в её присутствии.</p>
+        </div>
+        <div class="tab-content" id="d11-hist">
+          <div class="lore-text">
+            <p>Маки Харукава — абсолютная охотница. В свои 18.5 лет она уже обладает не только звериной грацией, но и ценой, которую платит за выживание: на руках когти, а на теле есть несколько шрамов от когтей самих зверей. На одежде есть "пластери", говоря о том что она на скорую руки штопала еë.</p>
+            <p>Ее детство до 7 лет прошло в глухой деревне среди лесов. Технологии были ей почти неизвестны: лишь изредка она видела в руках отца кнопочный телефон, по которому он связывался с внешним миром. Семья Маки была невелика. Отец, будучи главой дома, добывал мех на продажу, чтобы обеспечить семью пропитанием, но работа забирала у него все силы, оставляя лишь изнурительные смены и тяжелый сон. Мать же мечтала стать швыёй по ручной изделии. Поэтому она учила Маки рукоделию, шила ей вещи и постепенно передавала навыки: как правильно кроить ткань и подгонять её по фигуре. (Заранее сшила ей наряд фиолетовый, чтоб та могла разгуливать по деревни)</p>
+            <p>Маки быстро освоила вышивку, хотя сложное конструирование моделей (выйкрайка) давалось ей с трудом. Но однажды отец вернулся с работы необычайно воодушевленным. «Меня повысили! Завтра переезжаем в город, — объявил он. — И в честь этого я наконец обучу тебя настоящей охоте». Маки, завороженная его радостью, только улыбалась, стремясь разделить этот момент с самым близким человеком.</p>
+            <p>Однако счастье оказалось недолгим. Во время первой совместной вывески в лесную глушь, когда сани с тремя псами и снаряжением плавно скользили по снегу, отец обучал дочь основам промысла: капканам, ловушкам и приманкам. Когда дело дошло до стрельбы, Маки, вместо ружья, получила арбалет. С первого же выстрела ей удалось пробить оленю голову. Отец был в восторге, говоря своей дочке во всю лыбу. "С такой точностью,ты точно станешь абсолютной охотницей!" Но девочка лишь скромно улыбнулась, не в силах выразить восторг словами.</p>
+            <p>Обратный путь был омрачен странным запахом гари. Подъехав к деревне, они застали деревню в огне — мародеры не пощадили никого. Маки замерла в оцепенении: маленькая девочка не могла противостоять разгулу насилия. Она видела, как отец забегает дома и выносит раненую мать из огненного ада, видела безумный блеск в глазах грабителей. Вспышка выстрела, крик, и вот отец, истекая кровью, падает рядом с мëртвой женой. Прежде чем окончательно угаснуть, он прошептал: "Уезжай, доченька... Не оглядывайся. Ищи свое счастье..."</p>
+            <p>Маки забрала у родителей их последнее сокровище - фамильные кулоны, и, собрав волю в кулак, погнала псов прочь от деревни. В два дня пути она достигла юго-западных лесов. Чтобы выжить, ей пришлось занять пещеру медведя, убив спящего гризли кинжалом. С тех пор её жизнь превратилась в бесконечный цикл выживания: обустройство убежища, разделка добычи, хранение запасов трав и инструментов. Старые псы ушли в мир иной от старости, и Маки не решалась заводить новых, боясь что новые съедят еë.</p>
+            <p>Прошло время. Теперь Маки 18.5 летняя - опытный охотник. Ее жилище в пещере превратилось в полноценную станцию: здесь висят шкуры, стоят полки с травами и эликсирами, а на столе разложена энциклопедия по кулинарии. А так же есть отдельный шкафчик с одеждой, футболки, шорты, белье.</p>
+            <p>Однажды гуляя по лесу медленным шагом, она услышала крики и почувствовав запах крови, Маки мгновенно среагировала. Прибежав, не целясь, она выстрелила из арбалета, мгновенно сразив волка прямо в голову напавшего на мальчика. Хладнокровно она за секунды расправилась с двумя хищниками, а затем, без лишних эмоций, оттащила раненого юношу в свое убежище. Маки обработала его раны, используя найденные в лесу медикаменты, и обеспечила ему покой.</p>
+            <p>Его звали Джатаро Кимури. Наблюдая за тем, как он растет, обретая амбиции и надежду, то Маки почувствовала к нему нечто, похожее на привязанность как одного из родственника. Она даже планировала подарить ему отцовский кулон, видя в нем нового члена своей семьи, хоть и продолжала вести себя холодно по отношению к нему.</p>
+            <p>Но один ночей, сидя у костра пока мальчик спал.. Она рассматривала этот кулон от отца, пока маменый лежал у неë в сумке.. Она заметила письмо у порога самой берлоги, взяв в руки и прочитав о чëм она.. То Маки все же отложила свой кулон, думая что после обучения он получит еë как знак уважение и любви к нему.. Обсудив всë с маленьким мальчиком, то вы отправились сам пик надежды ради новых знаний для Кимури.. (Она не собирается учиться, она просто якобы пошла, но ради того чтобы приглядывать за своим учеником)</p>
+          </div>
+        </div>
+        <div class="tab-content" id="d11-gear">
+          <div class="gear-category">Инструменты и снаряжение</div>
+          <p style="font-size: 0.8rem; color: var(--dim); font-style: italic; margin-bottom: 20px; text-align: center;">* Желательно иметь при себе для полной отыгровки, если вы сами этого пожелаете.</p>
+          <div class="gear-grid">
+            <div class="gear-card"><div class="gear-card-name">🔪 Нож</div><div class="gear-card-desc">Самодельный нож с грубой деревянной рукоятью, обмотанной кожей. Выкован в лесу для выживания, часто используется для свежевания туш и разделки добычи.</div></div>
+            <div class="gear-card"><div class="gear-card-name">💊 Банка с лекарствами</div><div class="gear-card-desc">Потрёпанная жестяная банка, обмотанная скотчем. Внутри — самодельные пилюли из толчёных трав и коры. Пахнет горькой полынью. Помогает затянуть раны, но оставляет противный привкус во рту.</div></div>
+            <div class="gear-card"><div class="gear-card-name">💤 Снотворное</div><div class="gear-card-desc">Небольшой пузырёк с мутной жидкостью. Сделано из вытяжки болотных растений. Используется для усыпления дичи или, в крайнем случае, для защиты от слишком навязчивых людей.</div></div>
+          </div>
+        </div>
+        <div class="dossier-author">Автор идеи: <span>fialka</span></div>
+      </div>
+    </article>
+
+    <!-- ТЕХ. РАБОТЫ -->
+    <article class="dossier-wrapper hidden" id="d-tech">
+      <div class="dossier-header-card" style="justify-content: center; border-bottom: none; padding: 40px;">
+        <div class="dossier-header-info" style="text-align: center;">
+          <div class="dossier-title-new" style="color: #f1c40f;">ТЕХ. РАБОТЫ</div>
+          <div class="dossier-subtitle" style="color: #f1c40f;">Статус: В разработке</div>
+        </div>
+      </div>
+      
+      <div class="tab-content active" style="display: block; flex: 1;">
+        <div class="tech-works">
+          <div class="tech-icon">🚧</div>
+          <div class="tech-status">Обновление архива</div>
+          <p class="tech-text">
+            Здесь скоро появятся новые лица. Архив пополняется.<br>
+            Пожалуйста, ожидайте обновлений от Службы Безопасности Академии.
+          </p>
+          <div class="tech-tape" style="margin-top: 40px;"></div>
         </div>
       </div>
     </article>
@@ -711,19 +774,14 @@
       <ul>
         <li><strong>Переработка "Тех. работ":</strong>
           <ul>
-            <li>Дизайн заменен на "Системный сбой" с красной мигающей линией.</li>
-            <li>Обновлен текст: теперь это выглядит как заблокированный сектор.</li>
-            <li>Иконка (💀) получила эффект глитча.</li>
+            <li>Возвращена желто-черная лента.</li>
+            <li>Иконка получила эффект глитча и подсветку.</li>
+            <li>Текст обновлен на более "официальное уведомление".</li>
           </ul>
         </li>
         <li><strong>Копирование:</strong>
           <ul>
             <li>Из текста при копировании удалено имя автора идеи.</li>
-          </ul>
-        </li>
-        <li><strong>Навигация:</strong>
-          <ul>
-            <li>Кнопка «Вернуться» теперь скрыта на стартовом экране.</li>
           </ul>
         </li>
       </ul>
@@ -821,7 +879,7 @@
     });
     text = text.replace(/ \| $/, "\n");
     
-    // Убрали блок с автором
+    // Убрали имя автора
     text += "———————————————————————\n\n";
 
     const offTab = dossier.querySelector('.tab-content[id$="-off"]');
